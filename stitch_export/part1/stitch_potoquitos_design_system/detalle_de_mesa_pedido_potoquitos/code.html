@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full gap-space-lg">
+<!-- Interactive Navigation Fix for App Shell Sidebar Context -->
+<script>
+    (function () {
+      const activePath = "mesas-y-pedidos";
+      const navLinks = document.querySelectorAll('aside nav a[data-path]');
+      navLinks.forEach(link => {
+        if (link.getAttribute('data-path') === activePath) {
+          link.className = "h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-body-md-semibold text-body-md-semibold bg-danger-soft text-secondary border-l-[3px] border-secondary transition-colors";
+          const icon = link.querySelector('.material-symbols-outlined');
+          if (icon) icon.className = "material-symbols-outlined text-[20px] text-secondary";
+        }
+      });
+    })();
+  </script>
+<!-- Contextual Operational Banner / Toast Notification -->
+<div class="w-full bg-success-soft rounded-xl p-space-md flex items-center justify-between shadow-[0_4px_14px_rgba(15,39,71,0.05)]">
+<div class="flex items-center gap-space-md">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Pedido #112 listo para recoger en Cocina</span>
+<span class="font-caption text-caption text-text-secondary">Mesa 5 · Asignado a Carlos R. · Hace 2 min en fogón principal</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-space-md h-8 rounded-lg bg-surface text-tertiary font-label-sm text-label-sm hover:bg-surface-secondary transition-colors shadow-sm flex items-center gap-space-xs" onclick="scrollToCard('card-pedido-112')">
+<span>Ver comanda</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Header Section: Breadcrumbs, Mesa ID, Status Pill, Metadata & Primary Actions -->
+<div class="w-full bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex flex-col gap-space-md">
+<!-- Breadcrumb Row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-text-secondary font-label-md text-label-md">
+<a class="hover:text-primary transition-colors" href="#">Mesas y Pedidos</a>
+<span class="material-symbols-outlined text-[16px] text-text-muted">chevron_right</span>
+<span class="font-body-md-semibold text-text-primary">Mesa 5</span>
+</div>
+<a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver a mesas</span>
+</a>
+</div>
+<!-- Title & Top Operation Controls -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md flex-wrap">
+<h1 class="font-headline-lg text-headline-lg text-text-primary">Mesa 5</h1>
+<!-- Prioritary Status Badge: Pedido Listo supersedes in-prep / dining status -->
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-success-soft text-tertiary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+          Pedido listo para entrega
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-secondary text-text-secondary font-caption text-caption">
+<span class="material-symbols-outlined text-[15px]">meeting_room</span>
+          Salón Principal
+        </span>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="h-[42px] px-space-md rounded-lg bg-surface text-text-primary font-body-md-semibold text-body-md-semibold hover:bg-surface-secondary transition-colors shadow-sm flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Reimprimir comanda</span>
+</button>
+<button class="h-[42px] px-space-md rounded-lg bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold hover:bg-primary transition-colors shadow-sm flex items-center gap-space-xs" id="btn-add-pedido" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>+ Agregar pedido</span>
+</button>
+</div>
+</div>
+<!-- Compact Metadata Strip -->
+<div class="flex flex-wrap items-center gap-y-2 gap-x-space-lg pt-space-xs text-text-secondary font-label-md text-label-md">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-muted">person</span>
+<span>Mesero: <strong class="text-text-primary font-semibold">Carlos Reales</strong></span>
+</div>
+<span class="text-text-muted">·</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-muted">groups</span>
+<span>4 comensales</span>
+</div>
+<span class="text-text-muted">·</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-muted">schedule</span>
+<span>Abierta: 7:15 PM</span>
+</div>
+<span class="text-text-muted">·</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-muted">timelapse</span>
+<span>Tiempo: <strong class="text-text-primary font-semibold">48 min</strong></span>
+</div>
+<span class="text-text-muted">·</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-text-muted">receipt_long</span>
+<span>Comandas: <strong>5 emitidas</strong> (3 activas)</span>
+</div>
+</div>
+</div>
+<!-- Main 70 / 30 Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT 70% COLUMN: Pedidos de la Mesa -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Section Header & Filter Pills -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Pedidos de la mesa</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-secondary text-text-secondary font-caption text-caption">5 registros</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-secondary p-1 rounded-lg">
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md bg-surface text-text-primary shadow-sm">Todos (5)</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-secondary hover:text-text-primary">Activos (3)</button>
+<button class="px-2.5 py-1 text-label-sm font-label-sm rounded-md text-text-secondary hover:text-text-primary">Historial (2)</button>
+</div>
+</div>
+<!-- CARD 1: LISTO (HIGHEST OPERATIONAL PRIORITY) -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] relative overflow-hidden" id="card-pedido-112">
+<!-- Top Priority Accent Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary"></div>
+<div class="flex flex-col gap-space-md pl-space-xs">
+<!-- Card Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">Pedido #112</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-success-soft text-tertiary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-ping"></span>
+                ● LISTO
+              </span>
+<span class="font-caption text-caption text-text-secondary">Listo hace 2 min · Cocinero: Mario G.</span>
+</div>
+<div class="flex items-center gap-space-xs text-text-muted font-caption text-caption">
+<span class="material-symbols-outlined text-[16px]">room_service</span>
+<span>Comanda #4</span>
+</div>
+</div>
+<!-- Process Mini Timeline -->
+<div class="w-full bg-surface-secondary rounded-lg p-space-sm flex items-center justify-between text-caption font-caption">
+<div class="flex items-center gap-1.5 text-text-secondary">
+<span class="w-5 h-5 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center font-bold text-[11px]">✓</span>
+<span>Confirmado</span>
+</div>
+<div class="h-0.5 flex-1 bg-tertiary-fixed mx-2"></div>
+<div class="flex items-center gap-1.5 text-text-secondary">
+<span class="w-5 h-5 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center font-bold text-[11px]">✓</span>
+<span>Preparación</span>
+</div>
+<div class="h-0.5 flex-1 bg-tertiary mx-2"></div>
+<div class="flex items-center gap-1.5 text-tertiary font-semibold">
+<span class="w-5 h-5 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-bold text-[11px]">●</span>
+<span>LISTO</span>
+</div>
+<div class="h-0.5 flex-1 bg-surface-container mx-2"></div>
+<div class="flex items-center gap-1.5 text-text-muted">
+<span class="w-5 h-5 rounded-full bg-surface-container text-text-muted flex items-center justify-center font-bold text-[11px]">4</span>
+<span>Entregar</span>
+</div>
+</div>
+<!-- Product Itemization -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<!-- Item 1 -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-body-md-semibold text-body-md-semibold text-text-primary">
+<span class="w-6 h-6 rounded bg-primary-soft text-primary flex items-center justify-center text-caption font-bold">2×</span>
+<span>Hamburguesa Especial</span>
+</div>
+<div class="ml-7 mt-1 px-space-sm py-0.5 bg-warning-soft text-warning rounded text-caption font-caption inline-flex items-center gap-1 max-w-max">
+<span class="material-symbols-outlined text-[14px]">edit_note</span>
+<span>Nota: Sin cebolla en ambas, tocineta extra crujiente</span>
+</div>
+</div>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$44.000 COP</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-body-md-semibold text-body-md-semibold text-text-primary">
+<span class="w-6 h-6 rounded bg-primary-soft text-primary flex items-center justify-center text-caption font-bold">2×</span>
+<span>Coca-Cola 400 ml</span>
+</div>
+<div class="ml-7 mt-1 px-space-sm py-0.5 bg-surface-secondary text-text-secondary rounded text-caption font-caption inline-flex items-center gap-1 max-w-max">
+<span class="material-symbols-outlined text-[14px]">ac_unit</span>
+<span>Bien frías con hielo y limón</span>
+</div>
+</div>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$10.000 COP</span>
+</div>
+</div>
+<!-- Card Subtotal & Delivery Trigger -->
+<div class="pt-space-sm flex flex-col sm:flex-row sm:items-center justify-between gap-space-md bg-surface-secondary -mx-space-lg -mb-space-lg p-space-md rounded-b-xl">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-md text-label-md text-text-secondary">Subtotal pedido #112:</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">$54.000 COP</span>
+</div>
+<button class="h-[42px] px-space-lg rounded-lg bg-tertiary text-on-tertiary font-body-md-semibold text-body-md-semibold hover:opacity-90 transition-all flex items-center justify-center gap-space-xs shadow-sm" id="btn-entregar-112" onclick="marcarEntregado(this)">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+<span>Marcar como entregado a la mesa</span>
+</button>
+</div>
+</div>
+</div>
+<!-- CARD 2: PENDIENTE EN COCINA -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+<div class="flex flex-col gap-space-md pl-space-xs">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">Pedido #125</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-danger-soft text-secondary font-label-sm text-label-sm">
+                ● Pendiente
+              </span>
+<span class="font-caption text-caption text-text-secondary">Enviado hace 3 min</span>
+</div>
+<span class="font-caption text-caption text-text-muted">Esperando asignación en cocina</span>
+</div>
+<div class="bg-surface-secondary rounded-lg px-space-md py-space-xs flex items-center gap-space-xs text-secondary font-caption text-caption">
+<span class="material-symbols-outlined text-[16px]">hourglass_empty</span>
+<span>Esperando inicio de preparación en fogón · Turno asignado #3</span>
+</div>
+<!-- Product Itemization -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs font-body-md text-body-md text-text-primary">
+<span class="w-6 h-6 rounded bg-surface-secondary text-text-secondary flex items-center justify-center text-caption font-bold">1×</span>
+<span>Coca-Cola 400 ml</span>
+</div>
+<span class="font-body-md text-body-md text-text-primary">$5.000 COP</span>
+</div>
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-space-xs font-body-md text-body-md text-text-primary">
+<span class="w-6 h-6 rounded bg-surface-secondary text-text-secondary flex items-center justify-center text-caption font-bold">1×</span>
+<span>Papas Especiales con Tocineta</span>
+</div>
+<span class="font-body-md text-body-md text-text-primary">$12.000 COP</span>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between text-text-secondary">
+<span class="font-label-md text-label-md">Subtotal pedido #125:</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$17.000 COP</span>
+</div>
+</div>
+</div>
+<!-- CARD 3: EN PREPARACIÓN -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex flex-col gap-space-md pl-space-xs">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">Pedido #118</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-soft text-primary font-label-sm text-label-sm">
+                ● En preparación
+              </span>
+<span class="font-caption text-caption text-text-secondary">Iniciado hace 9 min en cocina</span>
+</div>
+<span class="font-caption text-caption text-text-muted">Cocinera: Laura V.</span>
+</div>
+<!-- Product Itemization -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-body-md-semibold text-body-md-semibold text-text-primary">
+<span class="w-6 h-6 rounded bg-primary-soft text-primary flex items-center justify-center text-caption font-bold">1×</span>
+<span>Picada Familiar POTOQUITOS</span>
+</div>
+<div class="ml-7 mt-1 px-space-sm py-0.5 bg-warning-soft text-warning rounded text-caption font-caption inline-flex items-center gap-1 max-w-max">
+<span class="material-symbols-outlined text-[14px]">edit_note</span>
+<span>Sin chorizo, cambiar por porción extra de chicharrón crujiente</span>
+</div>
+</div>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$75.000 COP</span>
+</div>
+</div>
+<div class="pt-space-xs flex items-center justify-between text-text-secondary">
+<span class="font-label-md text-label-md">Subtotal pedido #118:</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$75.000 COP</span>
+</div>
+</div>
+</div>
+<!-- CARD 4: ENTREGADO (HISTORIAL ACTIVO) -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] opacity-90">
+<div class="flex flex-col gap-space-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-sm text-headline-sm text-text-secondary font-semibold">Pedido #104</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-secondary text-text-secondary font-label-sm text-label-sm">
+                ✓ Entregado
+              </span>
+<span class="font-caption text-caption text-text-muted">Entregado a las 7:34 PM por Carlos R.</span>
+</div>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$15.000 COP</span>
+</div>
+<!-- Product Itemization -->
+<div class="flex flex-col gap-1 text-text-secondary font-body-md text-body-md pt-1">
+<div class="flex items-center justify-between">
+<span class="text-text-secondary">1× Limonada Natural Fría 16oz</span>
+<span class="text-caption font-caption text-text-muted">$6.500 COP</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-secondary">1× Entrada de Patacones</span>
+<span class="text-caption font-caption text-text-muted">$8.500 COP</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CARD 5: CANCELADO (HISTORIAL AUDITABLE) -->
+<div class="bg-surface-secondary rounded-xl p-space-md shadow-none">
+<div class="flex flex-col gap-1">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-body-md-semibold text-body-md-semibold text-text-muted line-through">Pedido #109</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-surface-container text-text-muted font-label-sm text-label-sm">
+                Cancelado
+              </span>
+<span class="font-caption text-caption text-text-muted">Cancelado a las 7:22 PM — Motivo: Comensal cambió por Picada</span>
+</div>
+<span class="font-caption text-caption text-text-muted font-semibold">$0 COP (Anulado)</span>
+</div>
+<div class="flex items-center justify-between text-caption font-caption text-text-muted pt-1">
+<span class="line-through">1× Perro Caliente Especial</span>
+<span>$18.000 COP no cobrado</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT 30% COLUMN: Resumen de Cuenta & Acciones Operativas -->
+<div class="lg:col-span-4 flex flex-col gap-space-md sticky top-20">
+<!-- Resumen Card -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Resumen de la cuenta</h3>
+<span class="font-caption text-caption text-text-muted">Atención activa #ATT-892</span>
+</div>
+<span class="material-symbols-outlined text-text-muted text-[22px]">account_balance_wallet</span>
+</div>
+<!-- Breakdown List -->
+<div class="flex flex-col gap-2 pt-space-xs font-label-md text-label-md">
+<div class="flex items-center justify-between text-text-secondary">
+<span>Pedido #104 (Entregado)</span>
+<span class="text-text-primary font-medium">$15.000 COP</span>
+</div>
+<div class="flex items-center justify-between text-text-secondary">
+<span>Pedido #112 (Listo)</span>
+<span class="text-text-primary font-medium">$54.000 COP</span>
+</div>
+<div class="flex items-center justify-between text-text-secondary">
+<span>Pedido #118 (En preparación)</span>
+<span class="text-text-primary font-medium">$75.000 COP</span>
+</div>
+<div class="flex items-center justify-between text-text-secondary">
+<span>Pedido #125 (Pendiente)</span>
+<span class="text-text-primary font-medium">$17.000 COP</span>
+</div>
+<div class="flex items-center justify-between text-text-muted">
+<span class="line-through">Pedido #109 (Cancelado)</span>
+<span>$0 COP</span>
+</div>
+<!-- Divider Subtotal -->
+<div class="pt-space-xs flex items-center justify-between font-body-md text-body-md text-text-secondary">
+<span>Subtotal consumos:</span>
+<span>$161.000 COP</span>
+</div>
+<div class="flex items-center justify-between font-caption text-caption text-text-muted">
+<span>Impoconsumo / IVA (8% incl.):</span>
+<span>Incluido</span>
+</div>
+<!-- Main KPI Total -->
+<div class="bg-surface-secondary rounded-xl p-space-md mt-space-xs flex flex-col gap-1">
+<span class="font-caption text-caption text-text-secondary uppercase tracking-wider">Total Acumulado</span>
+<div class="flex items-baseline justify-between">
+<span class="font-kpi-metric text-kpi-metric text-text-primary font-bold tracking-tight">$161.000</span>
+<span class="font-label-sm text-label-sm text-text-secondary font-semibold">COP</span>
+</div>
+</div>
+</div>
+<!-- Role Boundary Notice: Mesero strictly cannot charge -->
+<div class="bg-surface-secondary rounded-lg p-space-sm flex items-start gap-space-xs text-caption font-caption text-text-secondary">
+<span class="material-symbols-outlined text-[18px] text-info shrink-0">info</span>
+<span>El cobro y la emisión de factura se realizan exclusivamente en el módulo de <strong>Cajas</strong> por el personal de Caja.</span>
+</div>
+<!-- Service Action Button: Request Bill to Cashier -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<button class="w-full h-[46px] px-space-md rounded-lg bg-warning-soft text-text-primary hover:bg-warning/20 transition-all font-body-md-semibold text-body-md-semibold flex items-center justify-center gap-space-sm shadow-sm" id="btn-solicitar-cuenta" onclick="solicitarCuenta()">
+<span class="material-symbols-outlined text-[20px] text-warning">receipt</span>
+<span>Solicitar cuenta (Enviar a Caja)</span>
+</button>
+<span class="font-caption text-caption text-text-muted text-center leading-tight px-space-xs">
+            Al solicitar la cuenta, la Mesa 5 pasará a "Pendiente de pago" y quedará disponible en el terminal del Cajero.
+          </span>
+</div>
+</div>
+<!-- Secondary Info Card: Table Specs -->
+<div class="bg-surface rounded-xl p-space-lg shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex flex-col gap-space-sm">
+<h4 class="font-label-md text-label-md text-text-primary font-semibold">Información de la mesa</h4>
+<div class="flex flex-col gap-2 font-caption text-caption text-text-secondary">
+<div class="flex items-center justify-between">
+<span>Ubicación:</span>
+<span class="text-text-primary font-medium">Salón Principal · Zona Central</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Capacidad:</span>
+<span class="text-text-primary font-medium">4 personas sentadas</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Mesero asignado:</span>
+<span class="text-text-primary font-medium">Carlos Reales</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Hora de apertura:</span>
+<span class="text-text-primary font-medium">7:15 PM</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Tiempo en servicio:</span>
+<span class="text-text-primary font-medium">48 minutos</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Comandas emitidas:</span>
+<span class="text-text-primary font-medium">4 comandas registradas</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal / Floating Action Mock for Adding Order -->
+<div class="hidden fixed inset-0 z-50 bg-inverse-surface/40 flex items-center justify-center p-space-md" id="modal-nuevo-pedido">
+<div class="bg-surface rounded-xl p-space-lg max-w-md w-full shadow-[0_10px_25px_rgba(15,39,71,0.12)] flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Agregar nuevo pedido a Mesa 5</h3>
+<button class="text-text-muted hover:text-text-primary" onclick="toggleModalPedido(false)">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-text-secondary">Seleccione los productos que los comensales desean ordenar para enviar de inmediato a Cocina.</p>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-sm text-label-sm text-text-primary">Buscar producto del menú:</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-[40px] pl-9 pr-space-md bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:outline-none" placeholder="Hamburguesa, picada, bebidas..." type="text"/>
+</div>
+</div>
+<div class="flex justify-end gap-space-sm pt-space-xs">
+<button class="h-[40px] px-space-md rounded-lg bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold hover:bg-surface-container" onclick="toggleModalPedido(false)">Cancelar</button>
+<button class="h-[40px] px-space-md rounded-lg bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold hover:bg-primary" onclick="toggleModalPedido(false)">Enviar a cocina</button>
+</div>
+</div>
+</div>
+<!-- Lightweight Operational Micro-Interactions -->
+<script>
+    function scrollToCard(cardId) {
+      const card = document.getElementById(cardId);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('ring-2', 'ring-tertiary', 'transition-all');
+        setTimeout(() => card.classList.remove('ring-2', 'ring-tertiary'), 2000);
+      }
+    }
+
+    function marcarEntregado(button) {
+      button.disabled = true;
+      button.classList.remove('bg-tertiary', 'hover:opacity-90');
+      button.classList.add('bg-surface-container', 'text-text-muted', 'cursor-not-allowed');
+      button.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span> Entregado a la mesa';
+    }
+
+    function solicitarCuenta() {
+      const btn = document.getElementById('btn-solicitar-cuenta');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[20px] text-tertiary">check_circle</span> Cuenta enviada a Caja';
+      btn.classList.remove('bg-warning-soft');
+      btn.classList.add('bg-success-soft', 'text-tertiary');
+      alert('La Mesa 5 ha sido enviada al módulo de Cajas con el estado "Pendiente de pago".');
+    }
+
+    function toggleModalPedido(show) {
+      const modal = document.getElementById('modal-nuevo-pedido');
+      if (modal) {
+        if (show) {
+          modal.classList.remove('hidden');
+        } else {
+          modal.classList.add('hidden');
+        }
+      }
+    }
+
+    document.getElementById('btn-add-pedido')?.addEventListener('click', () => toggleModalPedido(true));
+  </script>
+</div></main></div></body></html>

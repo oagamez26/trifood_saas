@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<!-- Script para activar el elemento correspondiente en el App Shell persistent sidebar -->
+<script>
+    (function () {
+      const currentPath = "costos-y-gastos";
+      document.querySelectorAll("aside nav a").forEach((el) => {
+        const path = el.getAttribute("data-path");
+        if (path === currentPath) {
+          el.className = "h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-body-md-semibold text-body-md-semibold bg-danger-soft text-secondary border-l-[3px] border-secondary transition-colors";
+          const icon = el.querySelector(".material-symbols-outlined");
+          if (icon) icon.className = "material-symbols-outlined text-[20px] text-secondary";
+        } else {
+          el.className = "h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors";
+          const icon = el.querySelector(".material-symbols-outlined");
+          if (icon) icon.className = "material-symbols-outlined text-[20px] text-text-muted";
+        }
+      });
+    })();
+  </script>
+<!-- Encabezado Principal de Página -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-xl">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Costos y Gastos</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs">Controla los costos de producción y los gastos operativos de POTOQUITOS.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-[42px] px-space-md bg-primary-container text-on-primary rounded-lg font-body-md-semibold text-body-md-semibold flex items-center gap-space-xs shadow-sm hover:opacity-95 transition-all" onclick="openNewExpenseModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Registrar gasto</span>
+</button>
+</div>
+</div>
+<!-- Navegación por Tabs -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-border mb-space-xl pb-space-xs gap-space-sm">
+<div class="flex items-center gap-space-lg">
+<button class="relative pb-space-sm flex items-center gap-space-xs font-body-md-semibold text-body-md-semibold text-text-primary border-b-2 border-primary-container" type="button">
+<span>Gastos operativos</span>
+<span class="px-space-xs py-0.5 rounded-full bg-primary-soft text-primary font-caption text-[11px] font-bold">24</span>
+</button>
+<button class="relative pb-space-sm flex items-center gap-space-xs font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">
+<span>Costos de productos (Escandallos)</span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-high text-text-muted font-caption text-[11px] font-semibold">18</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs text-text-muted font-caption text-caption pb-space-xs">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>Gastos operativos no asociados directamente a recetas</span>
+</div>
+</div>
+<!-- Resumen superior: KPI Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter mb-space-xl">
+<!-- Card 1: Gastos del mes -->
+<div class="bg-surface p-space-lg rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-secondary">Gastos del mes</span>
+<div class="w-9 h-9 rounded-lg bg-primary-soft flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+</div>
+</div>
+<div>
+<div class="font-kpi-metric text-kpi-metric text-text-primary">$3.420.000 <span class="font-caption text-caption text-text-muted font-normal">COP</span></div>
+<p class="font-caption text-caption text-text-secondary mt-space-xs flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Acumulado septiembre 2026</span>
+</p>
+</div>
+</div>
+<!-- Card 2: Gastos de hoy -->
+<div class="bg-surface p-space-lg rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-secondary">Gastos de hoy</span>
+<div class="w-9 h-9 rounded-lg bg-warning-soft flex items-center justify-center text-warning">
+<span class="material-symbols-outlined text-[20px]">today</span>
+</div>
+</div>
+<div>
+<div class="font-kpi-metric text-kpi-metric text-text-primary">$185.000 <span class="font-caption text-caption text-text-muted font-normal">COP</span></div>
+<p class="font-caption text-caption text-text-secondary mt-space-xs flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+<span>2 registros hoy viernes</span>
+</p>
+</div>
+</div>
+<!-- Card 3: Registros del mes -->
+<div class="bg-surface p-space-lg rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-secondary">Registros del mes</span>
+<div class="w-9 h-9 rounded-lg bg-success-soft flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">fact_check</span>
+</div>
+</div>
+<div>
+<div class="font-kpi-metric text-kpi-metric text-text-primary">24 <span class="font-headline-sm text-headline-sm text-text-secondary font-medium">gastos</span></div>
+<p class="font-caption text-caption text-text-secondary mt-space-xs">Promedio $142.500 / registro</p>
+</div>
+</div>
+<!-- Card 4: Costo vs Ingreso est. -->
+<div class="bg-surface p-space-lg rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-secondary">Costo vs Ingreso est.</span>
+<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success-soft text-tertiary font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Normal</span>
+</div>
+</div>
+<div>
+<div class="font-kpi-metric text-kpi-metric text-text-primary">27.4%</div>
+<p class="font-caption text-caption text-text-secondary mt-space-xs">Impacto operativo controlado</p>
+</div>
+</div>
+</div>
+<!-- Layout dividido: Filtros + Tabla Principal y Detalle Lateral de Escandallo -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter items-start">
+<!-- Columna Principal: Filtros y Tabla de Gastos (8 de 12 en pantallas anchas) -->
+<div class="xl:col-span-8 flex flex-col gap-space-lg">
+<!-- Barra Horizontal de Filtros -->
+<div class="bg-surface p-space-md rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] border border-border flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Buscador -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full h-[40px] pl-10 pr-space-md bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary-container" id="filterSearch" placeholder="Buscar gasto por concepto o descripción..." type="text"/>
+</div>
+<!-- Filtros secundarios -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center bg-surface border border-border-strong rounded-lg px-space-sm h-[40px] gap-space-xs">
+<span class="font-caption text-caption text-text-muted">Desde:</span>
+<input class="w-24 bg-transparent font-label-md text-label-md text-text-primary focus:outline-none" type="text" value="01/09/2026"/>
+</div>
+<div class="flex items-center bg-surface border border-border-strong rounded-lg px-space-sm h-[40px] gap-space-xs">
+<span class="font-caption text-caption text-text-muted">Hasta:</span>
+<input class="w-24 bg-transparent font-label-md text-label-md text-text-primary focus:outline-none" type="text" value="12/09/2026"/>
+</div>
+<div class="relative min-w-[170px]">
+<select class="w-full h-[40px] px-space-sm bg-surface border border-border-strong rounded-lg font-label-md text-label-md text-text-primary appearance-none focus:outline-none focus:border-primary-container pr-8 cursor-pointer">
+<option>Todas las categorías (11)</option>
+<option>Arriendo</option>
+<option>Servicios</option>
+<option>Gas</option>
+<option>Transporte</option>
+<option>Mantenimiento</option>
+<option>Insumos generales</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[18px]">expand_more</span>
+</div>
+<button class="h-[40px] px-space-sm bg-surface hover:bg-surface-secondary border border-border-strong rounded-lg font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Limpiar</span>
+</button>
+</div>
+</div>
+<!-- Tabla de Gastos Operativos -->
+<div class="bg-surface rounded-xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-secondary border-b border-border text-text-secondary font-label-md text-label-md">
+<th class="py-3 px-4 font-semibold">Fecha y hora</th>
+<th class="py-3 px-4 font-semibold">Concepto</th>
+<th class="py-3 px-4 font-semibold">Categoría</th>
+<th class="py-3 px-4 font-semibold text-right">Valor (COP)</th>
+<th class="py-3 px-4 font-semibold">Descripción</th>
+<th class="py-3 px-4 font-semibold">Registrado por</th>
+<th class="py-3 px-4 text-center font-semibold w-12">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border text-text-primary font-body-md text-body-md">
+<!-- Fila 1 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">12 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">02:30 PM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Compra de gas</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-warning-soft text-warning">
+                    Gas
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $95.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Cilindro de gas propano 40 lbs para cocina">
+                  Cilindro de gas propano 40 lbs para cocina
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Carlos R.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 2 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">12 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">10:15 AM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Transporte insumos</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-primary-soft text-primary-container">
+                    Transporte
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $90.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Acarreo y flete de verduras desde mercado central">
+                  Acarreo y flete de verduras desde mercado central
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Orlando A.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 3 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">11 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">04:20 PM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Servicio de energía</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-primary-soft text-primary-container">
+                    Servicios
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $850.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Factura Afinia mes de agosto/septiembre">
+                  Factura Afinia mes de agosto/septiembre
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Carlos R.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 4 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">10 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">11:40 AM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Reparación nevera</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-purple-50 text-purple-700">
+                    Mantenimiento
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $180.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Recarga de refrigerante y cambio de sensor de frío">
+                  Recarga de refrigerante y cambio de sensor de frío
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Orlando A.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 5 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">08 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">09:00 AM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Internet fibra óptica</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-primary-soft text-primary-container">
+                    Servicios
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $120.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Mensualidad Claro 300 Mbps + IP fija">
+                  Mensualidad Claro 300 Mbps + IP fija
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Carlos R.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 6 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">05 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">03:15 PM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Artículos de aseo y desinfección</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-slate-100 text-slate-700">
+                    Insumos generales
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $210.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Detergentes, desengrasante cocina y toallas papel">
+                  Detergentes, desengrasante cocina y toallas papel
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Carlos R.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 7 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">02 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">11:00 AM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Pago de servicio de agua</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-primary-soft text-primary-container">
+                    Servicios
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $325.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Factura Emdupar acueducto y alcantarillado">
+                  Factura Emdupar acueducto y alcantarillado
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Carlos R.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 8 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md-semibold text-body-md-semibold text-text-primary">01 Sep 2026</div>
+<div class="font-caption text-caption text-text-muted">08:30 AM</div>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary">Pago de Arriendo local</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-danger-soft text-secondary font-semibold">
+                    Arriendo
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md-semibold text-body-md-semibold text-text-primary text-right whitespace-nowrap">
+                  $1.450.000
+                </td>
+<td class="py-3.5 px-4 text-text-secondary text-[13px] max-w-xs truncate" title="Canon de arrendamiento sede Centro Histórico">
+                  Canon de arrendamiento sede Centro Histórico
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap font-label-md text-label-md text-text-secondary">
+                  Orlando A.
+                </td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Fila 9 (Anulado) -->
+<tr class="bg-surface-secondary/40 text-text-muted">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="font-body-md text-body-md line-through text-text-muted">30 Ago 2026</div>
+<div class="font-caption text-caption text-text-muted">05:00 PM</div>
+</td>
+<td class="py-3.5 px-4 line-through text-text-muted font-body-md">Publicidad volanteo</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-sm text-[12px] bg-slate-100 text-slate-500">
+                    Publicidad
+                  </span>
+</td>
+<td class="py-3.5 px-4 font-body-md text-body-md line-through text-text-muted text-right whitespace-nowrap">
+                  $100.000
+                </td>
+<td class="py-3.5 px-4 text-text-muted text-[13px] line-through max-w-xs truncate" title="Impresión volantes promoción apertura nocturna">
+                  Impresión volantes promoción apertura nocturna
+                </td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded bg-surface-container text-neutral-status font-caption text-[11px] font-semibold tracking-wide uppercase">
+                    ANULADO
+                  </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<button class="w-8 h-8 rounded-lg inline-flex items-center justify-center text-text-muted opacity-40 cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación -->
+<div class="p-space-md border-t border-border flex flex-col sm:flex-row items-center justify-between gap-space-sm bg-surface">
+<span class="font-label-md text-label-md text-text-secondary">
+            Mostrando <span class="font-semibold text-text-primary">1–9</span> de <span class="font-semibold text-text-primary">24</span> registros de gastos
+          </span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-strong text-text-muted hover:bg-surface-secondary transition-colors" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold" type="button">
+              1
+            </button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-strong text-text-secondary hover:bg-surface-secondary transition-colors font-label-md text-label-md" type="button">
+              2
+            </button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-strong text-text-secondary hover:bg-surface-secondary transition-colors font-label-md text-label-md" type="button">
+              3
+            </button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-strong text-text-secondary hover:bg-surface-secondary transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Columna Lateral: Desglose de Escandallo de Receta / Rentabilidad Operativa (4 de 12) -->
+<div class="xl:col-span-4 flex flex-col gap-space-lg">
+<!-- Card: Escandallo & Rentabilidad Destacada -->
+<div class="bg-surface rounded-xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-lg">
+<div class="flex items-center justify-between border-b border-border pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px]">restaurant</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">Escandallo de Receta</span>
+</div>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-success-soft text-tertiary font-label-sm text-[11px] font-semibold">
+            Margen 65% · Saludable
+          </span>
+</div>
+<div class="mb-space-md">
+<div class="flex items-baseline justify-between mb-space-xs">
+<h3 class="font-body-md-semibold text-body-md-semibold text-text-primary text-[16px]">Hamburguesa Especial</h3>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">$22.000 COP</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">Precio de venta sugerido al público en mesa y domicilio</p>
+</div>
+<!-- Mini métricas de rentabilidad de receta -->
+<div class="grid grid-cols-2 gap-space-sm bg-surface-secondary p-space-sm rounded-lg mb-space-md border border-border">
+<div>
+<span class="font-caption text-caption text-text-muted block">Costo receta (Insumos)</span>
+<span class="font-body-md-semibold text-body-md-semibold text-danger-dark font-bold text-[15px]">$7.700 COP</span>
+</div>
+<div>
+<span class="font-caption text-caption text-text-muted block">Ganancia bruta</span>
+<span class="font-body-md-semibold text-body-md-semibold text-tertiary font-bold text-[15px]">$14.300 COP</span>
+</div>
+</div>
+<!-- Desglose de insumos de la receta -->
+<div class="space-y-space-xs mb-space-lg">
+<div class="text-text-muted font-caption text-caption uppercase tracking-wider mb-2 font-semibold">Desglose de Costo Unitario</div>
+<div class="flex items-center justify-between py-1.5 border-b border-surface-container font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-text-primary">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Carne de res molida (180 g)</span>
+</div>
+<span class="font-semibold text-text-primary">$4.200</span>
+</div>
+<div class="flex items-center justify-between py-1.5 border-b border-surface-container font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-text-primary">
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+<span>Pan brioche artesanal (1 und)</span>
+</div>
+<span class="font-semibold text-text-primary">$900</span>
+</div>
+<div class="flex items-center justify-between py-1.5 border-b border-surface-container font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-text-primary">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<span>Queso mozzarella tajado (40 g)</span>
+</div>
+<span class="font-semibold text-text-primary">$1.100</span>
+</div>
+<div class="flex items-center justify-between py-1.5 border-b border-surface-container font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-text-primary">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Vegetales frescos (Lechuga / Tomate)</span>
+</div>
+<span class="font-semibold text-text-primary">$600</span>
+</div>
+<div class="flex items-center justify-between py-1.5 border-b border-surface-container font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>Salsas de la casa y aderezos</span>
+</div>
+<span class="font-semibold text-text-primary">$400</span>
+</div>
+<div class="flex items-center justify-between py-1.5 border-b border-surface-container font-label-md text-label-md">
+<div class="flex items-center gap-space-xs text-text-primary">
+<span class="w-2 h-2 rounded-full bg-neutral-status"></span>
+<span>Empaque ecológico & servilletas</span>
+</div>
+<span class="font-semibold text-text-primary">$500</span>
+</div>
+</div>
+<!-- Barra visual de proporción de costo -->
+<div class="w-full h-2 rounded-full bg-surface-container flex overflow-hidden mb-space-sm">
+<div class="h-full bg-danger-dark" style="width: 35%" title="Costo Insumos: 35%"></div>
+<div class="h-full bg-tertiary" style="width: 65%" title="Margen Bruto: 65%"></div>
+</div>
+<div class="flex justify-between text-[11px] font-caption text-text-muted">
+<span>Costos directos (35%)</span>
+<span class="text-tertiary font-semibold">Margen bruto neto (65%)</span>
+</div>
+</div>
+<!-- Card informativa rápida: Política de Gastos Menores -->
+<div class="bg-surface rounded-xl border border-border p-space-md shadow-[0_4px_14px_rgba(15,39,71,0.05)]">
+<div class="flex items-start gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-secondary flex items-center justify-center text-text-secondary shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+</div>
+<div>
+<h4 class="font-label-md text-label-md text-text-primary font-semibold">Control de Caja Menor</h4>
+<p class="font-caption text-caption text-text-secondary mt-1">
+              Todos los gastos registrados afectan el arqueo de turno activo o el consolidado de caja administrativa. Para anular un gasto erróneo, contacte al Administrador principal.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal / Drawer Integrado: Registrar Nuevo Gasto -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-inverse-surface/40 backdrop-blur-[2px] hidden transition-opacity" id="newExpenseModal">
+<div class="bg-surface w-full max-w-lg rounded-xl shadow-2xl border border-border overflow-hidden mx-space-md animate-in fade-in zoom-in-95 duration-150">
+<!-- Header del Modal -->
+<div class="px-space-lg py-space-md border-b border-border flex items-center justify-between bg-surface-secondary">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[22px]">payments</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Registrar nuevo gasto</h2>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-container transition-colors" onclick="closeNewExpenseModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Formulario de Registro -->
+<form class="p-space-lg flex flex-col gap-space-md" onsubmit="handleFormSubmit(event)">
+<!-- Concepto -->
+<div>
+<label class="block font-label-md text-label-md text-text-primary font-semibold mb-space-xs" for="expenseConcept">
+            Concepto del gasto <span class="text-secondary">*</span>
+</label>
+<input class="w-full h-[42px] px-space-md bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary-container" id="expenseConcept" placeholder="Ej. Compra de gas, Transporte verduras..." required="" type="text" value="Compra de gas"/>
+</div>
+<!-- Fila: Categoría y Valor COP -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<div>
+<label class="block font-label-md text-label-md text-text-primary font-semibold mb-space-xs" for="expenseCategory">
+              Categoría <span class="text-secondary">*</span>
+</label>
+<div class="relative">
+<select class="w-full h-[42px] px-space-md bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary appearance-none focus:outline-none focus:border-primary-container pr-8 cursor-pointer" id="expenseCategory" required="">
+<option selected="" value="Gas">Gas</option>
+<option value="Arriendo">Arriendo</option>
+<option value="Servicios">Servicios (Energía / Agua)</option>
+<option value="Internet">Internet / Comunicaciones</option>
+<option value="Transporte">Transporte / Fletes</option>
+<option value="Mantenimiento">Mantenimiento</option>
+<option value="Nomina">Nómina / Turnos</option>
+<option value="Insumos generales">Insumos generales</option>
+<option value="Otros">Otros</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted text-[18px]">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-text-primary font-semibold mb-space-xs" for="expenseValue">
+              Valor en COP <span class="text-secondary">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-body-md-semibold text-body-md-semibold text-text-muted">$</span>
+<input class="w-full h-[42px] pl-7 pr-space-md bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary-container font-semibold" id="expenseValue" placeholder="95.000" required="" type="text" value="95.000"/>
+</div>
+</div>
+</div>
+<!-- Fila: Fecha del gasto -->
+<div>
+<label class="block font-label-md text-label-md text-text-primary font-semibold mb-space-xs" for="expenseDate">
+            Fecha del gasto <span class="text-secondary">*</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">calendar_today</span>
+<input class="w-full h-[42px] pl-10 pr-space-md bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary focus:outline-none focus:border-primary-container" id="expenseDate" required="" type="text" value="12/09/2026"/>
+</div>
+</div>
+<!-- Descripción / Observación -->
+<div>
+<label class="block font-label-md text-label-md text-text-primary font-semibold mb-space-xs" for="expenseNotes">
+            Descripción / Observación
+          </label>
+<textarea class="w-full p-space-sm bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary-container resize-none" id="expenseNotes" placeholder="Detalle adicional sobre el comprobante o motivo del gasto..." rows="3">Cilindro para cocina principal</textarea>
+</div>
+<!-- Footer / Acciones -->
+<div class="flex items-center justify-end gap-space-sm pt-space-sm border-t border-border mt-space-xs">
+<button class="h-[42px] px-space-md bg-surface border border-border-strong text-text-primary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-surface-secondary transition-colors" onclick="closeNewExpenseModal()" type="button">
+            Cancelar
+          </button>
+<button class="h-[42px] px-space-lg bg-primary-container text-on-primary rounded-lg font-body-md-semibold text-body-md-semibold flex items-center gap-space-xs shadow-sm hover:opacity-95 transition-all" type="submit">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Registrar gasto</span>
+</button>
+</div>
+</form>
+</div>
+</div>
+<!-- Scripts mínimos y limpios para controlar el modal y búsqueda visual -->
+<script>
+    function openNewExpenseModal() {
+      const modal = document.getElementById('newExpenseModal');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeNewExpenseModal() {
+      const modal = document.getElementById('newExpenseModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      closeNewExpenseModal();
+    }
+
+    // Filtrado de tabla en vivo por concepto o texto
+    const searchInput = document.getElementById('filterSearch');
+    if (searchInput) {
+      searchInput.addEventListener('keyup', function(e) {
+        const term = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+          const text = row.innerText.toLowerCase();
+          row.style.display = text.includes(term) ? '' : 'none';
+        });
+      });
+    }
+  </script>
+</div></main></div></body></html>

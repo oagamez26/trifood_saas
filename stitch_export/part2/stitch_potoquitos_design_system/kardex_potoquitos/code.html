@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full max-w-[1440px] mx-auto pb-space-xl">
+<!-- Top Action Breadcrumb & Navigation -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<nav class="flex items-center gap-space-xs font-label-md text-label-md text-text-secondary">
+<a class="hover:text-primary transition-colors" data-path="inventario" href="#">Inventario</a>
+<span class="material-symbols-outlined text-[16px] text-text-muted">chevron_right</span>
+<span class="text-text-secondary">Carne de res</span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">chevron_right</span>
+<span class="text-text-primary font-body-md-semibold">Kardex</span>
+</nav>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<a class="inline-flex items-center gap-space-xs font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors py-1 px-2 rounded-lg bg-surface-container-low hover:bg-surface-container" data-path="inventario" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+<span>Volver a Inventario</span>
+</a>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-start sm:self-auto">
+<!-- Registrar movimiento dropdown button -->
+<div class="relative">
+<button class="h-[42px] px-space-md bg-surface text-text-primary rounded-lg font-label-md text-label-md flex items-center gap-space-xs shadow-sm hover:bg-surface-secondary transition-all" id="movDropdownBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">tune</span>
+<span>+ Registrar movimiento</span>
+<span class="material-symbols-outlined text-[18px] text-text-secondary">expand_more</span>
+</button>
+<div class="hidden absolute right-0 mt-2 w-52 bg-surface rounded-xl shadow-xl z-30 py-2" id="movDropdownMenu">
+<a class="flex items-center gap-space-sm px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Registrar Merma</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Ajuste positivo (+)</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="w-2 h-2 rounded-full bg-warning"></span>
+<span>Ajuste negativo (-)</span>
+</a>
+</div>
+</div>
+<!-- Registrar Entrada Primario -->
+<button class="h-[42px] px-space-md bg-primary-container text-on-primary rounded-lg font-label-md text-label-md font-semibold flex items-center gap-space-xs shadow-sm hover:bg-primary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">add_box</span>
+<span>+ Registrar entrada</span>
+</button>
+</div>
+</div>
+<!-- Title & Description -->
+<div class="flex flex-col gap-1">
+<h1 class="font-display text-display text-text-primary tracking-tight">Kardex — Carne de res</h1>
+<p class="font-body-md text-body-md text-text-secondary">Consulta todos los movimientos, trazabilidad histórica y cambios de existencias de este ingrediente.</p>
+</div>
+<!-- Card Resumen Superior del Ingrediente -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex items-start sm:items-center gap-space-md min-w-0">
+<div class="w-14 h-14 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0 text-text-secondary">
+<span class="material-symbols-outlined text-[28px] text-primary">lunch_dining</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="font-headline-sm text-headline-sm text-text-primary">Carne de res</span>
+<span class="font-caption text-caption text-text-muted bg-surface-container px-2 py-0.5 rounded-full uppercase tracking-wider font-semibold">INS-001</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Normal
+            </span>
+</div>
+<div class="flex flex-wrap items-center gap-x-space-md gap-y-1 mt-1 font-caption text-caption text-text-secondary">
+<span>Unidad base: <strong class="text-text-primary font-body-md-semibold">Kilogramo (kg)</strong></span>
+<span class="text-text-muted">•</span>
+<span>Stock mínimo sugerido: <strong class="text-text-primary font-body-md-semibold">5.00 kg</strong></span>
+</div>
+<div class="flex items-center gap-1.5 mt-2 font-caption text-caption text-text-muted">
+<span class="material-symbols-outlined text-[14px]">link</span>
+<span>Enlazado a 3 recetas activas: Hamburguesa Especial, Picada Familiar, Perro Especial.</span>
+</div>
+</div>
+</div>
+<!-- KPI Numbers Inside Summary -->
+<div class="flex flex-wrap items-center gap-space-lg lg:border-l lg:border-surface-container-highest lg:pl-space-xl">
+<div class="flex flex-col">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Stock actual</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">12.00</span>
+<span class="font-label-md text-label-md text-text-secondary">kg</span>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-space-sm flex flex-col gap-1 min-w-[210px]">
+<span class="font-caption text-caption text-text-muted font-medium">Balance hoy (12 Sep):</span>
+<div class="flex items-center justify-between gap-space-sm font-label-sm text-label-sm">
+<span class="text-tertiary">Entradas: +10.00 kg</span>
+<span class="text-secondary">Salidas: -1.04 kg</span>
+</div>
+<div class="text-right font-label-sm text-label-sm font-semibold text-text-primary">
+            Saldo neto hoy: <span class="text-tertiary">+8.96 kg</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Filters Bar -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-sm flex-1">
+<!-- Date Range Filter -->
+<div class="flex items-center bg-surface-container-low rounded-lg px-3 h-[42px] gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">calendar_today</span>
+<span class="font-caption text-caption text-text-muted">Desde</span>
+<input class="bg-transparent font-label-md text-label-md text-text-primary w-20 focus:outline-none text-center" type="text" value="01/09/2026"/>
+<span class="font-caption text-caption text-text-muted">Hasta</span>
+<input class="bg-transparent font-label-md text-label-md text-text-primary w-20 focus:outline-none text-center" type="text" value="12/09/2026"/>
+</div>
+<!-- Movement Selector -->
+<div class="relative">
+<select class="h-[42px] pl-3 pr-8 bg-surface-container-low rounded-lg font-label-md text-label-md text-text-primary appearance-none cursor-pointer focus:outline-none">
+<option>Todos los movimientos</option>
+<option>Consumo por pedido</option>
+<option>Entrada manual</option>
+<option>Reversión</option>
+<option>Merma</option>
+<option>Ajuste positivo</option>
+<option>Ajuste negativo</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[18px] text-text-secondary">arrow_drop_down</span>
+</div>
+<!-- Search Input -->
+<div class="relative flex-1 min-w-[200px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-[42px] pl-9 pr-3 bg-surface-container-low rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar por referencia o #MOV..." type="text"/>
+</div>
+<button class="h-[42px] px-3 text-text-secondary hover:text-text-primary font-label-md text-label-md transition-colors flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Limpiar filtros</span>
+</button>
+</div>
+<div class="flex items-center justify-between lg:justify-end gap-space-md border-t lg:border-t-0 pt-space-sm lg:pt-0 border-surface-container">
+<span class="font-caption text-caption text-text-muted">Mostrando 8 de 184 movimientos</span>
+<button class="h-[42px] px-space-md bg-surface text-text-primary rounded-lg font-label-md text-label-md flex items-center gap-space-xs shadow-sm hover:bg-surface-secondary transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">print</span>
+<span>Exportar Kardex</span>
+</button>
+</div>
+</div>
+<!-- Main Kardex Table Container -->
+<div class="relative bg-surface rounded-xl shadow-sm overflow-hidden flex">
+<!-- Table Wrapper -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-secondary text-text-secondary font-label-md text-label-md">
+<th class="py-3 px-4 font-semibold">Fecha y hora</th>
+<th class="py-3 px-4 font-semibold">Tipo de movimiento</th>
+<th class="py-3 px-4 font-semibold text-right">Entrada</th>
+<th class="py-3 px-4 font-semibold text-right">Salida</th>
+<th class="py-3 px-4 font-semibold text-right">Saldo</th>
+<th class="py-3 px-4 font-semibold">Referencia / Origen</th>
+<th class="py-3 px-4 font-semibold">Registrado por</th>
+<th class="py-3 px-4 font-semibold text-center">Acción</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container text-body-md font-body-md text-text-primary">
+<!-- Row 1 (Active) -->
+<tr class="bg-primary-soft/40 hover:bg-primary-soft/60 transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">12 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">12:45 PM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Consumo por pedido
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-secondary whitespace-nowrap">-0.54 kg</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">11.46 kg</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-text-muted">receipt_long</span>
+<span class="font-body-md-semibold text-text-primary">Pedido #125</span>
+<span class="font-caption text-caption text-text-secondary">(Mesa 5)</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-text-muted bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                  Sistema
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-primary-container text-on-primary font-label-sm text-label-sm font-semibold" type="button">
+<span>Ver detalle</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">12 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">11:15 AM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Reversión
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-tertiary whitespace-nowrap">+0.54 kg</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">12.00 kg</td>
+<td class="py-3.5 px-4">
+<span class="text-text-secondary">Reversión Pedido #109</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-text-muted bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                  Sistema
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">12 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">10:32 AM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Entrada manual
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-tertiary whitespace-nowrap">+10.00 kg</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">11.46 kg</td>
+<td class="py-3.5 px-4">
+<span class="text-text-primary">Carga inicial de existencias</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center font-caption text-[10px] font-bold">CR</span>
+<span class="font-label-md text-label-md text-text-primary">Carlos Reales</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">12 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">09:15 AM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-danger-soft text-secondary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Merma
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-secondary whitespace-nowrap">-0.50 kg</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">1.46 kg</td>
+<td class="py-3.5 px-4">
+<span class="text-text-secondary">Deterioro por corte</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center font-caption text-[10px] font-bold">CR</span>
+<span class="font-label-md text-label-md text-text-primary">Carlos Reales</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">11 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">08:30 PM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Consumo por pedido
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-secondary whitespace-nowrap">-1.80 kg</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">1.96 kg</td>
+<td class="py-3.5 px-4">
+<span class="text-text-secondary">Pedidos agrupados turno noche</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-text-muted bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                  Sistema
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">11 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">04:15 PM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Ajuste positivo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-tertiary whitespace-nowrap">+1.00 kg</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">3.76 kg</td>
+<td class="py-3.5 px-4">
+<span class="text-text-primary">Conteo físico y auditoría semanal</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-surface-container text-text-secondary flex items-center justify-center font-caption text-[10px] font-bold">OA</span>
+<span class="font-label-md text-label-md text-text-primary">Orlando Agamez</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">11 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">01:20 PM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Ajuste negativo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-secondary whitespace-nowrap">-0.30 kg</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">2.76 kg</td>
+<td class="py-3.5 px-4">
+<span class="text-text-secondary">Diferencia en porcionamiento</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex items-center gap-1.5">
+<span class="w-5 h-5 rounded-full bg-primary-soft text-primary flex items-center justify-center font-caption text-[10px] font-bold">CR</span>
+<span class="font-label-md text-label-md text-text-primary">Carlos Reales</span>
+</div>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer" onclick="toggleDrawer(true)">
+<td class="py-3.5 px-4 whitespace-nowrap">
+<div class="flex flex-col leading-tight">
+<span class="font-body-md-semibold text-text-primary">11 Sep 2026</span>
+<span class="font-caption text-caption text-text-muted">12:10 PM</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Consumo por pedido
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right text-text-muted font-mono">—</td>
+<td class="py-3.5 px-4 text-right font-mono font-semibold text-secondary whitespace-nowrap">-0.72 kg</td>
+<td class="py-3.5 px-4 text-right font-mono font-bold text-text-primary whitespace-nowrap">3.06 kg</td>
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-text-muted">receipt_long</span>
+<span class="font-body-md-semibold text-text-primary">Pedido #104</span>
+<span class="font-caption text-caption text-text-secondary">(Mesa 5)</span>
+</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 font-caption text-caption text-text-muted bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                  Sistema
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center whitespace-nowrap">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded hover:bg-surface-container text-text-secondary font-label-sm text-label-sm" type="button">
+<span>Ver detalle</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Clean Pagination Controls -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-xs font-label-md text-label-md">
+<span class="text-text-secondary">Página 1 de 10 · 184 movimientos registrados</span>
+<div class="flex items-center gap-1">
+<button class="h-9 px-3 rounded-lg bg-surface text-text-muted opacity-50 cursor-not-allowed flex items-center gap-1 shadow-sm" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<button class="h-9 w-9 rounded-lg bg-primary-container text-on-primary font-semibold flex items-center justify-center shadow-sm" type="button">1</button>
+<button class="h-9 w-9 rounded-lg bg-surface text-text-primary hover:bg-surface-secondary flex items-center justify-center shadow-sm" type="button">2</button>
+<button class="h-9 w-9 rounded-lg bg-surface text-text-primary hover:bg-surface-secondary flex items-center justify-center shadow-sm" type="button">3</button>
+<span class="px-2 text-text-muted">...</span>
+<button class="h-9 w-9 rounded-lg bg-surface text-text-primary hover:bg-surface-secondary flex items-center justify-center shadow-sm" type="button">10</button>
+<button class="h-9 px-3 rounded-lg bg-surface text-text-primary hover:bg-surface-secondary flex items-center gap-1 shadow-sm transition-colors" type="button">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Lateral Audit Drawer (Overlaid / Fixed to right) -->
+<aside class="fixed top-16 right-0 bottom-0 w-full max-w-[420px] bg-surface z-50 flex flex-col shadow-xl transform translate-x-0 transition-transform duration-200 ease-in-out" id="auditDrawer">
+<!-- Drawer Header -->
+<div class="h-16 px-space-lg bg-surface-secondary flex items-center justify-between shrink-0">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-soft text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary leading-none">Detalle del Movimiento</span>
+</div>
+<span class="font-caption text-caption text-text-muted mt-0.5">Identificador único #MOV-00251</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-text-secondary hover:bg-surface hover:text-text-primary transition-colors" onclick="toggleDrawer(false)" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Content Scrollable -->
+<div class="flex-1 overflow-y-auto p-space-lg flex flex-col gap-space-lg">
+<!-- Movement Quick Summary Card -->
+<div class="bg-surface-secondary rounded-xl p-space-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span> Consumo por pedido
+          </span>
+<span class="font-caption text-caption text-text-muted">12 Sep 2026 · 12:45:18 PM</span>
+</div>
+<div class="mt-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted">Impacto en inventario</span>
+<div class="font-headline-lg text-headline-lg text-secondary font-mono tracking-tight leading-none mt-1">
+            -0.54 kg <span class="font-body-md text-body-md text-text-muted font-normal">(-540 g)</span>
+</div>
+</div>
+<!-- Stock Evolution Step Bar -->
+<div class="grid grid-cols-2 gap-2 bg-surface rounded-lg p-2.5 mt-1 text-center">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">Saldo anterior</span>
+<span class="font-body-md-semibold text-body-md-semibold font-mono text-text-primary">12.00 kg</span>
+</div>
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-muted">Saldo posterior</span>
+<span class="font-body-md-semibold text-body-md-semibold font-mono text-tertiary">11.46 kg</span>
+</div>
+</div>
+</div>
+<!-- Reference Origin Cross-link -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Origen / Referencia directa</span>
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[22px]">restaurant</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Pedido #125</span>
+<span class="font-caption text-caption text-text-secondary">Mesa 5 · Salón Principal</span>
+</div>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary hover:underline" data-path="mesas-y-pedidos" href="#">
+<span>Ver mesa</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Recipe Breakdown List -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Desglose de consumo por receta</span>
+<span class="font-caption text-caption text-text-muted">1 receta activada</span>
+</div>
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Hamburguesa Especial</span>
+<span class="font-caption text-caption text-text-secondary">3 unidades ordenadas en comanda</span>
+</div>
+<span class="font-label-md text-label-md font-mono font-semibold text-secondary">-540 g</span>
+</div>
+<div class="w-full bg-surface-container-low rounded p-2 text-text-secondary font-caption text-caption leading-relaxed">
+            Fórmula técnica: 3 × Hamburguesa Especial con porción de 180 g de carne c/u. Descuento automático ejecutado al confirmar comanda en cocina.
+          </div>
+</div>
+</div>
+<!-- Technical Audit Metadata -->
+<div class="flex flex-col gap-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Trazabilidad y Auditoría</span>
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col gap-2.5 font-label-md text-label-md">
+<div class="flex items-center justify-between">
+<span class="text-text-secondary">Registrado por:</span>
+<span class="font-semibold text-text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-text-muted">smart_toy</span>
+              Sistema KDS / Comandas
+            </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-secondary">Tipo de registro:</span>
+<span class="text-text-primary">Automático por venta</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-secondary">Estado del movimiento:</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-tertiary font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+              Aplicado y cerrado
+            </span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-text-secondary">Hash de verificación:</span>
+<span class="font-mono text-[11px] text-text-muted uppercase">KD-125-99218F</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-space-md bg-surface-secondary shrink-0 flex items-center gap-space-sm">
+<button class="flex-1 h-[42px] px-3 bg-surface text-text-primary rounded-lg font-label-md text-label-md font-medium flex items-center justify-center gap-1.5 shadow-sm hover:bg-surface-container transition-all" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">print</span>
+<span>Imprimir comprobante</span>
+</button>
+<button class="h-[42px] px-space-md bg-primary-container text-on-primary rounded-lg font-label-md text-label-md font-semibold hover:bg-primary transition-all" onclick="toggleDrawer(false)" type="button">
+        Cerrar
+      </button>
+</div>
+</aside>
+</div>
+<script>
+  // Ensure "Inventario" has active indicator matching the design system
+  (function setActiveNav() {
+    const navItems = document.querySelectorAll('aside nav a');
+    navItems.forEach(item => {
+      if (item.getAttribute('data-path') === 'inventario') {
+        item.className = "h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-body-md-semibold text-secondary bg-danger-soft border-l-[3px] border-secondary transition-colors";
+        const icon = item.querySelector('.material-symbols-outlined');
+        if (icon) icon.classList.add('text-secondary');
+      }
+    });
+  })();
+
+  // Dropdown micro-interaction
+  const movDropdownBtn = document.getElementById('movDropdownBtn');
+  const movDropdownMenu = document.getElementById('movDropdownMenu');
+  if (movDropdownBtn && movDropdownMenu) {
+    movDropdownBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      movDropdownMenu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', () => {
+      movDropdownMenu.classList.add('hidden');
+    });
+  }
+
+  // Lateral Drawer toggle function
+  function toggleDrawer(show) {
+    const drawer = document.getElementById('auditDrawer');
+    if (!drawer) return;
+    if (show) {
+      drawer.classList.remove('translate-x-full');
+      drawer.classList.add('translate-x-0');
+    } else {
+      drawer.classList.add('translate-x-full');
+      drawer.classList.remove('translate-x-0');
+    }
+  }
+</script></main></div></body></html>

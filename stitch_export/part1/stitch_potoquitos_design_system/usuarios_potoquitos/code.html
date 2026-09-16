@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<!-- Top View Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Usuarios</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-1">Administra las cuentas y accesos del personal de POTOQUITOS.</p>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-primary text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg flex items-center gap-2 transition-all shadow-[0_2px_8px_rgba(37,99,235,0.2)] active:scale-[0.98]" id="btn-open-create-drawer" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Nuevo usuario</span>
+</button>
+</div>
+</div>
+<!-- Operational Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg mb-space-xl">
+<!-- Card 1: Usuarios Activos -->
+<div class="bg-surface rounded-xl p-[20px] shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-secondary mb-1">Usuarios activos</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">8</span>
+<span class="font-caption text-caption text-text-muted">Total 10 registrados</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span class="font-caption text-caption text-text-secondary font-medium">80% operatividad activa</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-primary-soft text-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">group</span>
+</div>
+</div>
+<!-- Card 2: Meseros en Turno -->
+<div class="bg-surface rounded-xl p-[20px] shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-secondary mb-1">Meseros activos</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">4</span>
+<span class="font-caption text-caption text-text-secondary font-medium">en turno</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="font-caption text-caption text-text-muted">Asignados:</span>
+<span class="font-caption text-caption text-text-primary font-semibold">Turno tarde (Salón & Terraza)</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-container text-text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">table_restaurant</span>
+</div>
+</div>
+<!-- Card 3: Cajas Habilitadas -->
+<div class="bg-surface rounded-xl p-[20px] shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-text-secondary mb-1">Cajas/Cajeros activos</span>
+<div class="flex items-baseline gap-2">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">2</span>
+<span class="font-caption text-caption text-text-secondary font-medium">habilitados</span>
+</div>
+<div class="mt-3 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span class="font-caption text-caption text-text-primary font-medium">Caja 1 y Caja 2 en cobro</span>
+</div>
+</div>
+<div class="w-11 h-11 rounded-lg bg-success-soft text-[#10B981] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]">point_of_sale</span>
+</div>
+</div>
+</div>
+<!-- Main Content Card: Search Filters + Table -->
+<div class="bg-surface rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] overflow-hidden flex flex-col">
+<!-- Filter Controls Bar -->
+<div class="p-space-lg flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md bg-surface">
+<div class="flex flex-wrap items-center gap-space-sm flex-1">
+<!-- Search input -->
+<div class="relative w-full sm:w-[320px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full h-[42px] pl-10 pr-space-md bg-surface-secondary text-text-primary placeholder:text-text-muted font-body-md text-body-md rounded-lg focus:outline-none focus:bg-surface transition-all" id="user-search-input" placeholder="Buscar por nombre o usuario..." type="text"/>
+</div>
+<!-- Filter: Rol -->
+<div class="relative min-w-[170px]">
+<select class="w-full h-[42px] appearance-none pl-3 pr-9 bg-surface-secondary text-text-primary font-body-md text-body-md rounded-lg focus:outline-none cursor-pointer">
+<option value="">Todos los roles</option>
+<option value="admin">Administrador</option>
+<option value="mesero">Mesero</option>
+<option value="cocina">Cocina</option>
+<option value="cajero">Cajero</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">expand_more</span>
+</div>
+<!-- Filter: Estado -->
+<div class="relative min-w-[160px]">
+<select class="w-full h-[42px] appearance-none pl-3 pr-9 bg-surface-secondary text-text-primary font-body-md text-body-md rounded-lg focus:outline-none cursor-pointer">
+<option value="">Todos los estados</option>
+<option value="activo">Activos</option>
+<option value="inactivo">Inactivos</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[20px]">expand_more</span>
+</div>
+</div>
+<!-- Item counter metadata -->
+<div class="text-right flex items-center justify-end gap-2 shrink-0">
+<span class="font-caption text-caption text-text-muted">Mostrando <strong class="text-text-primary font-semibold">5</strong> de 10 usuarios</span>
+</div>
+</div>
+<!-- Table Canvas -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-secondary text-text-secondary font-label-md text-label-md select-none">
+<th class="py-3 px-space-lg font-semibold">USUARIO</th>
+<th class="py-3 px-space-lg font-semibold">NOMBRE</th>
+<th class="py-3 px-space-lg font-semibold">ROL</th>
+<th class="py-3 px-space-lg font-semibold">ESTADO</th>
+<th class="py-3 px-space-lg font-semibold">ÚLTIMO ACCESO</th>
+<th class="py-3 px-space-lg font-semibold text-right">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<!-- Row 1: creales -->
+<tr class="hover:bg-surface-secondary transition-colors group">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-primary-soft text-primary-container font-label-sm text-label-sm flex items-center justify-center font-bold uppercase">CR</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary font-mono text-[13px]">creales</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-primary">Carlos Reales</td>
+<td class="py-3.5 px-space-lg">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption font-semibold bg-[#EFF6FF] text-[#1D4ED8]">
+                Administrador
+              </span>
+</td>
+<td class="py-3.5 px-space-lg">
+<div class="inline-flex items-center gap-1.5 font-caption text-caption text-text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span>Activo</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-secondary">Hoy, 8:42 AM</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="action-menu-btn w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center transition-colors ml-auto focus:outline-none" onclick="toggleRowMenu(event, 'menu-row-1')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Popover Menu 1 -->
+<div class="row-menu hidden absolute right-space-lg top-10 z-30 w-48 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] py-1.5 text-left" id="menu-row-1">
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openDetailsModal('Carlos Reales', 'creales', 'Administrador')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">visibility</span>
+<span>Ver usuario</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openEditDrawer('Carlos Reales', 'creales', 'admin')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openPasswordModal('creales')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">key</span>
+<span>Cambiar contraseña</span>
+</button>
+<div class="h-[1px] bg-border my-1"></div>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-secondary hover:bg-danger-soft font-body-md text-body-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Desactivar usuario</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: mesero01 -->
+<tr class="hover:bg-surface-secondary transition-colors group">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-surface-container text-text-secondary font-label-sm text-label-sm flex items-center justify-center font-bold uppercase">JP</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary font-mono text-[13px]">mesero01</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-primary">Juan Pérez</td>
+<td class="py-3.5 px-space-lg">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption font-semibold bg-[#F1F5F9] text-[#334155]">
+                Mesero
+              </span>
+</td>
+<td class="py-3.5 px-space-lg">
+<div class="inline-flex items-center gap-1.5 font-caption text-caption text-text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span>Activo</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-secondary">Hoy, 9:15 AM</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="action-menu-btn w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center transition-colors ml-auto focus:outline-none" onclick="toggleRowMenu(event, 'menu-row-2')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Popover Menu 2 -->
+<div class="row-menu hidden absolute right-space-lg top-10 z-30 w-48 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] py-1.5 text-left" id="menu-row-2">
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openDetailsModal('Juan Pérez', 'mesero01', 'Mesero')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">visibility</span>
+<span>Ver usuario</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openEditDrawer('Juan Pérez', 'mesero01', 'mesero')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openPasswordModal('mesero01')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">key</span>
+<span>Cambiar contraseña</span>
+</button>
+<div class="h-[1px] bg-border my-1"></div>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-secondary hover:bg-danger-soft font-body-md text-body-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Desactivar usuario</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: cocina01 -->
+<tr class="hover:bg-surface-secondary transition-colors group">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-[#FFF7ED] text-[#C2410C] font-label-sm text-label-sm flex items-center justify-center font-bold uppercase">CP</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary font-mono text-[13px]">cocina01</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-primary">Cocina Principal</td>
+<td class="py-3.5 px-space-lg">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption font-semibold bg-[#FFF7ED] text-[#C2410C]">
+                Cocina
+              </span>
+</td>
+<td class="py-3.5 px-space-lg">
+<div class="inline-flex items-center gap-1.5 font-caption text-caption text-text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span>Activo</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-secondary">Hoy, 9:03 AM</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="action-menu-btn w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center transition-colors ml-auto focus:outline-none" onclick="toggleRowMenu(event, 'menu-row-3')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Popover Menu 3 -->
+<div class="row-menu hidden absolute right-space-lg top-10 z-30 w-48 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] py-1.5 text-left" id="menu-row-3">
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openDetailsModal('Cocina Principal', 'cocina01', 'Cocina')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">visibility</span>
+<span>Ver usuario</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openEditDrawer('Cocina Principal', 'cocina01', 'cocina')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openPasswordModal('cocina01')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">key</span>
+<span>Cambiar contraseña</span>
+</button>
+<div class="h-[1px] bg-border my-1"></div>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-secondary hover:bg-danger-soft font-body-md text-body-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Desactivar usuario</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: cajero01 -->
+<tr class="hover:bg-surface-secondary transition-colors group">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-[#ECFDF5] text-[#047857] font-label-sm text-label-sm flex items-center justify-center font-bold uppercase">MG</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary font-mono text-[13px]">cajero01</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-primary">María Gómez</td>
+<td class="py-3.5 px-space-lg">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption font-semibold bg-[#ECFDF5] text-[#047857]">
+                Cajero
+              </span>
+</td>
+<td class="py-3.5 px-space-lg">
+<div class="inline-flex items-center gap-1.5 font-caption text-caption text-text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span>Activo</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-secondary">Hoy, 8:55 AM</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="action-menu-btn w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center transition-colors ml-auto focus:outline-none" onclick="toggleRowMenu(event, 'menu-row-4')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Popover Menu 4 -->
+<div class="row-menu hidden absolute right-space-lg top-10 z-30 w-48 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] py-1.5 text-left" id="menu-row-4">
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openDetailsModal('María Gómez', 'cajero01', 'Cajero')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">visibility</span>
+<span>Ver usuario</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openEditDrawer('María Gómez', 'cajero01', 'cajero')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openPasswordModal('cajero01')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">key</span>
+<span>Cambiar contraseña</span>
+</button>
+<div class="h-[1px] bg-border my-1"></div>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-secondary hover:bg-danger-soft font-body-md text-body-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Desactivar usuario</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: mesero02 (Inactivo) -->
+<tr class="hover:bg-surface-secondary transition-colors group">
+<td class="py-3.5 px-space-lg">
+<div class="flex items-center gap-2.5">
+<span class="w-7 h-7 rounded-full bg-surface-container text-neutral-status font-label-sm text-label-sm flex items-center justify-center font-bold uppercase">AD</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-secondary font-mono text-[13px]">mesero02</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-secondary">Andrés Díaz</td>
+<td class="py-3.5 px-space-lg">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-caption text-caption font-semibold bg-[#F1F5F9] text-[#334155]">
+                Mesero
+              </span>
+</td>
+<td class="py-3.5 px-space-lg">
+<div class="inline-flex items-center gap-1.5 font-caption text-caption text-text-secondary font-medium">
+<span class="w-2 h-2 rounded-full bg-neutral-status"></span>
+<span>Inactivo</span>
+</div>
+</td>
+<td class="py-3.5 px-space-lg font-body-md text-body-md text-text-muted">10 Sep, 6:32 PM</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="action-menu-btn w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center transition-colors ml-auto focus:outline-none" onclick="toggleRowMenu(event, 'menu-row-5')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Popover Menu 5 -->
+<div class="row-menu hidden absolute right-space-lg top-10 z-30 w-48 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] py-1.5 text-left" id="menu-row-5">
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openDetailsModal('Andrés Díaz', 'mesero02', 'Mesero')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">visibility</span>
+<span>Ver usuario</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openEditDrawer('Andrés Díaz', 'mesero02', 'mesero')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-text-primary hover:bg-surface-secondary font-body-md text-body-md transition-colors" onclick="openPasswordModal('mesero02')" type="button">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">key</span>
+<span>Cambiar contraseña</span>
+</button>
+<div class="h-[1px] bg-border my-1"></div>
+<button class="w-full px-space-md py-2 flex items-center gap-2.5 text-tertiary hover:bg-success-soft font-body-md text-body-md transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>Reactivar usuario</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination Footer -->
+<div class="px-space-lg py-3.5 bg-surface flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<span class="font-caption text-caption text-text-secondary">Página <strong class="text-text-primary font-semibold">1</strong> de 2</span>
+<div class="flex items-center gap-2">
+<button class="h-9 px-3 rounded-lg bg-surface-secondary text-text-muted font-label-md text-label-md flex items-center gap-1 cursor-not-allowed opacity-60" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<button class="h-9 px-3 rounded-lg bg-surface hover:bg-surface-secondary text-text-primary font-label-md text-label-md flex items-center gap-1 shadow-sm transition-colors" type="button">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Slide-Over Drawer: Crear / Editar Usuario -->
+<div class="fixed inset-0 bg-primary-dark/30 z-50 hidden opacity-0 transition-opacity duration-200" id="user-drawer-backdrop"></div>
+<aside class="fixed top-0 right-0 h-full w-full sm:w-[460px] bg-surface z-50 shadow-[0_10px_25px_rgba(15,39,71,0.12)] transform translate-x-full transition-transform duration-300 flex flex-col" id="user-drawer">
+<!-- Drawer Header -->
+<div class="px-space-xl py-space-lg flex items-start justify-between bg-surface">
+<div class="flex flex-col pr-4">
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight" id="drawer-title">Nuevo usuario</h2>
+<p class="font-caption text-caption text-text-secondary mt-1" id="drawer-subtitle">Ingresa la información para habilitar una cuenta del personal de POTOQUITOS.</p>
+</div>
+<button class="w-9 h-9 rounded-lg flex items-center justify-center text-text-muted hover:text-text-primary hover:bg-surface-secondary transition-colors shrink-0" id="btn-close-drawer" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Drawer Body Form -->
+<form class="flex-1 overflow-y-auto px-space-xl py-space-lg space-y-space-md" id="form-user" onsubmit="handleUserSubmit(event)">
+<div class="grid grid-cols-2 gap-space-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Nombre *</label>
+<input class="w-full h-[42px] px-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none transition-all" id="drawer-input-firstname" placeholder="Ej. Juan" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Apellido *</label>
+<input class="w-full h-[42px] px-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none transition-all" id="drawer-input-lastname" placeholder="Ej. Pérez" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Nombre de usuario (Login ID) *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">alternate_email</span>
+<input class="w-full h-[42px] pl-10 pr-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none font-mono transition-all" id="drawer-input-username" placeholder="ej. mesero03" required="" type="text"/>
+</div>
+<span class="font-caption text-caption text-text-muted mt-1 block">Será usado para iniciar sesión en terminales POS y comandas.</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Rol del sistema *</label>
+<div class="relative">
+<select class="w-full h-[42px] appearance-none pl-3 pr-8 bg-surface-secondary text-text-primary font-body-md text-body-md rounded-lg focus:bg-surface focus:outline-none cursor-pointer" id="drawer-select-role" required="">
+<option value="mesero">Mesero</option>
+<option value="cocina">Cocina</option>
+<option value="cajero">Cajero</option>
+<option value="admin">Administrador</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Estado inicial</label>
+<div class="relative">
+<select class="w-full h-[42px] appearance-none pl-3 pr-8 bg-surface-secondary text-text-primary font-body-md text-body-md rounded-lg focus:bg-surface focus:outline-none cursor-pointer" id="drawer-select-status">
+<option value="activo">Activo</option>
+<option value="inactivo">Inactivo</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs space-y-space-md" id="password-group">
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Contraseña temporal *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">lock</span>
+<input class="w-full h-[42px] pl-10 pr-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none transition-all" id="drawer-input-pass" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Confirmar contraseña *</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">lock_reset</span>
+<input class="w-full h-[42px] pl-10 pr-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none transition-all" id="drawer-input-pass-confirm" placeholder="••••••••" type="password"/>
+</div>
+</div>
+</div>
+<!-- Helper Notice -->
+<div class="p-3 bg-surface-secondary rounded-lg flex items-start gap-2.5 mt-space-md">
+<span class="material-symbols-outlined text-info text-[20px] shrink-0 mt-0.5">info</span>
+<p class="font-caption text-caption text-text-secondary leading-snug">
+          El usuario deberá actualizar sus credenciales obligatoriamente en su primer inicio de sesión en el punto de venta.
+        </p>
+</div>
+</form>
+<!-- Drawer Footer Actions -->
+<div class="p-space-lg bg-surface flex items-center justify-end gap-space-sm">
+<button class="h-[42px] px-space-md bg-surface-secondary hover:bg-surface-container text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors" id="btn-cancel-drawer" type="button">
+        Cancelar
+      </button>
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-primary text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors shadow-sm" form="form-user" id="btn-submit-drawer" type="submit">
+        Crear usuario
+      </button>
+</div>
+</aside>
+<!-- Modal: Cambiar Contraseña Independiente -->
+<div class="fixed inset-0 bg-primary-dark/40 z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4" id="modal-password-backdrop">
+<div class="bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] w-full max-w-md p-space-xl overflow-hidden flex flex-col">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-soft text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">key</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Seguridad de cuenta</h3>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-secondary flex items-center justify-center" onclick="closePasswordModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<p class="font-caption text-caption text-text-secondary mb-space-md">
+        Restablecer credenciales de acceso para el usuario: <strong class="text-text-primary font-mono font-bold" id="modal-pass-user">creales</strong>
+</p>
+<form class="space-y-space-md" onsubmit="handlePasswordSubmit(event)">
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Nueva contraseña</label>
+<input class="w-full h-[42px] px-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none" placeholder="Mínimo 6 caracteres" required="" type="password"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-text-secondary mb-1.5 font-semibold">Confirmar nueva contraseña</label>
+<input class="w-full h-[42px] px-3 bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary focus:bg-surface focus:outline-none" placeholder="Repite la contraseña" required="" type="password"/>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-xs">
+<button class="h-[42px] px-space-md bg-surface-secondary hover:bg-surface-container text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg" onclick="closePasswordModal()" type="button">
+            Cancelar
+          </button>
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-primary text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg shadow-sm" type="submit">
+            Guardar nueva clave
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Modal: Ver Usuario (Detalles) -->
+<div class="fixed inset-0 bg-primary-dark/40 z-50 hidden opacity-0 transition-opacity duration-200 flex items-center justify-center p-4" id="modal-details-backdrop">
+<div class="bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] w-full max-w-md p-space-xl flex flex-col">
+<div class="flex items-start justify-between mb-space-md">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-full bg-primary-soft text-primary-container font-headline-sm text-headline-sm flex items-center justify-center font-bold" id="detail-avatar">
+            CR
+          </div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary" id="detail-name">Carlos Reales</h3>
+<span class="font-caption text-caption text-text-muted font-mono" id="detail-username">@creales</span>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-muted hover:text-text-primary hover:bg-surface-secondary flex items-center justify-center" onclick="closeDetailsModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="p-space-md bg-surface-secondary rounded-lg space-y-2 mb-space-lg">
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-text-secondary">Rol asignado:</span>
+<span class="font-semibold text-text-primary" id="detail-role">Administrador</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-text-secondary">Estado:</span>
+<span class="inline-flex items-center gap-1.5 font-semibold text-text-primary">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span> Activo
+          </span>
+</div>
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-text-secondary">Última sesión:</span>
+<span class="text-text-primary">Hoy, 8:42 AM</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md">
+<span class="text-text-secondary">Permisos de comanda:</span>
+<span class="text-text-primary font-semibold">Ilimitados</span>
+</div>
+</div>
+<button class="w-full h-[42px] bg-surface-secondary hover:bg-surface-container text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg" onclick="closeDetailsModal()" type="button">
+        Cerrar ventana
+      </button>
+</div>
+</div>
+</div>
+<script>
+  // UI Interactive Handlers for Drawer & Modals
+  const drawerBackdrop = document.getElementById('user-drawer-backdrop');
+  const userDrawer = document.getElementById('user-drawer');
+  const btnOpenCreate = document.getElementById('btn-open-create-drawer');
+  const btnCloseDrawer = document.getElementById('btn-close-drawer');
+  const btnCancelDrawer = document.getElementById('btn-cancel-drawer');
+
+  const drawerTitle = document.getElementById('drawer-title');
+  const drawerSubtitle = document.getElementById('drawer-subtitle');
+  const btnSubmitDrawer = document.getElementById('btn-submit-drawer');
+  const passwordGroup = document.getElementById('password-group');
+
+  function openDrawer(isEdit = false, data = {}) {
+    drawerBackdrop.classList.remove('hidden');
+    setTimeout(() => {
+      drawerBackdrop.classList.remove('opacity-0');
+      userDrawer.classList.remove('translate-x-full');
+    }, 10);
+
+    if (isEdit) {
+      drawerTitle.textContent = 'Editar usuario';
+      drawerSubtitle.textContent = 'Modifica los permisos y accesos del colaborador seleccionado.';
+      btnSubmitDrawer.textContent = 'Guardar cambios';
+      passwordGroup.classList.add('hidden');
+      document.getElementById('drawer-input-firstname').value = data.name.split(' ')[0] || '';
+      document.getElementById('drawer-input-lastname').value = data.name.split(' ')[1] || '';
+      document.getElementById('drawer-input-username').value = data.username || '';
+      document.getElementById('drawer-select-role').value = data.role || 'mesero';
+    } else {
+      drawerTitle.textContent = 'Nuevo usuario';
+      drawerSubtitle.textContent = 'Ingresa la información para habilitar una cuenta del personal de POTOQUITOS.';
+      btnSubmitDrawer.textContent = 'Crear usuario';
+      passwordGroup.classList.remove('hidden');
+      document.getElementById('form-user').reset();
+    }
+  }
+
+  function closeDrawer() {
+    userDrawer.classList.add('translate-x-full');
+    drawerBackdrop.classList.add('opacity-0');
+    setTimeout(() => {
+      drawerBackdrop.classList.add('hidden');
+    }, 250);
+  }
+
+  btnOpenCreate.addEventListener('click', () => openDrawer(false));
+  btnCloseDrawer.addEventListener('click', closeDrawer);
+  btnCancelDrawer.addEventListener('click', closeDrawer);
+  drawerBackdrop.addEventListener('click', closeDrawer);
+
+  // Dropdown Row Actions Menu
+  function toggleRowMenu(event, menuId) {
+    event.stopPropagation();
+    const currentMenu = document.getElementById(menuId);
+    const isHidden = currentMenu.classList.contains('hidden');
+
+    // Close all open menus
+    document.querySelectorAll('.row-menu').forEach(m => m.classList.add('hidden'));
+
+    if (isHidden) {
+      currentMenu.classList.remove('hidden');
+    }
+  }
+
+  // Close menus on outside click
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.row-menu').forEach(m => m.classList.add('hidden'));
+  });
+
+  // Edit action shortcut
+  function openEditDrawer(fullName, username, role) {
+    document.querySelectorAll('.row-menu').forEach(m => m.classList.add('hidden'));
+    openDrawer(true, { name: fullName, username: username, role: role });
+  }
+
+  // Password Modal Handlers
+  const passBackdrop = document.getElementById('modal-password-backdrop');
+  function openPasswordModal(username) {
+    document.querySelectorAll('.row-menu').forEach(m => m.classList.add('hidden'));
+    document.getElementById('modal-pass-user').textContent = username;
+    passBackdrop.classList.remove('hidden');
+    setTimeout(() => passBackdrop.classList.remove('opacity-0'), 10);
+  }
+
+  function closePasswordModal() {
+    passBackdrop.classList.add('opacity-0');
+    setTimeout(() => passBackdrop.classList.add('hidden'), 200);
+  }
+
+  function handlePasswordSubmit(e) {
+    e.preventDefault();
+    closePasswordModal();
+  }
+
+  // Details Modal Handlers
+  const detailBackdrop = document.getElementById('modal-details-backdrop');
+  function openDetailsModal(fullName, username, role) {
+    document.querySelectorAll('.row-menu').forEach(m => m.classList.add('hidden'));
+    document.getElementById('detail-name').textContent = fullName;
+    document.getElementById('detail-username').textContent = '@' + username;
+    document.getElementById('detail-role').textContent = role;
+    document.getElementById('detail-avatar').textContent = fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+    detailBackdrop.classList.remove('hidden');
+    setTimeout(() => detailBackdrop.classList.remove('opacity-0'), 10);
+  }
+
+  function closeDetailsModal() {
+    detailBackdrop.classList.add('opacity-0');
+    setTimeout(() => detailBackdrop.classList.add('hidden'), 200);
+  }
+
+  function handleUserSubmit(e) {
+    e.preventDefault();
+    closeDrawer();
+  }
+</script></main></div></body></html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<!-- SCRIPT PARA GESTIONAR ESTADO ACTIVO DEL SHELL -->
+<script>
+    (function () {
+      const navLinks = document.querySelectorAll("aside nav a");
+      navLinks.forEach((link) => {
+        link.className =
+          "h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors";
+        if (link.getAttribute("data-path") === "productos-y-menu") {
+          link.className =
+            "h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-body-md-semibold text-secondary bg-danger-soft border-l-[3px] border-secondary transition-colors";
+          const icon = link.querySelector(".material-symbols-outlined");
+          if (icon) icon.className = "material-symbols-outlined text-[20px] text-secondary";
+        }
+      });
+    })();
+  </script>
+<!-- ENCABEZADO DE VISTA & BREADCRUMB -->
+<div class="flex flex-col gap-space-sm mb-space-lg">
+<!-- Breadcrumb navegación -->
+<div class="flex items-center gap-space-xs text-caption font-caption text-text-secondary">
+<a class="inline-flex items-center gap-1 text-text-secondary hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Volver</span>
+</a>
+<span class="text-text-muted">|</span>
+<a class="hover:text-primary transition-colors" href="#">Productos y Menú</a>
+<span class="text-text-muted">/</span>
+<span class="text-text-primary font-body-md-semibold">Categorías</span>
+</div>
+<!-- Título y Acción Principal -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md pt-space-xs">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Categorías</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-0.5">
+          Organiza los productos del menú de POTOQUITOS.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm self-start sm:self-auto">
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-primary text-on-primary rounded-lg font-body-md-semibold text-body-md inline-flex items-center gap-space-xs shadow-sm transition-colors cursor-pointer" onclick="toggleModal('modal-categoria', true)" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Nueva categoría</span>
+</button>
+</div>
+</div>
+</div>
+<!-- BARRA DE BÚSQUEDA Y FILTROS -->
+<div class="bg-surface rounded-xl p-space-md shadow-[0_4px_14px_rgba(15,39,71,0.04)] mb-space-lg">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex flex-1 flex-col sm:flex-row items-stretch sm:items-center gap-space-md">
+<!-- Input de Búsqueda -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">
+            search
+          </span>
+<input class="w-full h-[42px] pl-10 pr-space-md bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all" id="category-search" placeholder="Buscar categoría..." type="text"/>
+</div>
+<!-- Selector de Estado -->
+<div class="relative w-full sm:w-48">
+<select class="w-full h-[42px] px-space-md bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary appearance-none focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 cursor-pointer pr-10" id="category-filter-status">
+<option value="all">Todos los estados</option>
+<option value="active">Activa</option>
+<option value="inactive">Inactiva</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px] pointer-events-none">
+            expand_more
+          </span>
+</div>
+</div>
+<!-- Conteo de Categorías -->
+<div class="flex items-center justify-end text-caption font-label-md text-text-secondary whitespace-nowrap">
+        Mostrando <span class="font-body-md-semibold text-text-primary mx-1">6</span> categorías
+      </div>
+</div>
+</div>
+<!-- TABLA DE CATEGORÍAS -->
+<div class="bg-surface rounded-xl shadow-[0_4px_14px_rgba(15,39,71,0.05)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-secondary text-text-secondary font-label-md text-label-md">
+<th class="py-3 px-space-md" scope="col">CATEGORÍA</th>
+<th class="py-3 px-space-md" scope="col">DESCRIPCIÓN</th>
+<th class="py-3 px-space-md" scope="col">PRODUCTOS ASOCIADOS</th>
+<th class="py-3 px-space-md" scope="col">ESTADO</th>
+<th class="py-3 px-space-md text-right" scope="col">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-md text-body-md text-text-primary">
+<!-- Fila 1: Hamburguesas (con dropdown activo para demostración) -->
+<tr class="hover:bg-surface-secondary/60 transition-colors">
+<td class="py-4 px-space-md align-middle font-body-md-semibold text-text-primary whitespace-nowrap">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[18px]">lunch_dining</span>
+</div>
+<span>Hamburguesas</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle text-text-secondary max-w-md">
+              Hamburguesas artesanales de res y pollo con ingredientes premium.
+            </td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="font-body-md-semibold text-text-primary">8</span>
+<span class="text-text-secondary text-caption ml-1">productos</span>
+</td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-label-sm bg-success-soft text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Activa</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-middle text-right whitespace-nowrap relative">
+<div class="inline-block relative">
+<button aria-label="Opciones de categoría Hamburguesas" class="w-8 h-8 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-secondary flex items-center justify-center transition-colors focus:outline-none" id="action-btn-1" onclick="toggleDropdown('menu-actions-1')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Menú contextual visible interactivo -->
+<div class="absolute right-0 top-9 w-44 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] p-1.5 z-30 flex flex-col gap-0.5 text-left" id="menu-actions-1">
+<a class="h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">inventory</span>
+<span>Ver productos</span>
+</a>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors text-left" onclick="openEditModal('Hamburguesas', 'Hamburguesas artesanales de res y pollo con ingredientes premium.', 'active')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-secondary hover:bg-danger-soft transition-colors text-left" onclick="openInactivateConfirm('Hamburguesas', 8)" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">pause_circle</span>
+<span>Inactivar</span>
+</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Fila 2: Perros -->
+<tr class="hover:bg-surface-secondary/60 transition-colors">
+<td class="py-4 px-space-md align-middle font-body-md-semibold text-text-primary whitespace-nowrap">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[18px]">kebab_dining</span>
+</div>
+<span>Perros</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle text-text-secondary max-w-md">
+              Perros calientes especiales con tocineta y salsas caseras.
+            </td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="font-body-md-semibold text-text-primary">6</span>
+<span class="text-text-secondary text-caption ml-1">productos</span>
+</td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-label-sm bg-success-soft text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Activa</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-middle text-right whitespace-nowrap relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-secondary inline-flex items-center justify-center transition-colors focus:outline-none" onclick="toggleDropdown('menu-actions-2')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 top-9 w-44 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] p-1.5 z-30 flex-col gap-0.5 text-left" id="menu-actions-2">
+<a class="h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">inventory</span>
+<span>Ver productos</span>
+</a>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors text-left" onclick="openEditModal('Perros', 'Perros calientes especiales con tocineta y salsas caseras.', 'active')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-secondary hover:bg-danger-soft transition-colors text-left" onclick="openInactivateConfirm('Perros', 6)" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">pause_circle</span>
+<span>Inactivar</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 3: Picadas -->
+<tr class="hover:bg-surface-secondary/60 transition-colors">
+<td class="py-4 px-space-md align-middle font-body-md-semibold text-text-primary whitespace-nowrap">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[18px]">dinner_dining</span>
+</div>
+<span>Picadas</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle text-text-secondary max-w-md">
+              Picadas mixtas familiares y personales con carne, cerdo y papa criolla.
+            </td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="font-body-md-semibold text-text-primary">5</span>
+<span class="text-text-secondary text-caption ml-1">productos</span>
+</td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-label-sm bg-success-soft text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Activa</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-middle text-right whitespace-nowrap relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-secondary inline-flex items-center justify-center transition-colors focus:outline-none" onclick="toggleDropdown('menu-actions-3')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 top-9 w-44 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] p-1.5 z-30 flex-col gap-0.5 text-left" id="menu-actions-3">
+<a class="h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">inventory</span>
+<span>Ver productos</span>
+</a>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors text-left" onclick="openEditModal('Picadas', 'Picadas mixtas familiares y personales con carne, cerdo y papa criolla.', 'active')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-secondary hover:bg-danger-soft transition-colors text-left" onclick="openInactivateConfirm('Picadas', 5)" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">pause_circle</span>
+<span>Inactivar</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 4: Acompañamientos -->
+<tr class="hover:bg-surface-secondary/60 transition-colors">
+<td class="py-4 px-space-md align-middle font-body-md-semibold text-text-primary whitespace-nowrap">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[18px]">tapas</span>
+</div>
+<span>Acompañamientos</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle text-text-secondary max-w-md">
+              Papas a la francesa, aros de cebolla y porciones adicionales.
+            </td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="font-body-md-semibold text-text-primary">7</span>
+<span class="text-text-secondary text-caption ml-1">productos</span>
+</td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-label-sm bg-success-soft text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Activa</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-middle text-right whitespace-nowrap relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-secondary inline-flex items-center justify-center transition-colors focus:outline-none" onclick="toggleDropdown('menu-actions-4')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 top-9 w-44 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] p-1.5 z-30 flex-col gap-0.5 text-left" id="menu-actions-4">
+<a class="h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">inventory</span>
+<span>Ver productos</span>
+</a>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors text-left" onclick="openEditModal('Acompañamientos', 'Papas a la francesa, aros de cebolla y porciones adicionales.', 'active')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-secondary hover:bg-danger-soft transition-colors text-left" onclick="openInactivateConfirm('Acompañamientos', 7)" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">pause_circle</span>
+<span>Inactivar</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 5: Bebidas -->
+<tr class="hover:bg-surface-secondary/60 transition-colors">
+<td class="py-4 px-space-md align-middle font-body-md-semibold text-text-primary whitespace-nowrap">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-primary">
+<span class="material-symbols-outlined text-[18px]">local_bar</span>
+</div>
+<span>Bebidas</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle text-text-secondary max-w-md">
+              Gaseosas, jugos naturales, limonadas y cervezas.
+            </td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="font-body-md-semibold text-text-primary">12</span>
+<span class="text-text-secondary text-caption ml-1">productos</span>
+</td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-label-sm bg-success-soft text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Activa</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-middle text-right whitespace-nowrap relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-secondary inline-flex items-center justify-center transition-colors focus:outline-none" onclick="toggleDropdown('menu-actions-5')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 top-9 w-44 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] p-1.5 z-30 flex-col gap-0.5 text-left" id="menu-actions-5">
+<a class="h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">inventory</span>
+<span>Ver productos</span>
+</a>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors text-left" onclick="openEditModal('Bebidas', 'Gaseosas, jugos naturales, limonadas y cervezas.', 'active')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-secondary hover:bg-danger-soft transition-colors text-left" onclick="openInactivateConfirm('Bebidas', 12)" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">pause_circle</span>
+<span>Inactivar</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Fila 6: Combos (Inactiva) -->
+<tr class="hover:bg-surface-secondary/60 transition-colors opacity-85">
+<td class="py-4 px-space-md align-middle font-body-md-semibold text-text-primary whitespace-nowrap">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-muted">
+<span class="material-symbols-outlined text-[18px]">fastfood</span>
+</div>
+<span>Combos</span>
+</div>
+</td>
+<td class="py-4 px-space-md align-middle text-text-secondary max-w-md">
+              Combos especiales con hamburguesa, papas y bebida incluida.
+            </td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="font-body-md-semibold text-text-primary">4</span>
+<span class="text-text-secondary text-caption ml-1">productos</span>
+</td>
+<td class="py-4 px-space-md align-middle whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-caption font-label-sm bg-surface-container text-text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-neutral-status"></span>
+<span>Inactiva</span>
+</span>
+</td>
+<td class="py-4 px-space-md align-middle text-right whitespace-nowrap relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-secondary inline-flex items-center justify-center transition-colors focus:outline-none" onclick="toggleDropdown('menu-actions-6')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-0 top-9 w-44 bg-surface rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] p-1.5 z-30 flex-col gap-0.5 text-left" id="menu-actions-6">
+<a class="h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">inventory</span>
+<span>Ver productos</span>
+</a>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-text-primary hover:bg-surface-secondary transition-colors text-left" onclick="openEditModal('Combos', 'Combos especiales con hamburguesa, papas y bebida incluida.', 'inactive')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span>
+<span>Editar</span>
+</button>
+<button class="w-full h-9 px-space-sm rounded-lg flex items-center gap-space-xs text-label-md font-label-md text-tertiary hover:bg-success-soft transition-colors text-left" onclick="activateCategory('Combos')" type="button">
+<span class="material-symbols-outlined text-[18px] text-tertiary">play_circle</span>
+<span>Activar</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Paginación / Footer Tabla -->
+<div class="px-space-md py-3 bg-surface-secondary/40 flex items-center justify-between text-caption font-caption text-text-secondary">
+<div>Mostrando 1-6 de 6 elementos</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded flex items-center justify-center text-neutral-status cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary-container text-on-primary font-body-md-semibold text-caption flex items-center justify-center" type="button">
+          1
+        </button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-neutral-status cursor-not-allowed" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MODAL: CREAR / EDITAR CATEGORÍA -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-primary-dark/40 p-space-md hidden" id="modal-categoria">
+<div class="bg-surface w-full max-w-lg rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] overflow-hidden flex flex-col transition-all">
+<!-- Cabecera modal -->
+<div class="p-space-lg bg-surface flex items-start justify-between">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-text-primary" id="modal-title">Nueva categoría</h2>
+<p class="font-body-md text-body-md text-text-secondary mt-1">
+            Crea una agrupación para clasificar los platos y bebidas en el catálogo y menú público.
+          </p>
+</div>
+<button class="text-text-muted hover:text-text-primary p-1 rounded-lg transition-colors" onclick="toggleModal('modal-categoria', false)" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Formulario -->
+<div class="p-space-lg flex flex-col gap-space-md bg-surface">
+<!-- Campo 1: Nombre -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary" for="cat-nombre">
+            Nombre de la categoría <span class="text-secondary">*</span>
+</label>
+<input class="w-full h-[42px] px-space-md bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all" id="cat-nombre" placeholder="Ej. Hamburguesas" type="text"/>
+</div>
+<!-- Campo 2: Descripción -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary" for="cat-desc">
+            Descripción
+          </label>
+<textarea class="w-full p-space-md bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:bg-surface focus:outline-none focus:ring-2 focus:ring-primary-container/20 transition-all resize-none" id="cat-desc" placeholder="Ej. Hamburguesas artesanales preparadas al momento." rows="3"></textarea>
+</div>
+<!-- Campo 3: Estado -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-text-primary">Estado de la categoría</label>
+<div class="flex items-center gap-space-lg pt-1">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="w-4 h-4 text-primary-container focus:ring-primary-container" name="cat-status" type="radio" value="active"/>
+<span class="font-body-md text-body-md text-text-primary">Activa</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="w-4 h-4 text-primary-container focus:ring-primary-container" name="cat-status" type="radio" value="inactive"/>
+<span class="font-body-md text-body-md text-text-primary">Inactiva</span>
+</label>
+</div>
+</div>
+<!-- Banner informativo -->
+<div class="p-space-md bg-primary-soft rounded-lg flex items-start gap-space-sm text-caption">
+<span class="material-symbols-outlined text-primary-container text-[20px] shrink-0 mt-0.5">
+            info
+          </span>
+<p class="text-text-primary font-body-md leading-relaxed">
+            Si una categoría se inactiva, dejará de mostrarse en el menú público, pero los productos registrados conservarán su histórico intacto.
+          </p>
+</div>
+</div>
+<!-- Footer modal -->
+<div class="p-space-lg bg-surface-secondary flex items-center justify-end gap-space-sm">
+<button class="h-[42px] px-space-md bg-surface hover:bg-surface-secondary text-text-secondary rounded-lg font-label-md text-label-md transition-colors cursor-pointer" onclick="toggleModal('modal-categoria', false)" type="button">
+          Cancelar
+        </button>
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-primary text-on-primary rounded-lg font-body-md-semibold text-body-md transition-colors cursor-pointer shadow-sm" id="btn-save-category" onclick="toggleModal('modal-categoria', false)" type="button">
+          Crear categoría
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL DE CONFIRMACIÓN: INACTIVAR CATEGORÍA -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-primary-dark/40 p-space-md hidden" id="modal-inactivar">
+<div class="bg-surface w-full max-w-md rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] overflow-hidden flex flex-col">
+<div class="p-space-lg flex flex-col gap-space-sm text-left">
+<div class="w-10 h-10 rounded-full bg-danger-soft text-secondary flex items-center justify-center mb-1">
+<span class="material-symbols-outlined text-[24px]">pause_circle</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary" id="inactivate-title">
+          ¿Inactivar la categoría 'Hamburguesas'?
+        </h3>
+<p class="font-body-md text-body-md text-text-secondary leading-relaxed" id="inactivate-body">
+          Tiene 8 productos asociados. La categoría dejará de estar disponible para nuevas asignaciones y no se mostrará en el menú activo. Los productos no se eliminarán.
+        </p>
+</div>
+<div class="p-space-md bg-surface-secondary flex items-center justify-end gap-space-sm">
+<button class="h-[42px] px-space-md bg-surface hover:bg-surface-secondary text-text-secondary rounded-lg font-label-md text-label-md transition-colors cursor-pointer" onclick="toggleModal('modal-inactivar', false)" type="button">
+          Cancelar
+        </button>
+<button class="h-[42px] px-space-md bg-secondary hover:bg-danger-dark text-on-secondary rounded-lg font-body-md-semibold text-body-md transition-colors cursor-pointer shadow-sm" onclick="confirmInactivation()" type="button">
+          Inactivar categoría
+        </button>
+</div>
+</div>
+</div>
+<!-- SCRIPT DE MICRO-INTERACCIONES Y CONTROL DE MODALES -->
+<script>
+    function toggleModal(id, show) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        if (show) {
+          modal.classList.remove("hidden");
+        } else {
+          modal.classList.add("hidden");
+        }
+      }
+    }
+
+    function toggleDropdown(id) {
+      const dropdown = document.getElementById(id);
+      const isVisible = dropdown.classList.contains("flex");
+      
+      // Cerrar otros dropdowns
+      for (let i = 1; i <= 6; i++) {
+        const item = document.getElementById("menu-actions-" + i);
+        if (item) {
+          item.classList.add("hidden");
+          item.classList.remove("flex");
+        }
+      }
+
+      if (!isVisible && dropdown) {
+        dropdown.classList.remove("hidden");
+        dropdown.classList.add("flex");
+      }
+    }
+
+    function openEditModal(name, desc, status) {
+      document.getElementById("modal-title").innerText = "Editar categoría";
+      document.getElementById("btn-save-category").innerText = "Guardar cambios";
+      document.getElementById("cat-nombre").value = name;
+      document.getElementById("cat-desc").value = desc;
+      
+      const radioActive = document.querySelector('input[name="cat-status"][value="active"]');
+      const radioInactive = document.querySelector('input[name="cat-status"][value="inactive"]');
+      if (status === "active" && radioActive) radioActive.checked = true;
+      if (status === "inactive" && radioInactive) radioInactive.checked = true;
+
+      // Cerrar dropdowns
+      for (let i = 1; i <= 6; i++) {
+        const item = document.getElementById("menu-actions-" + i);
+        if (item) {
+          item.classList.add("hidden");
+          item.classList.remove("flex");
+        }
+      }
+
+      toggleModal("modal-categoria", true);
+    }
+
+    function openInactivateConfirm(categoryName, productCount) {
+      document.getElementById("inactivate-title").innerText = "¿Inactivar la categoría '" + categoryName + "'?";
+      document.getElementById("inactivate-body").innerText =
+        "Tiene " + productCount + " productos asociados. La categoría dejará de estar disponible para nuevas asignaciones y no se mostrará en el menú activo. Los productos no se eliminarán.";
+      
+      // Cerrar dropdowns
+      for (let i = 1; i <= 6; i++) {
+        const item = document.getElementById("menu-actions-" + i);
+        if (item) {
+          item.classList.add("hidden");
+          item.classList.remove("flex");
+        }
+      }
+
+      toggleModal("modal-inactivar", true);
+    }
+
+    function confirmInactivation() {
+      toggleModal("modal-inactivar", false);
+    }
+
+    function activateCategory(categoryName) {
+      // Microinteracción para reactivar
+      alert("Categoría '" + categoryName + "' activada exitosamente.");
+    }
+
+    // Cerrar menús al hacer click afuera
+    document.addEventListener("click", function (event) {
+      const isActionButton = event.target.closest('button[id^="action-btn-"]') || event.target.closest('button[onclick*="toggleDropdown"]');
+      const isDropdown = event.target.closest('div[id^="menu-actions-"]');
+      if (!isActionButton && !isDropdown) {
+        for (let i = 1; i <= 6; i++) {
+          const item = document.getElementById("menu-actions-" + i);
+          if (item && i !== 1) { // Mantener abierta la fila 1 por defecto para fines de inspección si no se ha manipulado
+            item.classList.add("hidden");
+            item.classList.remove("flex");
+          }
+        }
+      }
+    });
+  </script>
+</div></main></div></body></html>

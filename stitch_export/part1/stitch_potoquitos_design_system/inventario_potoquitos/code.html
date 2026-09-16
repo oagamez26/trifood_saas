@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<div class="flex flex-col gap-space-lg w-full max-w-[1440px] mx-auto pb-space-xl">
+<!-- ENCABEZADO DE PÁGINA -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Inventario</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs">Controla ingredientes, existencias y movimientos de inventario de POTOQUITOS.</p>
+</div>
+<div class="flex items-center gap-space-md">
+<button class="h-[42px] px-space-md bg-surface text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg shadow-sm hover:bg-surface-secondary transition-colors flex items-center gap-space-xs cursor-pointer" onclick="toggleIngredienteModal()" type="button">
+<span class="material-symbols-outlined text-[20px] text-text-secondary">add</span>
+<span>Nuevo ingrediente</span>
+</button>
+<button class="h-[42px] px-space-md bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg shadow-sm hover:bg-primary transition-colors flex items-center gap-space-xs cursor-pointer" onclick="openEntradaDrawer('Carne de res', 'kg')" type="button">
+<span class="material-symbols-outlined text-[20px]">inventory</span>
+<span>Registrar entrada</span>
+</button>
+</div>
+</div>
+<!-- RESUMEN DE INDICADORES (3 CARDS COMPACTOS) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Total Ingredientes -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">24</span>
+<span class="font-label-md text-label-md text-text-primary font-semibold mt-0.5">Total Ingredientes</span>
+<span class="font-caption text-caption text-text-muted mt-space-xs">Ingredientes activos registrados</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-primary-soft text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">package_2</span>
+</div>
+</div>
+<!-- Stock Crítico -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-kpi-metric text-kpi-metric text-secondary">3</span>
+<span class="font-label-md text-label-md text-secondary font-semibold mt-0.5">Stock Crítico</span>
+<span class="font-caption text-caption text-text-muted mt-space-xs">Requieren reposición inmediata</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-danger-soft text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">error</span>
+</div>
+</div>
+<!-- Stock Bajo -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-kpi-metric text-kpi-metric text-warning">5</span>
+<span class="font-label-md text-label-md text-warning font-semibold mt-0.5">Stock Bajo</span>
+<span class="font-caption text-caption text-text-muted mt-space-xs">Próximos a stock mínimo</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-warning-soft text-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-[26px]">warning</span>
+</div>
+</div>
+</div>
+<!-- FILTROS Y BÚSQUEDA -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex flex-1 flex-col sm:flex-row items-center gap-space-md w-full">
+<div class="relative w-full sm:max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full h-[42px] pl-10 pr-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md placeholder:text-text-muted focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)] transition-all" id="filterInput" onkeyup="filterTable()" placeholder="Buscar ingrediente..." type="text"/>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<!-- Filtro Estado -->
+<div class="relative w-full sm:w-44">
+<select class="w-full h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none cursor-pointer appearance-none" id="stateFilter" onchange="filterTable()">
+<option value="ALL">Todos los estados</option>
+<option value="Crítico">Crítico</option>
+<option value="Bajo">Bajo</option>
+<option value="Normal">Normal</option>
+<option value="Inactivo">Inactivo</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+<!-- Filtro Unidad -->
+<div class="relative w-full sm:w-40">
+<select class="w-full h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none cursor-pointer appearance-none" id="unitFilter" onchange="filterTable()">
+<option value="ALL">Todas las unidades</option>
+<option value="kg">kg</option>
+<option value="und">und</option>
+<option value="L">L</option>
+<option value="g">g</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between w-full md:w-auto gap-space-md">
+<span class="font-caption text-caption text-text-secondary whitespace-nowrap" id="tableCount">Mostrando 12 de 24 ingredientes</span>
+<button class="h-[42px] px-space-md text-text-secondary hover:text-text-primary hover:bg-surface-secondary rounded-lg font-label-md text-label-md transition-colors flex items-center gap-space-xs cursor-pointer" onclick="resetFilters()" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Limpiar</span>
+</button>
+</div>
+</div>
+<!-- TABLA PRINCIPAL DE INGREDIENTES -->
+<div class="bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="inventoryTable">
+<thead>
+<tr class="bg-surface-secondary">
+<th class="py-3 px-space-lg font-label-sm text-label-sm uppercase tracking-wider text-text-secondary" scope="col">Ingrediente</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-text-secondary" scope="col">Unidad Base</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-text-secondary" scope="col">Stock Actual</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-text-secondary" scope="col">Stock Mínimo</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-text-secondary" scope="col">Usado En</th>
+<th class="py-3 px-space-md font-label-sm text-label-sm uppercase tracking-wider text-text-secondary" scope="col">Estado</th>
+<th class="py-3 px-space-lg font-label-sm text-label-sm uppercase tracking-wider text-text-secondary text-right" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<!-- Row 1: Carne de res -->
+<tr class="hover:bg-surface-secondary transition-colors group relative" data-name="Carne de res" data-state="Crítico" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Carne de res</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-secondary">2 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">5 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">3 recetas <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Hamburguesa Especial, Picada, Perro</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-danger-soft text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Crítico
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-1')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<!-- Menú desplegable contextual (Activo para Carne de Res) -->
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-1">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Carne de res')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">visibility</span> Ver detalle
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Carne de res', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openAjusteModal('Carne de res', 'Merma')" type="button">
+<span class="material-symbols-outlined text-[18px] text-warning">remove_circle</span> Registrar merma
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openAjusteModal('Carne de res', 'Ajuste')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">tune</span> Registrar ajuste
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Carne de res')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<div class="h-[1px] bg-surface-container my-1"></div>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="editIngrediente('Carne de res')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">edit</span> Editar
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-secondary hover:bg-danger-soft flex items-center gap-space-sm w-full text-left" onclick="inactivarIngrediente('Carne de res')" type="button">
+<span class="material-symbols-outlined text-[18px] text-secondary">block</span> Inactivar
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Queso mozzarella -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Queso mozzarella" data-state="Bajo" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Queso mozzarella</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-warning">5 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">7 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">2 recetas <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Hamburguesa, Perro Especial</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Bajo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-2')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-2">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Queso mozzarella')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Queso mozzarella', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Tomate -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Tomate" data-state="Bajo" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Tomate</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-warning">4 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">5 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">2 recetas <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Hamburguesa Especial, Picada</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Bajo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-3')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-3">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Tomate')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Tomate', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Pan brioche hamburguesa -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Pan brioche hamburguesa" data-state="Normal" data-unit="und">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Pan brioche hamburguesa</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">und</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-text-primary">42 und</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">20 und</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">1 receta <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Hamburguesas</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Normal
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-4')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-4">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Pan brioche hamburguesa')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Pan brioche hamburguesa', 'und')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Salchicha artesanal 150g -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Salchicha artesanal 150g" data-state="Crítico" data-unit="und">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Salchicha artesanal 150g</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">und</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-secondary">8 und</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">15 und</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">1 receta <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Perro Especial</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-danger-soft text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Crítico
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-5')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-5">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Salchicha artesanal 150g')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Salchicha artesanal 150g', 'und')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Papa criolla -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Papa criolla" data-state="Bajo" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Papa criolla</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-warning">6.5 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">8 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">1 receta <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Picada Familiar</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Bajo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-6')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-6">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Papa criolla')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Papa criolla', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 7: Tocineta ahumada -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Tocineta ahumada" data-state="Crítico" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Tocineta ahumada</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-secondary">1.8 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">4 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">3 recetas <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Hamburguesa, Perros, Papas</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-danger-soft text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Crítico
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-7')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-7">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Tocineta ahumada')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Tocineta ahumada', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 8: Limón Tahití -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Limón Tahití" data-state="Normal" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Limón Tahití</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-text-primary">12 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">5 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">1 receta <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Limonada Natural</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Normal
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-8')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-8">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Limón Tahití')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Limón Tahití', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 9: Salsa de la casa -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Salsa de la casa (Golf/Tártara)" data-state="Bajo" data-unit="L">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Salsa de la casa (Golf/Tártara)</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">L</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-warning">3.2 L</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">4 L</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">2 recetas <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Acompañamientos y frituras</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Bajo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-9')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-9">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Salsa de la casa')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Salsa de la casa', 'L')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 10: Chicharrón de cerdo -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Chicharrón de cerdo" data-state="Bajo" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Chicharrón de cerdo</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-warning">4.5 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">6 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">1 receta <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Picada Potoquitos</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+                  Bajo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-10')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-10">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Chicharrón de cerdo')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Chicharrón de cerdo', 'kg')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 11: Aceite vegetal para freidora -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Aceite vegetal para freidora" data-state="Normal" data-unit="L">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-primary">Aceite vegetal para freidora</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">L</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-text-primary">25 L</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">15 L</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">General <span class="font-caption text-caption text-text-muted block truncate max-w-xs">Estación de frituras</span></td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Normal
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-11')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-11">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Aceite vegetal para freidora')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="openEntradaDrawer('Aceite vegetal para freidora', 'L')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">add_circle</span> Registrar entrada
+                  </button>
+</div>
+</td>
+</tr>
+<!-- Row 12: Cebolla caramelizada -->
+<tr class="hover:bg-surface-secondary transition-colors group" data-name="Cebolla caramelizada" data-state="Inactivo" data-unit="kg">
+<td class="py-3.5 px-space-lg font-body-md-semibold text-body-md-semibold text-text-secondary">Cebolla caramelizada</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">kg</td>
+<td class="py-3.5 px-space-md font-body-md-semibold text-body-md-semibold text-text-secondary">0 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-secondary">2 kg</td>
+<td class="py-3.5 px-space-md font-body-md text-body-md text-text-muted">Desactivado</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container text-text-secondary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-neutral-status"></span>
+                  Inactivo
+                </span>
+</td>
+<td class="py-3.5 px-space-lg text-right relative">
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center ml-auto transition-colors" onclick="toggleRowMenu(event, 'menu-12')" type="button">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+<div class="hidden absolute right-space-lg top-10 w-52 bg-surface rounded-xl shadow-xl z-30 py-1.5 flex flex-col text-left" id="menu-12">
+<button class="px-space-md py-2 font-label-md text-label-md text-text-primary hover:bg-surface-secondary flex items-center gap-space-sm w-full text-left" onclick="showKardexDetail('Cebolla caramelizada')" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">history</span> Ver Kardex
+                  </button>
+<button class="px-space-md py-2 font-label-md text-label-md text-primary-container hover:bg-primary-soft flex items-center gap-space-sm w-full text-left" onclick="reactivarIngrediente('Cebolla caramelizada')" type="button">
+<span class="material-symbols-outlined text-[18px] text-primary-container">check_circle</span> Reactivar
+                  </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PAGINACIÓN -->
+<div class="px-space-lg py-3.5 bg-surface-secondary flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Mostrando 1–12 de 24 ingredientes</span>
+<div class="flex items-center gap-1.5">
+<button class="h-8 px-2.5 bg-surface text-text-muted rounded font-label-sm text-label-sm cursor-not-allowed opacity-60" disabled="" type="button">Anterior</button>
+<button class="h-8 w-8 bg-primary-container text-on-primary rounded font-label-sm text-label-sm font-semibold shadow-sm" type="button">1</button>
+<button class="h-8 w-8 bg-surface text-text-primary hover:bg-surface-container rounded font-label-sm text-label-sm transition-colors" type="button">2</button>
+<button class="h-8 px-2.5 bg-surface text-text-primary hover:bg-surface-container rounded font-label-sm text-label-sm transition-colors" type="button">Siguiente</button>
+</div>
+</div>
+</div>
+<!-- PANEL INFERIOR: ÚLTIMO MOVIMIENTO REGISTRADO -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-secondary flex items-center justify-center text-text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">sync_alt</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-sm text-label-sm font-bold text-text-primary uppercase tracking-wide">Último movimiento registrado:</span>
+<span class="font-caption text-caption font-semibold px-2 py-0.5 rounded bg-surface-container text-text-primary">CONSUMO_POR_PEDIDO</span>
+<span class="font-body-md text-body-md text-secondary font-semibold">· -540 g (Carne de res)</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-0.5">Comanda #125 Mesa 5 · Registrado hace 6 minutos de forma automática</p>
+</div>
+</div>
+<button class="text-primary-container hover:text-primary font-body-md-semibold text-body-md-semibold flex items-center gap-1 whitespace-nowrap cursor-pointer" onclick="showKardexDetail('General')" type="button">
+<span>Ver Kardex general</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- DRAWER DERECHO: REGISTRAR ENTRADA DE INVENTARIO -->
+<div class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0" id="entradaDrawer">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-inverse-surface/40 backdrop-blur-none cursor-pointer" onclick="closeEntradaDrawer()"></div>
+<!-- Panel -->
+<div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-surface shadow-2xl p-space-xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto overflow-y-auto">
+<div class="flex flex-col">
+<!-- Header -->
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Registrar Entrada</h2>
+<span class="font-caption text-caption text-text-secondary">Añadir existencias físicas con trazabilidad</span>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-secondary flex items-center justify-center" onclick="closeEntradaDrawer()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Formulario -->
+<form class="flex flex-col gap-space-md mt-space-md" id="formEntrada" onsubmit="handleEntradaSubmit(event)">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Ingrediente seleccionado</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md font-semibold focus:outline-none" id="drawerIngredienteNombre" readonly="" type="text" value="Carne de res"/>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Cantidad a ingresar *</label>
+<input class="h-[42px] px-space-md bg-surface text-text-primary rounded-lg font-body-md text-body-md focus:outline-none focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)] bg-surface-secondary" min="0.01" placeholder="0.00" required="" step="0.01" type="number"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Unidad de medida</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-secondary rounded-lg font-body-md text-body-md focus:outline-none" id="drawerIngredienteUnidad" readonly="" type="text" value="kg"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Motivo de ingreso</label>
+<select class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none cursor-pointer">
+<option value="COMPRA_LOCAL">Compra / Reposición regular</option>
+<option value="DONACION">Aporte de insumos de emergencia</option>
+<option value="PRODUCCION_INTERNA">Producción interna de cocina</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Nota u observación (opcional)</label>
+<textarea class="p-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)] transition-all resize-none" placeholder="Detalle de lote, factura de compra o motivo de entrada..." rows="3"></textarea>
+</div>
+<div class="p-space-md rounded-xl bg-primary-soft text-primary-container flex items-start gap-space-sm mt-space-xs">
+<span class="material-symbols-outlined text-[20px] flex-shrink-0 mt-0.5">info</span>
+<p class="font-caption text-caption">Toda entrada actualiza el stock en tiempo real y se registra automáticamente con tu usuario en el Kardex operacional.</p>
+</div>
+<div class="flex items-center gap-space-md mt-space-lg">
+<button class="flex-1 h-[42px] px-space-md bg-surface text-text-secondary hover:bg-surface-secondary rounded-lg font-body-md-semibold text-body-md-semibold transition-colors" onclick="closeEntradaDrawer()" type="button">
+              Cancelar
+            </button>
+<button class="flex-1 h-[42px] px-space-md bg-primary-container text-on-primary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-primary transition-colors shadow-sm" type="submit">
+              Confirmar Entrada
+            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- MODAL: REGISTRAR MERMA O AJUSTE OPERACIONAL -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center" id="ajusteModal">
+<div class="fixed inset-0 bg-inverse-surface/40" onclick="closeAjusteModal()"></div>
+<div class="relative bg-surface rounded-xl shadow-2xl w-full max-w-md p-space-xl z-10 mx-space-md">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-text-primary" id="modalAjusteTitulo">Registrar Merma</h2>
+<span class="font-caption text-caption text-text-secondary" id="modalAjusteSubtitulo">Ajuste con impacto en trazabilidad de existencias</span>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-secondary flex items-center justify-center" onclick="closeAjusteModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-space-md mt-space-sm" onsubmit="handleAjusteSubmit(event)">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Ingrediente</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md font-semibold focus:outline-none" id="ajusteIngredienteNombre" readonly="" type="text" value=""/>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Cantidad afectada *</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)]" min="0.01" placeholder="0.00" required="" step="0.01" type="number"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Causa / Tipo</label>
+<select class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none" id="selectTipoAjuste">
+<option value="DETERIORO">Deterioro / Caducidad</option>
+<option value="ERROR_COCINA">Error en preparación</option>
+<option value="CONTEO_FISICO">Diferencia inventario físico</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Justificación detallada *</label>
+<textarea class="p-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none resize-none" placeholder="Explica la razón de la pérdida o ajuste..." required="" rows="3"></textarea>
+</div>
+<div class="flex items-center gap-space-md mt-space-md">
+<button class="flex-1 h-[42px] px-space-md bg-surface text-text-secondary hover:bg-surface-secondary rounded-lg font-body-md-semibold text-body-md-semibold transition-colors" onclick="closeAjusteModal()" type="button">
+            Cancelar
+          </button>
+<button class="flex-1 h-[42px] px-space-md bg-secondary text-on-secondary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-danger-dark transition-colors shadow-sm" id="btnConfirmAjuste" type="submit">
+            Guardar Ajuste
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- MODAL: DETALLE DE KARDEX OPERACIONAL -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center" id="kardexModal">
+<div class="fixed inset-0 bg-inverse-surface/40" onclick="closeKardexModal()"></div>
+<div class="relative bg-surface rounded-xl shadow-2xl w-full max-w-2xl p-space-xl z-10 mx-space-md max-h-[870px] flex flex-col">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-text-primary" id="kardexTitulo">Kardex de Movimientos</h2>
+<span class="font-caption text-caption text-text-secondary">Trazabilidad de entradas, mermas y consumos automáticos</span>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-secondary flex items-center justify-center" onclick="closeKardexModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="overflow-y-auto flex-1 my-space-md">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-secondary text-text-secondary font-label-sm text-label-sm">
+<th class="py-2.5 px-3">Fecha/Hora</th>
+<th class="py-2.5 px-3">Tipo Movimiento</th>
+<th class="py-2.5 px-3 text-right">Cantidad</th>
+<th class="py-2.5 px-3">Referencia / Responsable</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border font-body-md text-body-md">
+<tr>
+<td class="py-3 px-3 font-caption text-caption text-text-muted">Hoy, 12:44 PM</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-danger-soft text-secondary">CONSUMO</span></td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-secondary">-0.54 kg</td>
+<td class="py-3 px-3 text-text-secondary font-caption text-caption">Comanda #125 · Mesa 5 (Mesero Carlos)</td>
+</tr>
+<tr>
+<td class="py-3 px-3 font-caption text-caption text-text-muted">Hoy, 11:20 AM</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-primary-soft text-primary-container">ENTRADA</span></td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-tertiary">+5.00 kg</td>
+<td class="py-3 px-3 text-text-secondary font-caption text-caption">Reposición matutina · Admin POTOQUITOS</td>
+</tr>
+<tr>
+<td class="py-3 px-3 font-caption text-caption text-text-muted">Ayer, 09:15 PM</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-danger-soft text-secondary">CONSUMO</span></td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-secondary">-1.20 kg</td>
+<td class="py-3 px-3 text-text-secondary font-caption text-caption">Comandas servicio cena (Lote 4 recetas)</td>
+</tr>
+<tr>
+<td class="py-3 px-3 font-caption text-caption text-text-muted">Ayer, 03:30 PM</td>
+<td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-warning-soft text-warning">MERMA</span></td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-warning">-0.30 kg</td>
+<td class="py-3 px-3 text-text-secondary font-caption text-caption">Recorte de grasa excesiva en porcionado</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pt-space-md flex justify-end">
+<button class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-surface-container transition-colors" onclick="closeKardexModal()" type="button">
+          Cerrar kardex
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL: NUEVO INGREDIENTE -->
+<div class="fixed inset-0 z-50 hidden items-center justify-center" id="ingredienteModal">
+<div class="fixed inset-0 bg-inverse-surface/40" onclick="toggleIngredienteModal()"></div>
+<div class="relative bg-surface rounded-xl shadow-2xl w-full max-w-lg p-space-xl z-10 mx-space-md">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Nuevo Ingrediente</h2>
+<span class="font-caption text-caption text-text-secondary">Registra un ingrediente base para formulación de recetas</span>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-secondary flex items-center justify-center" onclick="toggleIngredienteModal()" type="button">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-space-md mt-space-sm" onsubmit="handleNuevoIngrediente(event)">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Nombre del ingrediente *</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_rgba(37,99,235,0.2)]" placeholder="Ej. Queso Cheddar Americano" required="" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Unidad base *</label>
+<select class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none">
+<option value="kg">Kilogramos (kg)</option>
+<option value="g">Gramos (g)</option>
+<option value="und">Unidades (und)</option>
+<option value="L">Litros (L)</option>
+<option value="ml">Mililitros (ml)</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Stock mínimo de alerta *</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface" placeholder="Ej. 5" required="" step="0.1" type="number"/>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary">Stock inicial en bodega</label>
+<input class="h-[42px] px-space-md bg-surface-secondary text-text-primary rounded-lg font-body-md text-body-md focus:outline-none focus:bg-surface" placeholder="0.00 (opcional)" step="0.1" type="number"/>
+</div>
+<div class="flex items-center gap-space-md mt-space-md">
+<button class="flex-1 h-[42px] px-space-md bg-surface text-text-secondary hover:bg-surface-secondary rounded-lg font-body-md-semibold text-body-md-semibold transition-colors" onclick="toggleIngredienteModal()" type="button">
+            Cancelar
+          </button>
+<button class="flex-1 h-[42px] px-space-md bg-primary-container text-on-primary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-primary transition-colors shadow-sm" type="submit">
+            Crear Ingrediente
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- TOAST FEEDBACK NOTIFICATION -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="statusToast">
+<div class="bg-surface text-text-primary px-space-md py-3 rounded-xl shadow-xl flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px]" id="toastIcon">check_circle</span>
+<span class="font-body-md-semibold text-body-md-semibold" id="toastMessage">Operación realizada con éxito</span>
+</div>
+</div>
+</div>
+<script>
+  // Sincronizar navegación activa de la shell
+  (function initNav() {
+    const navItems = document.querySelectorAll('aside nav a');
+    navItems.forEach(item => {
+      const path = item.getAttribute('data-path');
+      if (path === 'inventario') {
+        item.classList.add('bg-danger-soft', 'text-secondary', 'font-body-md-semibold', 'border-l-[3px]', 'border-secondary');
+        item.classList.remove('text-text-secondary');
+        const icon = item.querySelector('.material-symbols-outlined');
+        if (icon) icon.classList.add('text-secondary');
+      } else {
+        item.classList.remove('bg-danger-soft', 'text-secondary', 'font-body-md-semibold', 'border-l-[3px]', 'border-secondary');
+      }
+    });
+  })();
+
+  // Control de menú de tres puntos
+  let activeMenuId = null;
+
+  function toggleRowMenu(event, menuId) {
+    event.stopPropagation();
+    const menu = document.getElementById(menuId);
+    if (!menu) return;
+
+    if (activeMenuId && activeMenuId !== menuId) {
+      const prev = document.getElementById(activeMenuId);
+      if (prev) prev.classList.add('hidden');
+    }
+
+    menu.classList.toggle('hidden');
+    activeMenuId = menu.classList.contains('hidden') ? null : menuId;
+  }
+
+  // Cerrar menú con click afuera
+  document.addEventListener('click', function(e) {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m && !m.contains(e.target)) {
+        m.classList.add('hidden');
+        activeMenuId = null;
+      }
+    }
+  });
+
+  // Filtrado reactivo de la tabla
+  function filterTable() {
+    const searchVal = document.getElementById('filterInput').value.toLowerCase();
+    const stateVal = document.getElementById('stateFilter').value;
+    const unitVal = document.getElementById('unitFilter').value;
+
+    const rows = document.querySelectorAll('#inventoryTable tbody tr');
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const name = (row.getAttribute('data-name') || '').toLowerCase();
+      const state = row.getAttribute('data-state');
+      const unit = row.getAttribute('data-unit');
+
+      const matchSearch = name.includes(searchVal);
+      const matchState = stateVal === 'ALL' || state === stateVal;
+      const matchUnit = unitVal === 'ALL' || unit === unitVal;
+
+      if (matchSearch && matchState && matchUnit) {
+        row.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        row.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('tableCount').innerText = `Mostrando ${visibleCount} de 24 ingredientes`;
+  }
+
+  function resetFilters() {
+    document.getElementById('filterInput').value = '';
+    document.getElementById('stateFilter').value = 'ALL';
+    document.getElementById('unitFilter').value = 'ALL';
+    filterTable();
+  }
+
+  // Toast feedback
+  function showToast(message, isError = false) {
+    const toast = document.getElementById('statusToast');
+    const msg = document.getElementById('toastMessage');
+    const icon = document.getElementById('toastIcon');
+
+    msg.innerText = message;
+    if (isError) {
+      icon.innerText = 'error';
+      icon.className = 'material-symbols-outlined text-secondary text-[20px]';
+    } else {
+      icon.innerText = 'check_circle';
+      icon.className = 'material-symbols-outlined text-tertiary text-[20px]';
+    }
+
+    toast.classList.remove('translate-y-20', 'opacity-0');
+    setTimeout(() => {
+      toast.classList.add('translate-y-20', 'opacity-0');
+    }, 3200);
+  }
+
+  // Drawer Registrar Entrada
+  function openEntradaDrawer(name = 'Carne de res', unit = 'kg') {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m) m.classList.add('hidden');
+      activeMenuId = null;
+    }
+    document.getElementById('drawerIngredienteNombre').value = name;
+    document.getElementById('drawerIngredienteUnidad').value = unit;
+    
+    const drawer = document.getElementById('entradaDrawer');
+    drawer.classList.remove('opacity-0', 'pointer-events-none');
+    const panel = drawer.querySelector('.max-w-md');
+    panel.classList.remove('translate-x-full');
+  }
+
+  function closeEntradaDrawer() {
+    const drawer = document.getElementById('entradaDrawer');
+    const panel = drawer.querySelector('.max-w-md');
+    panel.classList.add('translate-x-full');
+    setTimeout(() => {
+      drawer.classList.add('opacity-0', 'pointer-events-none');
+    }, 200);
+  }
+
+  function handleEntradaSubmit(e) {
+    e.preventDefault();
+    closeEntradaDrawer();
+    showToast('Entrada registrada exitosamente en Kardex');
+  }
+
+  // Modal Ajuste / Merma
+  function openAjusteModal(nombre, tipo) {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m) m.classList.add('hidden');
+      activeMenuId = null;
+    }
+    document.getElementById('ajusteIngredienteNombre').value = nombre;
+    const title = document.getElementById('modalAjusteTitulo');
+    const subtitle = document.getElementById('modalAjusteSubtitulo');
+    const btn = document.getElementById('btnConfirmAjuste');
+
+    if (tipo === 'Merma') {
+      title.innerText = 'Registrar Merma';
+      subtitle.innerText = 'Baja de inventario por deterioro, rotura o vencimiento';
+      btn.innerText = 'Confirmar Merma';
+      btn.className = 'flex-1 h-[42px] px-space-md bg-secondary text-on-secondary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-danger-dark transition-colors shadow-sm';
+    } else {
+      title.innerText = 'Registrar Ajuste';
+      subtitle.innerText = 'Corrección manual de balance por auditoría física';
+      btn.innerText = 'Guardar Ajuste';
+      btn.className = 'flex-1 h-[42px] px-space-md bg-primary-container text-on-primary rounded-lg font-body-md-semibold text-body-md-semibold hover:bg-primary transition-colors shadow-sm';
+    }
+
+    const modal = document.getElementById('ajusteModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeAjusteModal() {
+    const modal = document.getElementById('ajusteModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  function handleAjusteSubmit(e) {
+    e.preventDefault();
+    closeAjusteModal();
+    showToast('Ajuste de inventario aplicado con trazabilidad');
+  }
+
+  // Modal Kardex
+  function showKardexDetail(nombre) {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m) m.classList.add('hidden');
+      activeMenuId = null;
+    }
+    document.getElementById('kardexTitulo').innerText = `Kardex: ${nombre}`;
+    const modal = document.getElementById('kardexModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  }
+
+  function closeKardexModal() {
+    const modal = document.getElementById('kardexModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  // Modal Nuevo Ingrediente
+  function toggleIngredienteModal() {
+    const modal = document.getElementById('ingredienteModal');
+    if (modal.classList.contains('hidden')) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    } else {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  }
+
+  function handleNuevoIngrediente(e) {
+    e.preventDefault();
+    toggleIngredienteModal();
+    showToast('Ingrediente creado con éxito');
+  }
+
+  function editIngrediente(nombre) {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m) m.classList.add('hidden');
+      activeMenuId = null;
+    }
+    toggleIngredienteModal();
+  }
+
+  function inactivarIngrediente(nombre) {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m) m.classList.add('hidden');
+      activeMenuId = null;
+    }
+    showToast(`${nombre} inactivado para recetas`, true);
+  }
+
+  function reactivarIngrediente(nombre) {
+    if (activeMenuId) {
+      const m = document.getElementById(activeMenuId);
+      if (m) m.classList.add('hidden');
+      activeMenuId = null;
+    }
+    showToast(`${nombre} reactivado`);
+  }
+</script></main></div></body></html>

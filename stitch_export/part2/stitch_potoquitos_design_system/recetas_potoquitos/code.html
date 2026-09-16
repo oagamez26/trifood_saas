@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<!-- Top Section: Breadcrumb, Title & Global Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs text-text-secondary font-caption text-caption mb-space-xs">
+<span class="hover:text-text-primary cursor-pointer transition-colors">Productos y Menú</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-text-primary font-body-md-semibold">Recetas y Escandallos</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Recetas</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs max-w-3xl">
+        Configura los ingredientes necesarios para preparar cada producto de POTOQUITOS, calcula costos y monitorea la capacidad de producción en tiempo real.
+      </p>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-space-sm self-start md:self-auto shrink-0">
+<button class="h-[42px] px-space-md bg-surface text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg shadow-sm hover:bg-surface-secondary transition-all flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[20px] text-text-secondary">fact_check</span>
+<span>Auditoría de escandallos</span>
+</button>
+<button class="h-[42px] px-space-md bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg shadow-sm hover:bg-primary transition-all flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Configurar receta</span>
+</button>
+</div>
+</div>
+<!-- KPI Cards Grid (Flat Modern Enterprise) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg mb-space-lg">
+<!-- KPI 1 -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-secondary">Productos con receta</span>
+<div class="w-8 h-8 rounded-lg bg-success-soft text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-sm">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">18</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+          Activas y enlazadas a inventario
+        </span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-secondary">Productos sin receta</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container text-text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-sm">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">7</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container text-text-secondary">
+          Bebidas embotelladas y snacks directos
+        </span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-text-secondary">Recetas incompletas</span>
+<div class="w-8 h-8 rounded-lg bg-warning-soft text-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-baseline gap-space-sm">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">2</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+          Requieren completar insumos
+        </span>
+</div>
+</div>
+</div>
+<!-- Filter & Search Controls Bar -->
+<div class="bg-surface rounded-xl p-space-sm shadow-sm mb-space-lg flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex flex-wrap items-center gap-space-sm flex-1">
+<!-- Search Input -->
+<div class="relative min-w-[240px] max-w-sm flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">search</span>
+<input class="w-full h-10 pl-9 pr-space-md bg-surface-secondary rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:bg-surface focus:outline-none focus:shadow-[0_0_0_2px_#2563EB]" placeholder="Buscar producto o ingrediente..." type="text"/>
+</div>
+<!-- Category Filter -->
+<div class="relative">
+<select class="h-10 pl-3 pr-8 bg-surface-secondary text-text-primary font-label-md text-label-md rounded-lg appearance-none cursor-pointer focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#2563EB]">
+<option>Todas las categorías</option>
+<option>Hamburguesas</option>
+<option>Perros</option>
+<option>Picadas</option>
+<option>Acompañamientos</option>
+<option>Bebidas</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-text-secondary text-[18px] pointer-events-none">expand_more</span>
+</div>
+<!-- Status Filter -->
+<div class="relative">
+<select class="h-10 pl-3 pr-8 bg-surface-secondary text-text-primary font-label-md text-label-md rounded-lg appearance-none cursor-pointer focus:outline-none focus:bg-surface focus:shadow-[0_0_0_2px_#2563EB]">
+<option>Todos los estados</option>
+<option>Configurada</option>
+<option>Sin receta</option>
+<option>Incompleta</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-text-secondary text-[18px] pointer-events-none">expand_more</span>
+</div>
+<button class="h-10 px-space-sm text-text-muted hover:text-text-primary font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">filter_alt_off</span>
+<span>Limpiar</span>
+</button>
+</div>
+<!-- Counter -->
+<div class="px-space-sm font-caption text-caption text-text-muted flex items-center gap-1">
+<span>Mostrando</span>
+<span class="font-body-md-semibold text-text-primary">6</span>
+<span>de 27 productos</span>
+</div>
+</div>
+<!-- Operational Workspace: Table (62%) + Detail Panel (38%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT PANEL: Data Table (col-span-7) -->
+<div class="lg:col-span-7 bg-surface rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="px-space-md py-space-sm bg-surface flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Listado Maestro de Productos</h2>
+<span class="font-caption text-caption text-text-muted">Precios COP y Capacidad en vivo</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-md text-body-md">
+<thead>
+<tr class="bg-surface-secondary text-text-secondary font-label-md text-label-md border-b border-surface-container">
+<th class="py-3 px-4 font-semibold">Producto</th>
+<th class="py-3 px-3 font-semibold">Categoría</th>
+<th class="py-3 px-3 font-semibold text-right">Costo Est.</th>
+<th class="py-3 px-3 font-semibold text-right">P. Venta</th>
+<th class="py-3 px-3 font-semibold text-center">Margen</th>
+<th class="py-3 px-3 font-semibold">Capacidad</th>
+<th class="py-3 px-3 font-semibold">Estado</th>
+<th class="py-3 px-3 text-center"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Row 1 (Active/Selected) -->
+<tr class="bg-primary-soft/40 hover:bg-primary-soft transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Artisanal beef burger with brioche bun, melted cheese, lettuce and tomato on a clean restaurant prep board, flat commercial photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsveP_6Srbi81cw_jmdby62SJgihF1WhGCXLklxiGeTg33QyhXe_veqqw1kYZdHq8gHwWJ9E5V6ZGl9nR_HewSl62lbltTlK3uQh7k00jJcggY5MVua3fFLUvwLkU6eoi1IIorKfCRUkDFfuRIzXzhzcvcOQNQj3EqNPw7ge5rD3yzww87KbCY4n0x8FbP20EP7R3XGajEQNduHTo0hq6CCImBR2XuEZEpsnjSSJwUnsa3wwaMHl0"/>
+</div>
+<div>
+<div class="font-body-md-semibold text-primary">Hamburguesa Especial</div>
+<span class="font-caption text-caption text-text-muted">6 ingredientes</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-text-secondary font-label-md">Hamburguesas</td>
+<td class="py-3 px-3 text-right font-body-md text-text-primary">$7.700</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-text-primary">$22.000</td>
+<td class="py-3 px-3 text-center">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">65%</span>
+</td>
+<td class="py-3 px-3">
+<div class="font-body-md-semibold text-text-primary">30 und</div>
+<div class="font-caption text-[11px] text-secondary leading-tight">Lim: Carne</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-success-soft text-tertiary font-semibold">
+                  Configurada
+                </span>
+</td>
+<td class="py-3 px-3 text-center text-text-secondary">
+<button class="w-7 h-7 rounded hover:bg-surface flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Large Colombian picada platter with crispy pork belly chicharron, yellow potatoes, plantain and chorizo in high key lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmBM0fI-SpiB4e4oW-3-cAXr2xNvJyQJ0Tu_HGxRTU78GU9ii8Fu5yAfDPVyaUumEaNh0CE-W3aGdr6a3cSm9BeV6s-TOz6zGki_Ymm_1rSeHpMF4ZR69rwj1waERlroV3RnzUN2aV0lobe6LEPYD-IJ3d0gYB79r3vKtXkq1ubPfEdOLYzP3jX3HLzdL2i4ZbG71OmJmiLIwP8pwGqUTn1hpjZDvZ-Y4iATQMbGCOeAtP8MqTdZ8"/>
+</div>
+<div>
+<div class="font-body-md-semibold text-text-primary">Picada Familiar POTOQUITOS</div>
+<span class="font-caption text-caption text-text-muted">8 ingredientes</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-text-secondary font-label-md">Picadas</td>
+<td class="py-3 px-3 text-right font-body-md text-text-primary">$28.500</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-text-primary">$75.000</td>
+<td class="py-3 px-3 text-center">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">62%</span>
+</td>
+<td class="py-3 px-3">
+<div class="font-body-md-semibold text-text-primary">14 und</div>
+<div class="font-caption text-[11px] text-secondary leading-tight">Lim: Chicharrón</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-success-soft text-tertiary font-semibold">
+                  Configurada
+                </span>
+</td>
+<td class="py-3 px-3 text-center text-text-secondary">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Incompleta -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Gourmet hot dog loaded with crushed crisps, melted cheese and artisanal sausage served on a restaurant tray" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGEaHjedbmFWERMFilKDzWOvVlEPzFirxOiUso8p3i0tR4ctIwXXWkfxIQQAnJDv5UXzReoPb4aBbOkZCoUGBuOdeTV92oTH67xgHTEkp1K6jjs9Lz7EiJDJ_SidtekFA8BpQddT6UljyYZ0W0WtqHOZIx0JaCLc3F9n_whd48qDi9RrqUHR7jpncUfA705E0_BsFqLN3dJ1wP295eUEgcnEJt9iP59-BZY5_zt-5Ar5W_Yo5t39w"/>
+</div>
+<div>
+<div class="font-body-md-semibold text-text-primary">Perro Caliente Especial</div>
+<span class="font-caption text-caption text-text-muted">4 ingredientes</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-text-secondary font-label-md">Perros</td>
+<td class="py-3 px-3 text-right font-body-md text-text-primary">$5.200</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-text-primary">$18.000</td>
+<td class="py-3 px-3 text-center">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">71%</span>
+</td>
+<td class="py-3 px-3">
+<div class="font-body-md-semibold text-text-primary">8 und</div>
+<div class="font-caption text-[11px] text-secondary leading-tight">Lim: Salchicha art.</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-warning-soft text-warning font-semibold">
+                  Incompleta
+                </span>
+</td>
+<td class="py-3 px-3 text-center text-text-secondary">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<div class="w-full h-full bg-surface-container-high flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">lunch_dining</span>
+</div>
+</div>
+<div>
+<div class="font-body-md-semibold text-text-primary">Papas Especiales con Tocineta</div>
+<span class="font-caption text-caption text-text-muted">4 ingredientes</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-text-secondary font-label-md">Acompañamientos</td>
+<td class="py-3 px-3 text-right font-body-md text-text-primary">$3.900</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-text-primary">$12.000</td>
+<td class="py-3 px-3 text-center">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">67%</span>
+</td>
+<td class="py-3 px-3">
+<div class="font-body-md-semibold text-text-primary">9 und</div>
+<div class="font-caption text-[11px] text-secondary leading-tight">Lim: Tocineta</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-success-soft text-tertiary font-semibold">
+                  Configurada
+                </span>
+</td>
+<td class="py-3 px-3 text-center text-text-secondary">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<div class="w-full h-full bg-surface-container-high flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">fastfood</span>
+</div>
+</div>
+<div>
+<div class="font-body-md-semibold text-text-primary">Salchipapa Especial</div>
+<span class="font-caption text-caption text-text-muted">3 ingredientes</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-text-secondary font-label-md">Acompañamientos</td>
+<td class="py-3 px-3 text-right font-body-md text-text-primary">$4.100</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-text-primary">$14.000</td>
+<td class="py-3 px-3 text-center">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold">70%</span>
+</td>
+<td class="py-3 px-3">
+<div class="font-body-md-semibold text-text-primary">12 und</div>
+<div class="font-caption text-[11px] text-text-muted leading-tight">Normal</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-success-soft text-tertiary font-semibold">
+                  Configurada
+                </span>
+</td>
+<td class="py-3 px-3 text-center text-text-secondary">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Sin Receta Directo -->
+<tr class="hover:bg-surface-secondary transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden">
+<div class="w-full h-full bg-surface-container-high flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">local_drink</span>
+</div>
+</div>
+<div>
+<div class="font-body-md-semibold text-text-primary">Coca-Cola 400 ml</div>
+<span class="font-caption text-caption text-text-muted">Sin preparación</span>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-text-secondary font-label-md">Bebidas</td>
+<td class="py-3 px-3 text-right font-body-md text-text-primary">$2.800</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-text-primary">$5.000</td>
+<td class="py-3 px-3 text-center">
+<span class="font-label-sm text-label-sm text-text-secondary font-semibold">44%</span>
+</td>
+<td class="py-3 px-3">
+<div class="font-body-md-semibold text-text-primary">45 und</div>
+<div class="font-caption text-[11px] text-text-muted leading-tight">Stock botella</div>
+</td>
+<td class="py-3 px-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-surface-container text-text-secondary font-semibold">
+                  Sin receta
+                </span>
+</td>
+<td class="py-3 px-3 text-center text-text-secondary">
+<button class="w-7 h-7 rounded hover:bg-surface-container flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer of Table -->
+<div class="p-space-sm bg-surface flex items-center justify-between text-text-secondary font-caption text-caption border-t border-surface-container">
+<span>1 a 6 de 27 productos registrados</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 rounded hover:bg-surface-secondary flex items-center justify-center" disabled="" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<span class="px-2 py-1 bg-surface-secondary text-text-primary font-semibold rounded">1</span>
+<button class="w-8 h-8 rounded hover:bg-surface-secondary flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- RIGHT PANEL: Detalle y Escandallo Activo (col-span-5) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Main Detail Header Card -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm">
+<div class="flex items-start justify-between gap-space-sm pb-space-sm border-b border-surface-container">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg bg-surface-container flex items-center justify-center shrink-0 overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close up gourmet hamburger with freshly melted cheese, grilled beef patty, crisp lettuce on brioche bun, professional studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRxJq6N1-4AlDajMlEVT-u5cfYB9WozsVVHhNJyLZGbcXLQwsk5uYKTCmfWhaKuk1aiWgTDpqYwfwAM1wtf_WW_csfpfR-vCQJHwuZEW8Gnr-YDPEivdnWUlsbW6vAHpiHjyIl_CcNulY18f8HrLGH-cI-KapxfG9g7RbSt4HlB4sRNK3tjrnpC4dwdWaWIGRhXJu_lIIB4wkOWx6S62AJhe-vE8CHq4hgSLTwGyEnRftULLbJDgM"/>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 bg-surface-container text-text-secondary font-mono text-[11px] rounded font-semibold">PROD-001</span>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-[11px] bg-success-soft text-tertiary font-semibold">Receta activa</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mt-1">Hamburguesa Especial</h3>
+<p class="font-caption text-caption text-text-secondary">Categoría: Hamburguesas · Precio de Venta: $22.000 COP</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-secondary flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+</div>
+<!-- Ingredients Table in Escandallo -->
+<div class="mt-space-md">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Ingredientes de la receta (6 insumos)</span>
+<span class="font-caption text-caption text-text-secondary">Unidad por porción</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-md text-[13px]">
+<thead>
+<tr class="text-text-muted border-b border-surface-container font-label-sm text-[11px]">
+<th class="py-2">Insumo</th>
+<th class="py-2 text-right">Cant.</th>
+<th class="py-2 text-right">Costo</th>
+<th class="py-2 text-right">Capacidad</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<!-- Insumo 1 -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Carne de res (molida art.)</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 5.4 kg</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">180 g</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$4.200</td>
+<td class="py-2 text-right font-body-md-semibold text-secondary">30 und</td>
+</tr>
+<!-- Insumo 2 -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Pan brioche hamburguesa</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 42 und</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">1 und</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$900</td>
+<td class="py-2 text-right font-body-md-semibold text-text-secondary">42 und</td>
+</tr>
+<!-- Insumo 3 -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Queso mozzarella tajado</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 5 kg</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">2 porc.</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$1.100</td>
+<td class="py-2 text-right font-body-md-semibold text-text-secondary">50 und</td>
+</tr>
+<!-- Insumo 4 -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Tomate milano fresco</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 4 kg</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">30 g</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$350</td>
+<td class="py-2 text-right font-body-md-semibold text-text-secondary">133 und</td>
+</tr>
+<!-- Insumo 5 -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Lechuga crespa fresca</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 18 und</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">25 g</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$250</td>
+<td class="py-2 text-right font-body-md-semibold text-text-secondary">72 und</td>
+</tr>
+<!-- Insumo 6 -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Salsa de la casa (golf/tártara)</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 3.2 L</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">20 ml</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$400</td>
+<td class="py-2 text-right font-body-md-semibold text-text-secondary">160 und</td>
+</tr>
+<!-- Insumo 7 Packaging -->
+<tr>
+<td class="py-2 pr-2">
+<div class="font-body-md-semibold text-text-primary">Empaque y papel térmico</div>
+<div class="font-caption text-[11px] text-text-muted">Stock: 120 und</div>
+</td>
+<td class="py-2 text-right text-text-secondary font-mono">1 und</td>
+<td class="py-2 text-right font-body-md-semibold text-text-primary">$500</td>
+<td class="py-2 text-right font-body-md-semibold text-text-secondary">120 und</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Add Ingredient Action -->
+<button class="w-full mt-space-sm h-10 border border-dashed border-border-strong rounded-lg text-primary font-label-md text-label-md hover:bg-primary-soft transition-colors flex items-center justify-center gap-1" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Agregar ingrediente al escandallo</span>
+</button>
+</div>
+</div>
+<!-- Financial & Margin Breakdown Card -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Análisis Financiero y Margen</span>
+<span class="font-caption text-caption text-tertiary bg-success-soft px-2 py-0.5 rounded-full font-semibold">Rentable</span>
+</div>
+<div class="grid grid-cols-3 gap-2 p-space-sm bg-surface-secondary rounded-lg mb-space-sm">
+<div>
+<div class="font-caption text-[11px] text-text-secondary">Costo Receta</div>
+<div class="font-headline-sm text-headline-sm text-text-primary">$7.700</div>
+<div class="font-caption text-[10px] text-text-muted">35% del precio</div>
+</div>
+<div>
+<div class="font-caption text-[11px] text-text-secondary">P. de Venta</div>
+<div class="font-headline-sm text-headline-sm text-text-primary">$22.000</div>
+<div class="font-caption text-[10px] text-text-muted">Precio Carta</div>
+</div>
+<div>
+<div class="font-caption text-[11px] text-text-secondary">Margen Bruto</div>
+<div class="font-headline-sm text-headline-sm text-tertiary">$14.300</div>
+<div class="font-caption text-[10px] text-tertiary font-semibold">65.0% Margen</div>
+</div>
+</div>
+<!-- Margin Bar Graphic -->
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-caption font-caption text-text-secondary">
+<span>Costo ($7.700)</span>
+<span>Margen de Ganancia ($14.300)</span>
+</div>
+<div class="w-full h-2.5 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary" style="width: 35%"></div>
+<div class="h-full bg-tertiary" style="width: 65%"></div>
+</div>
+</div>
+</div>
+<!-- Production Capacity & Predictive Stock Link -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm border-l-4 border-secondary">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[22px]">crisis_alert</span>
+<div>
+<h4 class="font-body-md-semibold text-body-md-semibold text-text-primary">Capacidad de Producción Inmediata</h4>
+<p class="font-caption text-caption text-text-secondary">Calculado automáticamente cruzando inventario y receta</p>
+</div>
+</div>
+<div class="text-right">
+<span class="font-kpi-metric text-kpi-metric text-text-primary">30</span>
+<span class="font-caption text-caption text-text-muted block">unidades máx.</span>
+</div>
+</div>
+<div class="mt-space-sm p-2.5 bg-danger-soft/60 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-primary font-body-md text-[13px]">
+<span class="material-symbols-outlined text-secondary text-[18px]">warning</span>
+<span>Insumo limitante: <strong>Carne de res</strong> (5.4 kg restantes)</span>
+</div>
+<a class="font-label-sm text-label-sm text-secondary hover:underline font-semibold shrink-0" href="#">Ver Kardex →</a>
+</div>
+<div class="mt-space-sm flex items-center justify-between text-caption font-caption text-text-secondary pt-space-xs">
+<span>Próxima alerta de agotamiento a las <strong>10 unidades</strong></span>
+<a class="text-primary hover:underline font-label-sm text-label-sm" href="#">Abrir en Inventario →</a>
+</div>
+</div>
+<!-- Operational Bottom Panel Actions -->
+<div class="flex items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="h-10 px-space-sm bg-surface border border-border-strong text-text-primary font-label-md text-label-md rounded-lg hover:bg-surface-secondary transition-colors" type="button">
+            Duplicar escandallo
+          </button>
+<button class="h-10 px-space-sm bg-surface border border-border-strong text-text-primary font-label-md text-label-md rounded-lg hover:bg-surface-secondary transition-colors" type="button">
+            Ver ficha de producto
+          </button>
+</div>
+<button class="h-10 px-space-md bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg hover:bg-primary transition-all flex items-center gap-1 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar cambios</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div></body></html>

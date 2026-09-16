@@ -1,0 +1,214 @@
+.menu-shell {
+  background: #fbfaf7;
+  min-height: 100vh;
+  padding: 2rem clamp(1rem, 6vw, 5rem) 4rem;
+}
+.menu-header {
+  margin: 0 auto 4rem;
+  max-width: 900px;
+  padding-top: 3rem;
+}
+.menu-header h1 {
+  color: #173b65;
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+.menu-category {
+  margin: 0 auto 4rem;
+  max-width: 1100px;
+}
+.menu-category h2 {
+  border-bottom: 1px solid #d8dee6;
+  padding-bottom: 0.8rem;
+}
+.menu-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 1.5rem;
+}
+.menu-card {
+  background: white;
+  border: 1px solid #e2e4e8;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  min-height: 150px;
+}
+.product-image {
+  align-items: center;
+  background: #e7eef6;
+  color: #1255a0;
+  display: flex;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  justify-content: center;
+  min-height: 150px;
+  overflow: hidden;
+}
+.product-image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+.menu-card-content {
+  padding: 1rem;
+}
+.menu-card-title {
+  align-items: flex-start;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+}
+.menu-card h3 {
+  color: #173b65;
+  font-size: 1.1rem;
+  margin: 0;
+}
+.menu-card strong {
+  color: #b11f2a;
+  white-space: nowrap;
+}
+.menu-card p {
+  color: #5f6b7a;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.menu-card small {
+  color: #657184;
+  font-family: "Trebuchet MS", sans-serif;
+}
+.availability {
+  color: #b11f2a;
+  display: block;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-top: 0.7rem;
+}
+.search-field {
+  display: grid;
+  gap: 0.4rem;
+  margin: 2rem 0;
+  max-width: 500px;
+}
+.admin-table {
+  background: white;
+  border: 1px solid #dce2e9;
+}
+.admin-row {
+  align-items: center;
+  border-bottom: 1px solid #edf0f3;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr auto auto;
+  padding: 1rem;
+}
+.admin-row:last-child {
+  border-bottom: 0;
+}
+.admin-row small {
+  color: #657184;
+  display: block;
+  margin-top: 0.3rem;
+}
+.status {
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+.status.available {
+  color: #2d6a4f;
+}
+.status.unavailable {
+  color: #b11f2a;
+}
+@media (max-width: 620px) {
+  .admin-row {
+    align-items: flex-start;
+    grid-template-columns: 1fr auto;
+  }
+  .admin-row .status {
+    grid-column: 1 / -1;
+  }
+}
+
+.catalog-filters,
+.catalog-form {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.catalog-filters {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+.catalog-form {
+  max-width: 760px;
+  padding: 1.5rem;
+  border: 1px solid #dce2e9;
+  background: white;
+}
+.catalog-form label,
+.catalog-filters label {
+  display: grid;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.catalog-product {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #dce2e9;
+}
+.catalog-product img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+}
+.button-row,
+.category-item {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.category-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.category-item {
+  padding: 0.6rem;
+  border-bottom: 1px solid #dce2e9;
+}
+textarea,
+select,
+input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #1768b5;
+  outline-offset: 3px;
+}
+@media (max-width: 620px) {
+  .catalog-product {
+    grid-template-columns: 1fr;
+  }
+  .catalog-form {
+    padding: 1rem;
+  }
+  .menu-card-title {
+    flex-direction: column;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+  .catalog-product input[type="file"] {
+    width: 100%;
+  }
+}

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#F5F7FA]" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>POTOQUITOS - Dashboard Administrador</title>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              red: '#EF3340',
+              blue: '#2563EB',
+              dark: '#102A43',
+              muted: '#627D98',
+              border: '#E3E8EF',
+              surface: '#F5F7FA',
+              activeBg: '#FDEBED',
+              badgeGreen: '#10B981',
+              badgeGreenBg: '#DFF7EE',
+              badgeYellow: '#D97706',
+              badgeYellowBg: '#FFF4D6',
+            }
+          },
+          boxShadow: {
+            card: '0 1px 3px 0 rgba(16, 42, 67, 0.05), 0 1px 2px -1px rgba(16, 42, 67, 0.05)',
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="base-styling">
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #102A43;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Scrollbar styling for tables and overflow panels */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F5F7FA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="h-full bg-[#F5F7FA] flex overflow-hidden">
+<!-- BEGIN: Sidebar -->
+<aside class="w-[240px] flex-shrink-0 bg-white border-r border-[#E3E8EF] flex flex-col justify-between h-full select-none z-20" data-purpose="main-sidebar">
+<div class="flex flex-col h-full overflow-y-auto">
+<!-- Brand Logo Header -->
+<div class="pt-6 pb-4 px-6 flex flex-col items-center border-b border-transparent">
+<div class="w-24 h-24 flex items-center justify-center mb-1">
+<img alt="POTOQUITOS Mascot Logo" class="max-h-full max-w-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAyAc7fpfpLFcxttbJYwlNDABzHpS1b-6tu0qi26J2ryjdVvmDq_zFVptMN2FJROmBgPTC8hNJuphVI6P6EmVOnn9cxzJeEy_vPwCEj4P03NwoKBcLqI3Ilx9Pf0FcA3UZizpDI7TFaDJYJzLdFxB2qqj_qx2-aUsg7fngwa-ESBZGwjeYIno9YwtwdVWpH-_YvO1JLmUaJ-OCVYw8YM4UKBOOGrC7wuluGii_8Vvp1z1-zashTI9htQSre7VSOteU"/>
+</div>
+<span class="text-[11px] tracking-[0.2em] font-bold text-[#627D98] uppercase">Restaurante</span>
+</div>
+<!-- Navigation Menu -->
+<nav class="px-3 py-2 space-y-1 flex-1 text-sm font-medium" data-purpose="navigation-menu">
+<!-- 1. Dashboard (Active) -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] bg-[#FDEBED] text-[#EF3340] font-semibold border-l-[3px] border-[#EF3340]" href="#">
+<!-- Lucide LayoutDashboard / Grid icon -->
+<svg class="w-5 h-5 flex-shrink-0 text-[#EF3340]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="7" rx="1" width="7" x="3" y="3"></rect>
+<rect height="7" rx="1" width="7" x="14" y="3"></rect>
+<rect height="7" rx="1" width="7" x="14" y="14"></rect>
+<rect height="7" rx="1" width="7" x="3" y="14"></rect>
+</svg>
+<span>Dashboard</span>
+</a>
+<!-- 2. Usuarios -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide Users -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+<circle cx="9" cy="7" r="4"></circle>
+<path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+</svg>
+<span>Usuarios</span>
+</a>
+<!-- 3. Productos y Menú -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide UtensilsCrossed -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="m16 2-2.3 2.3a3 3 0 0 0 0 4.2l1.8 1.8a3 3 0 0 0 4.2 0L22 8"></path>
+<path d="M15 15 3.3 3.3a4.2 4.2 0 0 0 0 6l7.3 7.3"></path>
+<path d="m2.1 21.9 6.4-6.3"></path>
+<path d="m19 5-7 7"></path>
+</svg>
+<span>Productos y Menú</span>
+</a>
+<!-- 4. Mesas y Pedidos -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide Table / Chair -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M4 18v3"></path>
+<path d="M20 18v3"></path>
+<path d="M3 11h18"></path>
+<path d="M5 11V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5"></path>
+<path d="M6 18H4a2 2 0 0 1-2-2v-3h20v3a2 2 0 0 1-2 2h-2"></path>
+</svg>
+<span>Mesas y Pedidos</span>
+</a>
+<!-- 5. Cocina -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide ChefHat -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M6 13.8a4 4 0 0 1-2.4-7.2A4.2 4.2 0 0 1 8 4a4.3 4.3 0 0 1 8 0 4.2 4.2 0 0 1 4.4 2.6A4 4 0 0 1 18 13.8"></path>
+<path d="M6 17h12"></path>
+<path d="M6 21h12"></path>
+</svg>
+<span>Cocina</span>
+</a>
+<!-- 6. Inventario -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide Package / Archive -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="m7.5 4.27 9 5.15"></path>
+<path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path>
+<path d="m3.3 7 8.7 5 8.7-5"></path>
+<path d="M12 22V12"></path>
+</svg>
+<span>Inventario</span>
+</a>
+<!-- 7. Cajas -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide CreditCard / Wallet -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="14" rx="2" width="20" x="2" y="5"></rect>
+<line x1="2" x2="22" y1="10" y2="10"></line>
+</svg>
+<span>Cajas</span>
+</a>
+<!-- 8. Costos y Gastos -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide CircleDollarSign -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10"></circle>
+<path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path>
+<path d="M12 18V6"></path>
+</svg>
+<span>Costos y Gastos</span>
+</a>
+<!-- 9. Alertas Predictivas -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide BellRing -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+<path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+<path d="M4 2C2.8 3.7 2 5.7 2 8"></path>
+<path d="M22 8c0-2.3-.8-4.3-2-6"></path>
+</svg>
+<span>Alertas Predictivas</span>
+</a>
+<!-- 10. Reportes -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide BarChart3 -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M3 3v18h18"></path>
+<path d="M18 17V9"></path>
+<path d="M13 17V5"></path>
+<path d="M8 17v-3"></path>
+</svg>
+<span>Reportes</span>
+</a>
+<!-- 11. Configuración -->
+<a class="flex items-center gap-3 px-3.5 h-11 rounded-[10px] text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors" href="#">
+<!-- Lucide Settings -->
+<svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+<circle cx="12" cy="12" r="3"></circle>
+</svg>
+<span>Configuración</span>
+</a>
+</nav>
+<!-- Sidebar Footer Info -->
+<div class="px-5 py-4 border-t border-[#E3E8EF] mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="text-xs font-bold text-[#102A43]">POTOQUITOS</span>
+<span class="text-[10px] text-[#627D98] bg-[#F5F7FA] px-1.5 py-0.5 rounded border border-[#E3E8EF]">v1.0.0</span>
+</div>
+<p class="text-[11px] text-[#627D98] mt-0.5">Sistema de gestión para restaurantes</p>
+<div class="mt-3 flex items-start gap-2 pt-2 border-t border-[#F5F7FA]">
+<!-- Code Icon -->
+<svg class="w-3.5 h-3.5 text-[#627D98] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="16 18 22 12 16 6"></polyline>
+<polyline points="8 6 2 12 8 18"></polyline>
+</svg>
+<div class="text-[10px] leading-tight text-[#627D98]">
+<span class="block">Desarrollado por:</span>
+<span class="font-medium text-[#486581]">Carlos Reales | Orlando Agamez</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: Sidebar -->
+<!-- BEGIN: MainContentArea -->
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- Top Header -->
+<header class="h-16 bg-white border-b border-[#E3E8EF] flex items-center justify-between px-8 flex-shrink-0 z-10" data-purpose="top-navigation-header">
+<!-- Search Bar -->
+<div class="w-[420px] relative">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+<svg class="w-4 h-4 text-[#627D98]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</div>
+<input class="w-full h-[40px] pl-10 pr-4 bg-transparent border border-[#E3E8EF] rounded-full text-xs placeholder-[#627D98] text-[#102A43] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB] transition-colors" placeholder="Buscar en el sistema..." type="text"/>
+</div>
+<!-- Right Actions: Notifications & User Profile -->
+<div class="flex items-center gap-5">
+<!-- Notification Button -->
+<button aria-label="Notificaciones" class="relative p-2 rounded-full text-[#627D98] hover:text-[#102A43] hover:bg-[#F5F7FA] transition-colors">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+<path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+</svg>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-[#EF3340] text-white text-[10px] font-bold rounded-full flex items-center justify-center border-2 border-white">
+            3
+          </span>
+</button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-3 pl-3 border-l border-[#E3E8EF] cursor-pointer">
+<div class="w-9 h-9 rounded-full bg-[#102A43] text-white flex items-center justify-center font-bold text-sm">
+            A
+          </div>
+<div class="flex flex-col text-left">
+<span class="text-sm font-semibold text-[#102A43] leading-tight">Administrador</span>
+<span class="text-[11px] text-[#627D98] font-normal">POTOQUITOS</span>
+</div>
+<svg class="w-4 h-4 text-[#627D98] ml-1" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+</div>
+</header>
+<!-- Scrollable Workspace -->
+<main class="flex-1 overflow-y-auto px-8 py-7 space-y-6" data-purpose="dashboard-content">
+<!-- BEGIN: Welcome & Date Row -->
+<section class="flex items-center justify-between" data-purpose="greeting-banner">
+<div>
+<h1 class="text-2xl font-bold text-[#102A43] tracking-tight">
+            Hola, <span class="text-[#2563EB]">Administrador</span>
+</h1>
+<p class="text-xs text-[#627D98] mt-1">Aquí tienes un resumen de la operación de POTOQUITOS.</p>
+</div>
+<!-- Date Card -->
+<div class="flex items-center gap-3 bg-white border border-[#E3E8EF] rounded-xl px-4 py-2.5 shadow-sm">
+<div class="p-2 rounded-lg bg-[#F5F7FA] text-[#627D98]">
+<svg class="w-5 h-5 text-[#2563EB]" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-[#102A43]">Viernes</span>
+<span class="text-[11px] text-[#627D98]">12 de Septiembre de 2026</span>
+</div>
+</div>
+</section>
+<!-- END: Welcome & Date Row -->
+<!-- BEGIN: KPI Cards Row -->
+<section class="grid grid-cols-2 gap-6" data-purpose="kpi-metrics">
+<!-- KPI 1: Ventas de hoy -->
+<div class="bg-white rounded-2xl border border-[#E3E8EF] p-5 shadow-card flex items-center justify-between">
+<div class="flex items-start gap-4">
+<!-- Icon Container -->
+<div class="w-12 h-12 rounded-xl bg-[#EF3340] flex items-center justify-center flex-shrink-0 shadow-sm">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<line x1="18" x2="18" y1="20" y2="10"></line>
+<line x1="12" x2="12" y1="20" y2="4"></line>
+<line x1="6" x2="6" y1="20" y2="14"></line>
+</svg>
+</div>
+<div>
+<span class="text-xs font-medium text-[#627D98]">Ventas de hoy</span>
+<div class="text-2xl font-bold text-[#102A43] mt-0.5 tracking-tight">$1,250,000</div>
+<div class="flex items-center gap-1 mt-1 text-xs font-semibold text-[#10B981]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="18 15 12 9 6 15"></polyline>
+</svg>
+<span>12%</span>
+<span class="text-[#627D98] font-normal text-[11px]">vs. ayer</span>
+</div>
+</div>
+</div>
+<!-- Sparkline Chart SVG (Red) -->
+<div class="w-36 h-14">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 140 50">
+<defs>
+<lineargradient id="gradRed" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#EF3340" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#EF3340" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Filled Area -->
+<path d="M 0 35 Q 20 30, 35 15 T 70 25 T 105 18 T 140 8 L 140 50 L 0 50 Z" fill="url(#gradRed)"></path>
+<!-- Line -->
+<path d="M 0 35 Q 20 30, 35 15 T 70 25 T 105 18 T 140 8" fill="none" stroke="#EF3340" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="140" cy="8" fill="#EF3340" r="3.5"></circle>
+</svg>
+</div>
+</div>
+<!-- KPI 2: Pedidos de hoy -->
+<div class="bg-white rounded-2xl border border-[#E3E8EF] p-5 shadow-card flex items-center justify-between">
+<div class="flex items-start gap-4">
+<!-- Icon Container -->
+<div class="w-12 h-12 rounded-xl bg-[#2563EB] flex items-center justify-center flex-shrink-0 shadow-sm">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="8" cy="21" r="1"></circle>
+<circle cx="19" cy="21" r="1"></circle>
+<path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
+</svg>
+</div>
+<div>
+<span class="text-xs font-medium text-[#627D98]">Pedidos de hoy</span>
+<div class="text-2xl font-bold text-[#102A43] mt-0.5 tracking-tight">48</div>
+<div class="flex items-center gap-1 mt-1 text-xs font-semibold text-[#10B981]">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<polyline points="18 15 12 9 6 15"></polyline>
+</svg>
+<span>9%</span>
+<span class="text-[#627D98] font-normal text-[11px]">vs. ayer</span>
+</div>
+</div>
+</div>
+<!-- Sparkline Chart SVG (Blue) -->
+<div class="w-36 h-14">
+<svg class="w-full h-full overflow-visible" viewbox="0 0 140 50">
+<defs>
+<lineargradient id="gradBlue" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#2563EB" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Filled Area -->
+<path d="M 0 38 Q 25 34, 45 22 T 85 24 T 115 14 T 140 10 L 140 50 L 0 50 Z" fill="url(#gradBlue)"></path>
+<!-- Line -->
+<path d="M 0 38 Q 25 34, 45 22 T 85 24 T 115 14 T 140 10" fill="none" stroke="#2563EB" stroke-linecap="round" stroke-width="2"></path>
+<circle cx="140" cy="10" fill="#2563EB" r="3.5"></circle>
+</svg>
+</div>
+</div>
+</section>
+<!-- END: KPI Cards Row -->
+<!-- BEGIN: Operational Analytics & Tables Grid -->
+<section class="grid grid-cols-2 gap-6" data-purpose="operation-analytics">
+<!-- Left Card: Ventas de la semana (Bar Chart) -->
+<div class="bg-white rounded-2xl border border-[#E3E8EF] p-6 shadow-card flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2.5">
+<div class="p-1.5 rounded-md bg-blue-50 text-[#2563EB]">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 3v18h18"></path>
+<path d="M18 17V9"></path>
+<path d="M13 17V5"></path>
+<path d="M8 17v-3"></path>
+</svg>
+</div>
+<h2 class="text-base font-bold text-[#102A43]">Ventas de la semana</h2>
+</div>
+<!-- Week Dropdown -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#486581] border border-[#E3E8EF] rounded-lg bg-white hover:bg-gray-50 transition-colors">
+<span>Esta semana</span>
+<svg class="w-3.5 h-3.5 text-[#627D98]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</button>
+</div>
+<!-- SVG Bar Chart -->
+<div class="w-full h-56 pt-2">
+<svg class="w-full h-full" viewbox="0 0 500 220">
+<!-- Horizontal Grid Lines & Y-Axis Labels -->
+<g fill="#627D98" font-family="Inter" font-size="11" text-anchor="end">
+<text x="45" y="24">$2.0M</text>
+<line stroke="#F0F4F8" stroke-dasharray="3,3" stroke-width="1" x1="55" x2="490" y1="20" y2="20"></line>
+<text x="45" y="64">$1.5M</text>
+<line stroke="#F0F4F8" stroke-dasharray="3,3" stroke-width="1" x1="55" x2="490" y1="60" y2="60"></line>
+<text x="45" y="104">$1.0M</text>
+<line stroke="#F0F4F8" stroke-dasharray="3,3" stroke-width="1" x1="55" x2="490" y1="100" y2="100"></line>
+<text x="45" y="144">$500K</text>
+<line stroke="#F0F4F8" stroke-dasharray="3,3" stroke-width="1" x1="55" x2="490" y1="140" y2="140"></line>
+<text x="45" y="184">$0</text>
+<line stroke="#E3E8EF" stroke-width="1.2" x1="55" x2="490" y1="180" y2="180"></line>
+</g>
+<!-- Bars (7 Days) -->
+<!-- Lun -->
+<rect class="hover:fill-blue-400 transition-colors" fill="#93C5FD" height="68" rx="4" width="28" x="75" y="112"></rect>
+<text fill="#627D98" font-family="Inter" font-size="11" text-anchor="middle" x="89" y="200">Lun</text>
+<!-- Mar -->
+<rect class="hover:fill-blue-400 transition-colors" fill="#93C5FD" height="84" rx="4" width="28" x="135" y="96"></rect>
+<text fill="#627D98" font-family="Inter" font-size="11" text-anchor="middle" x="149" y="200">Mar</text>
+<!-- Mié -->
+<rect class="hover:fill-blue-400 transition-colors" fill="#93C5FD" height="100" rx="4" width="28" x="195" y="80"></rect>
+<text fill="#627D98" font-family="Inter" font-size="11" text-anchor="middle" x="209" y="200">Mié</text>
+<!-- Vie (HIGHLIGHT - RED with Tooltip) -->
+<!-- Tooltip Bubble -->
+<g>
+<rect fill="#102A43" height="22" rx="4" width="46" x="238" y="30"></rect>
+<polygon fill="#102A43" points="261,52 256,57 266,57"></polygon>
+<text fill="#FFFFFF" font-family="Inter" font-size="10" font-weight="bold" text-anchor="middle" x="261" y="45">$1.6M</text>
+</g>
+<rect fill="#EF3340" height="120" rx="4" width="28" x="247" y="60"></rect>
+<text fill="#EF3340" font-family="Inter" font-size="11" font-weight="bold" text-anchor="middle" x="261" y="200">Vie</text>
+<!-- Jue -->
+<rect class="hover:fill-blue-400 transition-colors" fill="#93C5FD" height="110" rx="4" width="28" x="307" y="70"></rect>
+<text fill="#627D98" font-family="Inter" font-size="11" text-anchor="middle" x="321" y="200">Jue</text>
+<!-- Sáb -->
+<rect class="hover:fill-blue-400 transition-colors" fill="#93C5FD" height="92" rx="4" width="28" x="367" y="88"></rect>
+<text fill="#627D98" font-family="Inter" font-size="11" text-anchor="middle" x="381" y="200">Sáb</text>
+<!-- Dom -->
+<rect class="hover:fill-blue-400 transition-colors" fill="#93C5FD" height="78" rx="4" width="28" x="427" y="102"></rect>
+<text fill="#627D98" font-family="Inter" font-size="11" text-anchor="middle" x="441" y="200">Dom</text>
+</svg>
+</div>
+</div>
+<!-- Right Card: Operación actual (Live Status Table) -->
+<div class="bg-white rounded-2xl border border-[#E3E8EF] p-6 shadow-card flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2.5">
+<div class="p-1.5 rounded-md bg-blue-50 text-[#2563EB]">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="18" rx="2" width="18" x="3" y="3"></rect>
+<path d="M3 9h18"></path>
+<path d="M9 21V9"></path>
+</svg>
+</div>
+<h2 class="text-base font-bold text-[#102A43]">Operación actual</h2>
+</div>
+<!-- Active Service Badge -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#DFF7EE] text-[#10B981] text-xs font-semibold">
+<span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+<span>En servicio</span>
+</div>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="text-[#627D98] border-b border-[#E3E8EF]">
+<th class="pb-2.5 font-medium">Mesa</th>
+<th class="pb-2.5 font-medium">Estado</th>
+<th class="pb-2.5 font-medium">Tiempo</th>
+<th class="pb-2.5 font-medium text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F0F4F8]">
+<!-- Mesa 1 -->
+<tr class="h-10 hover:bg-[#F8FAFC]">
+<td class="font-semibold text-[#102A43]">Mesa 1</td>
+<td>
+<span class="inline-flex items-center gap-1.5 text-[#2563EB] font-medium">
+<span class="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+                        En preparación
+                      </span>
+</td>
+<td class="text-[#627D98]">14 min</td>
+<td class="text-right">
+<button class="text-[#627D98] hover:text-[#102A43] p-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+</button>
+</td>
+</tr>
+<!-- Mesa 2 -->
+<tr class="h-10 hover:bg-[#F8FAFC]">
+<td class="font-semibold text-[#102A43]">Mesa 2</td>
+<td>
+<span class="inline-flex items-center gap-1.5 text-[#10B981] font-medium">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                        Lista
+                      </span>
+</td>
+<td class="text-[#627D98]">2 min</td>
+<td class="text-right">
+<button class="text-[#627D98] hover:text-[#102A43] p-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+</button>
+</td>
+</tr>
+<!-- Mesa 3 -->
+<tr class="h-10 hover:bg-[#F8FAFC]">
+<td class="font-semibold text-[#102A43]">Mesa 3</td>
+<td>
+<span class="inline-flex items-center gap-1.5 text-[#EF3340] font-medium">
+<span class="w-2 h-2 rounded-full bg-[#EF3340]"></span>
+                        Pendiente
+                      </span>
+</td>
+<td class="text-[#627D98]">5 min</td>
+<td class="text-right">
+<button class="text-[#627D98] hover:text-[#102A43] p-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+</button>
+</td>
+</tr>
+<!-- Mesa 4 -->
+<tr class="h-10 hover:bg-[#F8FAFC]">
+<td class="font-semibold text-[#102A43]">Mesa 4</td>
+<td>
+<span class="inline-flex items-center gap-1.5 text-[#10B981] font-medium">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+                        Lista
+                      </span>
+</td>
+<td class="text-[#627D98]">1 min</td>
+<td class="text-right">
+<button class="text-[#627D98] hover:text-[#102A43] p-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+</button>
+</td>
+</tr>
+<!-- Mesa 5 -->
+<tr class="h-10 hover:bg-[#F8FAFC]">
+<td class="font-semibold text-[#102A43]">Mesa 5</td>
+<td>
+<span class="inline-flex items-center gap-1.5 text-[#627D98] font-medium">
+<span class="w-2 h-2 rounded-full bg-[#94A3B8]"></span>
+                        Disponible
+                      </span>
+</td>
+<td class="text-[#627D98]">-</td>
+<td class="text-right">
+<button class="text-[#627D98] hover:text-[#102A43] p-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+</button>
+</td>
+</tr>
+<!-- Mesa 6 -->
+<tr class="h-10 hover:bg-[#F8FAFC]">
+<td class="font-semibold text-[#102A43]">Mesa 6</td>
+<td>
+<span class="inline-flex items-center gap-1.5 text-[#2563EB] font-medium">
+<span class="w-2 h-2 rounded-full bg-[#2563EB]"></span>
+                        En preparación
+                      </span>
+</td>
+<td class="text-[#627D98]">10 min</td>
+<td class="text-right">
+<button class="text-[#627D98] hover:text-[#102A43] p-1">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Operational Analytics & Tables Grid -->
+<!-- BEGIN: Inventory Alerts Section -->
+<section class="space-y-3" data-purpose="inventory-alerts">
+<!-- Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<!-- Alert Icon Red -->
+<div class="p-1 rounded-md bg-[#FDEBED] text-[#EF3340]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+<line x1="12" x2="12" y1="9" y2="13"></line>
+<line x1="12" x2="12.01" y1="17" y2="17"></line>
+</svg>
+</div>
+<h2 class="text-base font-bold text-[#102A43]">Alertas de inventario</h2>
+</div>
+<a class="text-xs font-semibold text-[#2563EB] hover:underline" href="#">Ver todas</a>
+</div>
+<!-- 4 Column Inventory Cards -->
+<div class="grid grid-cols-4 gap-4">
+<!-- Item 1: Carne de res (Crítico) -->
+<div class="bg-white border border-[#E3E8EF] rounded-xl p-3.5 flex items-center gap-3.5 shadow-sm hover:border-red-200 transition-colors">
+<!-- Icon/Illustration Container -->
+<div class="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0 text-2xl">
+              🥩
+            </div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-[#102A43] truncate">Carne de res</h3>
+<p class="text-[11px] text-[#627D98] truncate mt-0.5">Stock actual: 2 kg</p>
+<div class="mt-1.5">
+<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FDEBED] text-[#EF3340]">
+                  Crítico
+                </span>
+</div>
+</div>
+</div>
+<!-- Item 2: Queso mozzarella (Bajo) -->
+<div class="bg-white border border-[#E3E8EF] rounded-xl p-3.5 flex items-center gap-3.5 shadow-sm hover:border-amber-200 transition-colors">
+<!-- Icon Container -->
+<div class="w-12 h-12 rounded-lg bg-amber-50 flex items-center justify-center flex-shrink-0 text-2xl">
+              🧀
+            </div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-[#102A43] truncate">Queso mozzarella</h3>
+<p class="text-[11px] text-[#627D98] truncate mt-0.5">Stock actual: 5 kg</p>
+<div class="mt-1.5">
+<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF4D6] text-[#D97706]">
+                  Bajo
+                </span>
+</div>
+</div>
+</div>
+<!-- Item 3: Tomate (Bajo) -->
+<div class="bg-white border border-[#E3E8EF] rounded-xl p-3.5 flex items-center gap-3.5 shadow-sm hover:border-amber-200 transition-colors">
+<!-- Icon Container -->
+<div class="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center flex-shrink-0 text-2xl">
+              🍅
+            </div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-[#102A43] truncate">Tomate</h3>
+<p class="text-[11px] text-[#627D98] truncate mt-0.5">Stock actual: 4 kg</p>
+<div class="mt-1.5">
+<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF4D6] text-[#D97706]">
+                  Bajo
+                </span>
+</div>
+</div>
+</div>
+<!-- Item 4: Lechuga (OK) -->
+<div class="bg-white border border-[#E3E8EF] rounded-xl p-3.5 flex items-center gap-3.5 shadow-sm hover:border-emerald-200 transition-colors">
+<!-- Icon Container -->
+<div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center flex-shrink-0 text-2xl">
+              🥬
+            </div>
+<div class="flex-1 min-w-0">
+<h3 class="text-xs font-bold text-[#102A43] truncate">Lechuga</h3>
+<p class="text-[11px] text-[#627D98] truncate mt-0.5">Stock actual: 3 unidades</p>
+<div class="mt-1.5">
+<span class="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#DFF7EE] text-[#10B981]">
+                  OK
+                </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Inventory Alerts Section -->
+</main>
+</div>
+<!-- END: MainContentArea -->
+</body></html>

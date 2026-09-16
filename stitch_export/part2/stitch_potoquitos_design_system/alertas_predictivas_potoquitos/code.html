@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<!-- Top View Heading & Operational Controls -->
+<header class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-sm mb-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Alertas Predictivas</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-soft text-primary font-caption text-caption font-semibold">
+          Proyección Determinística
+        </span>
+</div>
+<p class="font-body-md text-body-md text-text-secondary">
+        Anticipa posibles faltantes según el inventario disponible y el comportamiento histórico de ventas.
+      </p>
+</div>
+<!-- Time Horizon Filter & Telemetry Timestamp -->
+<div class="flex flex-wrap items-center gap-space-md">
+<!-- Horizon Switcher Pill Group -->
+<div class="inline-flex items-center bg-surface p-1 rounded-xl shadow-sm border border-border">
+<button class="px-space-md py-1.5 rounded-lg font-label-md text-label-md bg-primary-container text-on-primary font-semibold shadow-sm transition-colors" type="button">
+          Hoy · Viernes
+        </button>
+<button class="px-space-md py-1.5 rounded-lg font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">
+          Mañana · Sábado
+        </button>
+<button class="px-space-md py-1.5 rounded-lg font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">
+          Próximos 3 días
+        </button>
+</div>
+<!-- Live Sync Timestamp -->
+<div class="flex items-center gap-space-xs bg-surface px-space-md py-2 rounded-xl shadow-sm border border-border">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+<span class="font-caption text-caption text-text-secondary">Última actualización:</span>
+<span class="font-caption text-caption text-text-primary font-semibold">11:30 AM</span>
+</div>
+<!-- Action Refresh -->
+<button class="inline-flex items-center gap-space-xs h-[42px] px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary rounded-xl font-body-md-semibold text-body-md-semibold transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">autorenew</span>
+<span>Actualizar análisis</span>
+</button>
+</div>
+</header>
+<!-- Metric Summary KPI Cards -->
+<section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-gutter mb-space-xl">
+<!-- Card 1: Active Alerts Count -->
+<div class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-md text-label-md text-text-secondary">Alertas activas</span>
+<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">notifications_active</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm mb-space-xs">
+<span class="font-kpi-metric text-kpi-metric text-text-primary leading-none">4</span>
+<span class="font-caption text-caption text-text-muted">en monitoreo continuo</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">
+        3 productos terminados y 1 ingrediente crítico
+      </p>
+</div>
+<!-- Card 2: High Risk Metric -->
+<div class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-md text-label-md text-text-secondary">Riesgo alto</span>
+<span class="w-8 h-8 rounded-lg bg-danger-soft flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm mb-space-xs">
+<span class="font-kpi-metric text-kpi-metric text-secondary leading-none">1</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-danger-soft text-secondary font-label-sm text-label-sm">
+          Déficit en turno
+        </span>
+</div>
+<p class="font-caption text-caption text-text-secondary">
+        Faltante de stock proyectado antes de fin de turno
+      </p>
+</div>
+<!-- Card 3: Medium Risk Metric -->
+<div class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-md text-label-md text-text-secondary">Riesgo medio</span>
+<span class="w-8 h-8 rounded-lg bg-warning-soft flex items-center justify-center text-warning">
+<span class="material-symbols-outlined text-[20px]">schedule</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm mb-space-xs">
+<span class="font-kpi-metric text-kpi-metric text-text-primary leading-none">2</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-warning-soft text-warning font-label-sm text-label-sm">
+          Capacidad ajustada
+        </span>
+</div>
+<p class="font-caption text-caption text-text-secondary">
+        Colchón operativo menor al 15% de la demanda
+      </p>
+</div>
+<!-- Card 4: Normal Status Metric -->
+<div class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-md text-label-md text-text-secondary">Sin riesgo</span>
+<span class="w-8 h-8 rounded-lg bg-success-soft flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</span>
+</div>
+<div class="flex items-baseline gap-space-sm mb-space-xs">
+<span class="font-kpi-metric text-kpi-metric text-text-primary leading-none">15</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-success-soft text-tertiary font-label-sm text-label-sm">
+          Holgura > 48h
+        </span>
+</div>
+<p class="font-caption text-caption text-text-secondary">
+        Inventario suficiente para cubrir demanda pico
+      </p>
+</div>
+</section>
+<!-- Main Section: Requieren Atención -->
+<section class="mb-space-xl">
+<div class="flex flex-col mb-space-md">
+<h2 class="font-headline-md text-headline-md text-text-primary">Requieren atención inmediata</h2>
+<p class="font-body-md text-body-md text-text-secondary">
+        Productos cuya capacidad de preparación actual podría ser insuficiente según la demanda estimada para hoy viernes.
+      </p>
+</div>
+<!-- 2 Column Master/Analytical Split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: High Risk Product Card (Span 7) -->
+<article class="lg:col-span-7 bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div>
+<!-- Header and Badging -->
+<div class="flex items-start justify-between gap-space-sm pb-space-md border-b border-border mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-danger-soft flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[26px]">lunch_dining</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Hamburguesa Especial</h3>
+<p class="font-caption text-caption text-text-secondary">Plato principal · Turno nocturno estimado</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-danger-soft text-secondary font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+              Riesgo alto
+            </span>
+</div>
+<!-- Triple Comparative Data Metric Block -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-space-sm mb-space-md">
+<div class="bg-surface-secondary p-space-md rounded-xl border border-border flex flex-col">
+<span class="font-caption text-caption text-text-secondary uppercase tracking-wider mb-space-xs">Capacidad actual</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">30 unds</span>
+<span class="font-caption text-caption text-text-muted mt-1">Con inventario en bodega</span>
+</div>
+<div class="bg-surface-secondary p-space-md rounded-xl border border-border flex flex-col">
+<span class="font-caption text-caption text-text-secondary uppercase tracking-wider mb-space-xs">Demanda estimada</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">40 unds</span>
+<span class="font-caption text-caption text-text-muted mt-1">Histórico de 4 viernes</span>
+</div>
+<div class="bg-danger-soft p-space-md rounded-xl border border-border flex flex-col">
+<span class="font-caption text-caption text-secondary uppercase tracking-wider mb-space-xs font-semibold">Déficit proyectado</span>
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">-10 unds</span>
+<span class="font-caption text-caption text-secondary mt-1">Faltante estimado al cierre</span>
+</div>
+</div>
+<!-- Capacity vs Demand Coverage Bar -->
+<div class="mb-space-lg bg-surface-secondary p-space-md rounded-xl border border-border">
+<div class="flex items-center justify-between mb-space-xs font-label-md text-label-md">
+<span class="text-text-secondary">Cobertura de la demanda: <strong class="text-text-primary">75.0%</strong></span>
+<span class="text-secondary font-semibold">Límite de quiebre en und. 30</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-full overflow-hidden relative">
+<div class="h-full bg-secondary rounded-full" style="width: 75%;"></div>
+</div>
+<div class="flex justify-between items-center mt-space-xs font-caption text-caption text-text-muted">
+<span>0 unidades</span>
+<span class="text-secondary font-medium">↑ Capacidad máx: 30</span>
+<span>Demanda: 40 unds</span>
+</div>
+</div>
+<!-- Limiting Ingredient Callout Box -->
+<div class="bg-surface-secondary rounded-xl p-space-md border border-border flex flex-col gap-space-sm mb-space-md">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px] mt-0.5">priority_high</span>
+<div class="flex-1">
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">
+                  Ingrediente limitante: Carne de res molida (180 g / unidad)
+                </p>
+<p class="font-caption text-caption text-text-secondary mt-0.5">
+                  Los <strong>5.4 kg</strong> disponibles en almacén únicamente permiten producir un máximo de 30 hamburguesas.
+                </p>
+</div>
+</div>
+<div class="flex items-start gap-space-sm pt-space-xs border-t border-border">
+<span class="material-symbols-outlined text-info text-[20px] mt-0.5">join_inner</span>
+<div class="flex-1">
+<p class="font-caption text-caption text-text-primary font-semibold">
+                  Aviso de concurrencia de ingrediente compartido
+                </p>
+<p class="font-caption text-caption text-text-secondary">
+                  La carne de res también es insumo principal de <strong>Picada Potoquitos</strong> (demanda estimada: 25 porciones). El uso compartido incrementa la probabilidad de quiebre anticipado.
+                </p>
+</div>
+</div>
+</div>
+<!-- Recommendation & Assessment Note -->
+<div class="p-space-md rounded-xl bg-warning-soft text-text-primary flex items-start gap-space-sm mb-space-lg">
+<span class="material-symbols-outlined text-warning text-[20px] mt-0.5">lightbulb</span>
+<div class="font-body-md text-body-md text-text-primary">
+<strong>Sugerencia de abastecimiento:</strong> Registrar entrada de al menos <strong>1.8 kg</strong> de carne molida para equiparar la capacidad a 40 unidades (o <strong>2.6 kg</strong> si se incorpora margen de seguridad operativo del 10%).
+            </div>
+</div>
+</div>
+<!-- Action Footer Controls -->
+<div class="flex flex-wrap items-center gap-space-md pt-space-md border-t border-border">
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-primary text-on-primary rounded-xl font-body-md-semibold text-body-md-semibold flex items-center gap-space-xs transition-colors shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">query_stats</span>
+<span>Ver desglose y cálculo</span>
+</button>
+<a class="h-[42px] px-space-md bg-surface hover:bg-surface-secondary border border-primary-container text-primary-container rounded-xl font-body-md-semibold text-body-md-semibold inline-flex items-center gap-space-xs transition-colors shadow-sm" data-path="inventario" href="#">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Registrar entrada de inventario</span>
+</a>
+</div>
+</article>
+<!-- Right Column: Projection Methodology & Historical Breakdown (Span 5) -->
+<aside class="lg:col-span-5 bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-space-md border-b border-border mb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="w-8 h-8 rounded-lg bg-surface-secondary flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Modelo de proyección</h3>
+</div>
+<span class="font-caption text-caption text-text-muted">Cálculo determinístico</span>
+</div>
+<p class="font-body-md text-body-md text-text-secondary mb-space-md">
+            La demanda histórica de <strong>Hamburguesa Especial</strong> para días viernes promedia <strong>40 unidades</strong> (basado en los últimos 4 viernes cerrados: 38, 42, 39, 41 unidades). El inventario actual de carne solo permite elaborar 30 unidades.
+          </p>
+<!-- Historical Trend Bar Chart (Inline SVG) -->
+<div class="bg-surface-secondary p-space-md rounded-xl border border-border mb-space-md">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Comportamiento últimos viernes</span>
+<span class="font-caption text-caption text-text-secondary">Base: POS Ventas</span>
+</div>
+<!-- Discrete Visual Data Row Visualization -->
+<div class="flex flex-col gap-space-sm font-label-md text-label-md">
+<div>
+<div class="flex justify-between text-caption text-text-secondary mb-1">
+<span>Viernes 22 Ago</span>
+<span class="font-semibold text-text-primary">38 unds</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-text-secondary h-full rounded-full" style="width: 76%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-caption text-text-secondary mb-1">
+<span>Viernes 29 Ago</span>
+<span class="font-semibold text-text-primary">42 unds</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-text-secondary h-full rounded-full" style="width: 84%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-caption text-text-secondary mb-1">
+<span>Viernes 05 Sep</span>
+<span class="font-semibold text-text-primary">39 unds</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-text-secondary h-full rounded-full" style="width: 78%;"></div>
+</div>
+</div>
+<div class="pt-space-xs border-t border-border">
+<div class="flex justify-between text-caption font-semibold text-primary mb-1">
+<span>Viernes 12 Sep (Hoy · Estimado)</span>
+<span>40 unds</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 80%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recipe Components Stock Analysis -->
+<div class="flex flex-col mb-space-md">
+<h4 class="font-label-md text-label-md text-text-primary font-semibold mb-space-xs">
+              Capacidad teórica por ingrediente de receta:
+            </h4>
+<div class="divide-y divide-border text-body-md text-body-md">
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">radio_button_checked</span>
+<span class="text-text-primary font-medium">Carne de res molida</span>
+<span class="font-caption text-caption text-text-muted">(5.4 kg ÷ 180 g)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-semibold text-secondary">30 unds</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-danger-soft text-secondary font-semibold">Limitante</span>
+</div>
+</div>
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span>
+<span class="text-text-primary">Pan brioche artesanal</span>
+<span class="font-caption text-caption text-text-muted">(52 unds en stock)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="text-text-primary">52 unds</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-success-soft text-tertiary font-semibold">OK</span>
+</div>
+</div>
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span>
+<span class="text-text-primary">Queso mozzarella</span>
+<span class="font-caption text-caption text-text-muted">(1.76 kg ÷ 40 g)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="text-text-primary">44 unds</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-success-soft text-tertiary font-semibold">OK</span>
+</div>
+</div>
+<div class="py-2 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span>
+<span class="text-text-primary">Tomate y lechuga fresca</span>
+<span class="font-caption text-caption text-text-muted">(Porciones preparadas)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="text-text-primary">60 unds</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-success-soft text-tertiary font-semibold">OK</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footnote Explaining Formula Structure -->
+<div class="p-space-sm rounded-lg bg-surface-secondary border border-border mt-space-md">
+<p class="font-caption text-caption text-text-secondary leading-relaxed">
+<span class="font-semibold text-text-primary">Fórmula operativa:</span>
+<code>Existencia neta ÷ Gramaje estándar de escandallo = Unidades de producción</code>. Se descartan factores subjetivos o proyecciones sin histórico validado.
+          </p>
+</div>
+</aside>
+</div>
+</section>
+<!-- Mid Section: Medium Risk & Special Production Items -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-space-xl">
+<!-- Item 1: Picada Potoquitos -->
+<article class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-warning-soft flex items-center justify-center text-warning">
+<span class="material-symbols-outlined text-[22px]">tapas</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Picada Potoquitos</h3>
+<p class="font-caption text-caption text-text-secondary">Plato para compartir · Salón y terraza</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-warning-soft text-warning font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+            Riesgo medio
+          </span>
+</div>
+<!-- Metrics Ticker -->
+<div class="grid grid-cols-3 gap-space-xs p-space-sm bg-surface-secondary rounded-xl border border-border mb-space-md text-center">
+<div>
+<span class="font-caption text-caption text-text-muted block">Capacidad</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">28 porc.</span>
+</div>
+<div class="border-x border-border">
+<span class="font-caption text-caption text-text-muted block">Demanda est.</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">25 porc.</span>
+</div>
+<div>
+<span class="font-caption text-caption text-warning block font-semibold">Margen neto</span>
+<span class="font-body-md-semibold text-body-md-semibold text-warning">+3 porc. (+12%)</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary mb-space-sm">
+          La capacidad actual está al límite de la demanda proyectada. Un incremento leve en el salón durante el horario pico de 8:00 PM a 10:00 PM podría ocasionar la suspensión del plato en comandas.
+        </p>
+<div class="font-caption text-caption text-text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-text-muted text-[16px]">inventory_2</span>
+<span>Insumos de presión: <strong>Chicharrón de cerdo</strong> y <strong>pechuga de pollo</strong></span>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-border flex items-center justify-end">
+<button class="h-9 px-space-md bg-surface hover:bg-surface-secondary text-text-primary border border-border-strong rounded-lg font-label-md text-label-md transition-colors inline-flex items-center gap-1" type="button">
+<span>Ver detalle de insumos</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</article>
+<!-- Item 2: Perro Especial -->
+<article class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-warning-soft flex items-center justify-center text-warning">
+<span class="material-symbols-outlined text-[22px]">fastfood</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Perro Especial</h3>
+<p class="font-caption text-caption text-text-secondary">Comidas rápidas · Barra & domicilios</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-warning-soft text-warning font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+            Riesgo medio
+          </span>
+</div>
+<!-- Metrics Ticker -->
+<div class="grid grid-cols-3 gap-space-xs p-space-sm bg-surface-secondary rounded-xl border border-border mb-space-md text-center">
+<div>
+<span class="font-caption text-caption text-text-muted block">Capacidad</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">48 unds</span>
+</div>
+<div class="border-x border-border">
+<span class="font-caption text-caption text-text-muted block">Demanda est.</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">44 unds</span>
+</div>
+<div>
+<span class="font-caption text-caption text-warning block font-semibold">Margen neto</span>
+<span class="font-body-md-semibold text-body-md-semibold text-warning">+4 unds (+9%)</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-text-secondary mb-space-sm">
+          Disponibilidad ajustada frente a pedidos esperados de mesa y barra. El proveedor entrega pan recién horneado a las 5:00 PM; de haber demora, el inventario se limitará a 12 unidades remanentes.
+        </p>
+<div class="font-caption text-caption text-text-secondary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-text-muted text-[16px]">inventory_2</span>
+<span>Insumo limitante: <strong>Pan de perro artesanal (48 unds en stock físico)</strong></span>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-border flex items-center justify-end">
+<button class="h-9 px-space-md bg-surface hover:bg-surface-secondary text-text-primary border border-border-strong rounded-lg font-label-md text-label-md transition-colors inline-flex items-center gap-1" type="button">
+<span>Ver detalle de insumos</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Bottom Section: Dual Inventory Pressure Table & Consistency Audit Ledger -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Block 1: Raw Ingredients Critical Table (Span 7) -->
+<div class="lg:col-span-7 bg-surface rounded-2xl shadow-sm border border-border flex flex-col overflow-hidden">
+<div class="p-space-lg pb-space-md flex items-center justify-between border-b border-border">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Ingredientes bajo mayor presión</h3>
+<p class="font-caption text-caption text-text-secondary">Balance entre inventario físico y consumo de recetas proyectado</p>
+</div>
+<span class="font-caption text-caption px-2.5 py-1 rounded-md bg-surface-secondary text-text-secondary font-medium">
+          4 ingredientes evaluados
+        </span>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse font-body-md text-body-md">
+<thead>
+<tr class="bg-surface-secondary border-b border-border text-text-secondary font-label-md text-label-md">
+<th class="py-3 px-space-md">Ingrediente</th>
+<th class="py-3 px-space-md">Stock actual</th>
+<th class="py-3 px-space-md">Demanda est.</th>
+<th class="py-3 px-space-md">Déficit / Holgura</th>
+<th class="py-3 px-space-md">Estado</th>
+<th class="py-3 px-space-md text-right">Acción rápida</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border text-text-primary">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-space-md font-medium">
+<div class="flex flex-col">
+<span>Carne de res molida</span>
+<span class="font-caption text-caption text-text-muted">Gramaje base 180g</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-semibold">5.4 kg</td>
+<td class="py-3.5 px-space-md text-text-secondary">7.2 kg</td>
+<td class="py-3.5 px-space-md">
+<span class="font-bold text-secondary">-1.8 kg</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-danger-soft text-secondary font-caption text-caption font-semibold">
+                  Riesgo alto
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<a class="inline-flex items-center text-primary hover:underline font-label-sm text-label-sm font-semibold" data-path="inventario" href="#">
+                  + Registrar entrada
+                </a>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-space-md font-medium">
+<div class="flex flex-col">
+<span>Chicharrón de cerdo</span>
+<span class="font-caption text-caption text-text-muted">Porcionado Picadas</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-semibold">6.2 kg</td>
+<td class="py-3.5 px-space-md text-text-secondary">5.8 kg</td>
+<td class="py-3.5 px-space-md">
+<span class="font-semibold text-warning">+0.4 kg</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-warning-soft text-warning font-caption text-caption font-semibold">
+                  Riesgo medio
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<a class="inline-flex items-center text-text-secondary hover:text-text-primary font-label-sm text-label-sm font-semibold" data-path="inventario" href="#">
+                  Ver Kardex
+                </a>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-space-md font-medium">
+<div class="flex flex-col">
+<span>Pan brioche artesanal</span>
+<span class="font-caption text-caption text-text-muted">Lote proveedor 1</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-semibold">52 unds</td>
+<td class="py-3.5 px-space-md text-text-secondary">40 unds</td>
+<td class="py-3.5 px-space-md">
+<span class="font-semibold text-tertiary">+12 unds</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-success-soft text-tertiary font-caption text-caption font-semibold">
+                  Sin riesgo
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<a class="inline-flex items-center text-text-secondary hover:text-text-primary font-label-sm text-label-sm font-semibold" data-path="inventario" href="#">
+                  Revisar
+                </a>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3.5 px-space-md font-medium">
+<div class="flex flex-col">
+<span>Papa criolla limpia</span>
+<span class="font-caption text-caption text-text-muted">Acompañamientos</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md font-semibold">18.0 kg</td>
+<td class="py-3.5 px-space-md text-text-secondary">11.5 kg</td>
+<td class="py-3.5 px-space-md">
+<span class="font-semibold text-tertiary">+6.5 kg</span>
+</td>
+<td class="py-3.5 px-space-md">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-success-soft text-tertiary font-caption text-caption font-semibold">
+                  Sin riesgo
+                </span>
+</td>
+<td class="py-3.5 px-space-md text-right">
+<a class="inline-flex items-center text-text-secondary hover:text-text-primary font-label-sm text-label-sm font-semibold" data-path="inventario" href="#">
+                  Revisar
+                </a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Block 2: Safe Stock & Data Consistency Audit (Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Unaffected High-Stock Items Card -->
+<div class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Productos con cobertura holgada</h3>
+<span class="font-caption text-caption px-2 py-0.5 rounded bg-success-soft text-tertiary font-semibold">
+            Stock óptimo
+          </span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Item A -->
+<div class="p-space-sm bg-surface-secondary rounded-xl border border-border flex items-center justify-between">
+<div>
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">Papas Especiales</p>
+<p class="font-caption text-caption text-text-secondary">Capacidad: 65 unds · Demanda esperada: 30 unds</p>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold bg-success-soft px-2 py-1 rounded-full">+35 holgura</span>
+</div>
+</div>
+<!-- Item B -->
+<div class="p-space-sm bg-surface-secondary rounded-xl border border-border flex items-center justify-between">
+<div>
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">Coca-Cola 400 ml</p>
+<p class="font-caption text-caption text-text-secondary">Capacidad: 95 unds · Demanda esperada: 55 unds</p>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold bg-success-soft px-2 py-1 rounded-full">+40 holgura</span>
+</div>
+</div>
+<!-- Item C -->
+<div class="p-space-sm bg-surface-secondary rounded-xl border border-border flex items-center justify-between">
+<div>
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">Limonada de Coco</p>
+<p class="font-caption text-caption text-text-secondary">Capacidad: 38 unds · Demanda esperada: 18 unds</p>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-tertiary font-semibold bg-success-soft px-2 py-1 rounded-full">+20 holgura</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Audit & Data Consistency Block -->
+<div class="bg-surface rounded-2xl p-space-lg shadow-sm border border-border flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-sm mb-space-xs">
+<span class="material-symbols-outlined text-text-muted text-[20px]">fact_check</span>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Estado de consistencia de datos</h4>
+</div>
+<p class="font-caption text-caption text-text-secondary mb-space-md">
+            Identificación de registros excluidos temporalmente del cálculo automático para evitar falsos positivos.
+          </p>
+<div class="flex flex-col gap-space-sm">
+<!-- Data Gap 1 -->
+<div class="p-space-sm rounded-xl bg-surface-secondary border border-border flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Empanadas de la Casa (Nuevo plato)</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-container text-neutral-status font-medium">
+                  • Datos insuficientes
+                </span>
+</div>
+<p class="font-caption text-caption text-text-secondary">
+                Aún no existen suficientes registros históricos de viernes para proyectar demanda con confiabilidad. Se monitorea exclusivamente por nivel de stock mínimo en almacén.
+              </p>
+</div>
+<!-- Data Gap 2 -->
+<div class="p-space-sm rounded-xl bg-surface-secondary border border-border flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Chorizo Criollo artesanal</span>
+<span class="font-caption text-caption px-2 py-0.5 rounded-full bg-surface-container text-neutral-status font-medium">
+                  • Receta en borrador
+                </span>
+</div>
+<p class="font-caption text-caption text-text-secondary">
+                Sin receta configurada para cálculo de escandallo. Complete los insumos en el módulo de Menú para habilitar la previsión matemática.
+              </p>
+</div>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-muted">Algoritmo auditado conforme a ISO/POTOQUITOS Core</span>
+<a class="font-label-sm text-label-sm text-primary hover:underline font-semibold" data-path="configuracion" href="#">
+            Configurar parámetros
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Lightweight Operational Scripting for Interactive Tab States -->
+<script>
+    (function () {
+      // Manage active horizon button visual state
+      const buttons = document.querySelectorAll('header .inline-flex button');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => {
+            b.classList.remove('bg-primary-container', 'text-on-primary', 'font-semibold', 'shadow-sm');
+            b.classList.add('text-text-secondary');
+          });
+          btn.classList.add('bg-primary-container', 'text-on-primary', 'font-semibold', 'shadow-sm');
+          btn.classList.remove('text-text-secondary');
+        });
+      });
+    })();
+  </script>
+</div></main></div></body></html>

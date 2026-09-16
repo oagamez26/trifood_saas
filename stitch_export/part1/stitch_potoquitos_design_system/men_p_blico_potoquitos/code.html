@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Digital — POTOQUITOS</title>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#2563EB',
+              'blue-dark': '#0F2747',
+              'blue-soft': '#EAF2FF',
+              red: '#EF3340',
+              'red-dark': '#B91C1C',
+              'red-soft': '#FDEBED',
+              bg: '#F5F7FA',
+              surface: '#FFFFFF',
+              border: '#E3E8EF',
+              'border-strong': '#CBD5E1',
+              text: '#102A43',
+              'text-secondary': '#627D98',
+              'text-muted': '#829AB1',
+              success: '#10B981',
+              'success-soft': '#DFF7EE',
+              warning: '#F59E0B',
+              'warning-soft': '#FFF4D6',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            card: '0 4px 14px rgba(15, 39, 71, 0.05)',
+            'card-hover': '0 8px 22px rgba(15, 39, 71, 0.09)',
+            modal: '0 20px 40px -15px rgba(15, 39, 71, 0.2)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #F5F7FA;
+      color: #102A43;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-brand-blue-soft selection:text-brand-blue">
+
+  <!-- Header Público Sticky (Sin sidebar ni opciones de administración) -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-brand-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-4">
+      
+      <!-- Brand Logo Oficial -->
+      <a href="#" class="flex items-center gap-3 group focus:outline-none">
+        <div class="h-11 w-11 sm:h-12 sm:w-12 rounded-xl flex items-center justify-center p-0.5 transition-transform group-hover:scale-105">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC9F8PNhbHJ9Mfr4cC-j5AXooAMkMoZgd4y7s_Bxrv2QJSHmyUzvqbIm6uJ-a7Xef7njNufgJMMaTm8b-NVsStuXemO3Wb1fSvAuEr-0rXcw_yXkhfjh7qUCK1U4FqvYKfNklgvODhpntoACR4tqm-64uUcEt5A-p2XoErFU2oHthTKqcYyhj-9ZE2lgYcr_GAGqq4GfdSVsRjMjhnX13U2nVuXnQo2A98hcPx36UtAPdDHvD48hODScs-eaP-6pwS" alt="POTOQUITOS Restaurante" class="h-full w-full object-contain">
+        </div>
+        <div class="flex flex-col">
+          <span class="text-lg sm:text-xl font-bold tracking-tight text-brand-text flex items-center gap-1.5">
+            POTOQUITOS
+          </span>
+          <span class="text-[11px] font-semibold text-brand-red tracking-wider uppercase">Restaurante</span>
+        </div>
+      </a>
+
+      <!-- Centro: Indicador / Título de Consulta -->
+      <div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-brand-bg rounded-full border border-brand-border text-xs font-medium text-brand-text-secondary">
+        <i data-lucide="book-open" class="w-4 h-4 text-brand-blue"></i>
+        <span>Menú Digital para Comensales</span>
+      </div>
+
+      <!-- Lado derecho: Estado del local & QR / Compartir -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="hidden sm:flex items-center gap-2 px-2.5 py-1 bg-brand-success-soft text-brand-success rounded-full text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-brand-success animate-pulse"></span>
+          <span>Abierto hoy · 12:00 PM - 10:30 PM</span>
+        </div>
+        <button onclick="document.getElementById('search-input').focus()" aria-label="Buscar en el menú" class="p-2 sm:px-3 sm:py-2 text-brand-text-secondary hover:text-brand-blue hover:bg-brand-blue-soft rounded-lg transition-colors flex items-center gap-1.5 text-xs font-medium border border-transparent hover:border-brand-blue/20">
+          <i data-lucide="search" class="w-4 h-4 text-current"></i>
+          <span class="hidden sm:inline">Buscar plato</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+    <!-- Encabezado del Menú (Sobrio y directo, sin slogans inventados ni hamburguesas gigantes de fondo) -->
+    <section class="mb-6 sm:mb-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-4 border-b border-brand-border/60">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-blue mb-1">
+            <i data-lucide="utensils-crossed" class="w-3.5 h-3.5"></i>
+            Carta Gastronómica
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold text-brand-text tracking-tight">
+            Nuestro menú
+          </h1>
+          <p class="text-sm sm:text-base text-brand-text-secondary mt-1">
+            Explora los platos y bebidas disponibles en POTOQUITOS.
+          </p>
+        </div>
+
+        <!-- Indicador de servicio en mesa (Aclara el flujo real del restaurante sin carrito de compra) -->
+        <div class="inline-flex items-center gap-2 px-3 py-2 bg-white rounded-xl border border-brand-border text-xs text-brand-text-secondary shadow-sm">
+          <i data-lucide="bell-ring" class="w-4 h-4 text-brand-red"></i>
+          <span>Los pedidos son atendidos y confirmados en tu mesa por nuestro equipo de meseros.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Búsqueda y Navegación de Categorías Sticky/Flotante -->
+    <section class="sticky top-16 sm:top-20 z-20 bg-brand-bg/95 backdrop-blur-md pt-2 pb-4 -mx-4 sm:-mx-6 px-4 sm:px-6 border-b border-brand-border/70 mb-6">
+      <div class="flex flex-col gap-3">
+        
+        <!-- Buscador con icono -->
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-brand-text-muted">
+            <i data-lucide="search" class="w-4 h-4"></i>
+          </div>
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="Buscar en el menú por nombre o ingrediente..." 
+            class="w-full h-11 pl-10 pr-10 bg-white border border-brand-border rounded-xl text-sm text-brand-text placeholder-brand-text-muted focus:outline-none focus:ring-2 focus:ring-brand-blue focus:border-brand-blue shadow-sm transition-all"
+            oninput="handleSearch(this.value)"
+          >
+          <button id="clear-search" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3.5 flex items-center text-brand-text-muted hover:text-brand-text">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <!-- Barra Horizontal de Categorías (Scroll horizontal en móvil) -->
+        <div class="flex items-center gap-2 overflow-x-auto hide-scrollbar py-1">
+          <button onclick="filterCategory('todos')" id="cat-todos" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-brand-blue text-white shadow-sm">
+            Todos
+          </button>
+          <button onclick="filterCategory('hamburguesas')" id="cat-hamburguesas" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-brand-text-secondary bg-white hover:bg-brand-blue-soft/50 border border-brand-border transition-all">
+            Hamburguesas
+          </button>
+          <button onclick="filterCategory('perros')" id="cat-perros" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-brand-text-secondary bg-white hover:bg-brand-blue-soft/50 border border-brand-border transition-all">
+            Perros calientes
+          </button>
+          <button onclick="filterCategory('picadas')" id="cat-picadas" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-brand-text-secondary bg-white hover:bg-brand-blue-soft/50 border border-brand-border transition-all">
+            Picadas
+          </button>
+          <button onclick="filterCategory('acompanamientos')" id="cat-acompanamientos" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-brand-text-secondary bg-white hover:bg-brand-blue-soft/50 border border-brand-border transition-all">
+            Acompañamientos
+          </button>
+          <button onclick="filterCategory('bebidas')" id="cat-bebidas" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-brand-text-secondary bg-white hover:bg-brand-blue-soft/50 border border-brand-border transition-all">
+            Bebidas
+          </button>
+          <button onclick="filterCategory('combos')" id="cat-combos" class="category-btn whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium text-brand-text-secondary bg-white hover:bg-brand-blue-soft/50 border border-brand-border transition-all">
+            Combos
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contador de Resultados y Filtro Activo -->
+    <div class="flex items-center justify-between text-xs font-medium text-brand-text-secondary mb-4 px-1">
+      <span id="results-count">Mostrando 7 productos</span>
+      <span class="text-[11px] text-brand-text-muted flex items-center gap-1">
+        <i data-lucide="info" class="w-3.5 h-3.5"></i> Precios en COP con impuestos incluidos
+      </span>
+    </div>
+
+    <!-- Grid de Productos (Mobile 1 col, Tablet 2-3 col, Desktop 3-4 col) -->
+    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
+      
+      <!-- Producto 1: Hamburguesa Especial (Disponible) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="hamburguesas"
+        data-name="Hamburguesa Especial"
+        onclick="openProductModal('Hamburguesa Especial', '$22.000', 'Carne artesanal 180g, queso mozzarella derretido, tocineta ahumada crujiente, vegetales frescos y salsa de la casa en pan brioche sellado con mantequilla.', 'Para 1 persona', true, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBnNbXdacGS84jnS43anqGiQt4Ae-gQeZGXs1KqG0Mgd62XB87hIMl4nj_27uFezfidfVjRmBhQo4uJazIw90veT3DtInJnupPsBbaEI-e90LERrNoxwfwV-aVnhEc9DYOZJ2xQmc4chUcLh6xOduBA4kVb51ial3TnW8qSMES3fnGVXZsaND_595K8RFPIo1qEMu6yegw0LDfFSu-7Vn2qo9prrWdrgPyAuoKO2WPqYv-DQmRo5bo', 'Hamburguesas', '15 - 20 min')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnNbXdacGS84jnS43anqGiQt4Ae-gQeZGXs1KqG0Mgd62XB87hIMl4nj_27uFezfidfVjRmBhQo4uJazIw90veT3DtInJnupPsBbaEI-e90LERrNoxwfwV-aVnhEc9DYOZJ2xQmc4chUcLh6xOduBA4kVb51ial3TnW8qSMES3fnGVXZsaND_595K8RFPIo1qEMu6yegw0LDfFSu-7Vn2qo9prrWdrgPyAuoKO2WPqYv-DQmRo5bo" 
+            alt="Hamburguesa Especial POTOQUITOS" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-success shadow-sm backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+              Disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white backdrop-blur-sm">
+              Hamburguesas
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text group-hover:text-brand-blue transition-colors leading-snug">
+              Hamburguesa Especial
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Carne artesanal 180g, queso mozzarella derretido, tocineta ahumada crujiente, vegetales frescos y salsa de la casa.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text tracking-tight">$22.000</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-brand-blue"></i>
+              <span>Para 1 persona</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Producto 2: Picada Familiar (Disponible) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="picadas"
+        data-name="Picada Familiar POTOQUITOS"
+        onclick="openProductModal('Picada Familiar POTOQUITOS', '$75.000', 'Generosa selección de carnes asadas: res de primera, bondiola de cerdo marinada, chicharrón crujiente, chorizo artesanal, papa criolla frita, plátano maduro y arepitas calientes con ají y hogao.', 'Para 4 personas', true, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAFa41KFdGzjTQXmxgQGX2fm0cw25TAPMxPxmItlbYTqMJNibiW6UFW08bprkptET-MHZ5hUixpoVGULhlqziQll05J5P6X8ykWoOFYKAvUuEvAQ3JVVL5racN9tGALzF172gBX2WLvJzhO19jk44AIPBkIF7RZ3R946gRXt3RkQsRyWs8oFABfZU9VwlMddMGtGBKzd_OzDbw0azYqFiPuQUy0cnKaFybTNPjRxVorV0CuZ6l2wa0', 'Picadas', '20 - 25 min')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFa41KFdGzjTQXmxgQGX2fm0cw25TAPMxPxmItlbYTqMJNibiW6UFW08bprkptET-MHZ5hUixpoVGULhlqziQll05J5P6X8ykWoOFYKAvUuEvAQ3JVVL5racN9tGALzF172gBX2WLvJzhO19jk44AIPBkIF7RZ3R946gRXt3RkQsRyWs8oFABfZU9VwlMddMGtGBKzd_OzDbw0azYqFiPuQUy0cnKaFybTNPjRxVorV0CuZ6l2wa0" 
+            alt="Picada Familiar POTOQUITOS" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-success shadow-sm backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+              Disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white backdrop-blur-sm">
+              Picadas
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text group-hover:text-brand-blue transition-colors leading-snug">
+              Picada Familiar POTOQUITOS
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Selección de carne de res, cerdo, chicharrón crujiente, chorizo artesanal, papa criolla y platanitos con salsas.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text tracking-tight">$75.000</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-brand-blue"></i>
+              <span>Para 4 personas</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Producto 3: Perro Caliente Especial (Disponible) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="perros"
+        data-name="Perro Caliente Especial"
+        onclick="openProductModal('Perro Caliente Especial', '$18.000', 'Salchicha tipo americana a la parrilla, capa generosa de queso fundido, tocineta ahumada picada, ripio de papa crocante y combinación de salsas caseras: golf, piña natural y mostaza dulce.', 'Para 1 persona', true, 'https://lh3.googleusercontent.com/aida-public/AB6AXuD6tBx7mDoJUHFEpm8-MiUb0vxhNbZRb30Rpp_BJAgCiCO_kxWjd7GEBPz21vC_s9X0KTH-1yBVXyn1exwOkSRjvqN3V9JcRmOdnIo_VAJvYavBOjwhg20JdYMbGHCK13cB-kakCkYj6xHbO1F1s9KfomCynXSpZJMLO2E6H_6swUi8v8fs0OUSHpALKPwqFV7KIk2tJLzEho6-KAI6IvOOcmgOF_X2eZhWTvHFlFa5Wntw04zrSOE', 'Perros calientes', '10 - 15 min')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6tBx7mDoJUHFEpm8-MiUb0vxhNbZRb30Rpp_BJAgCiCO_kxWjd7GEBPz21vC_s9X0KTH-1yBVXyn1exwOkSRjvqN3V9JcRmOdnIo_VAJvYavBOjwhg20JdYMbGHCK13cB-kakCkYj6xHbO1F1s9KfomCynXSpZJMLO2E6H_6swUi8v8fs0OUSHpALKPwqFV7KIk2tJLzEho6-KAI6IvOOcmgOF_X2eZhWTvHFlFa5Wntw04zrSOE" 
+            alt="Perro Caliente Especial" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-success shadow-sm backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+              Disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white backdrop-blur-sm">
+              Perros calientes
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text group-hover:text-brand-blue transition-colors leading-snug">
+              Perro Caliente Especial
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Salchicha especial, abundante queso fundido, tocineta crujiente, ripio crocante y salsas de piña y tártara casera.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text tracking-tight">$18.000</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-brand-blue"></i>
+              <span>Para 1 persona</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Producto 4: Papas Especiales (Temporalmente NO Disponible - Opacidad reducida y badge claro) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="acompanamientos"
+        data-name="Papas Especiales con Queso y Tocineta"
+        onclick="openProductModal('Papas Especiales con Queso y Tocineta', '$12.000', 'Porción generosa de papas a la francesa corte clásico doradas y crujientes, bañadas en salsa de queso cheddar fundido y trozos de tocineta crocante.', 'Para 2 personas', false, 'https://lh3.googleusercontent.com/aida-public/AB6AXuAcZxk0m6YROCiXXMmWOdkDRoyYC5tpZC9cYyQrIrKM7lYsMi611MdmEHRIkI3xGMI3cM7Ea9BZOmES92o77vhrH6zdeCCICwCCV29A_y4_Gjau3uqC86ZeY4SnIFFNR747-8Qj4byLccwoaYn8wX9lRsRi_xOqjdNll9HJKgqQaGoMxwGy5GqqXxpxUSMQD4z6VxA2dpSTHXFMYdRDyM_5i99ZMVgBD1KTAUUXAhIdlcF-i5wTiMI', 'Acompañamientos', 'Agotado')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <!-- Opacidad ligera en la fotografía para indicar que no está disponible según especificación -->
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcZxk0m6YROCiXXMmWOdkDRoyYC5tpZC9cYyQrIrKM7lYsMi611MdmEHRIkI3xGMI3cM7Ea9BZOmES92o77vhrH6zdeCCICwCCV29A_y4_Gjau3uqC86ZeY4SnIFFNR747-8Qj4byLccwoaYn8wX9lRsRi_xOqjdNll9HJKgqQaGoMxwGy5GqqXxpxUSMQD4z6VxA2dpSTHXFMYdRDyM_5i99ZMVgBD1KTAUUXAhIdlcF-i5wTiMI" 
+            alt="Papas Especiales" 
+            class="w-full h-full object-cover opacity-60 grayscale-[25%]"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-text-muted border border-brand-border shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-text-muted"></span>
+              No disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white backdrop-blur-sm">
+              Acompañamientos
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text/75 leading-snug">
+              Papas Especiales con Tocineta
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Papas a la francesa doradas, bañadas en queso cheddar caliente fundido y lluvia de tocineta crujiente.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text/70 tracking-tight">$12.000</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="users" class="w-3.5 h-3.5 text-brand-text-muted"></i>
+              <span>Para 2 personas</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Producto 5: Limonadas Naturales y Cervezas (Disponible) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="bebidas"
+        data-name="Limonada Natural Fría 16oz"
+        onclick="openProductModal('Limonada Natural Fría 16oz', '$6.500', 'Limonada fresca recién prensada con limones tahití seleccionados, hierbabuena fresca opcional, abundante hielo picado y toque de endulzante al gusto.', 'Para 1 persona', true, 'https://lh3.googleusercontent.com/aida-public/AB6AXuD4eVOBuKdGHDNGc4eTlOyx5GAouhxMNtUKVpDKpFqCOHACXMBLUlDBp_S238bhYTib7NduPXF8QJddpdL2pvRatq0yB0FS12wEUmZx1UnW8qqbg9cMGZDTsnzDqMWf2NFku-7lLofR3u3JFBWKhCB1TuudmzIkPwDcMAEFl9QF6i5-9aZYD_zg12veG9uCYbROKIQUCX2YKA8zqpRhsrKNFjbuxAjxfI8TRsP677B8goWWB3Jy078', 'Bebidas', 'Inmediato')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4eVOBuKdGHDNGc4eTlOyx5GAouhxMNtUKVpDKpFqCOHACXMBLUlDBp_S238bhYTib7NduPXF8QJddpdL2pvRatq0yB0FS12wEUmZx1UnW8qqbg9cMGZDTsnzDqMWf2NFku-7lLofR3u3JFBWKhCB1TuudmzIkPwDcMAEFl9QF6i5-9aZYD_zg12veG9uCYbROKIQUCX2YKA8zqpRhsrKNFjbuxAjxfI8TRsP677B8goWWB3Jy078" 
+            alt="Limonadas y Bebidas POTOQUITOS" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-success shadow-sm backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+              Disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white backdrop-blur-sm">
+              Bebidas
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text group-hover:text-brand-blue transition-colors leading-snug">
+              Limonada Natural Fría 16oz
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Zumo de limón fresco prensado al momento, servido bien frío con hielo cristalino y menta fresca.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text tracking-tight">$6.500</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-brand-blue"></i>
+              <span>Para 1 persona</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Producto 6: Hamburguesa Clásica Doble (Disponible) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="hamburguesas"
+        data-name="Hamburguesa Clásica Doble"
+        onclick="openProductModal('Hamburguesa Clásica Doble', '$26.000', 'Dos medallones de carne artesanal de 120g cada uno, doble queso mozzarella americano, pepinillos encurtidos, cebolla caramelizada y salsa tártara especial.', 'Para 1 persona', true, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBnNbXdacGS84jnS43anqGiQt4Ae-gQeZGXs1KqG0Mgd62XB87hIMl4nj_27uFezfidfVjRmBhQo4uJazIw90veT3DtInJnupPsBbaEI-e90LERrNoxwfwV-aVnhEc9DYOZJ2xQmc4chUcLh6xOduBA4kVb51ial3TnW8qSMES3fnGVXZsaND_595K8RFPIo1qEMu6yegw0LDfFSu-7Vn2qo9prrWdrgPyAuoKO2WPqYv-DQmRo5bo', 'Hamburguesas', '15 - 20 min')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnNbXdacGS84jnS43anqGiQt4Ae-gQeZGXs1KqG0Mgd62XB87hIMl4nj_27uFezfidfVjRmBhQo4uJazIw90veT3DtInJnupPsBbaEI-e90LERrNoxwfwV-aVnhEc9DYOZJ2xQmc4chUcLh6xOduBA4kVb51ial3TnW8qSMES3fnGVXZsaND_595K8RFPIo1qEMu6yegw0LDfFSu-7Vn2qo9prrWdrgPyAuoKO2WPqYv-DQmRo5bo" 
+            alt="Hamburguesa Clásica Doble" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-success shadow-sm backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+              Disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-black/60 text-white backdrop-blur-sm">
+              Hamburguesas
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text group-hover:text-brand-blue transition-colors leading-snug">
+              Hamburguesa Clásica Doble
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Doble carne de 120g, doble queso derretido, cebolla caramelizada, pepinillos y salsa de la casa.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text tracking-tight">$26.000</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-brand-blue"></i>
+              <span>Para 1 persona</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Producto 7: Combo Potoquitos Especial (Disponible) -->
+      <article 
+        class="product-card group bg-white border border-brand-border rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-200 flex flex-col cursor-pointer"
+        data-category="combos"
+        data-name="Combo Potoquitos Especial"
+        onclick="openProductModal('Combo Potoquitos Especial', '$29.500', 'Hamburguesa Especial 180g con tocineta + porción individual de papas a la francesa crujientes + gaseosa fría 400ml a elección.', 'Para 1 persona', true, 'https://lh3.googleusercontent.com/aida-public/AB6AXuBnNbXdacGS84jnS43anqGiQt4Ae-gQeZGXs1KqG0Mgd62XB87hIMl4nj_27uFezfidfVjRmBhQo4uJazIw90veT3DtInJnupPsBbaEI-e90LERrNoxwfwV-aVnhEc9DYOZJ2xQmc4chUcLh6xOduBA4kVb51ial3TnW8qSMES3fnGVXZsaND_595K8RFPIo1qEMu6yegw0LDfFSu-7Vn2qo9prrWdrgPyAuoKO2WPqYv-DQmRo5bo', 'Combos', '15 - 20 min')"
+      >
+        <div class="relative aspect-[4/3] bg-brand-bg overflow-hidden">
+          <img 
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnNbXdacGS84jnS43anqGiQt4Ae-gQeZGXs1KqG0Mgd62XB87hIMl4nj_27uFezfidfVjRmBhQo4uJazIw90veT3DtInJnupPsBbaEI-e90LERrNoxwfwV-aVnhEc9DYOZJ2xQmc4chUcLh6xOduBA4kVb51ial3TnW8qSMES3fnGVXZsaND_595K8RFPIo1qEMu6yegw0LDfFSu-7Vn2qo9prrWdrgPyAuoKO2WPqYv-DQmRo5bo" 
+            alt="Combo Potoquitos Especial" 
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          >
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-brand-success shadow-sm backdrop-blur-sm">
+              <span class="w-2 h-2 rounded-full bg-brand-success"></span>
+              Disponible
+            </span>
+          </div>
+          <div class="absolute bottom-2.5 left-3">
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-brand-red text-white backdrop-blur-sm font-semibold">
+              Combo Ahorro
+            </span>
+          </div>
+        </div>
+
+        <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <h2 class="text-base sm:text-lg font-bold text-brand-text group-hover:text-brand-blue transition-colors leading-snug">
+              Combo Potoquitos Especial
+            </h2>
+            <p class="text-xs sm:text-sm text-brand-text-secondary line-clamp-2 mt-1.5 leading-relaxed">
+              Hamburguesa Especial con tocineta + porción individual de papas a la francesa + gaseosa fría 400ml.
+            </p>
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-brand-border/60 flex items-center justify-between">
+            <div>
+              <span class="text-xs text-brand-text-muted block">Precio</span>
+              <span class="text-lg sm:text-xl font-bold text-brand-text tracking-tight">$29.500</span>
+            </div>
+            <div class="flex items-center gap-1 text-xs font-medium text-brand-text-secondary bg-brand-bg px-2.5 py-1 rounded-lg border border-brand-border/50">
+              <i data-lucide="user" class="w-3.5 h-3.5 text-brand-blue"></i>
+              <span>Para 1 persona</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Estado de Búsqueda sin Resultados (Oculto por defecto) -->
+    <div id="no-results" class="hidden py-16 text-center max-w-md mx-auto">
+      <div class="w-14 h-14 mx-auto mb-4 rounded-full bg-brand-blue-soft text-brand-blue flex items-center justify-center">
+        <i data-lucide="search-x" class="w-7 h-7"></i>
+      </div>
+      <h3 class="text-lg font-bold text-brand-text">No encontramos productos</h3>
+      <p class="text-sm text-brand-text-secondary mt-1 mb-5">
+        Prueba buscando otro nombre o seleccionando otra categoría de la barra superior.
+      </p>
+      <button onclick="resetMenu()" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-blue text-white rounded-xl text-xs sm:text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm">
+        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+        <span>Ver todo el menú</span>
+      </button>
+    </div>
+
+    <!-- Mensaje informativo para comensales en mesa (Sin carrito ni checkout) -->
+    <section class="mt-12 p-5 sm:p-6 bg-white border border-brand-border rounded-2xl shadow-card flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4 text-left">
+        <div class="w-12 h-12 rounded-xl bg-brand-blue-soft text-brand-blue flex items-center justify-center shrink-0">
+          <i data-lucide="hand-metal" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 class="text-sm sm:text-base font-bold text-brand-text">¿Listo para hacer tu pedido?</h3>
+          <p class="text-xs sm:text-sm text-brand-text-secondary mt-0.5">
+            Comunícaselo a tu mesero asignado. Tomará tu comanda directamente en nuestro sistema.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-brand-bg rounded-lg text-xs font-semibold text-brand-text border border-brand-border">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-brand-blue"></i>
+          Preparación en cocina ~15 min
+        </span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal / Drawer de Detalle del Producto (Para lectura completa sin carrito) -->
+  <div id="product-modal" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden flex items-center justify-center p-4 sm:p-6 transition-opacity" onclick="closeProductModal(event)">
+    <div class="bg-white rounded-2xl border border-brand-border shadow-modal max-w-lg w-full overflow-hidden flex flex-col transform transition-all" onclick="event.stopPropagation()">
+      
+      <!-- Cabecera del modal con botón de cierre -->
+      <div class="relative aspect-[16/10] bg-brand-bg overflow-hidden">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+        <button onclick="closeProductModalDirect()" aria-label="Cerrar detalle" class="absolute top-3 right-3 w-9 h-9 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors backdrop-blur-sm focus:outline-none">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+        <div class="absolute bottom-3 left-4">
+          <span id="modal-category" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-brand-text text-white backdrop-blur-sm">
+            Categoría
+          </span>
+        </div>
+      </div>
+
+      <!-- Cuerpo del modal con información del producto -->
+      <div class="p-6">
+        <div class="flex items-start justify-between gap-3 mb-2">
+          <h2 id="modal-title" class="text-xl sm:text-2xl font-bold text-brand-text leading-tight">
+            Nombre del Producto
+          </h2>
+          <span id="modal-badge" class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-success-soft text-brand-success">
+            ● Disponible
+          </span>
+        </div>
+
+        <p id="modal-desc" class="text-sm text-brand-text-secondary leading-relaxed mt-2 mb-6">
+          Descripción detallada del producto preparado en la cocina de POTOQUITOS con ingredientes de primera calidad.
+        </p>
+
+        <!-- Indicadores complementarios -->
+        <div class="grid grid-cols-2 gap-3 py-3 px-4 bg-brand-bg rounded-xl border border-brand-border mb-6">
+          <div class="flex items-center gap-2">
+            <i data-lucide="users" class="w-4 h-4 text-brand-blue"></i>
+            <div>
+              <span class="text-[11px] text-brand-text-muted block">Porción recomendada</span>
+              <span id="modal-servings" class="text-xs font-semibold text-brand-text">Para 1 persona</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <i data-lucide="timer" class="w-4 h-4 text-brand-blue"></i>
+            <div>
+              <span class="text-[11px] text-brand-text-muted block">Tiempo estimado</span>
+              <span id="modal-time" class="text-xs font-semibold text-brand-text">15 - 20 min</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barra inferior de precio y cierre -->
+        <div class="pt-4 border-t border-brand-border flex items-center justify-between">
+          <div>
+            <span class="text-xs text-brand-text-muted block">Precio final</span>
+            <span id="modal-price" class="text-2xl font-bold text-brand-text tracking-tight">$0</span>
+          </div>
+          <button onclick="closeProductModalDirect()" class="px-5 py-2.5 bg-brand-blue text-white rounded-xl text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm">
+            Entendido
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer Público Sencillo (Sin widgets gigantes ni banners promocionales) -->
+  <footer class="bg-white border-t border-brand-border mt-12 py-8 text-brand-text-secondary text-xs">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4 pb-6 border-b border-brand-border/60 text-center md:text-left">
+        
+        <div class="flex items-center gap-3">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7RxR88m1KcGwbndjo5Os0YW8X-pbD3kDId2zqR0SkVWovZoAQCf-A0j7jdRsN8nzl2fOHxN-WTGXEmAQUkAyo8CusPjDP-MBHOP3LZaoxidO53CvAHUedgKGSGfCxm8iRcKK8tUcbWn3CAd2V8AT6nQjq6aiZmd8DENb9ls2kCso7fOTda3SvBxJyAOnImtX9wCt936zfDTlunn8Ur27YB0sUUz-z8t3McPPUTbdnptpnVWVYccabr2FdLKEZaa7q" alt="POTOQUITOS" class="h-8 w-8 object-contain">
+          <div>
+            <span class="font-bold text-brand-text text-sm block">POTOQUITOS Restaurante</span>
+            <span class="text-[11px] text-brand-text-muted">Sistema de Gestión y Menú Digital</span>
+          </div>
+        </div>
+
+        <!-- Información física del local -->
+        <div class="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2 text-xs">
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-red"></i> Calle Principal #12-34
+          </span>
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="phone" class="w-3.5 h-3.5 text-brand-blue"></i> (+57) 300 123 4567
+          </span>
+          <span class="flex items-center gap-1.5">
+            <i data-lucide="calendar" class="w-3.5 h-3.5 text-brand-text-muted"></i> Mar - Dom: 12:00 PM - 10:30 PM
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Créditos Oficiales y Versión -->
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-center text-[11px] text-brand-text-muted">
+        <p>© 2026 POTOQUITOS v1.0.0 · Todos los derechos reservados.</p>
+        <p>Desarrollado por: <span class="font-semibold text-brand-text-secondary">Carlos Reales | Orlando Agamez</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lógica Interactiva para Búsqueda, Filtrado y Detalle (Mobile Friendly) -->
+  <script>
+    // Inicializar Iconos Lucide
+    lucide.createIcons();
+
+    let currentCategory = 'todos';
+    let searchQuery = '';
+
+    function filterCategory(category) {
+      currentCategory = category;
+      
+      // Actualizar estilo visual de los botones de categoría
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('bg-brand-blue', 'text-white', 'shadow-sm');
+        btn.classList.add('text-brand-text-secondary', 'bg-white', 'border', 'border-brand-border');
+      });
+
+      const activeBtn = document.getElementById('cat-' + category);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-brand-text-secondary', 'bg-white', 'border', 'border-brand-border');
+        activeBtn.classList.add('bg-brand-blue', 'text-white', 'shadow-sm');
+      }
+
+      applyFilters();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.toLowerCase().trim();
+      const clearBtn = document.getElementById('clear-search');
+      if (searchQuery.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      applyFilters();
+    }
+
+    function clearSearch() {
+      const input = document.getElementById('search-input');
+      input.value = '';
+      searchQuery = '';
+      document.getElementById('clear-search').classList.add('hidden');
+      applyFilters();
+      input.focus();
+    }
+
+    function applyFilters() {
+      const cards = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const itemCat = card.getAttribute('data-category');
+        const itemName = card.getAttribute('data-name').toLowerCase();
+
+        const matchCat = (currentCategory === 'todos' || itemCat === currentCategory);
+        const matchSearch = (searchQuery === '' || itemName.includes(searchQuery));
+
+        if (matchCat && matchSearch) {
+          card.classList.remove('hidden');
+          card.classList.add('flex');
+          visibleCount++;
+        } else {
+          card.classList.remove('flex');
+          card.classList.add('hidden');
+        }
+      });
+
+      // Actualizar contador y estado vacío
+      const countEl = document.getElementById('results-count');
+      const noResultsEl = document.getElementById('no-results');
+      const gridEl = document.getElementById('products-grid');
+
+      if (visibleCount === 0) {
+        noResultsEl.classList.remove('hidden');
+        gridEl.classList.add('hidden');
+        countEl.textContent = '0 productos encontrados';
+      } else {
+        noResultsEl.classList.add('hidden');
+        gridEl.classList.remove('hidden');
+        countEl.textContent = `Mostrando ${visibleCount} producto${visibleCount > 1 ? 's' : ''}`;
+      }
+    }
+
+    function resetMenu() {
+      clearSearch();
+      filterCategory('todos');
+    }
+
+    // Modal de Detalle de Producto
+    function openProductModal(title, price, desc, servings, isAvailable, imgSrc, category, timeEst) {
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-price').textContent = price;
+      document.getElementById('modal-desc').textContent = desc;
+      document.getElementById('modal-servings').textContent = servings;
+      document.getElementById('modal-time').textContent = timeEst || '15 - 20 min';
+      document.getElementById('modal-img').src = imgSrc;
+      document.getElementById('modal-category').textContent = category;
+
+      const badge = document.getElementById('modal-badge');
+      if (isAvailable) {
+        badge.className = 'shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-success-soft text-brand-success';
+        badge.textContent = '● Disponible';
+      } else {
+        badge.className = 'shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-100 text-brand-text-muted';
+        badge.textContent = 'No disponible';
+      }
+
+      const modal = document.getElementById('product-modal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal(event) {
+      if (event.target === document.getElementById('product-modal')) {
+        closeProductModalDirect();
+      }
+    }
+
+    function closeProductModalDirect() {
+      document.getElementById('product-modal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Cerrar modal con tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeProductModalDirect();
+      }
+    });
+  </script>
+</body>
+</html>

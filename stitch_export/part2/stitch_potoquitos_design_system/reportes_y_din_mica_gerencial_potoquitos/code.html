@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full">
+<!-- Top Page Header -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md mb-space-xl">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Reportes y Dinámica Gerencial</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs">Analiza el desempeño operativo y financiero de POTOQUITOS con precisión ejecutiva.</p>
+</div>
+<!-- Date Range & Export Controls -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Period Selector Pills -->
+<div class="inline-flex p-1 bg-surface-container rounded-lg gap-1">
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">Hoy</button>
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">7 días</button>
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md bg-surface text-primary-container font-semibold shadow-sm transition-colors" type="button">30 días</button>
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">Este mes</button>
+<button class="px-space-sm py-1 rounded-md font-label-md text-label-md text-text-secondary hover:text-text-primary transition-colors" type="button">Personalizado</button>
+</div>
+<!-- Calendar Range Display -->
+<div class="h-10 px-space-md bg-surface rounded-lg flex items-center gap-space-xs shadow-sm text-text-secondary font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-body-md-semibold text-text-primary">01/09/2026 – 12/09/2026</span>
+</div>
+<!-- Export Dropdown -->
+<div class="relative inline-block text-left" id="exportMenuContainer">
+<button class="h-10 px-space-md bg-surface hover:bg-surface-secondary text-text-primary rounded-lg font-label-md text-label-md font-semibold flex items-center gap-space-xs shadow-sm transition-colors" id="exportDropdownBtn" type="button">
+<span class="material-symbols-outlined text-[18px] text-text-secondary">download</span>
+<span>Exportar reporte</span>
+<span class="material-symbols-outlined text-[16px] text-text-secondary">arrow_drop_down</span>
+</button>
+<div class="hidden absolute right-0 mt-2 w-48 bg-surface rounded-xl shadow-xl z-30 py-2" id="exportDropdownMenu">
+<a class="flex items-center gap-space-sm px-space-md py-2 font-body-md text-body-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-secondary text-[18px]">picture_as_pdf</span>
+<span>Descargar en PDF</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-2 font-body-md text-body-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-tertiary text-[18px]">table_view</span>
+<span>Exportar Excel (.xlsx)</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-2 font-body-md text-body-md text-text-primary hover:bg-surface-secondary transition-colors" href="#">
+<span class="material-symbols-outlined text-text-secondary text-[18px]">receipt_long</span>
+<span>Cierre Z Imprimible</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 1: Resumen Ejecutivo (5 KPIs) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md mb-space-xl">
+<!-- Ventas -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Ventas Totales</span>
+<div class="w-8 h-8 rounded-lg bg-primary-soft flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+</div>
+</div>
+<div>
+<p class="font-kpi-metric text-kpi-metric text-text-primary leading-tight">$8.500.000 <span class="text-caption font-caption text-text-muted">COP</span></p>
+<div class="flex items-center gap-1 mt-space-xs text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">arrow_upward</span>
+<span>12% vs período anterior</span>
+</div>
+</div>
+</div>
+<!-- Costo Estimado -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Costo Estimado</span>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-text-secondary">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+</div>
+</div>
+<div>
+<p class="font-kpi-metric text-kpi-metric text-text-primary leading-tight">$3.100.000 <span class="text-caption font-caption text-text-muted">COP</span></p>
+<div class="flex items-center gap-1 mt-space-xs text-text-secondary font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>5% impacto de recetas</span>
+</div>
+</div>
+</div>
+<!-- Gastos Operativos -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Gastos Operativos</span>
+<div class="w-8 h-8 rounded-lg bg-warning-soft flex items-center justify-center text-warning">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+</div>
+</div>
+<div>
+<p class="font-kpi-metric text-kpi-metric text-text-primary leading-tight">$2.000.000 <span class="text-caption font-caption text-text-muted">COP</span></p>
+<div class="flex items-center gap-1 mt-space-xs text-tertiary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+<span>3% ahorro en mant.</span>
+</div>
+</div>
+</div>
+<!-- Resultado Estimado -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Resultado Estimado</span>
+<div class="w-8 h-8 rounded-lg bg-primary-soft flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[18px]">query_stats</span>
+</div>
+</div>
+<div>
+<p class="font-kpi-metric text-kpi-metric text-primary-container leading-tight">$3.400.000 <span class="text-caption font-caption text-text-muted">COP</span></p>
+<div class="flex items-center gap-1 mt-space-xs text-primary-container font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-[16px]">pie_chart</span>
+<span>Margen ~40.0% · ↑ 18%</span>
+</div>
+</div>
+</div>
+<!-- Pedidos Atendidos -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-caption text-caption uppercase tracking-wider text-text-muted font-semibold">Pedidos Atendidos</span>
+<div class="w-8 h-8 rounded-lg bg-success-soft flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[18px]">room_service</span>
+</div>
+</div>
+<div>
+<p class="font-kpi-metric text-kpi-metric text-text-primary leading-tight">384 <span class="text-caption font-caption text-text-muted">órdenes</span></p>
+<div class="flex items-center gap-1 mt-space-xs text-text-secondary font-label-sm text-label-sm">
+<span>Ticket prom: $22.135</span>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Evolución de Ventas (60%) & Estructura del Período (40%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Columna Izquierda: Evolución de Ventas -->
+<div class="lg:col-span-7 bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[22px]">bar_chart</span>
+<span>Evolución de ventas de la semana</span>
+</h2>
+<p class="font-caption text-caption text-text-secondary mt-0.5">Ingresos diarios consolidados en salón y para llevar</p>
+</div>
+<span class="px-space-sm py-1 bg-surface-secondary text-text-secondary rounded-lg font-caption text-caption font-semibold">
+            Semana activa
+          </span>
+</div>
+<!-- SVG Weekly Bar Chart -->
+<div class="w-full h-56 flex flex-col justify-end pt-4 pb-2">
+<div class="h-44 w-full flex items-end justify-between gap-3 px-2">
+<!-- Lun: $850k (46%) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer">
+<span class="font-caption text-caption text-text-muted opacity-0 group-hover:opacity-100 transition-opacity mb-1 font-semibold">$850k</span>
+<div class="w-full max-w-[40px] bg-primary-soft group-hover:bg-primary-container rounded-t-md transition-all duration-300" style="height: 46%;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary mt-2">Lun</span>
+</div>
+<!-- Mar: $920k (50%) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer">
+<span class="font-caption text-caption text-text-muted opacity-0 group-hover:opacity-100 transition-opacity mb-1 font-semibold">$920k</span>
+<div class="w-full max-w-[40px] bg-primary-soft group-hover:bg-primary-container rounded-t-md transition-all duration-300" style="height: 50%;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary mt-2">Mar</span>
+</div>
+<!-- Mié: $780k (42%) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer">
+<span class="font-caption text-caption text-text-muted opacity-0 group-hover:opacity-100 transition-opacity mb-1 font-semibold">$780k</span>
+<div class="w-full max-w-[40px] bg-primary-soft group-hover:bg-primary-container rounded-t-md transition-all duration-300" style="height: 42%;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary mt-2">Mié</span>
+</div>
+<!-- Jue: $1.050k (57%) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer">
+<span class="font-caption text-caption text-text-muted opacity-0 group-hover:opacity-100 transition-opacity mb-1 font-semibold">$1.05M</span>
+<div class="w-full max-w-[40px] bg-primary-soft group-hover:bg-primary-container rounded-t-md transition-all duration-300" style="height: 57%;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary mt-2">Jue</span>
+</div>
+<!-- Vie: $1.480k (80%) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer">
+<span class="font-caption text-caption text-text-muted opacity-0 group-hover:opacity-100 transition-opacity mb-1 font-semibold">$1.48M</span>
+<div class="w-full max-w-[40px] bg-primary-container/80 group-hover:bg-primary-container rounded-t-md transition-all duration-300" style="height: 80%;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary mt-2">Vie</span>
+</div>
+<!-- Sáb: $1.850k (100% - Destacado Pico Potoquitos) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer relative">
+<div class="absolute -top-6 bg-secondary text-on-secondary px-2 py-0.5 rounded text-[11px] font-bold tracking-tight shadow-sm">
+                $1.85M
+              </div>
+<div class="w-full max-w-[40px] bg-secondary hover:bg-secondary-container rounded-t-md transition-all duration-300" style="height: 100%;"></div>
+<span class="font-label-sm text-label-sm text-secondary font-bold mt-2">Sáb</span>
+</div>
+<!-- Dom: $1.570k (85%) -->
+<div class="flex-1 flex flex-col items-center h-full justify-end group cursor-pointer">
+<span class="font-caption text-caption text-text-muted opacity-0 group-hover:opacity-100 transition-opacity mb-1 font-semibold">$1.57M</span>
+<div class="w-full max-w-[40px] bg-primary-container/90 group-hover:bg-primary-container rounded-t-md transition-all duration-300" style="height: 85%;"></div>
+<span class="font-label-sm text-label-sm text-text-secondary mt-2">Dom</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-space-md flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm bg-surface-secondary -mx-space-lg -mb-space-lg px-space-lg py-space-md rounded-b-xl">
+<p class="font-body-md text-body-md text-text-secondary">
+          Período actual: <span class="font-body-md-semibold text-text-primary">$8.500.000 COP</span>
+<span class="text-tertiary font-semibold ml-1">(+$910.000 COP vs anterior)</span>
+</p>
+<a class="font-label-md text-label-md text-primary-container hover:underline font-semibold flex items-center gap-1" href="#">
+<span>Ver reporte detallado de ventas</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Columna Derecha: Estructura del Período -->
+<div class="lg:col-span-5 bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<h2 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">account_balance_wallet</span>
+<span>Estructura del período</span>
+</h2>
+<span class="font-caption text-caption text-text-muted">Desglose gerencial</span>
+</div>
+<div class="flex flex-col gap-space-sm mb-space-md">
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded-lg bg-surface-secondary">
+<span class="font-body-md text-body-md text-text-primary font-medium">Ventas totales</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$8.500.000 COP</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded-lg">
+<span class="font-body-md text-body-md text-text-secondary flex items-center gap-1">
+<span class="text-secondary font-bold">(-)</span> Costo estimado de ventas
+            </span>
+<span class="font-body-md text-body-md text-secondary font-medium">-$3.100.000 COP</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded-lg bg-primary-soft/60">
+<span class="font-body-md-semibold text-body-md-semibold text-primary-dark">(=) Margen bruto estimado</span>
+<span class="font-body-md-semibold text-body-md-semibold text-primary-dark">$5.400.000 COP <span class="font-caption text-caption text-text-muted">(63.5%)</span></span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded-lg">
+<span class="font-body-md text-body-md text-text-secondary flex items-center gap-1">
+<span class="text-warning font-bold">(-)</span> Gastos operativos registrados
+            </span>
+<span class="font-body-md text-body-md text-warning font-medium">-$2.000.000 COP</span>
+</div>
+<div class="flex items-center justify-between py-2 px-space-sm rounded-lg bg-success-soft">
+<span class="font-body-md-semibold text-body-md-semibold text-tertiary">(=) Resultado operativo estimado</span>
+<span class="font-body-md-semibold text-body-md-semibold text-tertiary">$3.400.000 COP <span class="font-caption text-caption text-tertiary">(40.0%)</span></span>
+</div>
+</div>
+<!-- Proportional Stacked Progress Bar -->
+<div class="space-y-1.5">
+<div class="flex items-center justify-between font-caption text-caption text-text-muted font-medium">
+<span>Distribución de egresos y rendimiento</span>
+<span>100% total</span>
+</div>
+<div class="w-full h-3.5 bg-surface-container rounded-full overflow-hidden flex">
+<div class="h-full bg-secondary" style="width: 36.5%;" title="36.5% Insumos directos"></div>
+<div class="h-full bg-warning" style="width: 23.5%;" title="23.5% Gastos fijos"></div>
+<div class="h-full bg-tertiary" style="width: 40.0%;" title="40.0% Margen estimado"></div>
+</div>
+<div class="flex items-center justify-between pt-1 font-caption text-caption text-text-secondary">
+<span class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span> 36.5% Insumos
+            </span>
+<span class="flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded-full bg-warning"></span> 23.5% Gastos fijos
+            </span>
+<span class="flex items-center gap-1 font-semibold text-tertiary">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span> 40.0% Margen
+            </span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-right">
+<span class="font-caption text-caption text-text-muted">Cálculo de margen sujeto a escandallos vigentes</span>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Productos y Rentabilidad (2 columnas balanceadas) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg mb-space-xl">
+<!-- Columna 1: Más Vendidos -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<h2 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[22px]">leaderboard</span>
+<span>Productos más vendidos</span>
+</h2>
+<span class="font-caption text-caption text-text-muted">Ranking de rotación</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-secondary font-label-md text-label-md text-text-secondary">
+<th class="py-2.5 px-3 rounded-l-lg font-semibold">Producto</th>
+<th class="py-2.5 px-3 text-center font-semibold">Unidades</th>
+<th class="py-2.5 px-3 text-right rounded-r-lg font-semibold">Facturación</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-primary-soft text-primary-container font-bold text-[11px] flex items-center justify-center">1</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Hamburguesa Especial</span>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-body-md text-body-md text-text-secondary">184 unds</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-body-md-semibold text-text-primary">$4.048.000 <span class="font-caption text-caption text-text-muted">(47.6%)</span></td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container text-text-secondary font-bold text-[11px] flex items-center justify-center">2</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Picada Potoquitos</span>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-body-md text-body-md text-text-secondary">62 unds</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-body-md-semibold text-text-primary">$4.650.000 <span class="font-caption text-caption text-text-muted">(54.7%)</span></td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container text-text-secondary font-bold text-[11px] flex items-center justify-center">3</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Perro Especial</span>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-body-md text-body-md text-text-secondary">143 unds</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-body-md-semibold text-text-primary">$2.574.000 <span class="font-caption text-caption text-text-muted">(30.2%)</span></td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container text-text-secondary font-bold text-[11px] flex items-center justify-center">4</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Papas Especiales</span>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-body-md text-body-md text-text-secondary">121 unds</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-body-md-semibold text-text-primary">$1.452.000 <span class="font-caption text-caption text-text-muted">(17.0%)</span></td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container text-text-secondary font-bold text-[11px] flex items-center justify-center">5</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Coca-Cola 400 ml</span>
+</div>
+</td>
+<td class="py-3 px-3 text-center font-body-md text-body-md text-text-secondary">210 unds</td>
+<td class="py-3 px-3 text-right font-body-md-semibold text-body-md-semibold text-text-primary">$1.050.000 <span class="font-caption text-caption text-text-muted">(12.3%)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="pt-space-md text-right">
+<a class="font-label-md text-label-md text-primary-container hover:underline font-semibold inline-flex items-center gap-1" href="#">
+<span>Ver ranking completo (18 productos)</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Columna 2: Rentabilidad y Margen -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<h2 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[22px]">savings</span>
+<span>Rentabilidad y Margen por Producto</span>
+</h2>
+<span class="font-caption text-caption text-text-muted">Escandallos clave</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-secondary font-label-md text-label-md text-text-secondary">
+<th class="py-2.5 px-3 rounded-l-lg font-semibold">Producto</th>
+<th class="py-2.5 px-2 text-right font-semibold">P. Venta</th>
+<th class="py-2.5 px-2 text-right font-semibold">Costo Receta</th>
+<th class="py-2.5 px-2 text-right font-semibold">Margen</th>
+<th class="py-2.5 px-3 text-right rounded-r-lg font-semibold">Estado</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border">
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3 font-body-md-semibold text-body-md-semibold text-text-primary">Hamburguesa Especial</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$22.000</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$7.700</td>
+<td class="py-3 px-2 text-right font-body-md-semibold text-body-md-semibold text-tertiary">65%</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">Saludable</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3 font-body-md-semibold text-body-md-semibold text-text-primary">Picada Potoquitos</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$75.000</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$31.500</td>
+<td class="py-3 px-2 text-right font-body-md-semibold text-body-md-semibold text-tertiary">58%</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">Saludable</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3 font-body-md-semibold text-body-md-semibold text-text-primary">Perro Especial</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$18.000</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$7.900</td>
+<td class="py-3 px-2 text-right font-body-md-semibold text-body-md-semibold text-warning">56%</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-semibold">Atención</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-secondary transition-colors">
+<td class="py-3 px-3 font-body-md-semibold text-body-md-semibold text-text-primary">Papas Especiales</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$17.000</td>
+<td class="py-3 px-2 text-right font-body-md text-body-md text-text-secondary">$6.100</td>
+<td class="py-3 px-2 text-right font-body-md-semibold text-body-md-semibold text-tertiary">64%</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-semibold">Saludable</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="pt-space-md text-right">
+<a class="font-label-md text-label-md text-primary-container hover:underline font-semibold inline-flex items-center gap-1" href="#">
+<span>Ir a análisis de recetas y costos</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Dinámica Operativa y Demanda (3 cards en grid) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg mb-space-xl">
+<!-- Card 1: Comportamiento por día -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">date_range</span>
+<span>Flujo por día</span>
+</h3>
+<span class="font-caption text-caption text-text-muted">Pedidos</span>
+</div>
+<div class="space-y-2 pt-2">
+<!-- Sábado (Pico) -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="font-semibold text-secondary">Sábado (Pico de demanda)</span>
+<span class="font-bold text-text-primary">118 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Domingo -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-text-secondary">Domingo</span>
+<span class="text-text-primary font-semibold">96 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 81%;"></div>
+</div>
+</div>
+<!-- Viernes -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-text-secondary">Viernes</span>
+<span class="text-text-primary font-semibold">91 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 77%;"></div>
+</div>
+</div>
+<!-- Jueves -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-text-secondary">Jueves</span>
+<span class="text-text-primary">58 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-border-strong h-full rounded-full" style="width: 49%;"></div>
+</div>
+</div>
+<!-- Martes -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-text-secondary">Martes</span>
+<span class="text-text-primary">46 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-border-strong h-full rounded-full" style="width: 39%;"></div>
+</div>
+</div>
+<!-- Lunes -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-text-secondary">Lunes</span>
+<span class="text-text-primary">42 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-border-strong h-full rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+<!-- Miércoles -->
+<div>
+<div class="flex justify-between font-label-sm text-label-sm mb-1">
+<span class="text-text-secondary">Miércoles</span>
+<span class="text-text-primary">39 órdenes</span>
+</div>
+<div class="w-full bg-surface-container h-2.5 rounded-full overflow-hidden">
+<div class="bg-border-strong h-full rounded-full" style="width: 33%;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-secondary rounded-lg">
+<p class="font-caption text-caption text-text-secondary">
+<span class="font-semibold text-text-primary">Conclusión operativa:</span> Viernes a Domingo concentran el <span class="font-bold text-secondary">79%</span> del flujo total semanal.
+        </p>
+</div>
+</div>
+<!-- Card 2: Horarios de mayor afluencia -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[20px]">schedule</span>
+<span>Horarios de afluencia</span>
+</h3>
+<span class="font-caption text-caption text-text-muted">Concentración</span>
+</div>
+<div class="space-y-3 pt-2">
+<!-- 12-2 PM -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-secondary">
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">12:00 PM – 02:00 PM</p>
+<p class="font-caption text-caption text-text-muted">Almuerzos ejecutivos</p>
+</div>
+<div class="text-right">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">18%</span>
+<span class="block font-caption text-[11px] text-text-secondary">Moderado</span>
+</div>
+</div>
+<!-- 2-4 PM -->
+<div class="flex items-center justify-between p-2 rounded-lg">
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">02:00 PM – 04:00 PM</p>
+<p class="font-caption text-caption text-text-muted">Valle de la tarde</p>
+</div>
+<div class="text-right">
+<span class="font-body-md-semibold text-body-md-semibold text-text-secondary">6%</span>
+<span class="block font-caption text-[11px] text-text-muted">Bajo</span>
+</div>
+</div>
+<!-- 4-6 PM -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-secondary">
+<div>
+<p class="font-label-md text-label-md text-text-primary font-semibold">04:00 PM – 06:00 PM</p>
+<p class="font-caption text-caption text-text-muted">Meriendas / Pre-noche</p>
+</div>
+<div class="text-right">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">12%</span>
+<span class="block font-caption text-[11px] text-text-secondary">Moderado</span>
+</div>
+</div>
+<!-- 6-8 PM -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-primary-soft/50">
+<div>
+<p class="font-label-md text-label-md text-primary-dark font-semibold">06:00 PM – 08:00 PM</p>
+<p class="font-caption text-caption text-text-secondary">Inicio servicio cena</p>
+</div>
+<div class="text-right">
+<span class="font-body-md-semibold text-body-md-semibold text-primary-container">28%</span>
+<span class="block font-caption text-[11px] text-primary-container font-semibold">Alto</span>
+</div>
+</div>
+<!-- 8-10 PM -->
+<div class="flex items-center justify-between p-2 rounded-lg bg-danger-soft">
+<div>
+<p class="font-label-md text-label-md text-secondary font-bold">08:00 PM – 10:00 PM</p>
+<p class="font-caption text-caption text-secondary">Pico nocturno máximo</p>
+</div>
+<div class="text-right">
+<span class="font-body-md-semibold text-body-md-semibold text-secondary font-bold">36%</span>
+<span class="block font-caption text-[11px] text-secondary font-bold">Muy alto</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-secondary rounded-lg">
+<p class="font-caption text-caption text-text-secondary">
+<span class="font-semibold text-text-primary">Punto crítico:</span> 64% del despacho se procesa entre las 6:00 PM y las 10:00 PM.
+        </p>
+</div>
+</div>
+<!-- Card 3: Métodos de pago -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px]">point_of_sale</span>
+<span>Métodos de pago</span>
+</h3>
+<span class="font-caption text-caption text-text-muted">Cajas</span>
+</div>
+<div class="space-y-2.5 pt-2">
+<!-- Efectivo -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-text-primary font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Efectivo
+              </span>
+<span class="font-body-md-semibold text-text-primary">$3.200.000 (38%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 38%;"></div>
+</div>
+</div>
+<!-- Transferencia -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-text-primary font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> Transferencia bancaria
+              </span>
+<span class="font-body-md-semibold text-text-primary">$2.550.000 (30%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 30%;"></div>
+</div>
+</div>
+<!-- Nequi -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-text-primary font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span> Nequi
+              </span>
+<span class="font-body-md-semibold text-text-primary">$1.400.000 (16%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 16%;"></div>
+</div>
+</div>
+<!-- Tarjetas -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-text-primary font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-info"></span> Tarjeta Débito / Crédito
+              </span>
+<span class="font-body-md-semibold text-text-primary">$900.000 (11%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-info h-full rounded-full" style="width: 11%;"></div>
+</div>
+</div>
+<!-- Daviplata -->
+<div>
+<div class="flex justify-between font-label-md text-label-md mb-1">
+<span class="text-text-primary font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-warning"></span> Daviplata
+              </span>
+<span class="font-body-md-semibold text-text-primary">$450.000 (5%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-warning h-full rounded-full" style="width: 5%;"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm bg-surface-secondary rounded-lg flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Canal digital acumulado:</span>
+<span class="font-label-md text-label-md text-text-primary font-semibold">51% sin efectivo</span>
+</div>
+</div>
+</div>
+<!-- SECTION 5: Inventario y Desempeño Operativo -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg mb-space-xl">
+<!-- Card Izquierda: Estado del Inventario -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px]">inventory_2</span>
+<span>Estado del Inventario (24 ingredientes activos)</span>
+</h3>
+<p class="font-caption text-caption text-text-secondary mt-0.5">Control de existencias y niveles mínimos de seguridad</p>
+</div>
+</div>
+<!-- Pill counters -->
+<div class="grid grid-cols-3 gap-space-sm my-space-md">
+<div class="p-space-sm bg-success-soft rounded-lg text-center">
+<span class="block font-headline-sm text-headline-sm text-tertiary font-bold leading-none">16</span>
+<span class="font-caption text-caption text-tertiary font-semibold">Normal</span>
+</div>
+<div class="p-space-sm bg-warning-soft rounded-lg text-center">
+<span class="block font-headline-sm text-headline-sm text-warning font-bold leading-none">5</span>
+<span class="font-caption text-caption text-warning font-semibold">Nivel Bajo</span>
+</div>
+<div class="p-space-sm bg-danger-soft rounded-lg text-center">
+<span class="block font-headline-sm text-headline-sm text-secondary font-bold leading-none">3</span>
+<span class="font-caption text-caption text-secondary font-semibold">Estado Crítico</span>
+</div>
+</div>
+<!-- Lista de insumos en alerta -->
+<div class="space-y-space-xs mb-space-md">
+<p class="font-label-sm text-label-sm text-text-secondary font-semibold uppercase tracking-wider">Insumos con requerimiento inmediato</p>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-secondary">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<div>
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">Carne de res molida (180g)</p>
+<p class="font-caption text-caption text-text-secondary">2.1 kg disponibles · Consumo est. hoy: 7.2 kg</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-danger-soft text-secondary font-bold">Crítico</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-secondary">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-warning"></span>
+<div>
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">Pan brioche de hamburguesa</p>
+<p class="font-caption text-caption text-text-secondary">18 unidades disponibles · Mínimo sugerido: 40</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-bold">Bajo</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-secondary">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-warning"></span>
+<div>
+<p class="font-body-md-semibold text-body-md-semibold text-text-primary">Queso mozzarella rallado</p>
+<p class="font-caption text-caption text-text-secondary">3.4 kg disponibles · Mínimo sugerido: 5.0 kg</p>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-bold">Bajo</span>
+</div>
+</div>
+</div>
+<div class="pt-space-sm text-right">
+<a class="font-label-md text-label-md text-primary-container hover:underline font-semibold inline-flex items-center gap-1" href="#">
+<span>Gestionar Kardex e Inventario</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card Derecha: Desempeño Operativo del Servicio -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[22px]">speed</span>
+<span>Desempeño Operativo del Servicio</span>
+</h3>
+<p class="font-caption text-caption text-text-secondary mt-0.5">Métricas de cocina, velocidad de rotación y efectividad</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-space-md my-space-md">
+<!-- Tiempo Cocina -->
+<div class="p-space-md bg-surface-secondary rounded-xl">
+<div class="flex items-center justify-between text-text-secondary mb-1">
+<span class="font-caption text-caption">Tiempo promedio cocina</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">check_circle</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-text-primary">14</span>
+<span class="font-body-md text-body-md text-text-secondary">minutos</span>
+</div>
+<p class="font-caption text-caption text-tertiary mt-1 font-semibold">Meta < 18 min · Óptimo</p>
+</div>
+<!-- Tiempo Mesa -->
+<div class="p-space-md bg-surface-secondary rounded-xl">
+<div class="flex items-center justify-between text-text-secondary mb-1">
+<span class="font-caption text-caption">Tiempo permanencia mesa</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">timer</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg font-bold text-text-primary">52</span>
+<span class="font-body-md text-body-md text-text-secondary">minutos</span>
+</div>
+<p class="font-caption text-caption text-text-secondary mt-1">Rotación adecuada salón</p>
+</div>
+</div>
+<!-- Órdenes despachadas vs anuladas -->
+<div class="space-y-space-sm">
+<div>
+<div class="flex justify-between font-body-md text-body-md mb-1">
+<span class="text-text-primary font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[18px]">done_all</span>
+                Órdenes despachadas con éxito
+              </span>
+<span class="font-body-md-semibold text-body-md-semibold text-tertiary">384 (97.9%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 97.9%;"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-body-md text-body-md mb-1">
+<span class="text-text-secondary font-medium flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">cancel</span>
+                Órdenes anuladas / canceladas
+              </span>
+<span class="font-body-md text-body-md text-secondary font-semibold">8 (2.1%)</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 2.1%;"></div>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1">Motivo principal: 6 duplicidades por mesa, 2 errores de digitación</p>
+</div>
+</div>
+</div>
+<div class="pt-space-sm text-right">
+<a class="font-label-md text-label-md text-primary-container hover:underline font-semibold inline-flex items-center gap-1" href="#">
+<span>Ver monitor de comandas en cocina</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- SECTION 6: DESTACADA - "Dinámica Gerencial" -->
+<div class="bg-surface rounded-xl p-space-lg shadow-sm mb-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-lg pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 rounded-xl bg-primary-soft text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight">Dinámica Gerencial</h2>
+<p class="font-body-md text-body-md text-text-secondary">Interpretación automática de los datos recopilados durante el período seleccionado para la toma de decisiones.</p>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-space-sm py-1 bg-surface-secondary text-text-secondary rounded-lg font-caption text-caption font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>4 diagnósticos calculados</span>
+</div>
+</div>
+<!-- 4 Actionable Insight Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Hallazgo 1: Crecimiento Comercial (Verde) -->
+<div class="bg-surface-secondary rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-success-soft text-tertiary font-bold">Crecimiento comercial</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">trending_up</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold mt-1">Ventas en crecimiento (+12%)</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs leading-relaxed">
+            Las ventas aumentaron <span class="font-semibold text-text-primary">$910.000 COP</span> frente al ciclo anterior impulsadas por el fin de semana. Hamburguesa Especial representa el 21% de todas las unidades vendidas.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-tertiary hover:underline font-bold" href="#">
+<span>Ver reporte de ventas</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Hallazgo 2: Alerta de Costos (Ámbar) -->
+<div class="bg-surface-secondary rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-warning-soft text-warning font-bold">Alerta de costos</span>
+<span class="material-symbols-outlined text-warning text-[20px]">warning</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold mt-1">Revisar margen en Perro Especial (56%)</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs leading-relaxed">
+            El margen del Perro Especial cayó 4 puntos debido al incremento en pan artesanal y empaques. Se recomienda calibrar gramaje de insumo o evaluar precio sugerido a $19.000 COP.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-warning hover:underline font-bold" href="#">
+<span>Revisar escandallo</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Hallazgo 3: Optimización Turno (Azul) -->
+<div class="bg-surface-secondary rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-primary-soft text-primary-container font-bold">Turno & Personal</span>
+<span class="material-symbols-outlined text-primary-container text-[20px]">group_work</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold mt-1">Pico de afluencia: 8 PM a 10 PM</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs leading-relaxed">
+            El 36% de las órdenes ocurren en esta franja de dos horas los viernes y sábados. Se sugiere reforzar meseros y preparar mise-en-place de cocina a las 7:30 PM para mantener el tiempo en 14 min.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary-container hover:underline font-bold" href="#">
+<span>Ver horarios de servicio</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Hallazgo 4: Abastecimiento Crítico (Rojo) -->
+<div class="bg-surface-secondary rounded-xl p-space-md flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm bg-danger-soft text-secondary font-bold">Abastecimiento</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">emergency</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-secondary font-bold mt-1">Carne de res en nivel crítico</h3>
+<p class="font-body-md text-body-md text-text-secondary mt-space-xs leading-relaxed">
+            El stock actual (2.1 kg) cubre menos de 12 hamburguesas. Dado que el viernes se demandan en promedio 40 unidades, se generará rotura de inventario si no se ingresa compra hoy.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs">
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-secondary hover:underline font-bold" href="#">
+<span>Registrar entrada urgente</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Subtle Footer -->
+<div class="py-space-md text-center text-text-muted font-caption text-caption">
+<span>POTOQUITOS v1.0.0 · Sistema de gestión para restaurantes | Desarrollado por: Carlos Reales | Orlando Agamez</span>
+</div>
+</div>
+<script>
+  (function() {
+    // Dropdown toggle for export menu
+    const exportBtn = document.getElementById('exportDropdownBtn');
+    const exportMenu = document.getElementById('exportDropdownMenu');
+
+    if (exportBtn && exportMenu) {
+      exportBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        exportMenu.classList.toggle('hidden');
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!exportMenu.contains(e.target) && !exportBtn.contains(e.target)) {
+          exportMenu.classList.add('hidden');
+        }
+      });
+    }
+
+    // Set Reportes as active in navigation
+    try {
+      const activeNav = document.querySelector('nav a[data-path="reportes"]');
+      if (activeNav) {
+        const activeClasses = (activeNav.parentElement.getAttribute('data-active-classes') || 'bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary').split(' ');
+        activeNav.classList.add(...activeClasses);
+        activeNav.classList.remove('text-text-secondary');
+        const icon = activeNav.querySelector('.material-symbols-outlined');
+        if (icon) icon.classList.add('text-secondary');
+      }
+    } catch (e) {
+      console.warn('Navigation active sync: ', e);
+    }
+  })();
+</script></main></div></body></html>

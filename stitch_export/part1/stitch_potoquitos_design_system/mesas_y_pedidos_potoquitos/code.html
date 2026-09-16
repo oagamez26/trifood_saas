@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-error":"#ffffff","surface-bright":"#f7f9fc","on-surface-variant":"#434655","primary-fixed":"#dbe1ff","surface-container-lowest":"#ffffff","surface":"#FFFFFF","border":"#E3E8EF","surface-container-low":"#f2f4f7","on-primary-fixed":"#00174b","primary-fixed-dim":"#b4c5ff","inverse-on-surface":"#eff1f4","on-background":"#191c1e","on-secondary":"#ffffff","on-surface":"#191c1e","primary-container":"#2563eb","secondary":"#bb0023","secondary-fixed":"#ffdad8","text-muted":"#829AB1","background":"#f7f9fc","border-strong":"#CBD5E1","tertiary-container":"#007d55","surface-container-highest":"#e0e3e6","secondary-fixed-dim":"#ffb3b0","primary":"#004ac6","surface-container":"#eceef1","on-tertiary":"#ffffff","secondary-container":"#e02737","primary-dark":"#0F2747","surface-variant":"#e0e3e6","surface-container-high":"#e6e8eb","on-secondary-fixed-variant":"#930019","surface-secondary":"#F8FAFC","tertiary":"#006242","info":"#3B82F6","on-tertiary-fixed-variant":"#005236","danger-dark":"#B91C1C","on-primary-container":"#eeefff","inverse-surface":"#2d3133","tertiary-fixed":"#6ffbbe","warning-soft":"#FFF4D6","on-primary":"#ffffff","outline-variant":"#c3c6d7","surface-dim":"#d8dadd","warning":"#F59E0B","error-container":"#ffdad6","on-tertiary-fixed":"#002113","on-secondary-fixed":"#410006","on-secondary-container":"#fffbff","on-primary-fixed-variant":"#003ea8","text-primary":"#102A43","danger-soft":"#FDEBED","on-error-container":"#93000a","success-soft":"#DFF7EE","error":"#ba1a1a","primary-soft":"#EAF2FF","on-tertiary-container":"#bdffdb","inverse-primary":"#b4c5ff","surface-tint":"#0053db","text-secondary":"#627D98","neutral-status":"#94A3B8","outline":"#737686","tertiary-fixed-dim":"#4edea3"},borderRadius:{DEFAULT:"0.25rem",lg:"0.5rem",xl:"0.75rem",full:"9999px"},spacing:{"space-xl":"1.5rem","space-sm":"0.5rem",margin:"1.5rem","margin-mobile":"1rem","space-md":"1rem","space-lg":"1.25rem","space-xs":"0.25rem","gutter-mobile":"0.75rem",gutter:"1.25rem"},fontFamily:{"caption":["Inter"],"body-md":["Inter"],"display":["Inter"],"label-sm":["Inter"],"headline-lg":["Inter"],"kpi-metric":["Inter"],"body-md-semibold":["Inter"],"label-md":["Inter"],"headline-sm":["Inter"],"headline-md":["Inter"],"body-lg":["Inter"]},fontSize:{"caption":["12px",{lineHeight:"16px",fontWeight:"400"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display":["32px",{lineHeight:"40px",fontWeight:"700"}],"label-sm":["12px",{lineHeight:"16px",fontWeight:"600"}],"headline-lg":["28px",{lineHeight:"36px",fontWeight:"700"}],"kpi-metric":["28px",{lineHeight:"34px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-md-semibold":["14px",{lineHeight:"20px",fontWeight:"600"}],"label-md":["13px",{lineHeight:"18px",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",fontWeight:"600"}],"headline-md":["22px",{lineHeight:"30px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-background font-body-md text-body-md text-text-primary"><aside class="fixed left-0 top-0 h-full w-[240px] bg-surface z-50 flex flex-col shadow-[0_4px_14px_rgba(15,39,71,0.05)]"><div class="h-16 px-space-md flex items-center gap-space-sm"><img alt="POTOQUITOS Logo" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary leading-none">POTOQUITOS</span><span class="font-caption text-caption uppercase tracking-wider text-text-muted mt-space-xs">RESTAURANTE</span></div></div><nav class="flex-1 px-space-xs py-space-sm flex flex-col gap-space-xs overflow-y-auto" data-active-classes="bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary"><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg transition-colors bg-danger-soft text-secondary font-body-md-semibold border-l-[3px] border-secondary" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span>Usuarios</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="productos-y-menu" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span><span>Productos y Menú</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="mesas-y-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">table_restaurant</span><span>Mesas y Pedidos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cocina" href="#"><span class="material-symbols-outlined text-[20px]">skillet</span><span>Cocina</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="inventario" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span>Inventario</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="cajas" href="#"><span class="material-symbols-outlined text-[20px]">point_of_sale</span><span>Cajas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="costos-y-gastos" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span>Costos y Gastos</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="alertas-predictivas" href="#"><span class="material-symbols-outlined text-[20px]">notifications_active</span><span>Alertas Predictivas</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">bar_chart</span><span>Reportes</span></a><a class="h-11 px-space-md flex items-center gap-space-md rounded-r-lg font-label-md text-label-md text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Configuración</span></a></nav><div class="p-space-md bg-surface-secondary flex flex-col gap-space-xs"><p class="font-label-sm text-label-sm text-text-primary font-semibold">POTOQUITOS v1.0.0</p><p class="font-caption text-caption text-text-secondary">Sistema de gestión para restaurantes</p><p class="font-caption text-caption text-text-muted">Desarrollado por: Carlos Reales | Orlando Agamez</p></div></aside><div class="pl-[240px]"><header class="fixed top-0 left-[240px] right-0 h-16 bg-surface z-40 px-space-xl flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center flex-1 max-w-md"><div class="relative w-full"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span><input class="w-full h-[42px] pl-10 pr-space-md bg-surface rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:outline-none" placeholder="Buscar en el sistema..." type="text"/></div></div><div class="flex items-center gap-space-lg"><button class="relative w-10 h-10 flex items-center justify-center rounded-lg text-text-secondary hover:bg-surface-secondary hover:text-text-primary transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-4 h-4 bg-secondary text-on-secondary rounded-full flex items-center justify-center font-caption text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md cursor-pointer rounded-lg px-space-sm py-space-xs hover:bg-surface-secondary transition-colors"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-body-md-semibold text-body-md-semibold flex items-center justify-center">A</div><div class="flex flex-col text-left"><span class="font-label-md text-label-md text-text-primary font-semibold leading-tight">Administrador</span><span class="font-caption text-caption text-text-muted leading-tight">POTOQUITOS</span></div><span class="material-symbols-outlined text-text-secondary text-[20px]">expand_more</span><img alt="Profile" class="w-8 h-8 rounded-full object-cover ml-space-xs" src="https://lh3.googleusercontent.com/aida/AEtjO1WZRaqKgLnLtsxDoW6uV8ZjgJd_8vQXelZHyj8gRnqN1sa9J-mj5039u-tlvNioaYRjlYSgGoDcxkAjrQYeiKijFZkbXMXtCEB0ExqzGPk8Vu5sbEs_Vj5FZxIUwxLWzl27GQ3nB2kiHvRx-052EU6hVp1KapzQXu7cyLJkncFkKhBqmXVVU1E96Bz__xbWfCcycS1ySkn_TI2gXAkdRrBgkpFPR_2IJGG7NlW4qdhKDsZOlSmY1yMdbVex_viiQCDeg6aGO9J1"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background p-space-xl"><div class="flex flex-col w-full gap-space-lg">
+<!-- Operational Toast Alert (Floating Top-Right Notification) -->
+<div class="fixed top-20 right-6 z-50 flex items-center gap-space-md bg-surface border border-border px-space-md py-space-sm rounded-xl shadow-[0_10px_25px_rgba(15,39,71,0.12)] max-w-md transition-all duration-300" id="toastNotification">
+<div class="w-9 h-9 rounded-lg bg-success-soft flex items-center justify-center text-[#10B981] shrink-0">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<div class="flex items-center gap-1.5">
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Pedido #112 listo en Cocina</span>
+<span class="inline-block w-2 h-2 rounded-full bg-[#10B981] animate-ping"></span>
+</div>
+<p class="font-caption text-caption text-text-secondary truncate">Mesa 4 · Mesero Juan P. · 3 platos preparados</p>
+</div>
+<button class="h-8 px-2.5 rounded-lg bg-primary-soft text-primary font-label-sm text-label-sm hover:bg-primary hover:text-on-primary transition-colors shrink-0" onclick="document.getElementById('toastNotification').remove()">
+      Ver comanda
+    </button>
+</div>
+<!-- Vista Header: Title, Description & Main Action -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md pb-1 border-b border-border">
+<div class="flex flex-col">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Mesas y Pedidos</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-0.5">Consulta y gestiona la operación actual de las mesas de POTOQUITOS en tiempo real.</p>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-blue-700 active:bg-blue-800 text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg flex items-center gap-space-xs transition-colors shadow-sm" onclick="openModalMesa(6)">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>+ Nueva mesa</span>
+</button>
+</div>
+</div>
+<!-- Operational Metrics / Status Strip (4 Mini Cards Sobrias) -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Total Mesas -->
+<div class="bg-surface rounded-xl p-space-md border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-caption text-caption text-text-secondary uppercase tracking-wider font-medium">Total en Salón</span>
+<span class="font-kpi-metric text-kpi-metric text-text-primary mt-0.5">18</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">Capacidad activa 100%</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-surface-secondary text-text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">table_restaurant</span>
+</div>
+</div>
+<!-- Disponibles -->
+<div class="bg-surface rounded-xl p-space-md border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+<span class="font-caption text-caption text-text-secondary uppercase tracking-wider font-medium">Disponibles</span>
+</div>
+<span class="font-kpi-metric text-kpi-metric text-text-primary mt-0.5">7</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">Listas para asignación</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-success-soft text-[#10B981] flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">check_circle</span>
+</div>
+</div>
+<!-- Ocupadas / En Servicio -->
+<div class="bg-surface rounded-xl p-space-md border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-center justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-caption text-caption text-text-secondary uppercase tracking-wider font-medium">Ocupadas</span>
+</div>
+<span class="font-kpi-metric text-kpi-metric text-text-primary mt-0.5">8</span>
+<span class="font-caption text-caption text-text-muted mt-0.5">En atención o preparación</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-primary-soft text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+</div>
+</div>
+<!-- Pedidos Listos (Alerta Requerida) -->
+<div class="bg-surface rounded-xl p-space-md border border-[#10B981]/40 shadow-[0_4px_14px_rgba(15,39,71,0.05)] flex items-center justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-[#10B981]"></div>
+<div class="flex flex-col pl-1">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-pulse"></span>
+<span class="font-caption text-caption text-[#10B981] uppercase tracking-wider font-bold">Acción de Mesero</span>
+</div>
+<span class="font-kpi-metric text-kpi-metric text-text-primary mt-0.5">3 Listos</span>
+<span class="font-caption text-caption text-text-secondary mt-0.5">Entregar de inmediato</span>
+</div>
+<div class="w-11 h-11 rounded-lg bg-success-soft text-[#10B981] flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+</div>
+</div>
+<!-- Filter & Ordering Toolbar -->
+<div class="bg-surface rounded-xl p-space-md border border-border shadow-[0_2px_8px_rgba(15,39,71,0.03)] flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<!-- Search Bar -->
+<div class="relative w-full xl:max-w-xs">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full h-[42px] pl-10 pr-space-md bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" placeholder="Buscar mesa por número o mesero..." type="text"/>
+</div>
+<!-- Filter Pills (Scroll horizontal on small devices) -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 xl:pb-0 scrollbar-none">
+<button class="h-9 px-3.5 rounded-full bg-primary-container text-on-primary font-label-md text-label-md whitespace-nowrap shadow-sm">
+        Todas (18)
+      </button>
+<button class="h-9 px-3.5 rounded-full bg-surface-secondary text-text-secondary hover:bg-surface-container hover:text-text-primary font-label-md text-label-md whitespace-nowrap transition-colors">
+        Disponibles (7)
+      </button>
+<button class="h-9 px-3.5 rounded-full bg-surface-secondary text-text-secondary hover:bg-surface-container hover:text-text-primary font-label-md text-label-md whitespace-nowrap transition-colors">
+        Tomando pedido (2)
+      </button>
+<button class="h-9 px-3.5 rounded-full bg-surface-secondary text-text-secondary hover:bg-surface-container hover:text-text-primary font-label-md text-label-md whitespace-nowrap transition-colors">
+        En cocina (3)
+      </button>
+<button class="h-9 px-3.5 rounded-full bg-surface-secondary text-text-secondary hover:bg-surface-container hover:text-text-primary font-label-md text-label-md whitespace-nowrap transition-colors">
+        En preparación (2)
+      </button>
+<button class="h-9 px-3.5 rounded-full bg-success-soft text-[#10B981] hover:bg-[#c9f1e1] font-label-md text-label-md whitespace-nowrap transition-colors flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+        Listas (3)
+      </button>
+<button class="h-9 px-3.5 rounded-full bg-surface-secondary text-text-secondary hover:bg-surface-container hover:text-text-primary font-label-md text-label-md whitespace-nowrap transition-colors">
+        En consumo (1)
+      </button>
+</div>
+<!-- Ordering Select -->
+<div class="flex items-center gap-space-xs self-end xl:self-auto shrink-0">
+<span class="font-label-sm text-label-sm text-text-muted whitespace-nowrap">Ordenar por:</span>
+<div class="relative">
+<select class="h-[42px] pl-3 pr-8 bg-surface border border-border-strong rounded-lg font-label-md text-label-md text-text-primary focus:border-primary focus:outline-none appearance-none cursor-pointer">
+<option value="num">Número de mesa</option>
+<option value="time">Mayor tiempo activa</option>
+<option value="status">Estado operativo</option>
+<option value="waiter">Mesero asignado</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-text-muted text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Operational Grid of Tables (12 Exact Specified Tables) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-space-lg">
+<!-- MESA 1 (Disponible) -->
+<div class="bg-surface rounded-2xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] hover:border-border-strong transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 1</span>
+<span class="font-caption text-caption text-text-muted">Salón Principal</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-[#F1F5F9] text-[#64748B]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            Disponible
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">people</span>
+<span class="font-body-md text-body-md">Capacidad: <strong class="text-text-primary font-semibold">4 personas</strong></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">event_seat</span>
+<span class="font-body-md text-body-md">Sin comanda activa</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1">Limpia y preparada para comensales.</p>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5" onclick="openModalMesa(1)">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Abrir mesa</span>
+</button>
+</div>
+</div>
+<!-- MESA 2 (Disponible) -->
+<div class="bg-surface rounded-2xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] hover:border-border-strong transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 2</span>
+<span class="font-caption text-caption text-text-muted">Salón Principal</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-[#F1F5F9] text-[#64748B]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            Disponible
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">people</span>
+<span class="font-body-md text-body-md">Capacidad: <strong class="text-text-primary font-semibold">2 personas</strong></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">check</span>
+<span class="font-body-md text-body-md">Lista para recibir comensales</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1">Ubicación junto a la ventana norte.</p>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5" onclick="openModalMesa(2)">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Abrir mesa</span>
+</button>
+</div>
+</div>
+<!-- MESA 3 (Tomando Pedido) -->
+<div class="bg-surface rounded-2xl border border-warning-soft shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] transition-all relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1 bg-[#F59E0B]"></div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 3</span>
+<span class="font-caption text-caption text-[#D97706] font-medium">Borrador</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-warning-soft text-[#D97706] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B] animate-pulse"></span>
+            Tomando pedido
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Carlos R.</span>
+<span class="font-caption text-caption text-text-muted">Iniciada hace 4 min</span>
+</div>
+<div class="flex items-center gap-2 text-text-secondary font-caption text-caption">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>4 comensales · Salón central</span>
+</div>
+<div class="mt-1 p-2 rounded-lg bg-surface-secondary flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">2 platos seleccionados</span>
+<span class="font-label-sm text-label-sm font-semibold text-[#D97706]">En edición</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-primary-container hover:bg-blue-700 text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">edit_note</span>
+<span>Continuar pedido</span>
+</button>
+</div>
+</div>
+<!-- MESA 4 (CRÍTICO - PEDIDO LISTO) -->
+<div class="bg-surface rounded-2xl border-2 border-[#10B981] shadow-[0_6px_20px_rgba(16,185,129,0.15)] p-space-md flex flex-col justify-between relative overflow-hidden">
+<div class="absolute top-0 left-0 right-0 h-1.5 bg-[#10B981]"></div>
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 4</span>
+<span class="font-label-sm text-label-sm bg-primary-soft text-primary px-2 py-0.5 rounded">#112</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1 bg-success-soft text-[#10B981] font-bold animate-pulse">
+<span class="material-symbols-outlined text-[14px]">notifications</span>
+            Pedido listo
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Juan P.</span>
+<span class="font-caption text-caption text-[#10B981] font-semibold">Listo hace 2 min</span>
+</div>
+<p class="font-caption text-caption text-text-muted">3 platos: 2x Hamb. Especial, 1x Picada</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Total acumulado:</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">$97.000 COP</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-[#10B981] hover:bg-[#0ea372] text-white font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span>Ver pedido y entregar</span>
+</button>
+</div>
+</div>
+<!-- MESA 5 (Pendiente en cocina) -->
+<div class="bg-surface rounded-2xl border border-secondary/20 shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 5</span>
+<span class="font-label-sm text-label-sm bg-surface-secondary text-text-secondary px-2 py-0.5 rounded">#104</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-danger-soft text-[#EF3340] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#EF3340]"></span>
+            Pendiente en cocina
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Juan P.</span>
+<span class="font-caption text-caption text-text-muted">Enviado hace 3 min</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">Esperando inicio en fogón.</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Total actual:</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$44.000 COP</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>Ver pedido</span>
+</button>
+</div>
+</div>
+<!-- MESA 6 (Disponible - Terraza) -->
+<div class="bg-surface rounded-2xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] hover:border-border-strong transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 6</span>
+<span class="font-caption text-caption text-text-muted">Terraza</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-[#F1F5F9] text-[#64748B]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            Disponible
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">groups</span>
+<span class="font-body-md text-body-md">Capacidad: <strong class="text-text-primary font-semibold">6 personas</strong></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">deck</span>
+<span class="font-body-md text-body-md">Mesa exterior Terraza</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1">Ambiente ventilado con sombrilla.</p>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5" onclick="openModalMesa(6)">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Abrir mesa</span>
+</button>
+</div>
+</div>
+<!-- MESA 7 (En preparación) -->
+<div class="bg-surface rounded-2xl border border-primary-container/20 shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 7</span>
+<span class="font-label-sm text-label-sm bg-primary-soft text-primary px-2 py-0.5 rounded">#108</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-primary-soft text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            En preparación
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Carlos R.</span>
+<span class="font-caption text-caption text-primary font-semibold">14 min en cocina</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">Cocinero: Cocina Principal</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Total actual:</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$62.000 COP</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>Ver pedido</span>
+</button>
+</div>
+</div>
+<!-- MESA 8 (En consumo) -->
+<div class="bg-surface rounded-2xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 8</span>
+<span class="font-caption text-caption text-text-muted">3 comensales</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-surface-container-high text-primary-dark font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-dark"></span>
+            En consumo
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: María G.</span>
+<span class="font-caption text-caption text-text-muted">Abierta hace 45 min</span>
+</div>
+<p class="font-caption text-caption text-text-secondary truncate">Pedidos #099 y #107 entregados con éxito.</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Total cuenta:</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">$85.000 COP</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface-secondary border border-border-strong hover:bg-surface-container text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">post_add</span>
+<span>Ver cuenta / Adicionar</span>
+</button>
+</div>
+</div>
+<!-- MESA 9 (Pendiente de pago) -->
+<div class="bg-surface rounded-2xl border border-warning/30 shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 9</span>
+<span class="font-caption text-caption text-[#D97706] font-medium">Facturación</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-warning-soft text-[#D97706] font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#F59E0B]"></span>
+            Pendiente de pago
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Juan P.</span>
+<span class="font-caption text-caption text-[#D97706] font-semibold">Cuenta solicitada</span>
+</div>
+<p class="font-caption text-caption text-text-muted">Cliente solicitando factura en caja.</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Total:</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">$132.000 COP</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs flex flex-col gap-1">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">receipt</span>
+<span>Ver detalle de cuenta</span>
+</button>
+<span class="font-caption text-caption text-center text-text-muted italic">* El cobro se procesa en el módulo de Cajas</span>
+</div>
+</div>
+<!-- MESA 10 (Pedido Listo) -->
+<div class="bg-surface rounded-2xl border-2 border-[#10B981] shadow-[0_6px_20px_rgba(16,185,129,0.12)] p-space-md flex flex-col justify-between">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 10</span>
+<span class="font-label-sm text-label-sm bg-primary-soft text-primary px-2 py-0.5 rounded">#114</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1 bg-success-soft text-[#10B981] font-bold">
+<span class="material-symbols-outlined text-[14px]">notifications</span>
+            Pedido listo
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Carlos R.</span>
+<span class="font-caption text-caption text-[#10B981] font-semibold">Listo hace 1 min</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">Bebidas y Acompañamiento preparados.</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Servicio rápido:</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">Bar / Barra</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-[#10B981] hover:bg-[#0ea372] text-white font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span>Ver pedido y entregar</span>
+</button>
+</div>
+</div>
+<!-- MESA 11 (En preparación) -->
+<div class="bg-surface rounded-2xl border border-primary-container/20 shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 11</span>
+<span class="font-label-sm text-label-sm bg-primary-soft text-primary px-2 py-0.5 rounded">#115</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-primary-soft text-primary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            En preparación
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md text-text-primary font-medium">Mesero: Carlos R.</span>
+<span class="font-caption text-caption text-primary font-semibold">8 min en cocina</span>
+</div>
+<p class="font-caption text-caption text-text-secondary">2 comensales en Salón interior.</p>
+<div class="mt-1 pt-2 border-t border-border flex items-center justify-between">
+<span class="font-caption text-caption text-text-secondary">Total:</span>
+<span class="font-body-md-semibold text-body-md-semibold text-text-primary">$52.000 COP</span>
+</div>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>Ver pedido</span>
+</button>
+</div>
+</div>
+<!-- MESA 12 (Disponible) -->
+<div class="bg-surface rounded-2xl border border-border shadow-[0_4px_14px_rgba(15,39,71,0.05)] p-space-md flex flex-col justify-between hover:shadow-[0_6px_18px_rgba(15,39,71,0.08)] hover:border-border-strong transition-all">
+<div class="flex flex-col">
+<div class="flex items-center justify-between pb-space-sm border-b border-border">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-text-primary">Mesa 12</span>
+<span class="font-caption text-caption text-text-muted">Salón Principal</span>
+</div>
+<span class="h-[26px] px-2.5 rounded-full font-label-sm text-label-sm inline-flex items-center gap-1.5 bg-[#F1F5F9] text-[#64748B]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            Disponible
+          </span>
+</div>
+<div class="py-space-md flex flex-col gap-space-xs text-text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">people</span>
+<span class="font-body-md text-body-md">Capacidad: <strong class="text-text-primary font-semibold">4 personas</strong></span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-text-muted">check</span>
+<span class="font-body-md text-body-md">Sin comanda abierta</span>
+</div>
+<p class="font-caption text-caption text-text-muted mt-1">Mesa lista para nueva orden.</p>
+</div>
+</div>
+<div class="pt-space-xs">
+<button class="w-full h-10 px-space-md bg-surface border border-border-strong hover:bg-surface-secondary text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center justify-center gap-1.5" onclick="openModalMesa(12)">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>Abrir mesa</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Modal Interactivo 'Abrir Mesa' (Sobrio & Corporativo) -->
+<div class="fixed inset-0 z-50 bg-black/40 flex items-center justify-center hidden p-space-md" id="modalAbrirMesa">
+<div class="bg-surface rounded-2xl border border-border shadow-[0_10px_25px_rgba(15,39,71,0.12)] w-full max-w-md overflow-hidden flex flex-col">
+<!-- Modal Header -->
+<div class="px-space-lg py-space-md border-b border-border flex items-center justify-between bg-surface-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">table_restaurant</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary" id="modalTableTitle">Abrir Mesa 6</h3>
+</div>
+<button class="w-8 h-8 rounded-lg text-text-secondary hover:bg-surface-container flex items-center justify-center transition-colors" onclick="closeModalMesa()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Modal Body -->
+<div class="p-space-lg flex flex-col gap-space-md">
+<!-- Campo 1: Número de personas -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary font-semibold">Número de personas</label>
+<div class="flex items-center border border-border-strong rounded-lg overflow-hidden h-[42px] bg-surface">
+<button class="w-11 h-full flex items-center justify-center text-text-secondary hover:bg-surface-secondary active:bg-surface-container transition-colors" onclick="decrementPax()" type="button">
+<span class="material-symbols-outlined text-[18px]">remove</span>
+</button>
+<input class="flex-1 text-center font-body-md-semibold text-body-md-semibold text-text-primary bg-transparent focus:outline-none" id="paxInput" max="12" min="1" type="number" value="4"/>
+<button class="w-11 h-full flex items-center justify-center text-text-secondary hover:bg-surface-secondary active:bg-surface-container transition-colors" onclick="incrementPax()" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+<span class="font-caption text-caption text-text-muted">Ajusta la cantidad de comensales en sala.</span>
+</div>
+<!-- Campo 2: Mesero asignado (deshabilitado / fijo en turno) -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary font-semibold">Mesero asignado</label>
+<div class="relative">
+<input class="w-full h-[42px] px-3 bg-surface-secondary border border-border-strong rounded-lg font-body-md text-body-md text-text-secondary cursor-not-allowed" disabled="" type="text" value="Carlos Reales (Administrador / en turno)"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px]">lock</span>
+</div>
+<span class="font-caption text-caption text-text-muted">Asignado por sesión activa en terminal.</span>
+</div>
+<!-- Campo 3: Zona -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-text-primary font-semibold">Zona del restaurante</label>
+<div class="relative">
+<select class="w-full h-[42px] pl-3 pr-8 bg-surface border border-border-strong rounded-lg font-body-md text-body-md text-text-primary focus:border-primary focus:outline-none appearance-none cursor-pointer" id="zoneSelect">
+<option value="salon">Salón Principal</option>
+<option selected="" value="terraza">Terraza Exterior</option>
+<option value="barra">Barra / Barra Rápida</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-text-muted text-[18px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Modal Actions -->
+<div class="px-space-lg py-space-md border-t border-border bg-surface-secondary flex items-center justify-end gap-space-sm">
+<button class="h-[42px] px-space-md bg-surface border border-border-strong hover:bg-surface-container text-text-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors" onclick="closeModalMesa()" type="button">
+          Cancelar
+        </button>
+<button class="h-[42px] px-space-md bg-primary-container hover:bg-blue-700 active:bg-blue-800 text-on-primary font-body-md-semibold text-body-md-semibold rounded-lg transition-colors flex items-center gap-1.5 shadow-sm" onclick="confirmOpenTable()" type="button">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+<span>Abrir comanda y tomar pedido</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Inline Script for UI Interactivity -->
+<script>
+    function openModalMesa(tableNumber) {
+      const modal = document.getElementById('modalAbrirMesa');
+      const title = document.getElementById('modalTableTitle');
+      title.innerText = 'Abrir Mesa ' + tableNumber;
+      modal.classList.remove('hidden');
+    }
+
+    function closeModalMesa() {
+      const modal = document.getElementById('modalAbrirMesa');
+      modal.classList.add('hidden');
+    }
+
+    function incrementPax() {
+      const input = document.getElementById('paxInput');
+      input.value = Math.min(12, parseInt(input.value || 1) + 1);
+    }
+
+    function decrementPax() {
+      const input = document.getElementById('paxInput');
+      input.value = Math.max(1, parseInt(input.value || 1) - 1);
+    }
+
+    function confirmOpenTable() {
+      const pax = document.getElementById('paxInput').value;
+      alert('Mesa iniciada con ' + pax + ' personas. Redirigiendo a toma de comandas...');
+      closeModalMesa();
+    }
+  </script>
+</div></main></div></body></html>

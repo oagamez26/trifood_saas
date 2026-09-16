@@ -1,0 +1,6 @@
+.table-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-top: 2rem; }
+.table-tile { align-items: flex-end; background: white; border: 1px solid #dce2e9; display: flex; justify-content: space-between; min-height: 170px; padding: 1.4rem; }
+.table-tile h2 { font-size: 2.6rem; margin: 0 0 .8rem; }
+.table-status { color: #657184; font-family: 'Trebuchet MS', sans-serif; font-size: .78rem; font-weight: 700; }
+.table-status.disponible { color: #2d6a4f; }
+.table-status.ocupada, .table-status.cuenta_solicitada, .table-status.pendiente_pago { color: #b11f2a; }
