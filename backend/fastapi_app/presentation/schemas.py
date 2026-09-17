@@ -166,6 +166,7 @@ class OrderLine(Input):
 
 class OrderCreate(Input):
     table_session_id: StrictInt = Field(gt=0)
+    notes: str | None = Field(default=None, max_length=2000)
     lines: list[OrderLine] = Field(min_length=1, max_length=100)
 
 

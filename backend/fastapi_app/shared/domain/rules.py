@@ -91,7 +91,7 @@ def require(actor, permission):
 
 TRANSITIONS = {
     "BORRADOR": {"CONFIRMADO", "CANCELADO"},
-    "CONFIRMADO": {"EN_COCINA", "CANCELADO"},
+    "CONFIRMADO": {"EN_COCINA", "EN_PREPARACION", "CANCELADO"},
     "EN_COCINA": {"EN_PREPARACION", "CANCELADO"},
     "EN_PREPARACION": {"LISTO", "CANCELADO"},
     "LISTO": {"ENTREGADO", "CANCELADO"},
@@ -101,6 +101,12 @@ TRANSITIONS = {
 
 
 def transition(current, target):
+    if target == "ENTREGADO" and current != "LISTO":
+        raise DomainError(
+            "ORDER_NOT_READY_FOR_DELIVERY",
+            "El pedido no está listo para entrega. Debe estar en estado LISTO.",
+            409,
+        )
     if target not in TRANSITIONS.get(current, set()):
         raise DomainError(
             "INVALID_ORDER_TRANSITION",

@@ -68,7 +68,7 @@ def test_permissions_and_last_admin(client, headers):
         "/api/auth/login", json={"username": "waiter", "password": "Secure123"}
     ).json()["access_token"]
     response = client.get(
-        "/api/catalog/products", headers={"Authorization": "Bearer " + token}
+        "/api/analytics/dashboard", headers={"Authorization": "Bearer " + token}
     )
     assert response.status_code == 403
     assert response.json()["code"] == "PERMISSION_DENIED"

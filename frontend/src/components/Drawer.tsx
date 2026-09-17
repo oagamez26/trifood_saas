@@ -9,7 +9,8 @@ export interface DrawerProps {
   badge?: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
-  width?: "md" | "lg" | "xl" | string;
+  size?: "sm" | "md" | "lg" | "xl";
+  width?: "sm" | "md" | "lg" | "xl" | "2xl" | "full" | string;
 }
 
 export function Drawer({
@@ -20,7 +21,8 @@ export function Drawer({
   badge,
   children,
   footer,
-  width = "lg",
+  size,
+  width = "md",
 }: DrawerProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -42,10 +44,18 @@ export function Drawer({
 
   if (!isOpen) return null;
 
-  const widthStyle = width === "md" ? "480px" : width === "xl" ? "700px" : "620px";
+  const requestedSize = size || width;
+  const sizeClass =
+    requestedSize === "sm"
+      ? "drawer-sm"
+      : requestedSize === "lg"
+      ? "drawer-lg"
+      : requestedSize === "xl" || requestedSize === "2xl" || requestedSize === "full"
+      ? "drawer-xl"
+      : "drawer-md";
 
   return (
-    <div className="drawer-root" style={{ position: "fixed", inset: 0, zIndex: 100 }}>
+    <div className="drawer-root" style={{ position: "fixed", inset: 0, zIndex: 1000 }}>
       {/* BACKDROP OVERLAY */}
       <div
         onClick={onClose}
@@ -56,30 +66,14 @@ export function Drawer({
           backdropFilter: "blur(2px)",
           WebkitBackdropFilter: "blur(2px)",
           transition: "opacity 0.25s ease",
-          zIndex: 100,
+          zIndex: 1000,
         }}
         aria-hidden="true"
       />
 
       {/* SLIDE-OVER RIGHT PANEL */}
       <aside
-        className="drawer-panel"
-        style={{
-          position: "fixed",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          width: "100%",
-          maxWidth: widthStyle,
-          height: "100%",
-          backgroundColor: "var(--color-surface, #ffffff)",
-          borderLeft: "1px solid var(--color-border, #e2e8f0)",
-          boxShadow: "-10px 0 35px -5px rgba(15, 23, 42, 0.18)",
-          display: "flex",
-          flexDirection: "column",
-          zIndex: 101,
-          animation: "drawerSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
-        }}
+        className={`drawer-panel ${sizeClass}`}
         role="dialog"
         aria-modal="true"
         aria-label={title}
@@ -87,24 +81,29 @@ export function Drawer({
         {/* DRAWER HEADER */}
         <div
           style={{
-            padding: "20px 24px",
+            padding: "16px 20px",
             borderBottom: "1px solid var(--color-border, #e2e8f0)",
             display: "flex",
             alignItems: "flex-start",
             justifyContent: "space-between",
             backgroundColor: "var(--color-surface-secondary, #f8fafc)",
             flexShrink: 0,
+            boxSizing: "border-box",
+            width: "100%",
+            maxWidth: "100%",
+            overflowX: "hidden",
           }}
         >
-          <div style={{ paddingRight: 16 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{ paddingRight: 12, minWidth: 0, flex: 1 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
               <h2
                 style={{
-                  fontSize: 18,
+                  fontSize: 17,
                   fontWeight: 700,
                   color: "var(--color-text-primary, #0f172a)",
                   letterSpacing: "-0.015em",
                   margin: 0,
+                  wordBreak: "break-word",
                 }}
               >
                 {title}
@@ -119,6 +118,7 @@ export function Drawer({
                   marginTop: 4,
                   marginBottom: 0,
                   lineHeight: 1.4,
+                  wordBreak: "break-word",
                 }}
               >
                 {subtitle}
@@ -130,6 +130,7 @@ export function Drawer({
             onClick={onClose}
             type="button"
             aria-label="Cerrar panel"
+            title="Cerrar panel"
             style={{
               width: 34,
               height: 34,
@@ -142,6 +143,7 @@ export function Drawer({
               cursor: "pointer",
               border: "none",
               transition: "all 0.15s ease",
+              flexShrink: 0,
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.backgroundColor = "var(--color-border, #e2e8f0)";
@@ -161,12 +163,17 @@ export function Drawer({
           style={{
             flex: 1,
             overflowY: "auto",
-            padding: "24px",
+            overflowX: "hidden",
+            padding: "20px",
             display: "flex",
             flexDirection: "column",
-            gap: 20,
+            gap: 16,
+            boxSizing: "border-box",
+            width: "100%",
+            maxWidth: "100%",
+            minWidth: 0,
           }}
-          className="custom-scrollbar"
+          className="custom-scrollbar drawer-body"
         >
           {children}
         </div>
@@ -175,14 +182,18 @@ export function Drawer({
         {footer && (
           <div
             style={{
-              padding: "16px 24px",
+              padding: "14px 20px",
               borderTop: "1px solid var(--color-border, #e2e8f0)",
               backgroundColor: "var(--color-surface, #ffffff)",
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-end",
-              gap: 12,
+              flexWrap: "wrap",
+              gap: 10,
               flexShrink: 0,
+              boxSizing: "border-box",
+              width: "100%",
+              maxWidth: "100%",
             }}
           >
             {footer}

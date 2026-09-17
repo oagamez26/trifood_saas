@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { apiRequest } from "../../services/api";
+import { IconButton } from "../../components/IconButton";
 import {
   DollarSign,
   ShoppingBag,
@@ -82,6 +83,9 @@ export function DashboardPage() {
         const critical = iList.filter(
           (i: any) => Number(i.current_stock) <= Number(i.min_stock)
         );
+        const activeOrders = oList.filter((o: any) =>
+          ["BORRADOR", "CONFIRMADO", "EN_COCINA", "EN_PREPARACION", "LISTO"].includes(o.state)
+        );
         const totalSales = oList
           .filter((o: any) => o.state === "ENTREGADO")
           .reduce((sum: number, o: any) => sum + Number(o.total_amount || 0), 0);
@@ -92,7 +96,7 @@ export function DashboardPage() {
           tables_occupied: occupied,
           tables_total: activeTList.length || 0,
           critical_stock_count: critical.length,
-          recent_orders: oList.slice(0, 5).map((o: any) => ({
+          recent_orders: activeOrders.slice(0, 5).map((o: any) => ({
             id: o.id,
             table_number: String(o.table_session?.table?.number || o.table_number || "Mesa"),
             waiter_name: o.waiter_name || "Servicio",
@@ -209,13 +213,13 @@ export function DashboardPage() {
               </div>
             </div>
           </div>
-          <button
+          <IconButton
+            icon={ChevronRight}
+            tooltip="Ver mapa de mesas"
             onClick={() => navigate("/tables")}
-            className="btn-icon"
-            title="Ver mapa de mesas"
-          >
-            <ChevronRight size={20} />
-          </button>
+            variant="ghost"
+            size="md"
+          />
         </div>
 
         {/* KPI 4: Alertas de Stock */}
@@ -236,13 +240,13 @@ export function DashboardPage() {
               </div>
             </div>
           </div>
-          <button
+          <IconButton
+            icon={ChevronRight}
+            tooltip="Ver inventario"
             onClick={() => navigate("/inventory")}
-            className="btn-icon"
-            title="Ver inventario"
-          >
-            <ChevronRight size={20} />
-          </button>
+            variant="ghost"
+            size="md"
+          />
         </div>
       </div>
 
@@ -306,7 +310,7 @@ export function DashboardPage() {
       </div>
 
       {/* 2-COLUMN SECTION: RECENT ORDERS & INVENTORY RADAR */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: 20 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))", gap: 20, alignItems: "start" }}>
         {/* LEFT: RECENT ORDERS TABLE */}
         <div className="table-container">
           <div style={{ padding: "16px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid var(--color-border)" }}>
@@ -372,7 +376,7 @@ export function DashboardPage() {
         </div>
 
         {/* RIGHT: INVENTORY WATCH PANEL */}
-        <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+        <div className="card" style={{ display: "flex", flexDirection: "column", height: "fit-content" }}>
           <div>
             <div className="card-header">
               <h3 className="card-title">Insumos en Alerta</h3>
@@ -424,7 +428,7 @@ export function DashboardPage() {
             </div>
           </div>
 
-          <div style={{ marginTop: 20, paddingTop: 16, borderTop: "1px solid var(--color-border)" }}>
+          <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid var(--color-border)" }}>
             <button
               onClick={() => navigate("/inventory")}
               className="btn btn-secondary"

@@ -8,9 +8,10 @@ import {
   type Page,
 } from "../catalogApi";
 import { useAuth } from "../../../contexts/AuthContext";
-import { ApiError } from "../../../services/api";
+import { ApiError, apiRequest } from "../../../services/api";
 import { formatCOP, mediaUrl } from "../../../config/env";
 import { Drawer } from "../../../components/Drawer";
+import { IconButton } from "../../../components/IconButton";
 import {
   Utensils,
   CheckCircle2,
@@ -20,8 +21,8 @@ import {
   ExternalLink,
   Search,
   Users,
-  Edit2,
-  DollarSign,
+  Pencil,
+  Coins,
   Eye,
   EyeOff,
   Power,
@@ -82,6 +83,17 @@ export function CatalogProductsPage() {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [editCategory, setEditCategory] = useState<Category | "new" | null>(null);
 
+  // Recipe States
+  interface RecipeItemRow {
+    ingredient_id: number;
+    quantity: number | "";
+    unit: string;
+  }
+  const [recipeItems, setRecipeItems] = useState<RecipeItemRow[]>([]);
+  const [availableIngredients, setAvailableIngredients] = useState<
+    Array<{ id: number; name: string; base_unit: string; stock: number }>
+  >([]);
+
   // Pricing Modal States
   const [pricing, setPricing] = useState<AdminProduct | null>(null);
   const [history, setHistory] = useState<History[]>([]);
@@ -137,7 +149,27 @@ export function CatalogProductsPage() {
     }
   }, [token, revision]);
 
-  // Sync drawer fields when editing changes
+  // Load available ingredients for recipes
+  useEffect(() => {
+    if (token) {
+      apiRequest<any[]>("/inventory/ingredients", {}, token)
+        .then((items) => {
+          if (Array.isArray(items)) {
+            setAvailableIngredients(
+              items.map((i: any) => ({
+                id: i.id,
+                name: i.name,
+                base_unit: i.base_unit || "und",
+                stock: Number(i.stock ?? i.current_stock ?? 0),
+              }))
+            );
+          }
+        })
+        .catch(() => {});
+    }
+  }, [token, revision]);
+
+  // Sync drawer fields and recipe when editing changes
   useEffect(() => {
     if (editing === "new") {
       setSku("HAM-" + Math.floor(100 + Math.random() * 900));
@@ -151,6 +183,7 @@ export function CatalogProductsPage() {
       setImageFile(null);
       setImagePreview(null);
       setDeleteImageFlag(false);
+      setRecipeItems([]);
     } else if (editing) {
       setSku(editing.internal_code);
       setName(editing.name);
@@ -163,8 +196,61 @@ export function CatalogProductsPage() {
       setImageFile(null);
       setImagePreview(editing.image_reference ? mediaUrl(editing.image_reference) : null);
       setDeleteImageFlag(false);
+      setRecipeItems([]);
+
+      // Fetch persisted recipe for this product from PostgreSQL
+      apiRequest<any>(`/inventory/recipes/${editing.id}`, {}, token)
+        .then((data) => {
+          if (data && Array.isArray(data.items)) {
+            setRecipeItems(
+              data.items.map((it: any) => ({
+                ingredient_id: it.ingredient_id,
+                quantity: Number(it.quantity),
+                unit: it.unit || it.ingredient_unit || "und",
+              }))
+            );
+          }
+        })
+        .catch(() => {});
     }
-  }, [editing, categories]);
+  }, [editing, categories, token]);
+
+  function handleAddRecipeItem() {
+    if (availableIngredients.length === 0) return;
+    const first = availableIngredients[0];
+    setRecipeItems((prev) => [
+      ...prev,
+      {
+        ingredient_id: first.id,
+        quantity: 1,
+        unit: first.base_unit,
+      },
+    ]);
+  }
+
+  function handleUpdateRecipeItem(index: number, field: "ingredient_id" | "quantity", value: any) {
+    setRecipeItems((prev) => {
+      const next = [...prev];
+      if (field === "ingredient_id") {
+        const found = availableIngredients.find((ing) => ing.id === Number(value));
+        next[index] = {
+          ...next[index],
+          ingredient_id: Number(value),
+          unit: found ? found.base_unit : next[index].unit,
+        };
+      } else if (field === "quantity") {
+        next[index] = {
+          ...next[index],
+          quantity: value === "" ? "" : Number(value),
+        };
+      }
+      return next;
+    });
+  }
+
+  function handleRemoveRecipeItem(index: number) {
+    setRecipeItems((prev) => prev.filter((_, i) => i !== index));
+  }
 
   async function action(work: () => Promise<unknown>, successNote?: string) {
     setBusy(true);
@@ -290,6 +376,27 @@ export function CatalogProductsPage() {
       } else if (deleteImageFlag && editing !== "new") {
         await catalogApi.deleteImage(token, productId);
       }
+
+      // Persist Recipe to PostgreSQL
+      const validRecipeItems = recipeItems
+        .filter((it) => it.ingredient_id && Number(it.quantity) > 0)
+        .map((it) => ({
+          ingredient_id: Number(it.ingredient_id),
+          quantity: Number(it.quantity),
+          unit: it.unit || "und",
+        }));
+
+      await apiRequest(
+        `/inventory/recipes/${productId}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            items: validRecipeItems,
+            notes: `Receta para ${name.trim()}`,
+          }),
+        },
+        token
+      );
 
       setSuccessMsg(
         editing === "new" ? "Producto creado exitosamente." : "Producto actualizado exitosamente.",
@@ -771,32 +878,30 @@ export function CatalogProductsPage() {
                     </td>
 
                     <td style={{ textAlign: "right" }}>
-                      <div style={{ display: "inline-flex", gap: 6, alignItems: "center" }}>
+                      <div style={{ display: "inline-flex", gap: 6, alignItems: "center", justifyContent: "flex-end" }}>
                         {hasPermission("product.update") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Pencil}
+                            tooltip="Editar producto"
+                            variant="primary"
                             onClick={() => setEditing(item)}
-                            title="Editar información del producto"
-                            style={{ padding: "0 8px" }}
-                          >
-                            <Edit2 size={13} />
-                          </button>
+                          />
                         )}
 
                         {hasPermission("product.change_price") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Coins}
+                            tooltip="Historial y cambio de precio"
+                            variant="warning"
                             onClick={() => openPrice(item)}
-                            title="Historial y cambio de precio"
-                            style={{ padding: "0 8px" }}
-                          >
-                            <DollarSign size={13} />
-                          </button>
+                          />
                         )}
 
                         {hasPermission("product.change_availability") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={item.is_available ? EyeOff : Eye}
+                            tooltip={item.is_available ? "Marcar como agotado" : "Marcar como disponible"}
+                            variant={item.is_available ? "default" : "success"}
                             disabled={busy}
                             onClick={() =>
                               action(
@@ -811,20 +916,14 @@ export function CatalogProductsPage() {
                                   : "Producto marcado como disponible.",
                               )
                             }
-                            title={
-                              item.is_available
-                                ? "Marcar como agotado"
-                                : "Marcar como disponible"
-                            }
-                            style={{ padding: "0 8px" }}
-                          >
-                            {item.is_available ? <EyeOff size={13} /> : <Eye size={13} />}
-                          </button>
+                          />
                         )}
 
                         {hasPermission("product.disable") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Power}
+                            tooltip={item.is_active ? "Desactivar plato" : "Activar plato"}
+                            variant={item.is_active ? "danger" : "success"}
                             disabled={busy}
                             onClick={() =>
                               action(
@@ -838,11 +937,7 @@ export function CatalogProductsPage() {
                                   : "Producto activado en el catálogo.",
                               )
                             }
-                            title={item.is_active ? "Desactivar plato" : "Activar plato"}
-                            style={{ padding: "0 8px" }}
-                          >
-                            <Power size={13} />
-                          </button>
+                          />
                         )}
                       </div>
                     </td>
@@ -902,6 +997,7 @@ export function CatalogProductsPage() {
             ? "Ingresa la información para catalogar un nuevo ítem del restaurante."
             : "Modifica la información, fotografía, precio o estado del producto."
         }
+        size="lg"
         badge={
           editing && editing !== "new" ? (
             <span
@@ -1020,7 +1116,7 @@ export function CatalogProductsPage() {
               Información General
             </h3>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
               <div className="form-group">
                 <label className="form-label">Código / SKU *</label>
                 <div style={{ position: "relative" }}>
@@ -1079,7 +1175,7 @@ export function CatalogProductsPage() {
               />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr 1fr", gap: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 12 }}>
               <div className="form-group">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
                   <label className="form-label" style={{ margin: 0 }}>Categoría *</label>
@@ -1213,45 +1309,125 @@ export function CatalogProductsPage() {
 
           <hr style={{ border: "none", borderTop: "1px solid var(--color-border)" }} />
 
-          {/* SECCIÓN 4: RECETA E INVENTARIO */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          {/* SECCIÓN 4: RECETA / INGREDIENTES (STITCH DEFINITIVO) */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h3 style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--color-text-secondary)" }}>
-                Receta e Inventario
-              </h3>
-              <span className="badge badge-success" style={{ fontSize: 11 }}>
-                <span className="badge-dot" /> Kardex activo
-              </span>
-            </div>
-
-            <div
-              style={{
-                backgroundColor: "var(--color-surface)",
-                borderRadius: "var(--radius-md)",
-                padding: "14px 16px",
-                border: "1px solid var(--color-border)",
-                display: "flex",
-                flexDirection: "column",
-                gap: 8,
-              }}
-            >
-              <p style={{ fontSize: 12, color: "var(--color-text-secondary)", margin: 0 }}>
-                La receta descuenta automáticamente los ingredientes del inventario al confirmarse cada orden en cocina.
-              </p>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
-                <Link
-                  to="/inventory"
-                  className="btn btn-secondary btn-sm"
-                  style={{ fontSize: 11 }}
-                >
-                  <Soup size={13} />
-                  <span>Gestionar receta en Inventario</span>
-                </Link>
+              <div>
+                <h3 style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--color-text-secondary)", margin: 0 }}>
+                  RECETA / INGREDIENTES
+                </h3>
                 <span style={{ fontSize: 11, color: "var(--color-text-muted)" }}>
-                  Consumo automatizado
+                  Insumos que se descuentan automáticamente del inventario al preparar este ítem.
                 </span>
               </div>
+              <button
+                type="button"
+                onClick={handleAddRecipeItem}
+                className="btn btn-secondary btn-sm"
+                style={{ fontSize: 12, display: "flex", alignItems: "center", gap: 5 }}
+              >
+                <Plus size={14} />
+                <span>Agregar ingrediente</span>
+              </button>
             </div>
+
+            {recipeItems.length === 0 ? (
+              <div
+                style={{
+                  backgroundColor: "var(--color-surface-secondary)",
+                  borderRadius: "var(--radius-md)",
+                  padding: "16px",
+                  border: "1px dashed var(--color-border)",
+                  textAlign: "center",
+                  color: "var(--color-text-muted)",
+                  fontSize: 12,
+                }}
+              >
+                Sin ingredientes en la receta. Pulsa <strong>+ Agregar ingrediente</strong> para vincular insumos reales del inventario.
+              </div>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                {recipeItems.map((item, idx) => {
+                  const currentIng = availableIngredients.find((ing) => ing.id === item.ingredient_id);
+                  const baseUnit = currentIng?.base_unit || item.unit || "und";
+                  return (
+                    <div
+                      key={idx}
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "minmax(0, 1.8fr) minmax(0, 1fr) 56px 36px",
+                        gap: 8,
+                        alignItems: "center",
+                        backgroundColor: "var(--color-surface-secondary)",
+                        padding: "8px 10px",
+                        borderRadius: "var(--radius-md)",
+                        border: "1px solid var(--color-border)",
+                        minWidth: 0,
+                      }}
+                    >
+                      {/* INGREDIENT SELECT */}
+                      <div>
+                        <select
+                          className="form-select"
+                          value={item.ingredient_id}
+                          onChange={(e) => handleUpdateRecipeItem(idx, "ingredient_id", e.target.value)}
+                          style={{ fontSize: 12, padding: "6px 10px" }}
+                        >
+                          {availableIngredients.map((ing) => (
+                            <option key={ing.id} value={ing.id}>
+                              {ing.name} ({ing.stock} {ing.base_unit} disp.)
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* QUANTITY INPUT */}
+                      <div>
+                        <input
+                          type="number"
+                          step="0.01"
+                          min="0.01"
+                          required
+                          placeholder="Cantidad"
+                          value={item.quantity}
+                          onChange={(e) => handleUpdateRecipeItem(idx, "quantity", e.target.value)}
+                          className="form-input"
+                          style={{ fontSize: 12, padding: "6px 10px", fontWeight: 600 }}
+                        />
+                      </div>
+
+                      {/* UNIT DISPLAY TAG */}
+                      <div
+                        style={{
+                          fontSize: 12,
+                          fontWeight: 700,
+                          color: "var(--color-primary)",
+                          backgroundColor: "var(--color-primary-soft)",
+                          padding: "6px 4px",
+                          borderRadius: "var(--radius-sm)",
+                          textAlign: "center",
+                        }}
+                      >
+                        {baseUnit}
+                      </div>
+
+                      {/* REMOVE BUTTON */}
+                      <div style={{ textAlign: "right" }}>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveRecipeItem(idx)}
+                          className="btn-icon"
+                          style={{ color: "var(--color-danger, #ef4444)", padding: 4 }}
+                          title="Eliminar ingrediente de la receta"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </form>
       </Drawer>
@@ -1317,7 +1493,7 @@ export function CatalogProductsPage() {
                 {currentCategory ? "Editar Categoría" : "Nueva Categoría"}
               </h4>
 
-              <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: 10 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: 10 }}>
                 <div className="form-group">
                   <label className="form-label">Nombre *</label>
                   <input
@@ -1405,24 +1581,22 @@ export function CatalogProductsPage() {
                       )}
                     </td>
                     <td style={{ textAlign: "right" }}>
-                      <div style={{ display: "inline-flex", gap: 6 }}>
+                      <div style={{ display: "inline-flex", gap: 6, justifyContent: "flex-end" }}>
                         {hasPermission("category.update") && (
-                          <button
-                            type="button"
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Pencil}
+                            tooltip="Editar categoría"
+                            variant="primary"
                             onClick={() => setEditCategory(item)}
-                            style={{ padding: "0 8px" }}
-                            title="Editar categoría"
-                          >
-                            <Edit2 size={13} />
-                          </button>
+                          />
                         )}
                         {hasPermission(
                           item.is_active ? "category.disable" : "category.update",
                         ) && (
-                          <button
-                            type="button"
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Power}
+                            tooltip={item.is_active ? "Inactivar categoría" : "Activar categoría"}
+                            variant={item.is_active ? "danger" : "success"}
                             disabled={busy}
                             onClick={async () => {
                               await action(async () => {
@@ -1436,11 +1610,7 @@ export function CatalogProductsPage() {
                                 setCategories(updated);
                               }, item.is_active ? "Categoría inactivada." : "Categoría activada.");
                             }}
-                            style={{ padding: "0 8px" }}
-                            title={item.is_active ? "Inactivar" : "Activar"}
-                          >
-                            <Power size={13} />
-                          </button>
+                          />
                         )}
                       </div>
                     </td>

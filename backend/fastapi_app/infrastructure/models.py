@@ -206,7 +206,7 @@ class TableSession(Base):
 
     table = relationship("DiningTable", back_populates="sessions")
     orders = relationship("Order", back_populates="table_session")
-    payment = relationship("Payment", back_populates="table_session", uselist=False)
+    payments = relationship("Payment", back_populates="table_session")
 
 
 class Order(Base):
@@ -217,6 +217,7 @@ class Order(Base):
     waiter_id = sa.Column(sa.Integer, sa.ForeignKey("users.id"), nullable=False)
     state = sa.Column(sa.String(30), nullable=False, default="BORRADOR", server_default="BORRADOR", index=True)  # BORRADOR, CONFIRMADO, EN_COCINA, EN_PREPARACION, LISTO, ENTREGADO, CANCELADO
     account_requested = sa.Column(sa.Boolean, nullable=False, default=False)
+    inventory_deducted = sa.Column(sa.Boolean, nullable=False, default=False, server_default=sa.text("false"))
     notes = sa.Column(sa.Text, nullable=True)
     created_at = sa.Column(sa.DateTime(timezone=True), default=utc_now, nullable=False)
     confirmed_at = sa.Column(sa.DateTime(timezone=True), nullable=True)
@@ -372,6 +373,14 @@ class CashSession(Base):
     opened_at = sa.Column(sa.DateTime(timezone=True), default=utc_now, nullable=False)
     closed_at = sa.Column(sa.DateTime(timezone=True), nullable=True)
 
+    sales_amount = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+    tips_amount = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+    total_collected = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+    cash_collected = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+    card_collected = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+    transfer_collected = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+    cash_expenses = sa.Column(sa.Numeric(12, 2), nullable=True, default=0)
+
     cash_register = relationship("CashRegister", back_populates="sessions")
     cashier = relationship("User")
     payments = relationship("Payment", back_populates="cash_session")
@@ -381,15 +390,17 @@ class Payment(Base):
     __tablename__ = "payments"
 
     id = sa.Column(sa.Integer, primary_key=True)
-    table_session_id = sa.Column(sa.Integer, sa.ForeignKey("table_sessions.id"), unique=True, nullable=False)
+    table_session_id = sa.Column(sa.Integer, sa.ForeignKey("table_sessions.id"), nullable=False, index=True)
     cash_session_id = sa.Column(sa.Integer, sa.ForeignKey("cash_sessions.id"), nullable=False, index=True)
     cashier_id = sa.Column(sa.Integer, sa.ForeignKey("users.id"), nullable=False)
+    consumption_amount = sa.Column(sa.Numeric(12, 2), nullable=False, default=0)
+    tip_amount = sa.Column(sa.Numeric(12, 2), nullable=False, default=0)
     total_amount = sa.Column(sa.Numeric(12, 2), nullable=False)
     cash_received = sa.Column(sa.Numeric(12, 2), nullable=True)
     cash_change = sa.Column(sa.Numeric(12, 2), nullable=True)
     created_at = sa.Column(sa.DateTime(timezone=True), default=utc_now, nullable=False)
 
-    table_session = relationship("TableSession", back_populates="payment")
+    table_session = relationship("TableSession", back_populates="payments")
     cash_session = relationship("CashSession", back_populates="payments")
     cashier = relationship("User")
     details = relationship("PaymentDetail", back_populates="payment", cascade="all, delete-orphan")
@@ -401,7 +412,7 @@ class PaymentDetail(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     payment_id = sa.Column(sa.Integer, sa.ForeignKey("payments.id", ondelete="CASCADE"), nullable=False)
-    payment_method = sa.Column(sa.String(30), nullable=False)  # EFECTIVO, TARJETA, TRANSFERENCIA, NEQUI, DAVIPLATA, OTRO
+    payment_method = sa.Column(sa.String(30), nullable=False)  # EFECTIVO, TARJETA, TRANSFERENCIA
     amount = sa.Column(sa.Numeric(12, 2), nullable=False)
     reference_code = sa.Column(sa.String(100), nullable=True)
 
@@ -419,6 +430,7 @@ class Invoice(Base):
     waiter_id = sa.Column(sa.Integer, sa.ForeignKey("users.id"), nullable=True)
     table_number = sa.Column(sa.String(30), nullable=False)
     subtotal = sa.Column(sa.Numeric(12, 2), nullable=False)
+    tip = sa.Column(sa.Numeric(12, 2), nullable=False, default=0)
     tax = sa.Column(sa.Numeric(12, 2), nullable=False, default=0)
     total = sa.Column(sa.Numeric(12, 2), nullable=False)
     payment_method_summary = sa.Column(sa.String(120), nullable=False)
@@ -435,6 +447,7 @@ class InvoiceLine(Base):
 
     id = sa.Column(sa.Integer, primary_key=True)
     invoice_id = sa.Column(sa.Integer, sa.ForeignKey("invoices.id", ondelete="CASCADE"), nullable=False)
+    order_line_id = sa.Column(sa.Integer, sa.ForeignKey("order_lines.id", ondelete="SET NULL"), nullable=True)
     product_id = sa.Column(sa.Integer, nullable=False)
     product_name = sa.Column(sa.String(160), nullable=False)
     quantity = sa.Column(sa.Integer, nullable=False)

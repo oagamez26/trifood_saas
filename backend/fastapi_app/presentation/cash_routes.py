@@ -1,15 +1,16 @@
-from typing import List, Optional, Any
-from fastapi import APIRouter, Depends, Response
+from typing import List, Optional, Any, Dict
+from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, Field, AliasChoices
 from .dependencies import get_current_user, get_uow
 from ..shared.domain.rules import require
-from ..infrastructure.pdf_invoice import generate_invoice_pdf
+from ..infrastructure.pdf_invoice import generate_invoice_pdf, generate_cash_close_pdf
+from ..infrastructure import models as m
 
 router = APIRouter(prefix="/api/cash", tags=["cash"])
 
 
 class OpenSessionIn(BaseModel):
-    initial_cash: float
+    initial_cash: float = Field(validation_alias=AliasChoices("initial_cash", "amount"))
 
 
 class CloseSessionIn(BaseModel):
@@ -28,6 +29,10 @@ class ProcessPaymentIn(BaseModel):
     cash_session_id: int
     details: Optional[List[PaymentDetailIn]] = None
     payments: Optional[List[Any]] = None
+    items: Optional[List[Dict[str, Any]]] = None
+    custom_amount: Optional[float] = None
+    amount: Optional[float] = None
+    payment_type: Optional[str] = None
     cash_received: Optional[float] = None
     tip_amount: Optional[float] = 0.0
 
@@ -60,6 +65,38 @@ def close_cash_session(session_id: int, data: CloseSessionIn, user=Depends(get_c
     return res
 
 
+@router.get("/sessions/{session_id}")
+def get_cash_session(session_id: int, user=Depends(get_current_user), uow=Depends(get_uow)):
+    require(user, "cash.view")
+    from ..infrastructure.repositories import get, record
+    sess = get(uow.session, m.CashSession, session_id)
+    return {
+        **record(sess),
+        "cashier_name": f"{sess.cashier.first_name} {sess.cashier.last_name}" if sess.cashier else "?",
+        "register_name": sess.cash_register.name if sess.cash_register else "?",
+    }
+
+
+@router.get("/sessions/{session_id}/report/pdf")
+def get_cash_session_report_pdf(session_id: int, user=Depends(get_current_user), uow=Depends(get_uow)):
+    require(user, "cash.view")
+    from ..infrastructure.repositories import get, record
+    sess = get(uow.session, m.CashSession, session_id)
+    session_data = {
+        **record(sess),
+        "cashier_name": f"{sess.cashier.first_name} {sess.cashier.last_name}" if sess.cashier else "?",
+        "register_name": sess.cash_register.name if sess.cash_register else "?",
+    }
+    settings = uow.settings.all()
+    pdf_bytes = generate_cash_close_pdf(session_data, settings)
+    filename = f"cierre_caja_{session_id}.pdf"
+    return Response(
+        content=pdf_bytes,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"inline; filename={filename}"},
+    )
+
+
 @router.get("/sessions/history")
 def cash_sessions_history(user=Depends(get_current_user), uow=Depends(get_uow)):
     require(user, "cash.view")
@@ -68,7 +105,9 @@ def cash_sessions_history(user=Depends(get_current_user), uow=Depends(get_uow)):
 
 @router.get("/tables/{table_id}/summary")
 def get_table_payment_summary(table_id: int, user=Depends(get_current_user), uow=Depends(get_uow)):
-    require(user, "payment.view")
+    perms = user.get("effective_permissions", [])
+    if "payment.view" not in perms and "order.view" not in perms:
+        require(user, "payment.view")
     return uow.payments.table_summary(table_id)
 
 
@@ -90,6 +129,9 @@ def process_payment(data: ProcessPaymentIn, user=Depends(get_current_user), uow=
         cash_session_id=data.cash_session_id,
         cashier_id=user["id"],
         details=details_dict,
+        items=data.items,
+        custom_amount=data.custom_amount if data.custom_amount is not None else data.amount,
+        tip_amount=data.tip_amount or 0.0,
         cash_received=data.cash_received,
     )
     uow.commit()

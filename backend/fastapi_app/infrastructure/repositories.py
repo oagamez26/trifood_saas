@@ -402,7 +402,9 @@ class OrdersRepository:
         return [
             record(row)
             for row in self.session.scalars(
-                select(m.DiningTable).order_by(m.DiningTable.number)
+                select(m.DiningTable)
+                .where(m.DiningTable.is_active == True)
+                .order_by(m.DiningTable.number)
             )
         ]
 
@@ -513,15 +515,111 @@ class KitchenRepository:
             )
         return result
 
+    def deduct_order_inventory(self, order_or_id, actor_id):
+        if isinstance(order_or_id, int):
+            order = get(self.session, m.Order, order_or_id, lock=True)
+        else:
+            order = order_or_id
+        if not order or getattr(order, "inventory_deducted", False):
+            return
+
+        required_by_ingredient = {}
+        line_consumptions = []
+
+        table_num = (
+            order.table_session.table.number
+            if order.table_session and order.table_session.table
+            else str(order.table_session_id)
+        )
+
+        for line in order.lines:
+            recipe = self.session.scalar(
+                select(m.Recipe).where(m.Recipe.product_id == line.product_id)
+            )
+            if not recipe or not recipe.items:
+                continue
+
+            line_qty = Decimal(str(line.quantity))
+            for item in recipe.items:
+                item_qty = Decimal(str(item.quantity))
+                consumption = (item_qty * line_qty).quantize(Decimal("0.0001"))
+                required_by_ingredient[item.ingredient_id] = (
+                    required_by_ingredient.get(item.ingredient_id, Decimal("0")) + consumption
+                )
+                line_consumptions.append((line, item, consumption))
+
+        if not required_by_ingredient:
+            order.inventory_deducted = True
+            self.session.flush()
+            return
+
+        # Stock validation: verify all ingredients have sufficient stock
+        for ing_id, total_needed in required_by_ingredient.items():
+            ing = get(self.session, m.Ingredient, ing_id, lock=True)
+            if ing.stock < total_needed:
+                req_str = f"{total_needed.normalize():f}" if "." in str(total_needed) else str(total_needed)
+                stock_str = f"{ing.stock.normalize():f}" if "." in str(ing.stock) else str(ing.stock)
+                raise DomainError(
+                    "INSUFFICIENT_STOCK",
+                    f"Stock insuficiente para {ing.name}. Requerido: {req_str} {ing.base_unit}, disponible: {stock_str} {ing.base_unit}.",
+                    409,
+                )
+
+        # Deduct and record movement & kardex
+        for line, item, consumption in line_consumptions:
+            ing = get(self.session, m.Ingredient, item.ingredient_id, lock=True)
+            prev_stock = ing.stock
+            new_stock = prev_stock - consumption
+            ing.stock = new_stock
+            ing.updated_at = now()
+
+            ref = f"Comanda #{order.id} - Mesa {table_num} ({line.product_name} x{line.quantity})"
+
+            mov = m.InventoryMovement(
+                ingredient_id=ing.id,
+                movement_type="CONSUMO_PREPARACION",
+                quantity=consumption,
+                previous_stock=prev_stock,
+                new_stock=new_stock,
+                reference=ref,
+                responsible_user_id=actor_id,
+            )
+            self.session.add(mov)
+
+            kardex = m.KardexEntry(
+                ingredient_id=ing.id,
+                movement_type="CONSUMO_PREPARACION",
+                entry_quantity=Decimal("0"),
+                exit_quantity=consumption,
+                previous_balance=prev_stock,
+                new_balance=new_stock,
+                reference=ref,
+                responsible_user_id=actor_id,
+            )
+            self.session.add(kardex)
+
+        order.inventory_deducted = True
+        self.session.flush()
+
     def update_state(self, order_id, new_state, actor_id):
+        if new_state not in ("EN_PREPARACION", "LISTO"):
+            raise DomainError(
+                "OPERATION_NOT_ALLOWED",
+                "Cocina solamente puede iniciar preparación o marcar pedidos como listos.",
+                403,
+            )
         order = get(self.session, m.Order, order_id, lock=True)
+        if not getattr(order, "inventory_deducted", False):
+            self.deduct_order_inventory(order, actor_id)
         order.state = new_state
         if new_state == "EN_PREPARACION":
             order.in_kitchen_at = now()
+            if order.table_session and order.table_session.table:
+                order.table_session.table.state = "EN_PREPARACION"
         elif new_state == "LISTO":
             order.ready_at = now()
-        elif new_state == "ENTREGADO":
-            order.delivered_at = now()
+            if order.table_session and order.table_session.table:
+                order.table_session.table.state = "LISTO"
         self.session.flush()
         tbl_number = (
             order.table_session.table.number
@@ -543,11 +641,27 @@ class InventoryRepository:
     def __init__(self, session):
         self.session = session
 
-    def ingredients(self, active_only=False):
+    def ingredients(self, active_only=False, search=None, stock_status=None, base_unit=None):
         query = select(m.Ingredient).order_by(m.Ingredient.name.asc())
         if active_only:
             query = query.where(m.Ingredient.is_active.is_(True))
-        return [record(row) for row in self.session.scalars(query)]
+        if search:
+            term = f"%{search.strip().lower()}%"
+            query = query.where(sa.func.lower(m.Ingredient.name).like(term))
+        if base_unit and base_unit != "ALL":
+            query = query.where(m.Ingredient.base_unit == base_unit)
+        rows = list(self.session.scalars(query))
+        if stock_status and stock_status != "ALL":
+            s_up = stock_status.upper()
+            if s_up in ("CRITICO", "CRÍTICO", "CRITICAL"):
+                rows = [r for r in rows if r.stock <= 0]
+            elif s_up in ("BAJO", "LOW"):
+                rows = [r for r in rows if 0 < r.stock <= r.min_stock]
+            elif s_up in ("NORMAL",):
+                rows = [r for r in rows if r.stock > r.min_stock]
+            elif s_up in ("INACTIVO", "INACTIVE"):
+                rows = [r for r in rows if not r.is_active]
+        return [record(row) for row in rows]
 
     def ingredient(self, ingredient_id, lock=False):
         return record(get(self.session, m.Ingredient, ingredient_id, lock))
@@ -633,12 +747,26 @@ class InventoryRepository:
             )
         return results
 
-    def kardex(self, ingredient_id=None, limit=200):
+    def kardex(self, ingredient_id=None, movement_type=None, from_date=None, to_date=None, search=None, limit=500):
         query = select(m.KardexEntry).order_by(
             m.KardexEntry.created_at.desc(), m.KardexEntry.id.desc()
         )
         if ingredient_id:
             query = query.where(m.KardexEntry.ingredient_id == ingredient_id)
+        if movement_type and movement_type != "ALL":
+            query = query.where(m.KardexEntry.movement_type == movement_type)
+        if from_date:
+            query = query.where(m.KardexEntry.created_at >= from_date)
+        if to_date:
+            query = query.where(m.KardexEntry.created_at <= to_date)
+        if search:
+            term = f"%{search.strip().lower()}%"
+            query = query.join(m.Ingredient).where(
+                sa.or_(
+                    sa.func.lower(m.Ingredient.name).like(term),
+                    sa.func.lower(m.KardexEntry.reference).like(term),
+                )
+            )
         results = []
         for row in self.session.scalars(query.limit(limit)):
             ing_name = row.ingredient.name if row.ingredient else "?"
@@ -649,6 +777,7 @@ class InventoryRepository:
                 else "?"
             )
             qty = float(row.entry_quantity if row.entry_quantity > 0 else row.exit_quantity)
+            ref_cost = float(row.ingredient.reference_cost) if row.ingredient and getattr(row.ingredient, "reference_cost", None) else 0.0
             results.append(
                 {
                     **record(row),
@@ -659,6 +788,8 @@ class InventoryRepository:
                     "balance_before": str(row.previous_balance),
                     "balance_after": str(row.new_balance),
                     "quantity": qty,
+                    "unit_cost": ref_cost,
+                    "reference": row.reference or "",
                 }
             )
         return results
@@ -881,19 +1012,60 @@ class CashRepository:
                 409,
             )
         cash_payments = Decimal("0.00")
+        sales_amt = Decimal("0.00")
+        tips_amt = Decimal("0.00")
+        total_col = Decimal("0.00")
+        cash_col = Decimal("0.00")
+        card_col = Decimal("0.00")
+        trans_col = Decimal("0.00")
+
         for payment in sess.payments:
+            p_cons = Decimal(str(getattr(payment, "consumption_amount", 0) or payment.total_amount))
+            p_tip = Decimal(str(getattr(payment, "tip_amount", 0) or 0))
+            p_tot = Decimal(str(payment.total_amount))
+
+            sales_amt += p_cons
+            tips_amt += p_tip
+            total_col += p_tot
+
             for detail in payment.details:
-                if detail.payment_method == "EFECTIVO":
-                    cash_payments += detail.amount
-        expected = sess.initial_cash + cash_payments
-        rep = Decimal(str(reported_cash))
-        diff = rep - expected
-        if diff == 0:
+                amt = Decimal(str(detail.amount))
+                method = detail.payment_method.upper()
+                if method in ("EFECTIVO", "CASH"):
+                    cash_col += amt
+                    cash_payments += amt
+                elif method in ("TARJETA", "CARD", "DEBITO", "CREDITO"):
+                    card_col += amt
+                else:
+                    trans_col += amt
+
+        # Gastos asociados a este turno / caja
+        sess_date = sess.opened_at.date() if hasattr(sess.opened_at, "date") else sess.opened_at
+        expenses_query = select(m.Expense).where(m.Expense.expense_date >= sess_date)
+        cash_expenses = sum(
+            (Decimal(str(e.amount)) for e in self.session.scalars(expenses_query).all()),
+            Decimal("0.00")
+        )
+
+        # Regla 14: Efectivo esperado = monto inicial + cobros reales en efectivo (sin tarjeta ni transferencia)
+        expected = (sess.initial_cash + cash_payments).quantize(Decimal(".01"))
+        rep = Decimal(str(reported_cash)).quantize(Decimal(".01"))
+        diff = (rep - expected).quantize(Decimal(".01"))
+
+        if diff == Decimal("0.00"):
             status = "CUADRADA"
-        elif diff > 0:
+        elif diff > Decimal("0.00"):
             status = "SOBRANTE"
         else:
             status = "FALTANTE"
+
+        sess.sales_amount = sales_amt.quantize(Decimal(".01"))
+        sess.tips_amount = tips_amt.quantize(Decimal(".01"))
+        sess.total_collected = total_col.quantize(Decimal(".01"))
+        sess.cash_collected = cash_col.quantize(Decimal(".01"))
+        sess.card_collected = card_col.quantize(Decimal(".01"))
+        sess.transfer_collected = trans_col.quantize(Decimal(".01"))
+        sess.cash_expenses = cash_expenses.quantize(Decimal(".01"))
         sess.expected_cash = expected
         sess.reported_cash = rep
         sess.difference = diff
@@ -945,40 +1117,129 @@ class PaymentRepository:
                 "NO_ACTIVE_SESSION", "La mesa no tiene una sesión activa.", 404
             )
         orders = [order for order in sess.orders if order.state != "CANCELADO"]
-        total = sum(
-            sum(
-                Decimal(str(line.unit_price)) * line.quantity
-                for line in order.lines
-            )
-            for order in orders
+
+        # Consultar facturas previas de la sesión para saber qué líneas ya fueron pagadas
+        prev_invoices = self.session.scalars(
+            select(m.Invoice).where(m.Invoice.table_session_id == sess.id)
+        ).all()
+        paid_qty_by_line = {}
+        for inv in prev_invoices:
+            for il in inv.lines:
+                if il.order_line_id:
+                    paid_qty_by_line[il.order_line_id] = paid_qty_by_line.get(il.order_line_id, 0) + il.quantity
+                else:
+                    k = f"{il.product_id}_{il.product_name}"
+                    paid_qty_by_line[k] = paid_qty_by_line.get(k, 0) + il.quantity
+
+        items = []
+        total_consumption = Decimal("0.00")
+        for o in orders:
+            for l in o.lines:
+                uprice = Decimal(str(l.unit_price))
+                tot_qty = l.quantity
+                tot_line = uprice * tot_qty
+                total_consumption += tot_line
+
+                paid_qty = paid_qty_by_line.get(l.id, 0)
+                if not paid_qty:
+                    paid_qty = paid_qty_by_line.get(f"{l.product_id}_{l.product_name}", 0)
+                paid_qty = min(tot_qty, paid_qty)
+
+                pending_qty = max(0, tot_qty - paid_qty)
+
+                items.append({
+                    "order_line_id": l.id,
+                    "order_id": o.id,
+                    "product_id": l.product_id,
+                    "name": l.product_name,
+                    "unit_price": str(uprice),
+                    "ordered_qty": tot_qty,
+                    "paid_qty": paid_qty,
+                    "pending_qty": pending_qty,
+                    "subtotal": str(tot_line.quantize(Decimal(".01"))),
+                    "pending_subtotal": str((uprice * pending_qty).quantize(Decimal(".01"))),
+                })
+
+        # Consultar historial real de pagos de la sesión
+        prev_payments = self.session.scalars(
+            select(m.Payment)
+            .where(m.Payment.table_session_id == sess.id)
+            .order_by(m.Payment.created_at.asc(), m.Payment.id.asc())
+        ).all()
+
+        total_paid_consumption = sum(
+            (Decimal(str(p.consumption_amount or p.total_amount)) for p in prev_payments),
+            Decimal("0.00"),
         )
+        pending_balance = max(Decimal("0.00"), total_consumption - total_paid_consumption)
+
+        payments_history = []
+        for idx, p in enumerate(prev_payments, 1):
+            c_name = f"{p.cashier.first_name} {p.cashier.last_name}" if getattr(p, "cashier", None) else "Cajero"
+            dt = p.created_at
+            methods_list = [d.payment_method for d in p.details]
+            methods_summary = ", ".join(sorted(set(methods_list))) if methods_list else "EFECTIVO"
+            payments_history.append({
+                "id": p.id,
+                "number": idx,
+                "created_at": dt.isoformat() if dt else "",
+                "time": dt.strftime("%H:%M") if dt else "",
+                "consumption_amount": str(p.consumption_amount.quantize(Decimal(".01")) if p.consumption_amount else p.total_amount),
+                "tip_amount": str(p.tip_amount.quantize(Decimal(".01")) if p.tip_amount else Decimal("0.00")),
+                "total_amount": str(p.total_amount.quantize(Decimal(".01"))),
+                "payment_method": methods_summary,
+                "cashier_name": c_name,
+                "cash_received": str(p.cash_received.quantize(Decimal(".01"))) if p.cash_received else None,
+                "cash_change": str(p.cash_change.quantize(Decimal(".01"))) if p.cash_change else None,
+                "details": [
+                    {
+                        "method": d.payment_method,
+                        "amount": str(d.amount.quantize(Decimal(".01"))),
+                        "reference_code": d.reference_code,
+                    }
+                    for d in p.details
+                ],
+            })
+
+        is_already_partial = (table.state == "PAGO_PARCIAL")
+        account_requested = any(getattr(o, "account_requested", False) for o in orders) or (table.state == "CUENTA_SOLICITADA")
+        all_delivered = all(o.state in ("ENTREGADO", "PAGADO", "CERRADO") for o in orders) if orders else False
+        is_billable = is_already_partial or (all_delivered and account_requested and pending_balance > Decimal("0.00"))
+
         return {
             "table_id": table.id,
             "table_number": table.number,
             "session_id": sess.id,
+            "waiter_name": f"{sess.waiter.first_name} {sess.waiter.last_name}" if getattr(sess, "waiter", None) else "Mesero",
+            "state": table.state,
             "opened_at": sess.opened_at.isoformat(),
             "orders_count": len(orders),
             "orders": [
                 {
                     "id": o.id,
                     "state": o.state,
+                    "account_requested": getattr(o, "account_requested", False),
                     "lines": [
                         {
+                            "order_line_id": l.id,
                             "name": l.product_name,
                             "qty": l.quantity,
                             "unit_price": str(l.unit_price),
-                            "subtotal": str(
-                                (l.unit_price * l.quantity).quantize(
-                                    Decimal(".01")
-                                )
-                            ),
+                            "subtotal": str((l.unit_price * l.quantity).quantize(Decimal(".01"))),
                         }
                         for l in o.lines
                     ],
                 }
                 for o in orders
             ],
-            "total_amount": str(total.quantize(Decimal(".01"))),
+            "items": items,
+            "payments_history": payments_history,
+            "total_amount": str(total_consumption.quantize(Decimal(".01"))),
+            "total_paid": str(total_paid_consumption.quantize(Decimal(".01"))),
+            "pending_balance": str(pending_balance.quantize(Decimal(".01"))),
+            "is_billable": is_billable,
+            "account_requested": account_requested,
+            "all_delivered": all_delivered,
         }
 
     def process_payment(
@@ -987,6 +1248,9 @@ class PaymentRepository:
         cash_session_id,
         cashier_id,
         details,
+        items=None,
+        custom_amount=None,
+        tip_amount=0,
         cash_received=None,
     ):
         sess = get(self.session, m.TableSession, table_session_id, lock=True)
@@ -1006,69 +1270,185 @@ class PaymentRepository:
             raise DomainError(
                 "EMPTY_ORDERS", "No hay pedidos válidos para cobrar.", 422
             )
-        total = sum(
-            sum(
-                Decimal(str(line.unit_price)) * line.quantity
-                for line in order.lines
-            )
-            for order in orders
-        ).quantize(Decimal(".01"))
-        paid_total = sum(Decimal(str(d["amount"])) for d in details).quantize(
-            Decimal(".01")
+
+        # Regla 5: La mesa solamente puede cobrarse si los pedidos están entregados y la cuenta fue solicitada,
+        # o si la mesa ya tiene un pago parcial previo.
+        tbl = sess.table
+        is_already_partial = (tbl.state == "PAGO_PARCIAL")
+        account_is_requested = any(getattr(o, "account_requested", False) for o in orders) or (tbl.state == "CUENTA_SOLICITADA")
+        all_delivered = all(o.state in ("ENTREGADO", "PAGADO", "CERRADO") for o in orders)
+
+        if not is_already_partial:
+            if not all_delivered:
+                raise DomainError(
+                    "ORDER_NOT_DELIVERED",
+                    "No se puede cobrar la mesa; los pedidos deben estar entregados al cliente primero.",
+                    409,
+                )
+            if not account_is_requested:
+                raise DomainError(
+                    "ACCOUNT_NOT_REQUESTED",
+                    "No se puede cobrar la mesa; el mesero debe solicitar la cuenta primero.",
+                    409,
+                )
+
+        # Calcular consumo total de la comanda y lo ya pagado
+        total_session_consumption = sum(
+            (Decimal(str(l.unit_price)) * l.quantity for o in orders for l in o.lines),
+            Decimal("0.00"),
         )
-        if paid_total != total:
+        all_session_payments = self.session.scalars(
+            select(m.Payment).where(m.Payment.table_session_id == sess.id)
+        ).all()
+        total_session_paid = sum(
+            (Decimal(str(p.consumption_amount or p.total_amount)) for p in all_session_payments),
+            Decimal("0.00"),
+        )
+        current_pending_balance = max(Decimal("0.00"), total_session_consumption - total_session_paid)
+
+        if current_pending_balance <= Decimal("0.00"):
+            raise DomainError("ALREADY_PAID", "La cuenta ya no tiene saldo pendiente por cobrar.", 409)
+
+        # Consultar facturas previas para calcular cantidades pendientes por ítem
+        prev_invoices = self.session.scalars(
+            select(m.Invoice).where(m.Invoice.table_session_id == sess.id)
+        ).all()
+        paid_qty_by_line = {}
+        for inv in prev_invoices:
+            for il in inv.lines:
+                if il.order_line_id:
+                    paid_qty_by_line[il.order_line_id] = paid_qty_by_line.get(il.order_line_id, 0) + il.quantity
+                else:
+                    k = f"{il.product_id}_{il.product_name}"
+                    paid_qty_by_line[k] = paid_qty_by_line.get(k, 0) + il.quantity
+
+        all_lines_map = {}
+        for o in orders:
+            for l in o.lines:
+                all_lines_map[l.id] = l
+
+        lines_to_charge = []
+        is_free_abono = False
+
+        if items:
+            # Opción 1: Cobro parcial por productos y cantidades específicas
+            consumption_to_pay = Decimal("0.00")
+            for it in items:
+                line_id = it.get("order_line_id")
+                qty = int(it.get("quantity", 0))
+                if qty <= 0:
+                    continue
+                if line_id not in all_lines_map:
+                    raise DomainError("INVALID_ITEM", f"La línea #{line_id} no pertenece a esta mesa.", 422)
+                line = all_lines_map[line_id]
+                already_paid = paid_qty_by_line.get(line.id, 0)
+                pending_units = line.quantity - already_paid
+                if qty > pending_units:
+                    raise DomainError(
+                        "QUANTITY_EXCEEDED",
+                        f"Cantidad a cobrar ({qty}) excede las unidades pendientes ({pending_units}) de {line.product_name}.",
+                        422,
+                    )
+                uprice = Decimal(str(line.unit_price))
+                consumption_to_pay += uprice * qty
+                lines_to_charge.append((line, qty))
+        elif custom_amount is not None:
+            # Opción 2: Abono libre por valor (ej: $20.000, $35.500)
+            is_free_abono = True
+            consumption_to_pay = Decimal(str(custom_amount)).quantize(Decimal(".01"))
+            if consumption_to_pay <= Decimal("0.00"):
+                raise DomainError("ZERO_AMOUNT", "El valor del abono debe ser superior a cero.", 422)
+            if consumption_to_pay > current_pending_balance:
+                raise DomainError(
+                    "AMOUNT_EXCEEDS_BALANCE",
+                    f"El valor a abonar (${consumption_to_pay}) excede el saldo pendiente (${current_pending_balance}).",
+                    422,
+                )
+        else:
+            # Opción 3: Cobro total del saldo pendiente restante
+            consumption_to_pay = current_pending_balance
+            for o in orders:
+                for l in o.lines:
+                    already_paid = paid_qty_by_line.get(l.id, 0)
+                    if not already_paid:
+                        already_paid = paid_qty_by_line.get(f"{l.product_id}_{l.product_name}", 0)
+                    pending_units = max(0, l.quantity - already_paid)
+                    if pending_units > 0:
+                        lines_to_charge.append((l, pending_units))
+
+        consumption_to_pay = consumption_to_pay.quantize(Decimal(".01"))
+        tip = Decimal(str(tip_amount or 0)).quantize(Decimal(".01"))
+        total_to_pay = (consumption_to_pay + tip).quantize(Decimal(".01"))
+
+        if total_to_pay <= Decimal("0.00"):
+            raise DomainError("ZERO_AMOUNT", "El saldo a pagar es cero o no hay productos seleccionados.", 422)
+
+        # Normalizar medios de pago: exclusivamente EFECTIVO, TARJETA, TRANSFERENCIA
+        norm_details = []
+        for d in details:
+            m_str = str(d.get("payment_method", "EFECTIVO")).upper()
+            if m_str in ("NEQUI", "DAVIPLATA", "TRANSFERENCIA", "BANCOLOMBIA"):
+                clean_method = "TRANSFERENCIA"
+            elif m_str in ("TARJETA", "CARD", "DEBITO", "CREDITO", "DATAFONO"):
+                clean_method = "TARJETA"
+            else:
+                clean_method = "EFECTIVO"
+            norm_details.append({
+                "payment_method": clean_method,
+                "amount": Decimal(str(d["amount"])).quantize(Decimal(".01")),
+                "reference_code": d.get("reference_code"),
+            })
+
+        paid_total = sum(d["amount"] for d in norm_details).quantize(Decimal(".01"))
+        if paid_total != total_to_pay:
             raise DomainError(
                 "AMOUNT_MISMATCH",
-                f"El total pagado ({paid_total}) no coincide con el total de la cuenta ({total}).",
+                f"El total pagado (${paid_total}) no coincide con el total a pagar (${total_to_pay}) [Consumo: ${consumption_to_pay} + Propina: ${tip}].",
                 422,
             )
+
+        cash_part = sum(d["amount"] for d in norm_details if d["payment_method"] == "EFECTIVO")
         cash_change = None
         if cash_received is not None:
-            cash_rec = Decimal(str(cash_received))
-            cash_part = sum(
-                Decimal(str(d["amount"]))
-                for d in details
-                if d["payment_method"] == "EFECTIVO"
-            )
+            cash_rec = Decimal(str(cash_received)).quantize(Decimal(".01"))
             if cash_rec < cash_part:
                 raise DomainError(
                     "INSUFFICIENT_CASH",
-                    f"Efectivo recibido ({cash_rec}) es menor al monto en efectivo ({cash_part}).",
+                    f"Efectivo recibido (${cash_rec}) es menor al monto cobrado en efectivo (${cash_part}).",
                     422,
                 )
             cash_change = (cash_rec - cash_part).quantize(Decimal(".01"))
 
+        # Registrar pago en DB
         payment = m.Payment(
             table_session_id=table_session_id,
             cash_session_id=cash_session_id,
             cashier_id=cashier_id,
-            total_amount=total,
-            cash_received=Decimal(str(cash_received))
-            if cash_received
-            else None,
+            consumption_amount=consumption_to_pay,
+            tip_amount=tip,
+            total_amount=total_to_pay,
+            cash_received=Decimal(str(cash_received)).quantize(Decimal(".01")) if cash_received is not None else None,
             cash_change=cash_change,
         )
         self.session.add(payment)
         self.session.flush()
 
-        for d in details:
+        for d in norm_details:
             self.session.add(
                 m.PaymentDetail(
                     payment_id=payment.id,
                     payment_method=d["payment_method"],
-                    amount=Decimal(str(d["amount"])),
+                    amount=d["amount"],
                     reference_code=d.get("reference_code"),
                 )
             )
 
-        sess.state = "CLOSED"
-        sess.closed_at = now()
-        table = sess.table
-        table.state = "DISPONIBLE"
-
+        # Generar Factura / Comprobante
         inv_count = self.session.scalar(select(func.count(m.Invoice.id))) + 1
         inv_number = f"FAC-{inv_count:06d}"
-        methods_str = ", ".join(d["payment_method"] for d in details)
+        methods_str = ", ".join(sorted(set(d["payment_method"] for d in norm_details)))
+        table = sess.table
+
         invoice = m.Invoice(
             invoice_number=inv_number,
             payment_id=payment.id,
@@ -1076,35 +1456,69 @@ class PaymentRepository:
             cashier_id=cashier_id,
             waiter_id=sess.waiter_id,
             table_number=table.number,
-            subtotal=total,
+            subtotal=consumption_to_pay,
+            tip=tip,
             tax=Decimal("0.00"),
-            total=total,
+            total=total_to_pay,
             payment_method_summary=methods_str,
         )
         self.session.add(invoice)
         self.session.flush()
 
-        for order in orders:
-            for line in order.lines:
+        if is_free_abono:
+            self.session.add(
+                m.InvoiceLine(
+                    invoice_id=invoice.id,
+                    order_line_id=None,
+                    product_id=0,
+                    product_name=f"Abono parcial a cuenta - Mesa {table.number}",
+                    quantity=1,
+                    unit_price=consumption_to_pay,
+                    subtotal=consumption_to_pay,
+                )
+            )
+        else:
+            for l, qty in lines_to_charge:
+                uprice = Decimal(str(l.unit_price))
                 self.session.add(
                     m.InvoiceLine(
                         invoice_id=invoice.id,
-                        product_id=line.product_id,
-                        product_name=line.product_name,
-                        quantity=line.quantity,
-                        unit_price=line.unit_price,
-                        subtotal=(line.unit_price * line.quantity).quantize(
-                            Decimal(".01")
-                        ),
+                        order_line_id=l.id,
+                        product_id=l.product_id,
+                        product_name=l.product_name,
+                        quantity=qty,
+                        unit_price=uprice,
+                        subtotal=(uprice * qty).quantize(Decimal(".01")),
                     )
                 )
         self.session.flush()
+
+        # Recalcular saldo total pendiente tras este nuevo pago
+        new_total_paid = total_session_paid + consumption_to_pay
+        remaining_balance = max(Decimal("0.00"), total_session_consumption - new_total_paid)
+
+        if remaining_balance <= Decimal("0.00"):
+            sess.state = "CLOSED"
+            sess.closed_at = now()
+            table.state = "DISPONIBLE"
+            for order in orders:
+                order.state = "PAGADO"
+        else:
+            table.state = "PAGO_PARCIAL"
+
+        self.session.flush()
+
         return {
             "payment_id": payment.id,
             "invoice_number": inv_number,
             "invoice_id": invoice.id,
-            "total": str(total),
+            "total": str(total_to_pay),
+            "consumption": str(consumption_to_pay),
+            "tip": str(tip),
             "cash_change": str(cash_change) if cash_change is not None else None,
+            "remaining_balance": str(remaining_balance.quantize(Decimal(".01"))),
+            "is_fully_paid": (remaining_balance <= Decimal("0.00")),
+            "table_state": table.state,
         }
 
 
@@ -1280,18 +1694,24 @@ class PredictionsRepository:
                 status = "RIESGO_ALTO"
             else:
                 status = "RIESGO_MEDIO"
+            days_es = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+            day_name = days_es[target_weekday % 7]
             alerts.append(
                 {
                     "product_id": p.id,
                     "product_name": p.name,
+                    "day_of_week": day_name,
                     "capacity": capacity,
+                    "current_capacity": capacity,
                     "estimated_demand": estimated_demand,
                     "deficit": deficit,
+                    "projected_deficit": deficit,
                     "limiting_ingredient": limiting_ing,
                     "status": status,
+                    "risk_level": status,
                     "recommendation": f"Se sugiere reabastecer {deficit} porciones de {limiting_ing or 'insumos'}."
                     if deficit > 0
-                    else "Capacidad suficiente.",
+                    else "Capacidad suficiente para la demanda proyectada.",
                 }
             )
         return alerts
@@ -1301,39 +1721,85 @@ class ReportsRepository:
     def __init__(self, session):
         self.session = session
 
-    def sales_summary(self):
-        payments = self.session.scalars(select(m.Payment)).all()
-        total_sales = sum(p.total_amount for p in payments)
+    def sales_summary(self, from_date=None, to_date=None):
+        query = select(m.Payment)
+        if from_date:
+            query = query.where(m.Payment.created_at >= from_date)
+        if to_date:
+            query = query.where(m.Payment.created_at <= to_date)
+        payments = self.session.scalars(query).all()
+
+        total_consumption = Decimal("0.00")
+        total_tips = Decimal("0.00")
+        total_sales = Decimal("0.00")
         orders_count = len(payments)
+
+        methods = {"EFECTIVO": Decimal("0.00"), "TARJETA": Decimal("0.00"), "TRANSFERENCIA": Decimal("0.00")}
+        methods_count = {"EFECTIVO": 0, "TARJETA": 0, "TRANSFERENCIA": 0}
+        for p in payments:
+            cons = Decimal(str(getattr(p, "consumption_amount", 0) or p.total_amount))
+            tip = Decimal(str(getattr(p, "tip_amount", 0) or 0))
+            tot = Decimal(str(p.total_amount))
+            total_consumption += cons
+            total_tips += tip
+            total_sales += tot
+
+            for d in p.details:
+                amt = Decimal(str(d.amount))
+                m_str = d.payment_method.upper()
+                if m_str in ("EFECTIVO", "CASH"):
+                    methods["EFECTIVO"] += amt
+                    methods_count["EFECTIVO"] += 1
+                elif m_str in ("TARJETA", "CARD", "DEBITO", "CREDITO"):
+                    methods["TARJETA"] += amt
+                    methods_count["TARJETA"] += 1
+                else:
+                    methods["TRANSFERENCIA"] += amt
+                    methods_count["TRANSFERENCIA"] += 1
+
         ticket_avg = (
             (total_sales / orders_count).quantize(Decimal(".01"))
             if orders_count
             else Decimal("0.00")
         )
-        methods = {}
-        for p in payments:
-            for d in p.details:
-                methods[d.payment_method] = (
-                    methods.get(d.payment_method, Decimal("0.00")) + d.amount
-                )
+
         return {
             "total_sales": str(total_sales.quantize(Decimal(".01"))),
+            "total_consumption": str(total_consumption.quantize(Decimal(".01"))),
+            "total_tips": str(total_tips.quantize(Decimal(".01"))),
             "orders_count": orders_count,
             "ticket_average": str(ticket_avg),
             "methods_breakdown": {
                 k: str(v.quantize(Decimal(".01"))) for k, v in methods.items()
             },
+            "methods_count": methods_count,
         }
 
-    def operating_result(self):
-        payments = self.session.scalars(select(m.Payment)).all()
-        total_sales = sum(p.total_amount for p in payments)
+    def operating_result(self, from_date=None, to_date=None):
+        pay_query = select(m.Payment)
+        if from_date:
+            pay_query = pay_query.where(m.Payment.created_at >= from_date)
+        if to_date:
+            pay_query = pay_query.where(m.Payment.created_at <= to_date)
+        payments = self.session.scalars(pay_query).all()
+
+        total_sales = sum(
+            (Decimal(str(p.total_amount)) for p in payments),
+            Decimal("0.00"),
+        )
         total_cogs = Decimal("0.00")
-        lines = self.session.scalars(
+
+        lines_query = (
             select(m.OrderLine)
             .join(m.Order)
             .where(m.Order.state != "CANCELADO")
-        ).all()
+        )
+        if from_date:
+            lines_query = lines_query.where(m.Order.created_at >= from_date)
+        if to_date:
+            lines_query = lines_query.where(m.Order.created_at <= to_date)
+        lines = self.session.scalars(lines_query).all()
+
         for line in lines:
             recipe = self.session.scalar(
                 select(m.Recipe).where(m.Recipe.product_id == line.product_id)
@@ -1346,9 +1812,21 @@ class ReportsRepository:
                         * it.ingredient.reference_cost
                     )
         gross_margin = total_sales - total_cogs
-        expenses = self.session.scalars(select(m.Expense)).all()
-        total_expenses = sum(e.amount for e in expenses)
+
+        exp_query = select(m.Expense)
+        if from_date:
+            f_d_only = from_date.date() if hasattr(from_date, "date") else from_date
+            exp_query = exp_query.where(m.Expense.expense_date >= f_d_only)
+        if to_date:
+            t_d_only = to_date.date() if hasattr(to_date, "date") else to_date
+            exp_query = exp_query.where(m.Expense.expense_date <= t_d_only)
+        expenses = self.session.scalars(exp_query).all()
+        total_expenses = sum(
+            (Decimal(str(e.amount)) for e in expenses),
+            Decimal("0.00"),
+        )
         operating_result = gross_margin - total_expenses
+
         return {
             "total_sales": str(total_sales.quantize(Decimal(".01"))),
             "estimated_cogs": str(total_cogs.quantize(Decimal(".01"))),

@@ -75,20 +75,21 @@ ROLE_PERMISSIONS_MAP = {
     "ADMINISTRADOR": BASE_PERMISSIONS,
     "MESERO": (
         "category.view",
+        "product.view",
         "table.view",
         "table.open",
         "order.view",
         "order.create",
+        "order.update_draft",
         "order.confirm",
         "order.cancel",
         "order.deliver",
-        "order.prepare",
     ),
-
     "COCINA": (
         "kitchen.view",
         "kitchen.advance",
         "order.view",
+        "order.prepare",
         "product.view",
         "recipe.view",
         "inventory.view",
@@ -132,10 +133,7 @@ def seed_authorization(session):
     # 3. Assign permissions to roles
     for r_name, p_codes in ROLE_PERMISSIONS_MAP.items():
         role = roles_obj[r_name]
-        for p_code in p_codes:
-            perm = perms_obj[p_code]
-            if perm not in role.permissions:
-                role.permissions.append(perm)
+        role.permissions = [perms_obj[p_code] for p_code in p_codes if p_code in perms_obj]
     session.flush()
 
 

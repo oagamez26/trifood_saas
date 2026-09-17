@@ -310,7 +310,7 @@ export function ExpensesPage() {
         onClose={() => setShowModal(false)}
         title="Registrar Gasto Operativo"
         subtitle="Erogaciones para cálculo de margen real y balance operativo"
-        width="md"
+        size="sm"
         footer={
           <div style={{ display: "flex", gap: 10, width: "100%" }}>
             <button
@@ -400,42 +400,38 @@ export function ExpensesPage() {
           </div>
         </form>
       </Drawer>
-      {/* MODAL: NUEVA CATEGORÍA DE GASTO */}
-      {showCatModal && (
-        <div className="modal-backdrop" onClick={() => setShowCatModal(false)}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 380 }}>
-            <div className="modal-header">
-              <h3 style={{ fontSize: 16, fontWeight: 700 }}>Nueva Categoría de Gasto</h3>
-              <button onClick={() => setShowCatModal(false)} className="btn-icon">
-                <X size={18} />
-              </button>
-            </div>
-            <form onSubmit={handleCreateCategory}>
-              <div className="modal-body">
-                <div className="form-group">
-                  <label className="form-label">Nombre de la categoría</label>
-                  <input
-                    type="text"
-                    placeholder="Ej. Servicios Públicos, Nómina, Insumos"
-                    value={newCatName}
-                    onChange={(e) => setNewCatName(e.target.value)}
-                    className="form-input"
-                    required
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button type="button" onClick={() => setShowCatModal(false)} className="btn btn-secondary">
-                  Cancelar
-                </button>
-                <button type="submit" className="btn btn-primary">
-                  Guardar Categoría
-                </button>
-              </div>
-            </form>
+      {/* DRAWER: NUEVA CATEGORÍA DE GASTO */}
+      <Drawer
+        isOpen={showCatModal}
+        onClose={() => setShowCatModal(false)}
+        title="Nueva Categoría de Gasto"
+        subtitle="Agrupa y clasifica los costos operativos del restaurante."
+        size="sm"
+        footer={
+          <>
+            <button type="button" onClick={() => setShowCatModal(false)} className="btn btn-secondary">
+              Cancelar
+            </button>
+            <button type="submit" form="form-new-expense-cat" className="btn btn-primary">
+              Guardar Categoría
+            </button>
+          </>
+        }
+      >
+        <form id="form-new-expense-cat" onSubmit={handleCreateCategory} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div className="form-group">
+            <label className="form-label">Nombre de la categoría *</label>
+            <input
+              type="text"
+              placeholder="Ej. Servicios Públicos, Nómina, Insumos"
+              value={newCatName}
+              onChange={(e) => setNewCatName(e.target.value)}
+              className="form-input"
+              required
+            />
           </div>
-        </div>
-      )}
+        </form>
+      </Drawer>
     </div>
   );
 }

@@ -37,9 +37,21 @@ class RecipeIn(BaseModel):
 
 
 @router.get("/ingredients")
-def list_ingredients(active_only: bool = False, user=Depends(get_current_user), uow=Depends(get_uow)):
+def list_ingredients(
+    active_only: bool = False,
+    search: Optional[str] = None,
+    stock_status: Optional[str] = None,
+    base_unit: Optional[str] = None,
+    user=Depends(get_current_user),
+    uow=Depends(get_uow),
+):
     require(user, "inventory.view")
-    return uow.inventory.ingredients(active_only=active_only)
+    return uow.inventory.ingredients(
+        active_only=active_only,
+        search=search,
+        stock_status=stock_status,
+        base_unit=base_unit,
+    )
 
 
 @router.post("/ingredients")
@@ -101,9 +113,39 @@ def register_movement(data: MovementIn, user=Depends(get_current_user), uow=Depe
 
 
 @router.get("/kardex")
-def get_kardex(ingredient_id: Optional[int] = None, user=Depends(get_current_user), uow=Depends(get_uow)):
+def get_kardex(
+    ingredient_id: Optional[int] = None,
+    movement_type: Optional[str] = None,
+    from_date: Optional[str] = None,
+    to_date: Optional[str] = None,
+    search: Optional[str] = None,
+    user=Depends(get_current_user),
+    uow=Depends(get_uow),
+):
     require(user, "inventory.view")
-    return uow.inventory.kardex(ingredient_id=ingredient_id)
+    from datetime import datetime, time as d_time, timezone
+    f_dt = None
+    t_dt = None
+    if from_date:
+        try:
+            d = datetime.strptime(from_date, "%Y-%m-%d").date()
+            f_dt = datetime.combine(d, d_time.min, tzinfo=timezone.utc)
+        except ValueError:
+            pass
+    if to_date:
+        try:
+            d = datetime.strptime(to_date, "%Y-%m-%d").date()
+            t_dt = datetime.combine(d, d_time.max, tzinfo=timezone.utc)
+        except ValueError:
+            pass
+
+    return uow.inventory.kardex(
+        ingredient_id=ingredient_id,
+        movement_type=movement_type,
+        from_date=f_dt,
+        to_date=t_dt,
+        search=search,
+    )
 
 
 @router.get("/recipes")

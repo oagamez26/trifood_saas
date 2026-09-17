@@ -2,13 +2,14 @@ import React, { useEffect, useState, type FormEvent } from "react";
 import { useAuth, type AuthUser } from "../../contexts/AuthContext";
 import { apiRequest } from "../../services/api";
 import { Drawer } from "../../components/Drawer";
+import { IconButton } from "../../components/IconButton";
 import {
   Users,
   UserPlus,
   Search,
   Filter,
-  Key,
-  Edit,
+  KeyRound,
+  Pencil,
   Shield,
   CheckCircle2,
   XCircle,
@@ -439,41 +440,35 @@ export function UsersPage() {
                     </td>
 
                     <td style={{ textAlign: "right" }}>
-                      <div style={{ display: "inline-flex", gap: 6 }}>
+                      <div style={{ display: "inline-flex", gap: 6, justifyContent: "flex-end" }}>
                         {hasPermission("user.update") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Pencil}
+                            tooltip="Editar usuario y rol"
+                            variant="primary"
                             onClick={() => openEditDrawer(u)}
-                            title="Editar usuario y rol"
-                            style={{ padding: "0 8px" }}
-                          >
-                            <Edit size={13} />
-                          </button>
+                          />
                         )}
 
                         {hasPermission("user.update") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={KeyRound}
+                            tooltip="Restablecer contraseña"
+                            variant="default"
                             onClick={() => {
                               setPasswordTargetUser(u);
                               setTargetPassword("");
                             }}
-                            title="Restablecer contraseña"
-                            style={{ padding: "0 8px" }}
-                          >
-                            <Key size={13} />
-                          </button>
+                          />
                         )}
 
                         {hasPermission("user.update") && (
-                          <button
-                            className="btn btn-secondary btn-sm"
+                          <IconButton
+                            icon={Power}
+                            tooltip={u.is_active ? "Inactivar cuenta" : "Activar cuenta"}
+                            variant={u.is_active ? "danger" : "success"}
                             onClick={() => handleToggleActive(u)}
-                            title={u.is_active ? "Inactivar cuenta" : "Activar cuenta"}
-                            style={{ padding: "0 8px" }}
-                          >
-                            <Power size={13} color={u.is_active ? "var(--color-secondary)" : "var(--color-tertiary)"} />
-                          </button>
+                          />
                         )}
                       </div>
                     </td>
@@ -540,7 +535,7 @@ export function UsersPage() {
           onSubmit={handleSaveUser}
           style={{ display: "flex", flexDirection: "column", gap: 16 }}
         >
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
             <div className="form-group">
               <label className="form-label">Nombre *</label>
               <input
@@ -612,7 +607,7 @@ export function UsersPage() {
             />
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 12 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 12 }}>
             <div className="form-group">
               <label className="form-label">Rol del sistema *</label>
               <select
@@ -692,76 +687,44 @@ export function UsersPage() {
         </form>
       </Drawer>
 
-      {/* QUICK RESET PASSWORD MODAL */}
-      {passwordTargetUser && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            backgroundColor: "rgba(15, 23, 42, 0.45)",
-            backdropFilter: "blur(2px)",
-            zIndex: 110,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 16,
-          }}
-          onClick={() => setPasswordTargetUser(null)}
-        >
-          <div
-            style={{
-              backgroundColor: "var(--color-surface)",
-              borderRadius: "var(--radius-lg)",
-              padding: 24,
-              maxWidth: 400,
-              width: "100%",
-              boxShadow: "var(--shadow-modal)",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <Key size={18} color="var(--color-primary)" />
-                <h3 style={{ fontSize: 16, fontWeight: 700, margin: 0 }}>Restablecer Contraseña</h3>
-              </div>
-              <button onClick={() => setPasswordTargetUser(null)} style={{ color: "var(--color-text-muted)" }}>
-                <X size={18} />
-              </button>
+      {/* DRAWER: RESTABLECER CONTRASEÑA */}
+      <Drawer
+        isOpen={Boolean(passwordTargetUser)}
+        onClose={() => setPasswordTargetUser(null)}
+        title="Restablecer Contraseña"
+        subtitle={passwordTargetUser ? `Asignar clave para @${passwordTargetUser.username} (${passwordTargetUser.first_name} ${passwordTargetUser.last_name})` : ""}
+        size="sm"
+        footer={
+          <>
+            <button type="button" onClick={() => setPasswordTargetUser(null)} className="btn btn-secondary">
+              Cancelar
+            </button>
+            <button type="submit" form="form-reset-pwd-admin" className="btn btn-primary">
+              Actualizar Contraseña
+            </button>
+          </>
+        }
+      >
+        {passwordTargetUser && (
+          <form id="form-reset-pwd-admin" onSubmit={handleChangePasswordAdmin} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            <p style={{ fontSize: 13, color: "var(--color-text-secondary)", margin: 0 }}>
+              Ingresa una nueva clave de acceso provisional o definitiva para el usuario:
+            </p>
+
+            <div className="form-group">
+              <label className="form-label">Nueva Contraseña *</label>
+              <input
+                type="password"
+                required
+                placeholder="Mínimo 8 caracteres"
+                value={targetPassword}
+                onChange={(e) => setTargetPassword(e.target.value)}
+                className="form-input"
+              />
             </div>
-
-            <form onSubmit={handleChangePasswordAdmin} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <p style={{ fontSize: 13, color: "var(--color-text-secondary)", margin: 0 }}>
-                Asignar nueva contraseña para <strong>@{passwordTargetUser.username}</strong> ({passwordTargetUser.first_name} {passwordTargetUser.last_name}):
-              </p>
-
-              <div className="form-group">
-                <label className="form-label">Nueva Contraseña *</label>
-                <input
-                  type="password"
-                  required
-                  placeholder="Mínimo 8 caracteres"
-                  value={targetPassword}
-                  onChange={(e) => setTargetPassword(e.target.value)}
-                  className="form-input"
-                />
-              </div>
-
-              <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 6 }}>
-                <button
-                  type="button"
-                  className="btn btn-secondary btn-sm"
-                  onClick={() => setPasswordTargetUser(null)}
-                >
-                  Cancelar
-                </button>
-                <button type="submit" className="btn btn-primary btn-sm">
-                  Actualizar Contraseña
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+          </form>
+        )}
+      </Drawer>
     </div>
   );
 }

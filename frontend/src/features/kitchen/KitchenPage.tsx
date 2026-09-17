@@ -62,14 +62,10 @@ export function KitchenPage() {
     return () => clearInterval(interval);
   }, [token]);
 
-  async function handleAdvance(orderId: number, nextState: "prepare" | "ready" | "deliver") {
+  async function handleAdvance(orderId: number, nextState: "prepare" | "ready") {
     try {
       setBusyId(orderId);
-      if (nextState === "deliver") {
-        await apiRequest(`/tables-orders/orders/${orderId}/deliver`, { method: "POST" }, token);
-      } else {
-        await apiRequest(`/kitchen/orders/${orderId}/${nextState}`, { method: "POST" }, token);
-      }
+      await apiRequest(`/kitchen/orders/${orderId}/${nextState}`, { method: "POST" }, token);
       await loadKitchenOrders();
     } catch (err) {
       setMessage((err as Error).message);
@@ -370,16 +366,24 @@ export function KitchenPage() {
                   ))}
                 </div>
 
-                {/* Action: Deliver to table */}
-                <button
-                  onClick={() => handleAdvance(order.id, "deliver")}
-                  disabled={busyId === order.id}
-                  className="btn btn-secondary"
-                  style={{ width: "100%", height: 38 }}
+                {/* Status: Esperando servicio por mesero */}
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    padding: "8px 12px",
+                    backgroundColor: "var(--color-tertiary-soft)",
+                    borderRadius: "var(--radius-md)",
+                    color: "var(--color-tertiary)",
+                    fontSize: 12,
+                    fontWeight: 600,
+                  }}
                 >
-                  <UtensilsCrossed size={16} />
-                  <span>Entregado a la mesa</span>
-                </button>
+                  <CheckCircle2 size={16} />
+                  <span>Listo en pase — Esperando mesero</span>
+                </div>
               </div>
             ))
           )}

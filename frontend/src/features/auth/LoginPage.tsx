@@ -12,6 +12,8 @@ import {
   AlertCircle,
 } from "lucide-react";
 
+import { getDefaultHomeForUser } from "../../guards/ProtectedRoute";
+
 export function LoginPage() {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -26,8 +28,8 @@ export function LoginPage() {
     setBusy(true);
     setError("");
     try {
-      await login(username, password);
-      navigate("/", { replace: true });
+      const loggedUser = await login(username, password);
+      navigate(getDefaultHomeForUser(loggedUser), { replace: true });
     } catch (reason) {
       setError(
         reason instanceof Error ? reason.message : "Credenciales inválidas."

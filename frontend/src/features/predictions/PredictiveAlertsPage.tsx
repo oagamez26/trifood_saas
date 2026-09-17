@@ -19,6 +19,7 @@ type PredictiveAlert = {
   product_name: string;
   day_of_week: string;
   risk_level: "RIESGO_ALTO" | "RIESGO_MEDIO" | "SIN_RIESGO" | "DATOS_INSUFICIENTES";
+  status?: string;
   current_capacity: number;
   estimated_demand: number;
   projected_deficit: number;
@@ -37,48 +38,15 @@ export function PredictiveAlertsPage() {
   async function loadAlerts() {
     try {
       setLoading(true);
-      const res = await apiRequest<PredictiveAlert[]>(
+      const res = await apiRequest<any>(
         "/analytics/predictive-alerts",
         {},
         token
       );
-      setAlerts(res);
+      const list = Array.isArray(res) ? res : (res?.alerts || []);
+      setAlerts(list);
     } catch {
-      // Fallback sample conforming to Stitch alertas_predictivas_potoquitos
-      setAlerts([
-        {
-          product_id: 1,
-          product_name: "Hamburguesa Especial",
-          day_of_week: "Viernes",
-          risk_level: "RIESGO_ALTO",
-          current_capacity: 30,
-          estimated_demand: 40,
-          projected_deficit: 10,
-          limiting_ingredient: "Carne de res molida",
-          recommendation: "Ingresar al menos 2.0 kg de Carne de res para garantizar el turno nocturno.",
-        },
-        {
-          product_id: 2,
-          product_name: "Picada Familiar POTOQUITOS",
-          day_of_week: "Viernes",
-          risk_level: "RIESGO_MEDIO",
-          current_capacity: 12,
-          estimated_demand: 14,
-          projected_deficit: 2,
-          limiting_ingredient: "Papa criolla",
-          recommendation: "Monitorear existencia de papa criolla antes de las 8:00 PM.",
-        },
-        {
-          product_id: 3,
-          product_name: "Perro Caliente Especial",
-          day_of_week: "Viernes",
-          risk_level: "SIN_RIESGO",
-          current_capacity: 50,
-          estimated_demand: 25,
-          projected_deficit: 0,
-          recommendation: "Holgura operativa suficiente para más de 48 horas de operación.",
-        },
-      ]);
+      setAlerts([]);
     } finally {
       setLoading(false);
     }
@@ -88,9 +56,10 @@ export function PredictiveAlertsPage() {
     loadAlerts();
   }, [token]);
 
-  const highRisk = alerts.filter((a) => a.risk_level === "RIESGO_ALTO");
-  const medRisk = alerts.filter((a) => a.risk_level === "RIESGO_MEDIO");
-  const noRisk = alerts.filter((a) => a.risk_level === "SIN_RIESGO");
+  const highRisk = alerts.filter((a) => a.risk_level === "RIESGO_ALTO" || a.status === "RIESGO_ALTO");
+  const medRisk = alerts.filter((a) => a.risk_level === "RIESGO_MEDIO" || a.status === "RIESGO_MEDIO");
+  const noRisk = alerts.filter((a) => a.risk_level === "SIN_RIESGO" || a.status === "SIN_RIESGO");
+  const insufficientData = alerts.filter((a) => a.risk_level === "DATOS_INSUFICIENTES" || a.status === "DATOS_INSUFICIENTES");
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
@@ -160,53 +129,66 @@ export function PredictiveAlertsPage() {
         </h2>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          {alerts.map((item, idx) => {
-            const isHigh = item.risk_level === "RIESGO_ALTO";
-            const isMed = item.risk_level === "RIESGO_MEDIO";
+          {alerts.length === 0 ? (
+            <div className="card" style={{ padding: 32, textAlign: "center", color: "var(--color-text-muted)" }}>
+              <BellRing size={40} style={{ margin: "0 auto 12px", opacity: 0.5 }} />
+              <h3 style={{ fontSize: 16, fontWeight: 700, color: "var(--color-text-primary)", marginBottom: 6 }}>
+                Sin alertas predictivas activas
+              </h3>
+              <p style={{ fontSize: 13, maxWidth: 520, margin: "0 auto", lineHeight: 1.5 }}>
+                Aún no se han registrado suficientes órdenes históricas para calcular proyecciones de demanda de insumos. A medida que se completen servicios en mesas, se proyectarán los riesgos de inventario determinísticamente.
+              </p>
+            </div>
+          ) : (
+            alerts.map((item, idx) => {
+              const status = item.risk_level || item.status;
+              const isHigh = status === "RIESGO_ALTO";
+              const isMed = status === "RIESGO_MEDIO";
+              const isInsufficient = status === "DATOS_INSUFICIENTES";
 
-            return (
-              <div
-                key={idx}
-                className="card"
-                style={{
-                  padding: 22,
-                  borderColor: isHigh
-                    ? "var(--color-secondary)"
-                    : isMed
-                    ? "var(--color-warning)"
-                    : "var(--color-border)",
-                }}
-              >
-                {/* Header */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: 14, borderBottom: "1px solid var(--color-border)" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: 10,
-                        backgroundColor: isHigh ? "var(--color-secondary-soft)" : "var(--color-primary-soft)",
-                        color: isHigh ? "var(--color-secondary)" : "var(--color-primary)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <UtensilsCrossed size={22} />
+              return (
+                <div
+                  key={idx}
+                  className="card"
+                  style={{
+                    padding: 22,
+                    borderColor: isHigh
+                      ? "var(--color-secondary)"
+                      : isMed
+                      ? "var(--color-warning)"
+                      : "var(--color-border)",
+                  }}
+                >
+                  {/* Header */}
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingBottom: 14, borderBottom: "1px solid var(--color-border)" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <div
+                        style={{
+                          width: 44,
+                          height: 44,
+                          borderRadius: 10,
+                          backgroundColor: isHigh ? "var(--color-secondary-soft)" : isMed ? "var(--color-warning-soft)" : "var(--color-primary-soft)",
+                          color: isHigh ? "var(--color-secondary)" : isMed ? "var(--color-warning)" : "var(--color-primary)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <UtensilsCrossed size={22} />
+                      </div>
+                      <div>
+                        <h3 style={{ fontSize: 16, fontWeight: 800 }}>{item.product_name}</h3>
+                        <span style={{ fontSize: 12, color: "var(--color-text-muted)" }}>
+                          Día analizado: {item.day_of_week || "Hoy"} • Turno operativo
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <h3 style={{ fontSize: 16, fontWeight: 800 }}>{item.product_name}</h3>
-                      <span style={{ fontSize: 12, color: "var(--color-text-muted)" }}>
-                        Día analizado: {item.day_of_week} • Turno pico
-                      </span>
-                    </div>
+
+                    <span className={`badge ${isHigh ? "badge-danger" : isMed ? "badge-warning" : isInsufficient ? "badge-neutral" : "badge-success"}`}>
+                      <span className="badge-dot" />
+                      {isHigh ? "Riesgo alto" : isMed ? "Riesgo medio" : isInsufficient ? "Datos insuficientes" : "Sin riesgo"}
+                    </span>
                   </div>
-
-                  <span className={`badge ${isHigh ? "badge-danger" : isMed ? "badge-warning" : "badge-success"}`}>
-                    <span className="badge-dot" />
-                    {isHigh ? "Riesgo alto" : isMed ? "Riesgo medio" : "Sin riesgo"}
-                  </span>
-                </div>
 
                 {/* Triple Comparative Metric Block */}
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14, margin: "16px 0" }}>
@@ -267,7 +249,7 @@ export function PredictiveAlertsPage() {
                 </div>
               </div>
             );
-          })}
+          }))}
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { apiRequest } from "../services/api";
+import { Drawer } from "./Drawer";
 import {
   LayoutDashboard,
   Users,
@@ -31,53 +32,120 @@ export function AppShell() {
   const [passwordMsg, setPasswordMsg] = useState("");
   const [passwordLoading, setPasswordLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [alertCount, setAlertCount] = useState(0);
-
-  useEffect(() => {
-    async function checkAlerts() {
-      try {
-        const res = await apiRequest<any>("/analytics/dashboard", {}, accessToken!);
-        if (res && typeof res.critical_stock_count !== "undefined") {
-          setAlertCount(res.critical_stock_count);
-        }
-      } catch {
-        // non-blocking
-      }
-    }
-    if (accessToken) {
-      checkAlerts();
-      const interval = setInterval(checkAlerts, 15000);
-      return () => clearInterval(interval);
-    }
-  }, [accessToken]);
-
-  function handleSearchSubmit(e: React.KeyboardEvent<HTMLInputElement>) {
-    if (e.key === "Enter" && searchTerm.trim()) {
-      const q = searchTerm.trim().toLowerCase();
-      if (q.includes("mesa") || q.includes("salon")) {
-        navigate("/tables");
-      } else if (q.includes("cocina") || q.includes("kds")) {
-        navigate("/kitchen");
-      } else if (q.includes("caja") || q.includes("pago") || q.includes("cobro")) {
-        navigate("/cash");
-      } else if (q.includes("inventario") || q.includes("kardex") || q.includes("receta")) {
-        navigate("/inventory");
-      } else if (q.includes("gasto") || q.includes("costo")) {
-        navigate("/expenses");
-      } else if (q.includes("reporte") || q.includes("venta")) {
-        navigate("/reports");
-      } else if (q.includes("usuario")) {
-        navigate("/users");
-      } else {
-        navigate(`/products?q=${encodeURIComponent(searchTerm.trim())}`);
-      }
-    }
-  }
-
   const isAdmin = hasRole("ADMINISTRADOR");
   const isMesero = hasRole("MESERO");
   const isCocina = hasRole("COCINA");
   const isCajero = hasRole("CAJERO");
+
+  type AppNotification = {
+    id: string;
+    title: string;
+    message: string;
+    type: "warning" | "danger" | "info";
+    path: string;
+  };
+
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
+  const [showNotifPopover, setShowNotifPopover] = useState(false);
+
+  useEffect(() => {
+    async function checkAlerts() {
+      if (!accessToken) return;
+      const notifs: AppNotification[] = [];
+      try {
+        if (isAdmin) {
+          const res = await apiRequest<any>("/analytics/dashboard", {}, accessToken).catch(() => null);
+          if (res && res.critical_stock_count > 0) {
+            notifs.push({
+              id: "stock-crit",
+              title: "Stock Crítico",
+              message: `${res.critical_stock_count} insumo(s) bajo el umbral mínimo de seguridad.`,
+              type: "danger",
+              path: "/inventory",
+            });
+          }
+          const pred = await apiRequest<any>("/analytics/predictive-alerts", {}, accessToken).catch(() => null);
+          const predList = Array.isArray(pred) ? pred : (pred?.alerts || []);
+          if (predList.length > 0) {
+            const highPred = predList.filter(
+              (a: any) =>
+                a.status === "RIESGO_ALTO" ||
+                a.risk_level === "RIESGO_ALTO" ||
+                a.urgency === "CRITICA" ||
+                a.urgency === "ALTA"
+            );
+            if (highPred.length > 0) {
+              notifs.push({
+                id: "pred-alert",
+                title: "Alerta Predictiva",
+                message: `${highPred.length} producto(s)/ingrediente(s) con alto riesgo de agotamiento proyectado.`,
+                type: "warning",
+                path: "/predictive-alerts",
+              });
+            }
+          }
+        }
+        if (isAdmin || isMesero) {
+          const ordersRes = await apiRequest<any>("/tables-orders/orders", {}, accessToken).catch(() => null);
+          const ordList = Array.isArray(ordersRes) ? ordersRes : (ordersRes?.items || []);
+          const readyOrders = ordList.filter((o: any) => o.state === "LISTO");
+          if (readyOrders.length > 0) {
+            notifs.push({
+              id: "ready-orders",
+              title: "Platos Listos para Servir",
+              message: `${readyOrders.length} pedido(s) listos en pase esperando entrega.`,
+              type: "info",
+              path: "/tables",
+            });
+          }
+        }
+        if (isAdmin || isCajero) {
+          const tablesRes = await apiRequest<any>("/tables-orders/tables", {}, accessToken).catch(() => null);
+          const tblList = Array.isArray(tablesRes) ? tablesRes : (tablesRes?.items || []);
+          const pendingPay = tblList.filter((t: any) => t.is_active !== false && (t.state === "CUENTA_SOLICITADA" || t.state === "PENDIENTE_PAGO" || t.state === "PAGO_PARCIAL"));
+          if (pendingPay.length > 0) {
+            notifs.push({
+              id: "cash-tables",
+              title: "Cuentas por Cobrar",
+              message: `${pendingPay.length} mesa(s) con cuenta solicitada pendientes en Caja.`,
+              type: "warning",
+              path: "/cash",
+            });
+          }
+        }
+      } catch {
+        // non-blocking
+      }
+      setNotifications(notifs);
+    }
+
+    checkAlerts();
+    const interval = setInterval(checkAlerts, 15000);
+    return () => clearInterval(interval);
+  }, [accessToken, isAdmin, isMesero, isCajero]);
+
+  function handleSearchSubmit(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter" && searchTerm.trim()) {
+      const q = searchTerm.trim().toLowerCase();
+      if ((q.includes("mesa") || q.includes("salon")) && (isAdmin || isMesero)) {
+        navigate("/tables");
+      } else if ((q.includes("cocina") || q.includes("kds")) && (isAdmin || isCocina)) {
+        navigate("/kitchen");
+      } else if ((q.includes("caja") || q.includes("pago") || q.includes("cobro")) && (isAdmin || isCajero)) {
+        navigate("/cash");
+      } else if ((q.includes("inventario") || q.includes("kardex") || q.includes("receta")) && isAdmin) {
+        navigate("/inventory");
+      } else if ((q.includes("gasto") || q.includes("costo")) && isAdmin) {
+        navigate("/expenses");
+      } else if ((q.includes("reporte") || q.includes("venta")) && isAdmin) {
+        navigate("/reports");
+      } else if (q.includes("usuario") && isAdmin) {
+        navigate("/users");
+      } else if (isAdmin) {
+        navigate(`/products?q=${encodeURIComponent(searchTerm.trim())}`);
+      }
+    }
+  }
 
   const todayStr = new Intl.DateTimeFormat("es-CO", {
     weekday: "long",
@@ -93,7 +161,7 @@ export function AppShell() {
       to: "/",
       label: "Dashboard",
       icon: LayoutDashboard,
-      show: true,
+      show: isAdmin,
     },
     {
       to: "/users",
@@ -105,7 +173,7 @@ export function AppShell() {
       to: "/products",
       label: "Productos y Menú",
       icon: UtensilsCrossed,
-      show: true,
+      show: isAdmin,
     },
     {
       to: "/tables",
@@ -120,16 +188,16 @@ export function AppShell() {
       show: isAdmin || isCocina,
     },
     {
-      to: "/inventory",
-      label: "Inventario",
-      icon: Package,
-      show: isAdmin || isCocina,
-    },
-    {
       to: "/cash",
       label: "Cajas",
       icon: CreditCard,
       show: isAdmin || isCajero,
+    },
+    {
+      to: "/inventory",
+      label: "Inventario",
+      icon: Package,
+      show: isAdmin,
     },
     {
       to: "/expenses",
@@ -141,7 +209,7 @@ export function AppShell() {
       to: "/predictive-alerts",
       label: "Alertas Predictivas",
       icon: BellRing,
-      show: isAdmin || isCocina,
+      show: isAdmin,
     },
     {
       to: "/reports",
@@ -278,47 +346,134 @@ export function AppShell() {
               </span>
             </div>
 
-            {/* Notifications Button */}
-            <button
-              onClick={() => navigate("/predictive-alerts")}
-              aria-label="Alertas operativas"
-              style={{
-                position: "relative",
-                padding: 8,
-                borderRadius: "var(--radius-pill)",
-                color: "var(--color-text-secondary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
-              }}
-              title="Ver alertas predictivas y stock crítico"
-            >
-              <BellRing size={20} />
-              {alertCount > 0 && (
-                <span
+            {/* Notifications Button & Popover */}
+            <div style={{ position: "relative" }}>
+              <button
+                type="button"
+                onClick={() => setShowNotifPopover(!showNotifPopover)}
+                aria-label="Alertas operativas"
+                style={{
+                  position: "relative",
+                  padding: 8,
+                  borderRadius: "var(--radius-pill)",
+                  color: "var(--color-text-secondary)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  background: showNotifPopover ? "var(--color-surface-secondary)" : "transparent",
+                  border: "none",
+                }}
+                title="Ver resumen de alertas operativas"
+              >
+                <BellRing size={20} />
+                {notifications.length > 0 && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: 4,
+                      right: 4,
+                      minWidth: 16,
+                      height: 16,
+                      padding: "0 4px",
+                      backgroundColor: "var(--color-secondary)",
+                      color: "#ffffff",
+                      fontSize: 10,
+                      fontWeight: 700,
+                      borderRadius: "var(--radius-pill)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      border: "2px solid #ffffff",
+                    }}
+                  >
+                    {notifications.length}
+                  </span>
+                )}
+              </button>
+
+              {showNotifPopover && (
+                <div
                   style={{
                     position: "absolute",
-                    top: 4,
-                    right: 4,
-                    minWidth: 16,
-                    height: 16,
-                    padding: "0 4px",
-                    backgroundColor: "var(--color-secondary)",
-                    color: "#ffffff",
-                    fontSize: 10,
-                    fontWeight: 700,
-                    borderRadius: "var(--radius-pill)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    border: "2px solid #ffffff",
+                    right: 0,
+                    top: 44,
+                    width: 320,
+                    backgroundColor: "var(--color-surface)",
+                    borderRadius: "var(--radius-md)",
+                    boxShadow: "var(--shadow-modal)",
+                    border: "1px solid var(--color-border)",
+                    zIndex: 110,
+                    overflow: "hidden",
                   }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  {alertCount}
-                </span>
+                  <div
+                    style={{
+                      padding: "12px 16px",
+                      borderBottom: "1px solid var(--color-border)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      backgroundColor: "var(--color-surface-secondary)",
+                    }}
+                  >
+                    <span style={{ fontSize: 13, fontWeight: 700 }}>
+                      Notificaciones y Alertas ({notifications.length})
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setShowNotifPopover(false)}
+                      style={{ background: "none", border: "none", cursor: "pointer", color: "var(--color-text-muted)" }}
+                      title="Cerrar notificaciones"
+                    >
+                      <X size={15} />
+                    </button>
+                  </div>
+
+                  <div style={{ maxHeight: 320, overflowY: "auto" }}>
+                    {notifications.length === 0 ? (
+                      <div style={{ padding: "24px 16px", textAlign: "center", color: "var(--color-text-muted)", fontSize: 12 }}>
+                        No hay alertas operativas activas en este momento.
+                      </div>
+                    ) : (
+                      notifications.map((n) => (
+                        <div
+                          key={n.id}
+                          onClick={() => {
+                            setShowNotifPopover(false);
+                            navigate(n.path);
+                          }}
+                          style={{
+                            padding: "10px 14px",
+                            borderBottom: "1px solid var(--color-border)",
+                            cursor: "pointer",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 2,
+                            transition: "background-color 0.15s ease",
+                          }}
+                          onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "var(--color-surface-secondary)")}
+                          onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.backgroundColor = "transparent")}
+                        >
+                          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                            <span style={{ fontSize: 12, fontWeight: 700, color: n.type === "danger" ? "var(--color-secondary)" : n.type === "warning" ? "var(--color-warning)" : "var(--color-primary)" }}>
+                              {n.title}
+                            </span>
+                            <span className={`badge ${n.type === "danger" ? "badge-danger" : n.type === "warning" ? "badge-warning" : "badge-info"}`} style={{ height: 18, fontSize: 9 }}>
+                              Ir
+                            </span>
+                          </div>
+                          <span style={{ fontSize: 11, color: "var(--color-text-secondary)" }}>
+                            {n.message}
+                          </span>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
               )}
-            </button>
+            </div>
 
             {/* User Profile Pill */}
             <div
@@ -420,47 +575,43 @@ export function AppShell() {
         </main>
       </div>
 
-      {/* Change Password Modal */}
-      {showPasswordModal && (
-        <div className="modal-backdrop" onClick={() => setShowPasswordModal(false)}>
-          <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 440 }}>
-            <div className="modal-header">
-              <h3 style={{ fontSize: 16, fontWeight: 700 }}>Cambiar mi contraseña</h3>
-              <button onClick={() => setShowPasswordModal(false)} className="btn-icon">
-                <X size={18} />
-              </button>
+      {/* DRAWER: CAMBIAR MI CONTRASEÑA */}
+      <Drawer
+        isOpen={showPasswordModal}
+        onClose={() => setShowPasswordModal(false)}
+        title="Cambiar mi contraseña"
+        subtitle="Actualiza tus credenciales de acceso al sistema POTOQUITOS."
+        size="sm"
+        footer={
+          <>
+            <button type="button" onClick={() => setShowPasswordModal(false)} className="btn btn-secondary">
+              Cancelar
+            </button>
+            <button type="submit" form="form-change-password-user" disabled={passwordLoading} className="btn btn-primary">
+              {passwordLoading ? "Guardando..." : "Actualizar contraseña"}
+            </button>
+          </>
+        }
+      >
+        <form id="form-change-password-user" onSubmit={handlePasswordChange} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          {passwordMsg && (
+            <div className={`alert-box ${passwordMsg.includes("éxito") ? "alert-success" : "alert-danger"}`}>
+              {passwordMsg}
             </div>
-            <form onSubmit={handlePasswordChange}>
-              <div className="modal-body">
-                {passwordMsg && (
-                  <div className={`alert-box ${passwordMsg.includes("éxito") ? "alert-success" : "alert-danger"}`}>
-                    {passwordMsg}
-                  </div>
-                )}
-                <div className="form-group">
-                  <label className="form-label">Nueva contraseña</label>
-                  <input
-                    type="password"
-                    required
-                    placeholder="Mínimo 8 caracteres"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="form-input"
-                  />
-                </div>
-              </div>
-              <div className="modal-footer">
-                <button type="button" onClick={() => setShowPasswordModal(false)} className="btn btn-secondary">
-                  Cancelar
-                </button>
-                <button type="submit" disabled={passwordLoading} className="btn btn-primary">
-                  {passwordLoading ? "Guardando..." : "Actualizar contraseña"}
-                </button>
-              </div>
-            </form>
+          )}
+          <div className="form-group">
+            <label className="form-label">Nueva contraseña *</label>
+            <input
+              type="password"
+              required
+              placeholder="Mínimo 8 caracteres"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="form-input"
+            />
           </div>
-        </div>
-      )}
+        </form>
+      </Drawer>
     </div>
   );
 }

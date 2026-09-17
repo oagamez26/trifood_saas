@@ -21,7 +21,7 @@ type AuthContextValue = {
   user: AuthUser | null;
   accessToken: string | null;
   loading: boolean;
-  login: (username: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<AuthUser>;
   logout: () => Promise<void>;
   hasPermission: (permission: string) => boolean;
   hasRole: (role: string) => boolean;
@@ -85,13 +85,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }, 60_000);
     return () => window.clearInterval(timer);
   }, [accessToken]);
-  async function login(username: string, password: string) {
+  async function login(username: string, password: string): Promise<AuthUser> {
     const result = await apiRequest<{ user: AuthUser; access_token: string }>(
       "/auth/login",
       { method: "POST", body: JSON.stringify({ username, password }) },
     );
     setUser(result.user);
     setAccessToken(result.access_token);
+    return result.user;
   }
   async function logout() {
     try {

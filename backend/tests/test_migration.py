@@ -26,7 +26,7 @@ def test_alembic_fresh_database(tmp_path):
     with engine.connect() as connection:
         assert (
             connection.scalar(text("SELECT version_num FROM alembic_version"))
-            == "0004_fastapi_clean"
+            == "0005_complete_potoquitos_schema"
         )
     engine.dispose()
 

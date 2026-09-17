@@ -76,6 +76,13 @@ def request_account(identity: int, user=Depends(actor), service=Depends(orders_s
     return service.request_account(user, identity)
 
 
+@router.post("/orders/{identity}/request-account")
+def request_account_by_order(identity: int, user=Depends(actor), service=Depends(orders_service)):
+    order = service.get_order(user, identity)
+    sess = service.uow.orders.get_session(order["table_session_id"])
+    return service.request_account(user, sess["table_id"])
+
+
 @router.get("/orders")
 def orders(
     table_session_id: int | None = None,

@@ -29,10 +29,4 @@ def mark_as_ready(order_id: int, user=Depends(get_current_user), uow=Depends(get
     return result
 
 
-@router.post("/orders/{order_id}/deliver")
-def mark_as_delivered(order_id: int, user=Depends(get_current_user), uow=Depends(get_uow)):
-    require(user, "kitchen.advance")
-    result = uow.kitchen.update_state(order_id, "ENTREGADO", user["id"])
-    uow.commit()
-    return result
 

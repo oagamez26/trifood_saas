@@ -28,22 +28,38 @@ export default function App() {
       {/* Protected Routes (AppShell) */}
       <Route element={<ProtectedRoute />}>
         <Route element={<AppShell />}>
-          <Route path="/" element={<DashboardPage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/products" element={<CatalogProductsPage />} />
-          <Route path="/catalog" element={<CatalogProductsPage />} />
-          <Route path="/tables" element={<TablesOrdersPage />} />
-          <Route path="/tables-orders" element={<TablesOrdersPage />} />
-          <Route path="/kitchen" element={<KitchenPage />} />
-          <Route path="/cash" element={<CashPage />} />
-          <Route path="/payments" element={<CashPage />} />
-          <Route path="/inventory" element={<InventoryPage />} />
-          <Route path="/expenses" element={<ExpensesPage />} />
-          <Route path="/costs" element={<ExpensesPage />} />
-          <Route path="/predictive-alerts" element={<PredictiveAlertsPage />} />
-          <Route path="/reports" element={<ReportsPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
+          {/* Admin exclusive routes */}
+          <Route element={<ProtectedRoute allowedRoles={["ADMINISTRADOR"]} />}>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/products" element={<CatalogProductsPage />} />
+            <Route path="/catalog" element={<CatalogProductsPage />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/expenses" element={<ExpensesPage />} />
+            <Route path="/costs" element={<ExpensesPage />} />
+            <Route path="/predictive-alerts" element={<PredictiveAlertsPage />} />
+            <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+          </Route>
+
+          {/* Waiter & Admin routes */}
+          <Route element={<ProtectedRoute allowedRoles={["ADMINISTRADOR", "MESERO"]} />}>
+            <Route path="/tables" element={<TablesOrdersPage />} />
+            <Route path="/tables-orders" element={<TablesOrdersPage />} />
+          </Route>
+
+          {/* Kitchen & Admin routes */}
+          <Route element={<ProtectedRoute allowedRoles={["ADMINISTRADOR", "COCINA"]} />}>
+            <Route path="/kitchen" element={<KitchenPage />} />
+          </Route>
+
+          {/* Cashier & Admin routes */}
+          <Route element={<ProtectedRoute allowedRoles={["ADMINISTRADOR", "CAJERO"]} />}>
+            <Route path="/cash" element={<CashPage />} />
+            <Route path="/payments" element={<CashPage />} />
+          </Route>
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Route>

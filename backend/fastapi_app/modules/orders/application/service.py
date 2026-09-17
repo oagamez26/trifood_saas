@@ -90,7 +90,7 @@ class OrdersService:
                 "people_count": positive_integer(people),
             }
         )
-        self.uow.orders.save_table({"state": "OCUPADA"}, identity)
+        self.uow.orders.save_table({"state": "SIN_PEDIDO"}, identity)
         self.uow.auth.audit("TABLE_OPENED", actor["id"], details={"table_id": identity})
         self.uow.commit()
         return session
@@ -121,7 +121,25 @@ class OrdersService:
 
     def request_account(self, actor, identity):
         require(actor, "table.view")
-        result = self.uow.orders.save_table({"state": "PENDIENTE_PAGO"}, identity)
+        self.uow.orders.table(identity, lock=True)
+        session = self.uow.orders.active_session(identity)
+        if not session:
+            raise DomainError("SESSION_NOT_OPEN", "La mesa no tiene una cuenta activa.", 409)
+        orders = [o for o in self.uow.orders.orders(session["id"]) if o.get("state") != "CANCELADO"]
+        if not orders:
+            raise DomainError("NO_ORDERS", "La mesa no tiene pedidos para solicitar cuenta.", 422)
+        if any(o.get("state") not in ("ENTREGADO", "PAGADO", "CERRADO") for o in orders):
+            raise DomainError(
+                "ORDER_NOT_DELIVERED",
+                "No se puede solicitar la cuenta; todos los pedidos deben estar entregados al cliente.",
+                409,
+            )
+        for o in orders:
+            self.uow.orders.save_order({"account_requested": True}, None, o["id"])
+        result = self.uow.orders.save_table({"state": "CUENTA_SOLICITADA"}, identity)
+        self.uow.auth.audit(
+            "ACCOUNT_REQUESTED", actor["id"], details={"table_id": identity, "session_id": session["id"]}
+        )
         self.uow.commit()
         return result
 
@@ -155,10 +173,19 @@ class OrdersService:
         session = self.uow.orders.get_session(session_id, lock=True)
         if session["state"] != "OPEN":
             raise DomainError("SESSION_NOT_OPEN", "La cuenta no está abierta.", 409)
+        existing_orders = self.uow.orders.orders(session_id)
+        if any(o.get("state") not in ("CANCELADO", "PAGADO", "CERRADO") for o in existing_orders):
+            raise DomainError(
+                "ORDER_ALREADY_EXISTS",
+                "Esta mesa ya tiene una comanda activa. Debe modificar el pedido existente.",
+                409,
+            )
         result = self.uow.orders.save_order(
             {"table_session_id": session_id, "waiter_id": actor["id"], "state": "BORRADOR"},
             self.validated_lines(lines),
         )
+        if session.get("table_id"):
+            self.uow.orders.save_table({"state": "PENDIENTE"}, session["table_id"])
         self.uow.auth.audit(
             "ORDER_CREATED", actor["id"], details={"order_id": result["id"]}
         )
@@ -176,9 +203,11 @@ class OrdersService:
     def update_draft(self, actor, identity, lines):
         require(actor, "order.update_draft")
         order = self.uow.orders.order(identity, lock=True)
-        if order["state"] != "BORRADOR":
+        if order["state"] in ("EN_PREPARACION", "LISTO", "ENTREGADO", "PAGADO", "CERRADO", "CANCELADO"):
             raise DomainError(
-                "INVALID_ORDER_TRANSITION", "Solo se edita un borrador.", 409
+                "ORDER_LOCKED",
+                "No se puede modificar el pedido; ya se encuentra en preparación o finalizado.",
+                409,
             )
         result = self.uow.orders.save_order({}, self.validated_lines(lines), identity)
         self.uow.auth.audit(
@@ -204,8 +233,31 @@ class OrdersService:
         if target == "CONFIRMADO":
             lines = self.validated_lines(order["lines"])
             values["confirmed_at"] = now()
+            if order.get("table_session_id"):
+                sess = self.uow.orders.get_session(order["table_session_id"])
+                if sess and sess.get("table_id"):
+                    self.uow.orders.save_table({"state": "PENDIENTE"}, sess["table_id"])
+        if target in ("EN_PREPARACION", "LISTO"):
+            if hasattr(self.uow, "kitchen"):
+                self.uow.kitchen.deduct_order_inventory(identity, actor["id"])
+            if target == "EN_PREPARACION":
+                values["in_kitchen_at"] = now()
+                if order.get("table_session_id"):
+                    sess = self.uow.orders.get_session(order["table_session_id"])
+                    if sess and sess.get("table_id"):
+                        self.uow.orders.save_table({"state": "EN_PREPARACION"}, sess["table_id"])
+            elif target == "LISTO":
+                values["ready_at"] = now()
+                if order.get("table_session_id"):
+                    sess = self.uow.orders.get_session(order["table_session_id"])
+                    if sess and sess.get("table_id"):
+                        self.uow.orders.save_table({"state": "LISTO"}, sess["table_id"])
         if target == "ENTREGADO":
             values["delivered_at"] = now()
+            if order.get("table_session_id"):
+                sess = self.uow.orders.get_session(order["table_session_id"])
+                if sess and sess.get("table_id"):
+                    self.uow.orders.save_table({"state": "ENTREGADO"}, sess["table_id"])
         if target == "CANCELADO":
             self.uow.orders.cancel(identity, text(reason, 2000), actor["id"])
         result = self.uow.orders.save_order(values, lines, identity)
