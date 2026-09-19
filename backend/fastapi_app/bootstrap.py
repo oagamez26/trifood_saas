@@ -107,11 +107,52 @@ def create_app(settings=None):
         return error(exc.code, exc.message, exc.status)
 
     @app.exception_handler(RequestValidationError)
-    async def validation_error(request, exc):
-        return error(
-            "VALIDATION_ERROR",
-            "Revisa los campos, tipos y límites de la solicitud.",
-            422,
+    async def validation_error(request: Request, exc: RequestValidationError):
+        first_error = exc.errors()[0] if exc.errors() else None
+        custom_message = "Revisa los campos, tipos y límites de la solicitud."
+        if first_error:
+            loc = first_error.get("loc", [])
+            field = loc[-1] if loc else "campo"
+            err_type = first_error.get("type", "")
+
+            field_names = {
+                "name": "nombre del producto",
+                "internal_code": "código interno / SKU",
+                "description": "descripción",
+                "current_price": "precio de venta",
+                "price": "precio",
+                "category_id": "categoría",
+                "recommended_people": "porciones / personas",
+                "is_active": "estado activo",
+                "is_available": "disponibilidad",
+                "quantity": "cantidad",
+                "items": "receta / ingredientes",
+            }
+            clean_field = field_names.get(str(field), str(field))
+
+            if "extra_forbidden" in err_type:
+                custom_message = f"El campo '{clean_field}' no está permitido en esta operación."
+            elif "greater_than" in err_type or "gt" in err_type:
+                custom_message = f"El valor de '{clean_field}' debe ser mayor a 0."
+            elif "missing" in err_type:
+                custom_message = f"El campo '{clean_field}' es obligatorio."
+            elif "string_too_short" in err_type:
+                custom_message = f"El campo '{clean_field}' no puede estar vacío."
+            elif "int_parsing" in err_type or "int_type" in err_type:
+                custom_message = f"El campo '{clean_field}' debe ser un número entero válido."
+            elif "decimal" in err_type or "float" in err_type:
+                custom_message = f"El campo '{clean_field}' debe ser un valor numérico válido."
+            else:
+                custom_message = f"Error en '{clean_field}': {first_error.get('msg', 'valor no válido.')}"
+
+        return JSONResponse(
+            {
+                "status_code": 422,
+                "code": "VALIDATION_ERROR",
+                "message": custom_message,
+                "detail": exc.errors(),
+            },
+            status_code=422,
         )
 
     @app.exception_handler(IntegrityError)
@@ -152,6 +193,7 @@ def create_app(settings=None):
         return {"status": "ok", "framework": "fastapi"}
 
     @app.get("/media/products/{filename}")
+    @app.get("/api/media/products/{filename}")
     def media(filename: str):
         if filename == "default.svg":
             return Response(

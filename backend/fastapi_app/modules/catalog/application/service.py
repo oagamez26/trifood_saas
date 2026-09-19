@@ -49,13 +49,17 @@ class CatalogService:
     def save_product(self, actor, data, identity=None):
         require(actor, "product.update" if identity else "product.create")
         data = dict(data)
-        if "internal_code" in data:
+        if "internal_code" in data and data["internal_code"]:
             data["internal_code"] = text(data["internal_code"], 80).upper()
-        if "name" in data:
+        if "name" in data and data["name"]:
             data["name"] = text(data["name"], 160)
         if "description" in data:
-            data["description"] = text(data["description"], 10000)
-        if "recommended_people" in data:
+            desc = data["description"]
+            if desc is None:
+                data["description"] = ""
+            else:
+                data["description"] = desc.strip()[:10000]
+        if "recommended_people" in data and data["recommended_people"] is not None:
             data["recommended_people"] = positive_integer(
                 data["recommended_people"], True
             )

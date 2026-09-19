@@ -197,7 +197,9 @@ export function TablesOrdersPage() {
 
   const mediaUrl = (ref?: string) => {
     if (!ref) return null;
-    if (ref.startsWith("http")) return ref;
+    if (ref.startsWith("http://") || ref.startsWith("https://")) return ref;
+    if (ref.startsWith("/media/")) return ref;
+    if (ref.startsWith("/")) return ref;
     return `/media/products/${ref}`;
   };
 
@@ -309,6 +311,14 @@ export function TablesOrdersPage() {
 
   const formatTableName = (num?: string) =>
     !num ? "Mesa" : num.trim().toLowerCase().startsWith("mesa") ? num.trim() : `Mesa ${num.trim()}`;
+
+  function startNewAdditionForTable(table: Table) {
+    setActiveExistingOrder(null);
+    setCartLines([]);
+    setPosTable(table);
+    setSelectedCat(null);
+    setPosSearchTerm("");
+  }
 
   function openPosForTable(table: Table) {
     const tOrders = orders.filter(
@@ -910,6 +920,15 @@ export function TablesOrdersPage() {
                       <Clock size={16} />
                       <span>Solicitar cuenta</span>
                     </button>
+                    <button
+                      onClick={() => startNewAdditionForTable(table)}
+                      className="btn btn-secondary btn-sm"
+                      style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}
+                      title="Pedir más consumo para esta mesa"
+                    >
+                      <Plus size={14} />
+                      <span>Pedir más</span>
+                    </button>
                     <IconButton
                       icon={Printer}
                       variant="default"
@@ -936,14 +955,15 @@ export function TablesOrdersPage() {
                       <Printer size={16} />
                       <span>Prefactura</span>
                     </button>
-                    <span
-                      className="badge badge-secondary"
-                      style={{ display: "flex", alignItems: "center", gap: 4, padding: "4px 8px", fontSize: 11 }}
-                      title="Cuenta habilitada para cobro en Caja"
+                    <button
+                      onClick={() => startNewAdditionForTable(table)}
+                      className="btn btn-primary btn-sm"
+                      style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}
+                      title="Pedir más consumo antes de cerrar cuenta"
                     >
-                      <CreditCard size={13} />
-                      En Caja
-                    </span>
+                      <Plus size={14} />
+                      <span>Pedir más</span>
+                    </button>
                     <IconButton
                       icon={FileText}
                       variant="default"
@@ -958,10 +978,19 @@ export function TablesOrdersPage() {
                       onClick={() => openPosForTable(table)}
                       className="btn btn-secondary btn-sm"
                       style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}
-                      title="Ver comanda (En preparación en cocina - Bloqueada)"
+                      title="Ver comanda (En preparación en cocina)"
                     >
                       <Lock size={15} />
                       <span>Ver pedido</span>
+                    </button>
+                    <button
+                      onClick={() => startNewAdditionForTable(table)}
+                      className="btn btn-secondary btn-sm"
+                      style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 4 }}
+                      title="Pedir más / Nueva adición"
+                    >
+                      <Plus size={14} />
+                      <span>Pedir más</span>
                     </button>
                     <IconButton
                       icon={FileText}
@@ -1038,6 +1067,11 @@ export function TablesOrdersPage() {
 
       {/* DRAWER: POS TOMA DE PEDIDO O DETALLE DE COMANDA BLOQUEADA */}
       {posTable && (() => {
+        const tOrders = posTable.active_session
+          ? orders.filter((o) => o.table_session_id === posTable.active_session?.id && o.state !== "CANCELADO")
+          : [];
+        const isAddition = !activeExistingOrder && tOrders.length > 0;
+
         const isOrderLocked = Boolean(
           activeExistingOrder &&
             ["EN_PREPARACION", "LISTO", "ENTREGADO", "CUENTA_SOLICITADA", "PAGO_PARCIAL", "PAGADO"].includes(
@@ -1047,12 +1081,16 @@ export function TablesOrdersPage() {
 
         const drawerTitle = isOrderLocked
           ? `Detalle del Pedido #${activeExistingOrder?.id} — ${formatTableName(posTable.number)}`
+          : isAddition
+          ? `Toma de Pedido — ${formatTableName(posTable.number)} (Nueva Adición)`
           : `Toma de Pedido — ${formatTableName(posTable.number)}${
               activeExistingOrder ? ` (Pedido #${activeExistingOrder.id})` : ""
             }`;
 
         const drawerSubtitle = isOrderLocked
-          ? `Estado de la comanda: ${activeExistingOrder?.state}. Modo consulta (bloqueada contra modificaciones).`
+          ? `Estado de la comanda: ${activeExistingOrder?.state}. Modo consulta (bloqueada). Presiona 'Pedir más' para ordenar platos adicionales.`
+          : isAddition
+          ? "Nueva adición vinculada a la cuenta de la mesa. Los pedidos anteriores se conservan intactos y solo los nuevos productos se enviarán a cocina."
           : activeExistingOrder
           ? `Estado comanda: ${activeExistingOrder.state}. Agrega o ajusta platos y bebidas.`
           : "Selecciona los platos y bebidas para enviar la orden a cocina.";
@@ -1072,6 +1110,15 @@ export function TablesOrdersPage() {
                     <strong style={{ fontSize: 18, color: "var(--color-text-primary)" }}>{formatCOP(cartSubtotal)}</strong>
                   </div>
                   <div style={{ display: "flex", gap: 10 }}>
+                    <button
+                      type="button"
+                      onClick={() => startNewAdditionForTable(posTable)}
+                      className="btn btn-primary btn-sm"
+                      style={{ display: "flex", alignItems: "center", gap: 6 }}
+                    >
+                      <Plus size={16} />
+                      <span>Pedir más</span>
+                    </button>
                     {(activeExistingOrder?.state === "ENTREGADO" ||
                       activeExistingOrder?.state === "CUENTA_SOLICITADA" ||
                       activeExistingOrder?.state === "PAGO_PARCIAL") && (
@@ -1107,16 +1154,27 @@ export function TablesOrdersPage() {
                 {/* Status banner */}
                 <div
                   className="alert-box alert-warning"
-                  style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 16px", borderRadius: "var(--radius-md)" }}
+                  style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, padding: "12px 16px", borderRadius: "var(--radius-md)" }}
                 >
-                  <Lock size={20} style={{ flexShrink: 0, marginTop: 2 }} />
-                  <div style={{ fontSize: 13, lineHeight: 1.45 }}>
-                    <strong>Comanda bloqueada:</strong> El pedido #{activeExistingOrder?.id} se encuentra en estado{" "}
-                    <span className="badge badge-warning" style={{ height: 20, fontSize: 11, padding: "0 8px", verticalAlign: "middle" }}>
-                      {activeExistingOrder?.state}
-                    </span>
-                    . Por política de cocina y control estricto de inventario, no se permiten modificaciones ni adiciones de productos en este pedido.
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                    <Lock size={20} style={{ flexShrink: 0, marginTop: 2 }} />
+                    <div style={{ fontSize: 13, lineHeight: 1.45 }}>
+                      <strong>Comanda en proceso:</strong> El pedido #{activeExistingOrder?.id} se encuentra en estado{" "}
+                      <span className="badge badge-warning" style={{ height: 20, fontSize: 11, padding: "0 8px", verticalAlign: "middle" }}>
+                        {activeExistingOrder?.state}
+                      </span>
+                      . Los pedidos enviados a cocina se conservan intactos. Si el cliente desea ordenar más productos, presiona <strong>Pedir más</strong> para crear una nueva adición.
+                    </div>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => startNewAdditionForTable(posTable)}
+                    className="btn btn-primary btn-sm"
+                    style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: 6 }}
+                  >
+                    <Plus size={14} />
+                    <span>Pedir más</span>
+                  </button>
                 </div>
 
                 {/* Table Summary Meta Cards */}
@@ -1261,54 +1319,116 @@ export function TablesOrdersPage() {
                         if (posSearchTerm.trim() && !p.name.toLowerCase().includes(posSearchTerm.toLowerCase())) return false;
                         return true;
                       })
-                      .map((item) => (
-                        <div
-                          key={item.id}
-                          onClick={() => addToCart(item)}
-                          style={{
-                            border: "1px solid var(--color-border)",
-                            borderRadius: "var(--radius-md)",
-                            padding: 10,
-                            cursor: "pointer",
-                            backgroundColor: "var(--color-surface)",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "space-between",
-                            transition: "all 0.15s ease",
-                            minWidth: 0,
-                          }}
-                          className="hover-card"
-                        >
-                          <div>
-                            <span style={{ fontSize: 10, color: "var(--color-primary)", fontWeight: 700, textTransform: "uppercase" }}>
-                              {item.category_name || "Menú"}
-                            </span>
-                            <h5 style={{ fontSize: 12, fontWeight: 700, margin: "4px 0 2px 0", color: "var(--color-text-primary)", wordBreak: "break-word" }}>
-                              {item.name}
-                            </h5>
-                          </div>
-                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
-                            <span style={{ fontSize: 12, fontWeight: 800, color: "var(--color-primary)", fontVariantNumeric: "tabular-nums" }}>
-                              {formatCOP(Number(item.current_price))}
-                            </span>
-                            <div
-                              style={{
-                                width: 22,
-                                height: 22,
-                                borderRadius: 11,
-                                backgroundColor: "var(--color-primary-soft)",
-                                color: "var(--color-primary)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                flexShrink: 0,
-                              }}
-                            >
-                              <Plus size={12} />
+                      .map((item) => {
+                        const hasRealImage = Boolean(
+                          item.image_reference &&
+                          !item.image_reference.includes("default.svg") &&
+                          item.image_reference.trim() !== ""
+                        );
+                        const imgSrc = hasRealImage ? mediaUrl(item.image_reference) : null;
+
+                        return (
+                          <div
+                            key={item.id}
+                            onClick={() => addToCart(item)}
+                            style={{
+                              border: "1px solid var(--color-border)",
+                              borderRadius: "var(--radius-md)",
+                              padding: 8,
+                              cursor: "pointer",
+                              backgroundColor: "var(--color-surface)",
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                              minWidth: 0,
+                            }}
+                            className="hover-card"
+                          >
+                            <div>
+                              {/* FOTO COMPACTA O PLACEHOLDER DISCRETO */}
+                              <div
+                                style={{
+                                  width: "100%",
+                                  height: 72,
+                                  borderRadius: 6,
+                                  backgroundColor: "var(--color-surface-secondary, #f1f5f9)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  overflow: "hidden",
+                                  marginBottom: 6,
+                                  border: "1px solid var(--color-border, #e2e8f0)",
+                                }}
+                              >
+                                {imgSrc ? (
+                                  <img
+                                    src={imgSrc}
+                                    alt={item.name}
+                                    loading="lazy"
+                                    style={{
+                                      width: "100%",
+                                      height: "100%",
+                                      objectFit: "cover",
+                                    }}
+                                    onError={(e) => {
+                                      e.currentTarget.style.display = "none";
+                                    }}
+                                  />
+                                ) : (
+                                  <UtensilsCrossed size={22} color="var(--color-text-muted, #94a3b8)" />
+                                )}
+                              </div>
+
+                              <span
+                                style={{
+                                  fontSize: 10,
+                                  color: "var(--color-primary)",
+                                  fontWeight: 700,
+                                  textTransform: "uppercase",
+                                  display: "block",
+                                  whiteSpace: "nowrap",
+                                  overflow: "hidden",
+                                  textOverflow: "ellipsis",
+                                }}
+                              >
+                                {item.category_name || "Menú"}
+                              </span>
+                              <h5
+                                style={{
+                                  fontSize: 12,
+                                  fontWeight: 700,
+                                  margin: "2px 0 2px 0",
+                                  color: "var(--color-text-primary)",
+                                  lineHeight: 1.25,
+                                  wordBreak: "break-word",
+                                }}
+                              >
+                                {item.name}
+                              </h5>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
+                              <span style={{ fontSize: 12, fontWeight: 800, color: "var(--color-primary)", fontVariantNumeric: "tabular-nums" }}>
+                                {formatCOP(Number(item.current_price))}
+                              </span>
+                              <div
+                                style={{
+                                  width: 22,
+                                  height: 22,
+                                  borderRadius: 11,
+                                  backgroundColor: "var(--color-primary-soft)",
+                                  color: "var(--color-primary)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  flexShrink: 0,
+                                }}
+                              >
+                                <Plus size={12} />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                   </div>
                 </div>
 
@@ -1328,7 +1448,11 @@ export function TablesOrdersPage() {
                 >
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <h4 style={{ fontSize: 14, fontWeight: 700, margin: 0 }}>
-                      {activeExistingOrder ? `Pedido #${activeExistingOrder.id}` : "Nueva Comanda"}
+                      {activeExistingOrder
+                        ? `Pedido #${activeExistingOrder.id}`
+                        : (posTable.active_session && orders.some((o) => o.table_session_id === posTable.active_session?.id && o.state !== "CANCELADO"))
+                        ? "Nueva Comanda (Adición)"
+                        : "Nueva Comanda"}
                     </h4>
                     <span className="badge badge-neutral">{cartLines.length} ítems</span>
                   </div>
@@ -1658,7 +1782,11 @@ export function TablesOrdersPage() {
             </button>
             <button
               type="button"
-              onClick={() => window.print()}
+              onClick={() => {
+                document.body.classList.add("printing-receipt");
+                window.print();
+                setTimeout(() => document.body.classList.remove("printing-receipt"), 1000);
+              }}
               className="btn btn-primary"
               style={{ display: "flex", alignItems: "center", gap: 8 }}
               id="btn-print-prefactura"

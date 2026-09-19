@@ -109,22 +109,26 @@ Price = Annotated[
 class ProductCreate(Input):
     internal_code: str = Field(min_length=1, max_length=80)
     name: str = Field(min_length=1, max_length=160)
-    description: str = Field(min_length=1, max_length=10000)
+    description: str | None = Field(default=None, max_length=10000)
     current_price: Price = Field(
         validation_alias=AliasChoices("current_price", "price")
     )
     category_id: StrictInt = Field(gt=0)
     recommended_people: StrictInt | None = Field(default=None, gt=0)
+    is_active: StrictBool = True
+    is_available: StrictBool = True
 
 
 class ProductUpdate(Input):
     internal_code: str | None = Field(default=None, min_length=1, max_length=80)
     name: str | None = Field(default=None, min_length=1, max_length=160)
-    description: str | None = Field(default=None, min_length=1, max_length=10000)
+    description: str | None = Field(default=None, max_length=10000)
     category_id: StrictInt | None = Field(default=None, gt=0)
     recommended_people: StrictInt | None = Field(default=None, gt=0)
+    is_active: StrictBool | None = None
+    is_available: StrictBool | None = None
 
-    @field_validator("internal_code", "name", "description", "category_id")
+    @field_validator("internal_code", "name", "category_id")
     @classmethod
     def not_null(cls, value):
         if value is None:

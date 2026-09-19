@@ -9,7 +9,9 @@ export function mediaUrl(path?: string | null) {
   if (path.startsWith("/")) return path;
   return `/media/products/${path}`;
 }
-export const formatCOP = (value: string) =>
-  new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP" }).format(
-    Number(value),
-  );
+export const formatCOP = (value: string | number) =>
+  new Intl.NumberFormat("es-CO", {
+    style: "currency",
+    currency: "COP",
+    maximumFractionDigits: 0,
+  }).format(Number(value || 0));

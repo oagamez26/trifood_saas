@@ -174,10 +174,11 @@ class OrdersService:
         if session["state"] != "OPEN":
             raise DomainError("SESSION_NOT_OPEN", "La cuenta no está abierta.", 409)
         existing_orders = self.uow.orders.orders(session_id)
-        if any(o.get("state") not in ("CANCELADO", "PAGADO", "CERRADO") for o in existing_orders):
+        draft_orders = [o for o in existing_orders if o.get("state") in ("BORRADOR", "PENDIENTE")]
+        if draft_orders:
             raise DomainError(
-                "ORDER_ALREADY_EXISTS",
-                "Esta mesa ya tiene una comanda activa. Debe modificar el pedido existente.",
+                "DRAFT_ORDER_EXISTS",
+                f"Ya existe una comanda #{draft_orders[0]['id']} en borrador pendiente de enviar a cocina. Modifique o envíe ese pedido antes de crear otro.",
                 409,
             )
         result = self.uow.orders.save_order(
@@ -185,9 +186,12 @@ class OrdersService:
             self.validated_lines(lines),
         )
         if session.get("table_id"):
+            for o in existing_orders:
+                if o.get("account_requested"):
+                    self.uow.orders.save_order({"account_requested": False}, None, o["id"])
             self.uow.orders.save_table({"state": "PENDIENTE"}, session["table_id"])
         self.uow.auth.audit(
-            "ORDER_CREATED", actor["id"], details={"order_id": result["id"]}
+            "ORDER_CREATED", actor["id"], details={"order_id": result["id"], "is_addition": bool(existing_orders)}
         )
         self.uow.commit()
         return result
@@ -230,9 +234,10 @@ class OrdersService:
         transition(order["state"], target)
         values = {"state": target}
         lines = None
-        if target == "CONFIRMADO":
+        if target in ("CONFIRMADO", "EN_COCINA"):
             lines = self.validated_lines(order["lines"])
-            values["confirmed_at"] = now()
+            if not order.get("confirmed_at"):
+                values["confirmed_at"] = now()
             if order.get("table_session_id"):
                 sess = self.uow.orders.get_session(order["table_session_id"])
                 if sess and sess.get("table_id"):

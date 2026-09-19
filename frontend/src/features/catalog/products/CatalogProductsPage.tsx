@@ -66,6 +66,7 @@ export function CatalogProductsPage() {
 
   // Product Drawer States
   const [editing, setEditing] = useState<AdminProduct | "new" | null>(null);
+  const [drawerError, setDrawerError] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [sku, setSku] = useState("");
   const [name, setName] = useState("");
@@ -171,6 +172,7 @@ export function CatalogProductsPage() {
 
   // Sync drawer fields and recipe when editing changes
   useEffect(() => {
+    setDrawerError("");
     if (editing === "new") {
       setSku("HAM-" + Math.floor(100 + Math.random() * 900));
       setName("");
@@ -272,10 +274,16 @@ export function CatalogProductsPage() {
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 5 * 1024 * 1024) {
-      setMessage("La imagen supera el límite de 5MB.");
+    const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    if (!allowed.includes(file.type.toLowerCase())) {
+      setDrawerError("El archivo seleccionado no es válido. Formatos permitidos: JPG, PNG, WEBP.");
       return;
     }
+    if (file.size > 5 * 1024 * 1024) {
+      setDrawerError("La imagen supera el tamaño permitido (máximo 5MB).");
+      return;
+    }
+    setDrawerError("");
     setImageFile(file);
     setDeleteImageFlag(false);
     const reader = new FileReader();
@@ -295,30 +303,32 @@ export function CatalogProductsPage() {
   async function saveProduct(event: FormEvent) {
     event.preventDefault();
     if (!name.trim()) {
-      setMessage("El nombre del producto es obligatorio.");
+      setDrawerError("El nombre del producto es obligatorio.");
       return;
     }
     if (!categoryId) {
-      setMessage("Selecciona una categoría válida.");
+      setDrawerError("Selecciona una categoría válida.");
       return;
     }
     setBusy(true);
     setMessage("");
+    setDrawerError("");
 
     try {
       let productId: number;
       if (editing === "new") {
         const cleanPrice = price.replace(/[^0-9.]/g, "");
         if (!cleanPrice) {
-          setMessage("Ingresa un precio de venta válido.");
+          setDrawerError("Ingresa un precio de venta válido.");
           setBusy(false);
           return;
         }
+        const finalSku = sku.trim() || `PRD-${Date.now().toString().slice(-6)}`;
         const created = await catalogApi.mutate<AdminProduct>(
           token,
           "products",
           {
-            internal_code: sku.trim(),
+            internal_code: finalSku,
             name: name.trim(),
             description: description.trim(),
             category_id: Number(categoryId),
@@ -337,10 +347,11 @@ export function CatalogProductsPage() {
           `products/${productId}`,
           {
             name: name.trim(),
-            description: description.trim(),
+            description: description.trim() || undefined,
             category_id: Number(categoryId),
             recommended_people: Number(serves),
             is_active: isActive,
+            is_available: isAvailable,
           },
           "PATCH",
         );
@@ -351,7 +362,7 @@ export function CatalogProductsPage() {
             `products/${productId}/availability`,
             { is_available: isAvailable },
             "POST",
-          );
+          ).catch(() => {});
         }
 
         const cleanPrice = price.replace(/[^0-9.]/g, "");
@@ -377,26 +388,28 @@ export function CatalogProductsPage() {
         await catalogApi.deleteImage(token, productId);
       }
 
-      // Persist Recipe to PostgreSQL
-      const validRecipeItems = recipeItems
-        .filter((it) => it.ingredient_id && Number(it.quantity) > 0)
-        .map((it) => ({
-          ingredient_id: Number(it.ingredient_id),
-          quantity: Number(it.quantity),
-          unit: it.unit || "und",
-        }));
+      // Persist Recipe to PostgreSQL (if user has permission or recipe configured)
+      if (recipeItems.length > 0) {
+        const validRecipeItems = recipeItems
+          .filter((it) => it.ingredient_id && Number(it.quantity) > 0)
+          .map((it) => ({
+            ingredient_id: Number(it.ingredient_id),
+            quantity: Number(it.quantity),
+            unit: it.unit || "und",
+          }));
 
-      await apiRequest(
-        `/inventory/recipes/${productId}`,
-        {
-          method: "PUT",
-          body: JSON.stringify({
-            items: validRecipeItems,
-            notes: `Receta para ${name.trim()}`,
-          }),
-        },
-        token
-      );
+        await apiRequest(
+          `/inventory/recipes/${productId}`,
+          {
+            method: "PUT",
+            body: JSON.stringify({
+              items: validRecipeItems,
+              notes: `Receta para ${name.trim()}`,
+            }),
+          },
+          token
+        ).catch(() => {});
+      }
 
       setSuccessMsg(
         editing === "new" ? "Producto creado exitosamente." : "Producto actualizado exitosamente.",
@@ -405,7 +418,9 @@ export function CatalogProductsPage() {
       setEditing(null);
       refresh();
     } catch (error) {
-      setMessage((error as Error).message);
+      const err = (error as Error).message || "Ocurrió un error al guardar el producto.";
+      setDrawerError(err);
+      setMessage(err);
     } finally {
       setBusy(false);
     }
@@ -726,17 +741,17 @@ export function CatalogProductsPage() {
       {/* 4. PRODUCTS DATA TABLE */}
       <div className="card" style={{ overflow: "hidden" }}>
         <div style={{ overflowX: "auto" }}>
-          <table className="data-table">
+          <table className="data-table data-table-compact">
             <thead>
               <tr>
-                <th style={{ width: 60 }}>Foto</th>
-                <th>Plato / Descripción</th>
-                <th>Categoría</th>
-                <th style={{ textAlign: "right" }}>Precio (COP)</th>
-                <th style={{ textAlign: "center" }}>Rinde</th>
-                <th style={{ textAlign: "center" }}>Disponibilidad</th>
-                <th style={{ textAlign: "center" }}>Estado</th>
-                <th style={{ textAlign: "right" }}>Acciones</th>
+                <th style={{ width: 50, padding: "10px 8px" }}>Foto</th>
+                <th style={{ minWidth: 160, padding: "10px 8px" }}>Plato / Descripción</th>
+                <th style={{ minWidth: 100, padding: "10px 8px" }}>Categoría</th>
+                <th style={{ textAlign: "right", minWidth: 95, padding: "10px 8px" }}>Precio (COP)</th>
+                <th style={{ textAlign: "center", minWidth: 95, padding: "10px 8px" }}>Porciones</th>
+                <th style={{ textAlign: "center", minWidth: 110, padding: "10px 8px" }}>Disponibilidad</th>
+                <th style={{ textAlign: "center", minWidth: 80, padding: "10px 8px" }}>Estado</th>
+                <th style={{ textAlign: "right", minWidth: 130, padding: "10px 10px", whiteSpace: "nowrap" }}>Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -810,7 +825,7 @@ export function CatalogProductsPage() {
                           style={{
                             fontSize: 11,
                             color: "var(--color-text-muted)",
-                            maxWidth: 280,
+                            maxWidth: 240,
                             overflow: "hidden",
                             textOverflow: "ellipsis",
                             whiteSpace: "nowrap",
@@ -840,7 +855,7 @@ export function CatalogProductsPage() {
                       </span>
                     </td>
 
-                    <td style={{ textAlign: "center" }}>
+                    <td style={{ textAlign: "center", whiteSpace: "nowrap" }}>
                       <span
                         style={{
                           display: "inline-flex",
@@ -851,7 +866,7 @@ export function CatalogProductsPage() {
                         }}
                       >
                         <Users size={13} color="var(--color-text-muted)" />
-                        {item.recommended_people ?? 1} p.
+                        {(item.recommended_people ?? 1) === 1 ? "1 persona" : `${item.recommended_people ?? 1} personas`}
                       </span>
                     </td>
 
@@ -1040,6 +1055,28 @@ export function CatalogProductsPage() {
           onSubmit={saveProduct}
           style={{ display: "flex", flexDirection: "column", gap: 20 }}
         >
+          {drawerError && (
+            <div
+              className="alert-box alert-danger"
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "10px 14px",
+                margin: 0,
+              }}
+            >
+              <span style={{ fontSize: 13, fontWeight: 500 }}>{drawerError}</span>
+              <button
+                type="button"
+                onClick={() => setDrawerError("")}
+                style={{ background: "none", border: "none", color: "inherit", cursor: "pointer", padding: 2 }}
+              >
+                <X size={15} />
+              </button>
+            </div>
+          )}
+
           {/* SECCIÓN 1: FOTOGRAFÍA DEL PRODUCTO (STITCH) */}
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             <label style={{ fontSize: 13, fontWeight: 700, color: "var(--color-text-primary)" }}>
@@ -1076,19 +1113,20 @@ export function CatalogProductsPage() {
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <input
                     type="file"
+                    id="product-image-upload-input"
                     ref={fileInputRef}
                     accept="image/jpeg,image/png,image/webp"
                     onChange={handleImageChange}
                     style={{ display: "none" }}
                   />
-                  <button
-                    type="button"
+                  <label
+                    htmlFor="product-image-upload-input"
                     className="btn btn-secondary btn-sm"
-                    onClick={() => fileInputRef.current?.click()}
+                    style={{ cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6, margin: 0 }}
                   >
                     <Camera size={14} />
                     <span>{imagePreview ? "Cambiar imagen" : "Subir imagen"}</span>
-                  </button>
+                  </label>
                   {imagePreview && (
                     <button
                       type="button"
@@ -1218,7 +1256,7 @@ export function CatalogProductsPage() {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Rinde para</label>
+                <label className="form-label">Porciones</label>
                 <select
                   value={serves}
                   onChange={(e) => setServes(Number(e.target.value))}
@@ -1226,9 +1264,13 @@ export function CatalogProductsPage() {
                 >
                   <option value={1}>1 persona</option>
                   <option value={2}>2 personas</option>
-                  <option value={3}>3-4 personas</option>
-                  <option value={5}>Familiar (5+)</option>
+                  <option value={3}>3 personas</option>
+                  <option value={4}>4 personas</option>
+                  <option value={5}>Familiar (5+ personas)</option>
                 </select>
+                <span style={{ fontSize: 11, color: "var(--color-text-muted)", marginTop: 2 }}>
+                  Número de personas recomendado para este plato.
+                </span>
               </div>
             </div>
           </div>

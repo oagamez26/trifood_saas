@@ -556,7 +556,11 @@ export function CashPage() {
           <div style={{ display: "flex", gap: 12 }}>
             <button
               type="button"
-              onClick={() => window.print()}
+              onClick={() => {
+                document.body.classList.add("printing-receipt");
+                window.print();
+                setTimeout(() => document.body.classList.remove("printing-receipt"), 1000);
+              }}
               className="btn btn-primary"
               style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, height: 44, fontSize: 15 }}
               id="btn-print-invoice"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { apiRequest } from "../services/api";
 import { Drawer } from "./Drawer";
@@ -26,6 +26,7 @@ import {
 export function AppShell() {
   const { user, logout, hasRole, accessToken } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [newPassword, setNewPassword] = useState("");
@@ -437,7 +438,7 @@ export function AppShell() {
                         No hay alertas operativas activas en este momento.
                       </div>
                     ) : (
-                      notifications.map((n) => (
+                      notifications.map((n: AppNotification) => (
                         <div
                           key={n.id}
                           onClick={() => {
@@ -571,7 +572,9 @@ export function AppShell() {
 
         {/* WORKSPACE CONTENT */}
         <main className="workspace-content">
-          <Outlet />
+          <div key={location.pathname} className="module-page-enter">
+            <Outlet />
+          </div>
         </main>
       </div>
 

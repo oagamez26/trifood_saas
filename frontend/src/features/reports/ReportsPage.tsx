@@ -198,9 +198,24 @@ export function ReportsPage() {
   }
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+    <div className="printable-report" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      {/* HEADER DE IMPRESIÓN OFICIAL (Visible en vista previa de impresión) */}
+      <div className="print-only-header">
+        <div style={{ textAlign: "center", borderBottom: "2px solid #0f172a", paddingBottom: 10, marginBottom: 16 }}>
+          <div style={{ fontSize: 20, fontWeight: 900, letterSpacing: "0.04em", color: "#0f172a" }}>POTOQUITOS</div>
+          <div style={{ fontSize: 11, fontWeight: 600, color: "#475569" }}>RESTAURANTE & COMIDAS RÁPIDAS · NIT: 901.458.789-2</div>
+          <div style={{ fontSize: 10, color: "#64748b" }}>Calle 45 # 28 - 14, Barranquilla · Régimen Simple</div>
+          <div style={{ marginTop: 8, fontSize: 14, fontWeight: 800, color: "#0f172a", textTransform: "uppercase" }}>
+            Informe Gerencial y Consolidado Financiero
+          </div>
+          <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>
+            Período evaluado: <strong>{activeFromDate}</strong> al <strong>{activeToDate}</strong> · Generado: {new Date().toLocaleString("es-CO")}
+          </div>
+        </div>
+      </div>
+
       {/* 1. HEADER PRINCIPAL */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
+      <div className="no-print" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 14 }}>
         <div>
           <h1 style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em" }}>
             Reportes y Dinámica Gerencial
@@ -272,7 +287,7 @@ export function ReportsPage() {
 
       {/* 2. UNIFIED FILTER TOOLBAR */}
       <div
-        className="card"
+        className="card no-print"
         style={{
           padding: "16px 20px",
           display: "flex",

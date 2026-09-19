@@ -18,7 +18,7 @@ def menu_items(user=Depends(actor), work=Depends(uow)):
             "name": p["name"],
             "description": p.get("description", ""),
             "category_id": p.get("category_id"),
-            "category_name": p.get("category_name", ""),
+            "category_name": p.get("category_name", "") or (p.get("category") or {}).get("name", ""),
             "current_price": str(p["current_price"]),
             "is_available": p.get("is_available", True),
             "image_reference": p.get("image_reference", ""),

@@ -25,12 +25,42 @@ export async function apiRequest<T>(
     credentials: "include",
   });
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok)
+  if (!response.ok) {
+    let msg = payload.message || "No se pudo completar la solicitud.";
+    if (Array.isArray(payload.detail) && payload.detail.length > 0) {
+      const first = payload.detail[0];
+      const loc = first.loc || [];
+      const field = loc[loc.length - 1] || "";
+      const fieldTranslations: Record<string, string> = {
+        name: "nombre del producto",
+        internal_code: "código interno / SKU",
+        description: "descripción",
+        current_price: "precio",
+        price: "precio",
+        category_id: "categoría",
+        recommended_people: "porciones / personas",
+        is_active: "estado activo",
+        is_available: "disponibilidad",
+      };
+      const cleanField = fieldTranslations[String(field)] || field;
+      if (first.type === "extra_forbidden") {
+        msg = `El campo '${cleanField}' no está permitido en esta operación.`;
+      } else if (first.type?.includes("greater_than") || first.type?.includes("gt")) {
+        msg = `El valor de ${cleanField} debe ser mayor a 0.`;
+      } else if (first.type === "missing") {
+        msg = `El campo '${cleanField}' es obligatorio.`;
+      } else if (first.type === "string_too_short") {
+        msg = `El campo '${cleanField}' no puede estar vacío.`;
+      } else if (first.type?.includes("int") || first.type?.includes("decimal")) {
+        msg = `El campo '${cleanField}' debe ser un valor numérico válido.`;
+      }
+    }
     throw new ApiError(
-      payload.message ?? "No se pudo completar la solicitud.",
+      msg,
       response.status,
       payload.code ?? "HTTP_ERROR",
     );
+  }
   return payload as T;
 }
 export function csrfToken() {

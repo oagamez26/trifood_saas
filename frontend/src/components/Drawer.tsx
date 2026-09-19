@@ -1,4 +1,5 @@
 import React, { useEffect, type ReactNode } from "react";
+import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 
 export interface DrawerProps {
@@ -54,7 +55,7 @@ export function Drawer({
       ? "drawer-xl"
       : "drawer-md";
 
-  return (
+  return createPortal(
     <div className="drawer-root" style={{ position: "fixed", inset: 0, zIndex: 1000 }}>
       {/* BACKDROP OVERLAY */}
       <div
@@ -211,6 +212,7 @@ export function Drawer({
           }
         }
       `}</style>
-    </div>
+    </div>,
+    document.body
   );
 }
