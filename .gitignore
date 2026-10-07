@@ -13,6 +13,7 @@ frontend/dist/
 coverage/
 .vscode/
 .idea/
+backend/springboot/target/
 .validation/
 *.tsbuildinfo
 backend/legacy_tests/__pycache__/
