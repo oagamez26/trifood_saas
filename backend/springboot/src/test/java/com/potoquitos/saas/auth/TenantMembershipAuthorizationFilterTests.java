@@ -49,7 +49,7 @@ class TenantMembershipAuthorizationFilterTests {
                                 tokenPrincipal,
                                 jwt,
                                 List.of(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR"))));
-        when(membershipRepository.findActiveAccess(tenantId, 42))
+        when(membershipRepository.findActiveAccess(tenantId, 42, 0))
                 .thenReturn(
                         Optional.of(
                                 new TenantMembershipAccess(
@@ -80,7 +80,7 @@ class TenantMembershipAuthorizationFilterTests {
                                 principal,
                                 "signed",
                                 List.of(new SimpleGrantedAuthority("ROLE_ADMINISTRADOR"))));
-        when(membershipRepository.findActiveAccess(tenantId, 42))
+        when(membershipRepository.findActiveAccess(tenantId, 42, 0))
                 .thenReturn(Optional.empty());
 
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "/api/auth/me");

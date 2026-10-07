@@ -33,7 +33,7 @@ public class TenantMembershipAuthorizationFilter extends OncePerRequestFilter {
                 && authentication.getPrincipal() instanceof SaasPrincipal principal) {
             var access =
                     membershipRepository.findActiveAccess(
-                            principal.tenantId(), principal.userId());
+                            principal.tenantId(), principal.userId(), principal.tokenVersion());
             if (access.isEmpty()) {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
                 return;
@@ -44,6 +44,7 @@ public class TenantMembershipAuthorizationFilter extends OncePerRequestFilter {
                     new SaasPrincipal(
                             principal.userId(),
                             principal.tenantId(),
+                            principal.tokenVersion(),
                             membership.roles(),
                             membership.permissions());
             List<SimpleGrantedAuthority> authorities = new ArrayList<>();

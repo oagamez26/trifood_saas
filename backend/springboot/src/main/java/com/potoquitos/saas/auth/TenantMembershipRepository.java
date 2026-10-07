@@ -24,6 +24,7 @@ public class TenantMembershipRepository {
             LEFT JOIN permissions p ON p.id = rp.permission_id
             WHERE tm.tenant_id = ?
               AND tm.user_id = ?
+              AND u.token_version = ?
               AND tm.status = 'ACTIVE'
               AND t.status = 'ACTIVE'
               AND u.is_active IS TRUE
@@ -36,6 +37,11 @@ public class TenantMembershipRepository {
     }
 
     public Optional<TenantMembershipAccess> findActiveAccess(UUID tenantId, long userId) {
+        return findActiveAccess(tenantId, userId, 0);
+    }
+
+    public Optional<TenantMembershipAccess> findActiveAccess(
+            UUID tenantId, long userId, int tokenVersion) {
         List<AuthorityRow> rows =
                 jdbcTemplate.query(
                         ACTIVE_MEMBERSHIP_AUTHORITIES,
@@ -44,7 +50,8 @@ public class TenantMembershipRepository {
                                         resultSet.getString("role_name"),
                                         resultSet.getString("permission_codename")),
                         tenantId,
-                        userId);
+                        userId,
+                        tokenVersion);
         if (rows.isEmpty()) {
             return Optional.empty();
         }

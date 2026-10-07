@@ -1,6 +1,7 @@
 package com.potoquitos.saas.auth;
 
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -12,6 +13,8 @@ import com.potoquitos.saas.shared.security.SaasPrincipal;
 import com.potoquitos.saas.shared.tenant.TenantContext;
 import com.potoquitos.saas.shared.tenant.TenantContextInterceptor;
 import com.potoquitos.saas.shared.tenant.TenantWebConfiguration;
+import com.potoquitos.saas.users.TenantAccessManagementController;
+import com.potoquitos.saas.users.TenantAccessManagementService;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -27,7 +30,12 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-@WebMvcTest({CurrentUserController.class, CatalogCategoryController.class})
+@WebMvcTest({
+    CurrentUserController.class,
+    CatalogCategoryController.class,
+    AuthController.class,
+    TenantAccessManagementController.class
+})
 @TestPropertySource(properties = "security.jwt.secret=0123456789abcdef0123456789abcdef")
 @Import({
     SecurityConfiguration.class,
@@ -43,6 +51,14 @@ class CurrentUserSecurityTests {
     @MockitoBean private TenantMembershipRepository membershipRepository;
 
     @MockitoBean private CatalogCategoryService categoryService;
+
+    @MockitoBean private LoginService loginService;
+
+    @MockitoBean private RefreshTokenService refreshTokenService;
+
+    @MockitoBean private AuthCookieService authCookieService;
+
+    @MockitoBean private TenantAccessManagementService tenantAccessManagementService;
 
     @Test
     void protectedCurrentUserEndpointRejectsMissingAuthentication() throws Exception {
@@ -65,7 +81,8 @@ class CurrentUserSecurityTests {
     @Test
     void rejectsAuthenticatedUsersWithoutActiveTenantMembership() throws Exception {
         UUID tenantId = UUID.randomUUID();
-        when(membershipRepository.findActiveAccess(tenantId, 42)).thenReturn(Optional.empty());
+        when(membershipRepository.findActiveAccess(tenantId, 42, 0))
+                .thenReturn(Optional.empty());
 
         mockMvc.perform(authenticatedRequest(tenantId)).andExpect(status().isForbidden());
     }
@@ -82,7 +99,7 @@ class CurrentUserSecurityTests {
     @Test
     void endpointPermissionFromTheTenantRoleGrantsAccess() throws Exception {
         UUID tenantId = UUID.randomUUID();
-        when(membershipRepository.findActiveAccess(tenantId, 42))
+        when(membershipRepository.findActiveAccess(tenantId, 42, 0))
                 .thenReturn(
                         Optional.of(
                                 new TenantMembershipAccess(
@@ -92,6 +109,68 @@ class CurrentUserSecurityTests {
 
         mockMvc.perform(authenticatedRequest("/api/catalog/categories", tenantId))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void loginIsPublicAndDoesNotRequireTenantContext() throws Exception {
+        var tokens =
+                new RefreshTokenService.IssuedRefreshToken(
+                        "opaque-refresh",
+                        "signed-access",
+                        900,
+                        java.time.Duration.ofDays(30),
+                        42,
+                        UUID.randomUUID());
+        when(loginService.login("alice", "correct-password", null))
+                .thenReturn(
+                        new LoginService.LoginResult(
+                                tokens,
+                                new SaasPrincipal(
+                                        42, tokens.tenantId(), 0, Set.of(), Set.of()),
+                                900));
+        when(authCookieService.issueCsrfToken()).thenReturn("csrf");
+
+        mockMvc.perform(
+                        org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post(
+                                        "/api/auth/login")
+                                .contentType("application/json")
+                                .content(
+                                        """
+                                        {"username":"alice","password":"correct-password"}
+                                        """))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").value("signed-access"))
+                .andExpect(jsonPath("$.userId").value(42));
+
+        verify(authCookieService).setRefreshCookies(
+                org.mockito.ArgumentMatchers.any(),
+                org.mockito.ArgumentMatchers.eq("opaque-refresh"),
+                org.mockito.ArgumentMatchers.eq("csrf"),
+                org.mockito.ArgumentMatchers.eq(java.time.Duration.ofDays(30).toSeconds()));
+    }
+
+    @Test
+    void userAdministrationRequiresExplicitPermissionFromMembership() throws Exception {
+        UUID tenantId = UUID.randomUUID();
+        mockActiveMembership(tenantId, 42);
+
+        mockMvc.perform(authenticatedRequest("/api/users", tenantId))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void tenantMembershipPermissionGrantsAccessToTenantBoundUserList() throws Exception {
+        UUID tenantId = UUID.randomUUID();
+        when(membershipRepository.findActiveAccess(tenantId, 42, 0))
+                .thenReturn(
+                Optional.of(
+                        new TenantMembershipAccess(
+                                Set.of(), Set.of("users.read"))));
+        when(tenantAccessManagementService.listUsers()).thenReturn(List.of());
+
+        mockMvc.perform(authenticatedRequest("/api/users", tenantId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
     }
 
     private MockHttpServletRequestBuilder authenticatedRequest(UUID tenantId) {
@@ -108,7 +187,7 @@ class CurrentUserSecurityTests {
     }
 
     private void mockActiveMembership(UUID tenantId, long userId) {
-        when(membershipRepository.findActiveAccess(tenantId, userId))
+        when(membershipRepository.findActiveAccess(tenantId, userId, 0))
                 .thenReturn(
                         Optional.of(
                                 new TenantMembershipAccess(

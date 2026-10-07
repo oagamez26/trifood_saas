@@ -6,9 +6,9 @@ import java.util.UUID;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Component;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 @Component
 public class SaasJwtAuthenticationConverter
@@ -20,8 +20,10 @@ public class SaasJwtAuthenticationConverter
             throw new BadCredentialsException("JWT subject does not match user_id");
         }
         UUID tenantId = uuidClaim(jwt, "tenant_id");
+        int tokenVersion = nonNegativeIntClaim(jwt, "token_version");
         SaasPrincipal principal =
-                new SaasPrincipal(userId, tenantId, java.util.Set.of(), java.util.Set.of());
+                new SaasPrincipal(
+                        userId, tenantId, tokenVersion, java.util.Set.of(), java.util.Set.of());
         return UsernamePasswordAuthenticationToken.authenticated(
                 principal, jwt, java.util.Set.of());
     }
@@ -47,5 +49,21 @@ public class SaasJwtAuthenticationConverter
         } catch (IllegalArgumentException exception) {
             throw new BadCredentialsException("JWT claim tenant_id is invalid", exception);
         }
+    }
+
+    private static int nonNegativeIntClaim(Jwt jwt, String name) {
+        Object value = jwt.getClaims().get(name);
+        if (value == null) {
+            return 0;
+        }
+        try {
+            int parsed = new BigDecimal(String.valueOf(value)).intValueExact();
+            if (parsed >= 0) {
+                return parsed;
+            }
+        } catch (NumberFormatException | ArithmeticException exception) {
+            throw new BadCredentialsException("JWT claim token_version is invalid", exception);
+        }
+        throw new BadCredentialsException("JWT claim token_version is invalid");
     }
 }

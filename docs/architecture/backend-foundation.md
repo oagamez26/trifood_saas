@@ -47,17 +47,33 @@ El Resource Server valida firma HS256, expiración y formato de claims. El contr
 
 Las autoridades usan los prefijos `ROLE_` y `PERMISSION_`. Spring Security protege toda ruta salvo health y documentación OpenAPI; la seguridad de método está habilitada. `GET /api/auth/me` demuestra identidad, tenant y authorities autenticados. `GET /api/catalog/categories` exige `PERMISSION_catalog.categories.read` y filtra las filas con el tenant resuelto. El tenant nunca se toma de headers, query parameters ni payloads.
 
-El login y la emisión/rotación de tokens, el flujo refresh-cookie y la administración de usuarios quedan fuera de este incremento. Si se incorpora refresh por cookie posteriormente, debe habilitarse protección CSRF para esa operación, siguiendo el patrón existente de FastAPI.
+## Inicio de sesión, sesiones y administración de acceso
+
+El detalle de protocolo, endpoints y modelo de amenaza está en [Autenticación y autorización SaaS](./authentication-and-authorization.md).
+
+`POST /api/auth/login` valida username/password y selecciona un tenant solo entre las memberships activas del usuario. Si hay más de una membership y no se envía un `tenantSlug` selector, responde `400 tenant_selection_required`; el slug no es autoridad y se vuelve a validar en PostgreSQL. El usuario inactivo, el tenant suspendido, la membership inactiva o las credenciales incorrectas producen una respuesta genérica `401`.
+
+El access token HS256 incluye únicamente `sub`, `user_id`, `tenant_id`, `token_version`, `iat`, `exp` e `iss`. No incluye permisos como fuente de autorización. En cada petición bearer, el filtro vuelve a validar usuario/tenant/membership y carga los permisos actuales desde las tablas RBAC.
+
+La respuesta entrega el access token JSON y coloca el refresh token opaco en cookie `HttpOnly`, `SameSite=Strict`, `Path=/api/auth`; la cookie CSRF de doble envío es legible por el frontend. `POST /api/auth/refresh` requiere la cookie CSRF, el header `X-CSRF-TOKEN` coincidente y un `Origin` permitido. Los refresh tokens se persisten únicamente como SHA-256, expiran según `REFRESH_TOKEN_TTL` y se rotan con bloqueo de fila; el uso repetido revoca la familia completa. `POST /api/auth/logout` revoca la familia y limpia ambas cookies. La cookie `Secure` se controla con `AUTH_COOKIE_SECURE` (deshabilitarlo solo en desarrollo local).
+
+La migración aditiva V3 incorpora perfil visible por membership y `refresh_sessions`; no modifica V1/V2 ni copia datos. Los endpoints `/api/users`, `/api/tenant-memberships`, `/api/roles` y `/api/permissions` realizan consultas acotadas al `TenantContext`. El perfil y activación administrables son los de la membership: no se cambia la identidad global ni el estado global de un usuario desde otro tenant. Los usernames/emails nuevos se normalizan a minúsculas; las contraseñas se almacenan con BCrypt y no se exponen en respuestas.
+
+Los endpoints administrativos exigen authorities explícitas: `users.read`, `users.create`, `users.update`, `users.memberships.manage`, `users.roles.assign`, `roles.read` y `roles.manage`. Las concesiones provienen de `user_roles`, `roles`, `role_permissions` y `permissions` del tenant autenticado. Los IDs de usuario/rol de la ruta se verifican dentro de ese tenant, y el cliente nunca proporciona un `tenant_id` para seleccionar el ámbito.
+
+Para evitar dejar un tenant sin administrador, cambios de permisos que puedan retirar `roles.manage` bloquean y serializan la fila del tenant; se rechaza suspender/revocar la última membership administradora, quitar su único grant de rol o eliminar `roles.manage` del último rol activo.
+
+El bootstrap inicial se realiza una sola vez mediante `com.potoquitos.saas.users.BootstrapTenantApplication`, que habilita Flyway, crea tenant, primer usuario, membership, rol administrador y grants en una transacción, y se niega a correr si ya hay usuarios o tenants. Sus valores se suministran por variables `TRIFOOD_BOOTSTRAP_*`; no se crea un endpoint de bootstrap ni se imprimen credenciales. Ejecutarlo únicamente en una base SaaS nueva, nunca en `potoquitos`.
 
 ## Repositorios y acceso a datos por tenant
 
 `TenantScopedRepository<T, ID>` no hereda `CrudRepository`/`JpaRepository` y por ello no expone lecturas genéricas por ID ni listados sin tenant. Sus métodos requieren `tenant_id` junto con la clave (`findByIdAndTenantId`, `findAllByTenantId`). Los servicios obtienen ese valor mediante `TenantContext`; no deben recibirlo de DTOs. `CatalogCategoryService` aplica el patrón y sus operaciones requieren además el permiso de lectura del catálogo. Las escrituras de futuras entidades deben fijar el tenant desde `TenantContext`, comprobar tenant inmutable y conservar las FK compuestas del DDL.
 
-El incremento se verificó con 17 pruebas unitarias y MVC focalizadas (JWT, endpoint protegido, membresía, roles/permisos y selección tenant-aware), todas aprobadas. `SaasApiApplicationTests` contiene pruebas HTTP con PostgreSQL/Testcontainers para la integración real de JWT, roles/permisos y aislamiento de categorías; no se ejecutaron para evitar crear contenedores. Esta diferencia de evidencia se conserva como gate predespliegue, junto con Flyway, inicio de Spring Boot y `/actuator/health`.
+La suite focalizada del incremento de identidad contiene 42 pruebas aprobadas: login, emisión/expiración JWT, refresh (rotación, expiración y reutilización), hash de contraseña, CSRF, aislamiento tenant-aware, protección por permisos y regresiones de TenantContext/JWT/catálogo. `SaasApiApplicationTests` requiere PostgreSQL/Testcontainers y no se ejecutó; tampoco se inició Spring Boot conectado a base. Estos puntos no se afirman como validados.
 
 ## Flyway y seguridad operacional
 
-`V1__create_platform_foundation.sql` crea las tablas `tenants`, `plans` y `subscriptions`. `V2__create_tenant_scoped_business_schema.sql` define el esquema funcional reconstruido con tenancy desde su creación, excluyendo únicamente `alembic_version`; no copia datos del dump. Ambas migraciones se destinan a una base vacía. La configuración activa `clean-disabled=true` y `baseline-on-migrate=false`.
+`V1__create_platform_foundation.sql` crea las tablas `tenants`, `plans` y `subscriptions`. `V2__create_tenant_scoped_business_schema.sql` define el esquema funcional reconstruido con tenancy desde su creación, excluyendo únicamente `alembic_version`; no copia datos del dump. `V3__identity_access_and_refresh_sessions.sql` añade soporte de perfil tenant-local y refresh rotatorio. Las migraciones se destinan a una base SaaS nueva. La configuración activa `clean-disabled=true` y `baseline-on-migrate=false`.
 
 ### Estado de validación — 2026-10-07
 
@@ -67,7 +83,7 @@ V1 y V2 se ejecutaron directamente con `psql` en PostgreSQL 16.15, dentro de la 
 
 En esta comprobación se confirmó que Java 21.0.11 y Maven 3.9.16 están disponibles localmente. `mvn -DskipTests package` terminó con `BUILD SUCCESS` y `SaasJwtAuthenticationConverterTests` pasó sus 4 pruebas (0 fallos). No se ejecutó la prueba de integración `SaasApiApplicationTests`: usa Testcontainers y esta validación no debe crear ni recrear contenedores. La conexión directa local a `127.0.0.1:5432` tampoco está disponible para la aplicación: PostgreSQL respondió `fe_sendauth: no password supplied`; además, el contenedor PostgreSQL existente no publica el puerto 5432 al host. No se intentó resolverlo mediante operaciones Docker ni se usaron credenciales almacenadas.
 
-Por lo tanto, **no se afirma** que Flyway haya detectado/aplicado V1 y V2 mediante Spring Boot, que Spring Boot haya arrancado conectado a PostgreSQL ni que `/actuator/health` haya respondido `UP`. La prueba de integración con Flyway y PostgreSQL limpio sigue siendo un requisito pendiente antes de despliegue. La prueba de esquema espera ahora 30 columnas `tenant_id NOT NULL`, consistente con el inventario validado (incluida `subscriptions.tenant_id`).
+Por lo tanto, **no se afirma** que Flyway haya detectado/aplicado V1, V2 o V3 mediante Spring Boot, que Spring Boot haya arrancado conectado a PostgreSQL ni que `/actuator/health` haya respondido `UP`. La prueba de integración con Flyway y PostgreSQL limpio sigue siendo un requisito pendiente obligatorio antes del despliegue. La prueba de esquema espera ahora 30 columnas `tenant_id NOT NULL`, consistente con el inventario validado (incluida `subscriptions.tenant_id`).
 
 Una instalación local debe crear y configurar una base de desarrollo SaaS distinta. No se debe habilitar Flyway apuntando a `potoquitos`; cualquier estrategia de migración de la base actual se diseña y aprueba separadamente. La integración de Spring Boot + Flyway sobre PostgreSQL limpio y el health endpoint sigue siendo un gate pendiente obligatorio antes del despliegue, pero no bloquea el desarrollo local de módulos.
 

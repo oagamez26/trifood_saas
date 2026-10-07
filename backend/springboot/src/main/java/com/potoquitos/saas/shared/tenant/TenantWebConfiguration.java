@@ -14,6 +14,9 @@ public class TenantWebConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tenantContextInterceptor).addPathPatterns("/api/**");
+        registry.addInterceptor(tenantContextInterceptor)
+                .addPathPatterns("/api/**")
+                .excludePathPatterns(
+                        "/api/auth/login", "/api/auth/refresh", "/api/auth/logout");
     }
 }

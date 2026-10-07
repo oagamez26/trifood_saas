@@ -52,8 +52,20 @@ El tenant no se acepta desde Angular como autoridad. Si la experiencia de login 
 - `TenantContext` es request-scoped y se inicializa desde el principal autenticado en el interceptor MVC para `/api/**`.
 - `GET /api/auth/me` devuelve el usuario, tenant y authorities calculadas.
 - `GET /api/catalog/categories` exige `PERMISSION_catalog.categories.read`; el servicio obtiene el tenant desde `TenantContext` antes de consultar su `TenantScopedRepository`.
+- `POST /api/auth/login` excluye las rutas públicas de login/refresh/logout del interceptor de TenantContext. El login valida una membership seleccionada antes de emitir el JWT; las demás rutas API siguen requiriendo principal autenticado.
+- `GET/POST/PATCH /api/users` y `/api/tenant-memberships` seleccionan/escriben mediante el UUID del `TenantContext`; los campos tenant-scoped de perfil y estado viven en membership. Ningún DTO de administración acepta `tenant_id`.
+- `/api/roles`, `/api/permissions` y las asignaciones `user_roles` validan que tanto el usuario como el rol existan bajo el mismo tenant antes de modificar grants.
+- `refresh_sessions` referencia `(tenant_id, user_id)` de `tenant_memberships`; la rotación vuelve a comprobar membership/tenant/usuario activos y revoca la familia al detectar reutilización.
 - Las 17 pruebas unitarias/MVC focalizadas cubren la resolución del contexto, autorización de endpoints, reemplazo de roles del token por roles/permissions de membresía, falta de membresía y tenant entregado al repositorio.
 - Las pruebas HTTP/PostgreSQL de `SaasApiApplicationTests` verifican Flyway, membresía real y aislamiento por tenant, pero aún no se ejecutaron. Se mantienen pendientes antes del despliegue; no bloquean continuar con módulos.
+
+## Login, permisos y sesiones
+
+El `tenantSlug` enviado al login solo sirve para elegir una membership que el servidor consulta como activa; nunca se conserva directamente como claim. Si la cuenta tiene varias memberships activas se requiere elección explícita. El JWT identifica a una persona y un tenant ya validados, no concede permisos. Las autoridades se recalculan en cada request desde RBAC.
+
+Las identidades y credenciales (`users`) son globales; nombre visible, apellido visible y estado de pertenencia (`tenant_memberships`) son tenant-locales. Esto permite a cada organización administrar su perfil de usuario sin alterar cómo esa persona aparece o inicia sesión en otros tenants. Las operaciones de asignación/revocación de roles validan por separado la membership objetivo y el rol local, y dejan que las FK compuestas sean una segunda barrera.
+
+Los refresh tokens son secretos opacos generados aleatoriamente; solo se almacena su hash SHA-256. Cada refresh rota el token dentro de la misma familia bajo `SELECT ... FOR UPDATE`; un token revocado que se presenta de nuevo provoca revocación de la familia. El refresh se transporta en cookie HttpOnly y se protege con cookie/header CSRF de doble envío y validación de Origin. La cookie se limita a `/api/auth`, se configura Secure por entorno y no se devuelve en JSON.
 
 ## Invariantes de datos
 

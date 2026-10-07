@@ -4,9 +4,13 @@ import java.util.Set;
 import java.util.UUID;
 
 public record SaasPrincipal(
-        long userId, UUID tenantId, Set<String> roles, Set<String> permissions) {
+        long userId, UUID tenantId, int tokenVersion, Set<String> roles, Set<String> permissions) {
     public SaasPrincipal(long userId, UUID tenantId, Set<String> roles) {
-        this(userId, tenantId, roles, Set.of());
+        this(userId, tenantId, 0, roles, Set.of());
+    }
+
+    public SaasPrincipal(long userId, UUID tenantId, Set<String> roles, Set<String> permissions) {
+        this(userId, tenantId, 0, roles, permissions);
     }
 
     public SaasPrincipal {
@@ -15,6 +19,9 @@ public record SaasPrincipal(
         }
         if (tenantId == null) {
             throw new IllegalArgumentException("tenantId is required");
+        }
+        if (tokenVersion < 0) {
+            throw new IllegalArgumentException("tokenVersion must not be negative");
         }
         roles = Set.copyOf(roles);
         permissions = Set.copyOf(permissions);
