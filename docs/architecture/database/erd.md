@@ -63,11 +63,22 @@ erDiagram
         datetime created_at
     }
 
+    catalog_audit_events {
+        int id PK
+        int actor_user_id FK
+        string entity_type
+        int entity_id
+        string action
+        json details
+        datetime created_at
+    }
+
     users ||--o{ user_roles : "posee"
     roles ||--o{ user_roles : "asignado a"
     roles ||--o{ role_permissions : "contiene"
     permissions ||--o{ role_permissions : "concedido a"
     users ||--o{ audit_events : "genera"
+    users ||--o{ catalog_audit_events : "modifica catálogo"
 
     %% ========================================================
     %% CATÁLOGO Y PRODUCTOS

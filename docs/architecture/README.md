@@ -83,7 +83,8 @@ Toda la documentación aquí presentada ha sido validada directamente contra el 
 ## Persistencia y Seguridad
 
 ### 10. [Modelo de Datos Relacional (ERD PostgreSQL)](./database/erd.md)
-- Diagrama Entidad-Relación completo con 21 tablas relacionales.
+- Diagrama Entidad-Relación del modelo documentado. El dump PostgreSQL activo contiene 30 tablas de aplicación más `alembic_version`.
+- El ERD documenta `catalog_audit_events`, contrastada con el dump del esquema activo.
 - Claves primarias, foráneas, restricciones de no negatividad (`CHECK`) e índices parciales condicionales (`uq_open_table_session`, `uq_open_cash_session`).
 - [Ver Diagrama ERD](./database/erd.md)
 
