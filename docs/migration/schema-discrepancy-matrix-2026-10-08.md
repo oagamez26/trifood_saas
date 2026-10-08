@@ -1,7 +1,10 @@
 # Matriz de discrepancias PostgreSQL / Alembic / SQLAlchemy / FastAPI / React — 2026-10-08
 
-**Estado:** análisis de solo lectura. Registra evidencia y decisiones abiertas;
-**no resuelve ninguna discrepancia** ni autoriza implementar el catálogo.
+**Estado:** evidencia de solo lectura del 2026-10-08 y **decisiones D-01 a
+D-12 aprobadas por el responsable del proyecto el 2026-10-08** (sección 6).
+Las decisiones fijan el contrato objetivo de Trifood; no modifican el POS
+legacy ni autorizan por sí mismas implementar el catálogo, cambiar pruebas o
+reescribir historial Git.
 Complementa —no reemplaza— a
 [potoquitos-postgres-catalog-baseline.md](./potoquitos-postgres-catalog-baseline.md).
 
@@ -46,10 +49,11 @@ análisis fuera del repositorio):
 | `order_lines.product_id` / `invoice_lines.product_id` | Sin FK a producto, igual que en vivo. |
 
 **Conclusión:** V2 sigue representando el esquema vivo como base estructural.
-Sus diferencias son adaptaciones SaaS; la mayoría están documentadas, pero
-D-08 (`invoice_number`) y D-09 (actores vía membership) no tienen decisión
-aprobada. Que el DDL haya corrido con `psql` no convierte esas adaptaciones en
-decisiones validadas.
+Sus diferencias son adaptaciones SaaS. Con las decisiones del 2026-10-08,
+D-09 (actores vía membership) queda aprobada tal como está en V2; D-08
+(`invoice_number`) queda aprobada en dirección (tenant + serie/establecimiento)
+pero V2 aún no la expresa completamente (ver D-08). Que el DDL haya corrido con
+`psql` no sustituye la validación Flyway/Spring Boot pendiente.
 
 ## 3. Clasificación
 
@@ -61,61 +65,156 @@ confirmada; **C** código/migración no alineado; **D** esquema desactualizado;
 
 Filas 1–8 provienen del baseline del 2026-10-07 y se reconfirmaron contra el
 código actual (sin cambios en FastAPI/React desde el commit `367b797`). Filas
-9–17 son hallazgos nuevos del 2026-10-08.
+9–17 son hallazgos nuevos del 2026-10-08. La columna **Decisión** refleja lo
+aprobado el 2026-10-08; el detalle está en la sección 6.
 
 | # | Elemento | PostgreSQL actual | Alembic | SQLAlchemy | FastAPI | React | Regla funcional | Decisión |
 |---|---|---|---|---|---|---|---|---|
-| 1 | Actores de auditoría e historial de precio | `catalog_audit_events.actor_user_id` y `catalog_product_price_history.changed_by` `NOT NULL`; FK a `users` sin `ON DELETE`. | `schema_v2.py` (V4): `NOT NULL`, FK simple. V4/V5 no reconcilian columnas existentes. | `models.py:83,160,170`: `nullable=True`, `ondelete="SET NULL"`. | Siempre pasa el actor autenticado. | No interviene. | Toda mutación de catálogo y cambio de precio identifica al actor. | **C/E. Abierta — D-01.** |
-| 2 | Cascadas de imágenes e historial | Sin `ON DELETE` en `catalog_product_images.product_id` ni en historial. | V4 sin cascada; V5 no altera FKs existentes. | `ProductImage.product_id` `CASCADE`; `uploaded_by` `SET NULL` (`models.py:146`). | No hay borrado físico de producto/categoría. | Solo baja lógica. | Baja lógica; no existe flujo de borrado físico. | **C/E. Abierta — D-02.** |
-| 3 | `internal_code` editable | `NOT NULL`; únicos exacto y `upper(trim())`. | V4 normaliza y protege colisiones. | `unique=True`. | `ProductUpdate.internal_code` aceptado; se aplica `text(...,80).upper()`. | `readOnly={editing !== "new"}` (`CatalogProductsPage.tsx:1168`); el PATCH de edición no lo envía. | Unicidad normalizada confirmada; inmutabilidad no impuesta por API. | **B** (normalización) / **E** (inmutabilidad). **Abierta — D-03.** |
-| 4 | Menú público y `is_available` | Sin columna de publicación. | Sin migración de publicación. | Sin `is_published`. | `public_menu` devuelve productos activos de categorías activas e incluye `is_available`. | Insignia "Disponible" fija (`PublicMenuPage.tsx:302`). | Inclusión pública = activo + categoría activa. | **B** (API) / **E** (presentación). **Abierta — D-04.** |
-| 5 | Límite de descripción | `text`. | Sin límite. | `Text`. | Hasta 10.000 caracteres (schema y `strip()[:10000]`). | `maxLength={300}` (`CatalogProductsPage.tsx:1207`). | No confirmado. | **A/E. Abierta — D-05.** |
-| 6 | Receta guardada desde el editor de producto | `recipes.product_id` único, `CASCADE` desde producto; `recipe_items` `CASCADE` desde receta. | V5 crea desde metadata. | 1:1 producto–receta. | `PUT /inventory/recipes/{id}`. | Llamada secundaria con `.catch(() => {})` (`:411`) y notas forzadas a `"Receta para <nombre>"`. Muestra éxito aunque falle. | La receta vincula producto con insumos. | **B** (relación) / **E** (UX). **Abierta — D-06.** |
+| 1 | Actores de auditoría e historial de precio | `catalog_audit_events.actor_user_id` y `catalog_product_price_history.changed_by` `NOT NULL`; FK a `users` sin `ON DELETE`. | `schema_v2.py` (V4): `NOT NULL`, FK simple. V4/V5 no reconcilian columnas existentes. | `models.py:83,160,170`: `nullable=True`, `ondelete="SET NULL"`. | Siempre pasa el actor autenticado. | No interviene. | Toda mutación de catálogo y cambio de precio identifica al actor. | **D-01 aprobada (a):** `NOT NULL`, sin `SET NULL`. SQLAlchemy legacy queda como fuente no alineada (C). |
+| 2 | Cascadas de imágenes e historial | Sin `ON DELETE` en `catalog_product_images.product_id` ni en historial. | V4 sin cascada; V5 no altera FKs existentes. | `ProductImage.product_id` `CASCADE`; `uploaded_by` `SET NULL` (`models.py:146`). | No hay borrado físico de producto/categoría. | Solo baja lógica. | Baja lógica; no existe flujo de borrado físico. | **D-02 aprobada (a):** solo baja lógica, sin cascadas nuevas. |
+| 3 | `internal_code` editable | `NOT NULL`; únicos exacto y `upper(trim())`. | V4 normaliza y protege colisiones. | `unique=True`. | `ProductUpdate.internal_code` aceptado; se aplica `text(...,80).upper()`. | `readOnly={editing !== "new"}` (`CatalogProductsPage.tsx:1168`); el PATCH de edición no lo envía. | Unicidad normalizada confirmada. | **D-03 aprobada (c):** inmutable tras crear; generado por backend si no se indica. |
+| 4 | Menú público y `is_available` | Sin columna de publicación. | Sin migración de publicación. | Sin `is_published`. | `public_menu` devuelve productos activos de categorías activas e incluye `is_available`. | Insignia "Disponible" fija (`PublicMenuPage.tsx:302`). | Inclusión pública = activo + categoría activa. | **D-04 aprobada (a):** se muestran marcados "No disponible". |
+| 5 | Límite de descripción | `text`. | Sin límite. | `Text`. | Hasta 10.000 caracteres (schema y `strip()[:10000]`). | `maxLength={300}` (`CatalogProductsPage.tsx:1207`). | — | **D-05 aprobada (a):** 300 caracteres como regla de dominio. |
+| 6 | Receta guardada desde el editor de producto | `recipes.product_id` único, `CASCADE` desde producto; `recipe_items` `CASCADE` desde receta. | V5 crea desde metadata. | 1:1 producto–receta. | `PUT /inventory/recipes/{id}`. | Llamada secundaria con `.catch(() => {})` (`:411`) y notas forzadas a `"Receta para <nombre>"`. Muestra éxito aunque falle. | La receta vincula producto con insumos. | **D-06 aprobada (a):** endpoints separados; todo error se reporta. Relación **B**: preservar. |
 | 7 | Snapshots en pedidos y facturas | `order_lines.product_id` e `invoice_lines.product_id` sin FK; nombre/precio guardados. | Igual. | Entero sin FK. | Valida producto/categoría al crear y persiste snapshot. | Historial no relee el catálogo. | Snapshot histórico. | **B. Preservar** (V2 lo preserva). |
 | 8 | `tenant_id` | No existe. | No existe. | No existe. | Sin contexto tenant. | Single-tenant, marca Potoquitos en ~10 pantallas. | Tenant es extensión SaaS deliberada. | **B.** Diseño SaaS; marca → configuración del tenant. |
-| 9 | Quitar imagen de producto | `catalog_product_images` con `is_current`, `replaced_at`; único parcial actual. | V4. | `ProductImage`. | `DELETE /catalog/products/{id}/image` (permiso `product.update`) → `replace_image(id, None)`: marca `is_current=False`, `replaced_at=now()`, `current_image_id=NULL`, audita `IMAGE_REMOVED`. No borra fila ni archivo. | `catalogApi.deleteImage` desde el editor. | **Retiro lógico**; historial de imágenes conservado. | **B. Hecho confirmado; preservar.** Retención/limpieza de archivos queda en D-02. |
-| 10 | Permisos de estado vía `PATCH` genérico | `is_active`, `is_available` `NOT NULL`. | — | — | `save_product` exige solo `product.update`, pero `ProductUpdate` acepta `is_active` e `is_available`. Las rutas dedicadas exigen `product.disable` (desactivar) y `product.change_availability`. | El PATCH de edición envía ambos campos; luego, si cambió la disponibilidad, llama a `/availability` con `.catch(() => {})` (`:365`). Si falta `product.change_availability`, el cambio ya fue aplicado por el PATCH y el error se silencia. | Existen permisos separados para desactivar y cambiar disponibilidad. | **C/E. Abierta — D-07.** El baseline solo registraba `is_active`; se amplía a `is_available`. |
-| 11 | Código autogenerado al crear producto | `internal_code NOT NULL`. | — | — | `ProductCreate.internal_code` obligatorio (`min_length=1`). | Si el campo está vacío genera `PRD-<últimos 6 dígitos de Date.now()>` (`:326`). | No confirmado: la API no genera códigos. | **E. Abierta — D-03** (se agrega a la decisión del código). |
-| 12 | Guardado de edición no atómico | — | — | — | Endpoints independientes: PATCH, availability, price, image, recipe, cada uno con su propia transacción. | Hasta 5 peticiones secuenciales; un fallo intermedio deja cambios parciales y algunas fallas se silencian. | Cada operación del backend es atómica; la composición en UI no. | **E. Abierta — D-06** (ampliada). |
-| 13 | `invoice_number` | Índice UNIQUE global `ix_invoices_invoice_number`. | Tabla creada por V5 desde `Base.metadata`; no figura en `schema_v2.py`. | `unique=True, index=True` (`models.py:426`). | `FAC-{count(*)+1:06d}` (`repositories.py:1446`): secuencia por conteo global, sin bloqueo. | Muestra/descarga el número (`{invoice_number}.pdf`). | Numeración consecutiva visible `FAC-NNNNNN`. Alcance (global/tenant/serie fiscal) no confirmado. | **E. Abierta — D-08.** V2 usa `(tenant_id, invoice_number)`; `tenant-schema-rebuild.md` dice mantenerlo global. Riesgo técnico registrado: `count+1` puede colisionar bajo concurrencia. |
-| 14 | Referencias a usuarios (actores) | 16 FK a `users(id)`: auditorías, `uploaded_by`, `changed_by`, cajero/mesero en sesiones, pedidos, pagos y facturas, responsables de inventario/Kardex/gastos, `cancelled_by`, `user_roles`. | FK a `users`. | FK a `users`. | Usa el usuario autenticado. | — | Identifica al actor. | **E. Abierta — D-09.** V2 las referencia a `tenant_memberships(tenant_id, user_id)`; exige membership en el tenant. La revocación es lógica (`REVOKED`), por lo que no rompe historia, pero no hay decisión registrada. |
-| 15 | Catálogo de permisos y roles | Tablas `roles`, `permissions`, `user_roles`, `role_permissions` (contenido no inspeccionado: solo esquema). | No siembra permisos. | Modelos RBAC. | `seed.py`: 4 roles (`ADMINISTRADOR`, `MESERO`, `COCINA`, `CAJERO`) y **47** codenames (`product.update`, `product.change_price`…); se siembra vía `cli.py`. | Rutas protegidas por rol. | Matriz rol→permiso del POS. | **D/E. Abierta — D-10.** V3 siembra 8 codenames con otra nomenclatura (`catalog.categories.read`, `users.read`…); bootstrap crea solo `TENANT_ADMIN`. `architecture-overview.md` afirma 45 permisos. |
-| 16 | Credenciales de desarrollo en el repositorio | — | — | — | `seed.py` contiene usuarios y contraseñas en claro para desarrollo. | — | CLAUDE.md prohíbe secretos en el repositorio. | **Riesgo registrado. Abierta — D-11.** No se reproducen aquí. |
-| 17 | Prueba de integración Flyway | — | — | — | — | — | `SaasApiApplicationTests.java:71` espera versión Flyway `"2"`; V3 existe. | **C. Abierta — D-12** (pertenece al gate Flyway/Spring Boot). |
+| 9 | Quitar imagen de producto | `catalog_product_images` con `is_current`, `replaced_at`; único parcial actual. | V4. | `ProductImage`. | `DELETE /catalog/products/{id}/image` (permiso `product.update`) → `replace_image(id, None)`: marca `is_current=False`, `replaced_at=now()`, `current_image_id=NULL`, audita `IMAGE_REMOVED`. No borra fila ni archivo. | `catalogApi.deleteImage` desde el editor. | **Retiro lógico**; historial de imágenes conservado. | **B. Preservar.** Coherente con D-02 (a). La retención/limpieza de archivos no se define ahora. |
+| 10 | Permisos de estado vía `PATCH` genérico | `is_active`, `is_available` `NOT NULL`. | — | — | `save_product` exige solo `product.update`, pero `ProductUpdate` acepta `is_active` e `is_available`. Las rutas dedicadas exigen `product.disable` y `product.change_availability`. | El PATCH de edición envía ambos campos; luego llama a `/availability` con `.catch(() => {})` (`:365`). | Existen permisos separados para desactivar y cambiar disponibilidad. | **D-07 aprobada (a):** estado solo por rutas dedicadas con su permiso. |
+| 11 | Código autogenerado al crear producto | `internal_code NOT NULL`. | — | — | `ProductCreate.internal_code` obligatorio (`min_length=1`). | Si el campo está vacío genera `PRD-<últimos 6 dígitos de Date.now()>` (`:326`). | — | **D-03 aprobada (c):** la generación pasa al backend; el formato queda por definir en el diseño del catálogo. |
+| 12 | Guardado de edición no atómico | — | — | — | Endpoints independientes: PATCH, availability, price, image, recipe, cada uno con su propia transacción. | Hasta 5 peticiones secuenciales; un fallo intermedio deja cambios parciales y algunas fallas se silencian. | Cada operación del backend es atómica; la composición en UI no. | **D-06 aprobada (a).** |
+| 13 | `invoice_number` | Índice UNIQUE global `ix_invoices_invoice_number`. | Tabla creada por V5 desde `Base.metadata`; no figura en `schema_v2.py`. | `unique=True, index=True` (`models.py:426`). | `FAC-{count(*)+1:06d}` (`repositories.py:1446`): conteo global, sin bloqueo. | Muestra/descarga el número (`{invoice_number}.pdf`). | Numeración consecutiva visible `FAC-NNNNNN`. | **D-08 aprobada (c) en dirección:** tenant + serie/establecimiento y generación concurrente segura. Definición fiscal detallada pendiente para el módulo de facturación. |
+| 14 | Referencias a usuarios (actores) | 16 FK a `users(id)`: auditorías, `uploaded_by`, `changed_by`, cajero/mesero en sesiones, pedidos, pagos y facturas, responsables de inventario/Kardex/gastos, `cancelled_by`, `user_roles`. | FK a `users`. | FK a `users`. | Usa el usuario autenticado. | — | Identifica al actor. | **D-09 aprobada (a):** FK a `tenant_memberships(tenant_id, user_id)`, como en V2; memberships nunca se borran físicamente. |
+| 15 | Catálogo de permisos y roles | Tablas `roles`, `permissions`, `user_roles`, `role_permissions` (contenido no inspeccionado: solo esquema). | No siembra permisos. | Modelos RBAC. | `seed.py`: 4 roles y **47** codenames; se siembra vía `cli.py`. | Rutas protegidas por rol. | Matriz rol→permiso del POS. | **D-10 aprobada (b):** nomenclatura Trifood con equivalencia explícita que conserva los 47 permisos (sección 6.1). |
+| 16 | Credenciales de desarrollo en el repositorio | — | — | — | `seed.py` contiene usuarios y contraseñas en claro para desarrollo. | — | CLAUDE.md prohíbe secretos en el repositorio. | **D-11 aprobada (a):** variables de entorno y rotación; pendiente de tarea de seguridad separada. No se reproducen aquí. |
+| 17 | Prueba de integración Flyway | — | — | — | — | — | `SaasApiApplicationTests.java:71` espera versión Flyway `"2"`; V3 existe. | **D-12 aprobada (b):** comprobar la última migración disponible; se aplica dentro del gate de integración. |
 
 ## 5. Documentación inconsistente (registrada, no corregida)
 
-| Documento | Afirmación | Evidencia contraria |
+| Documento | Afirmación | Evidencia contraria / estado |
 |---|---|---|
 | `docs/adr/ADR-002-tenant-isolation-strategy.md` | "Aún no existe login ni emisión de JWT"; extraer "roles validados" del JWT. | Login/JWT implementados; roles del JWT ignorados (`SaasJwtAuthenticationConverter`). |
 | `docs/architecture/tenant-isolation.md` | 17 pruebas unitarias/MVC. | 42 `@Test` unitarias/MVC en el repositorio. |
 | `docs/database/tenant-schema-rebuild.md` | `order_lines`: "FKs compuestas a pedido y producto". | V2 y el vivo no tienen FK a producto (correcto según baseline). |
-| `docs/database/tenant-schema-rebuild.md` | `invoice_number` global en el primer diseño; "V2 no validado". | V2 lo hace por tenant; registro posterior de DDL validado con `psql`. |
+| `docs/database/tenant-schema-rebuild.md` | `invoice_number` global en el primer diseño; "V2 no validado". | Superado por D-08 (c); DDL V2 validado con `psql` según registro posterior. |
 | `docs/architecture/architecture-overview.md` | 45 permisos; 21 tablas en `models.py`. | `seed.py` tiene 47 codenames; dump con 30 tablas de aplicación. |
 | `docs/migration/migration-matrix.md`, `tenant-model.md` | Backfill de datos de Potoquitos; `users.tenant_id/role_id`. | Diseño vigente: reconstrucción sin copia de datos y `tenant_memberships`. |
 
-## 6. Decisiones abiertas
+Estos documentos no se modifican en esta tarea; este documento prevalece para
+los temas D-01 a D-12.
 
-| ID | Decisión | Fuentes en conflicto |
-|---|---|---|
-| D-01 | Nulabilidad y `ON DELETE` de `actor_user_id` / `changed_by`. | PostgreSQL + `schema_v2` + V2 vs SQLAlchemy. |
-| D-02 | Política de borrado físico de producto, imágenes e historial; retención de archivos de imagen retirados. | SQLAlchemy vs PostgreSQL; ausencia de flujo. |
-| D-03 | `internal_code`: ¿inmutable tras crear? ¿generación automática (`PRD-…`) es regla o solo UX? | FastAPI vs React. |
-| D-04 | Presentación de `is_available` en menú público. | FastAPI vs React. |
-| D-05 | Límite de descripción (300 vs 10.000). | FastAPI vs React. |
-| D-06 | Guardado compuesto de producto (receta, disponibilidad, precio, imagen): atomicidad y reporte de errores. | React vs servicios FastAPI. |
-| D-07 | ¿`product.update` puede cambiar `is_active` / `is_available`, o se exigen `product.disable` / `product.change_availability`? | FastAPI (PATCH vs rutas dedicadas) y React. |
-| D-08 | Alcance y generación de `invoice_number` (global, por tenant o por serie fiscal; concurrencia). | PostgreSQL + SQLAlchemy vs V2 vs `tenant-schema-rebuild.md`. |
-| D-09 | Actores referenciados vía `tenant_memberships` en V2. | PostgreSQL/SQLAlchemy vs V2. |
-| D-10 | Mapeo de los 47 permisos y 4 roles legacy al RBAC Trifood (nomenclatura, seeds por tenant). | `seed.py` vs V3/bootstrap vs documentación. |
-| D-11 | Tratamiento de credenciales de desarrollo en `seed.py`. | `seed.py` vs CLAUDE.md. |
-| D-12 | Actualizar `SaasApiApplicationTests` a la versión Flyway vigente dentro del gate de integración. | Prueba vs migraciones. |
+## 6. Decisiones aprobadas (2026-10-08)
 
-Ninguna se resuelve en este documento. Las que afectan al catálogo (D-01 a
-D-07, D-09, D-10) deben decidirse antes de diseñar el módulo Spring.
+Aprobadas por el responsable del proyecto. Fijan el contrato objetivo de
+Trifood; el POS legacy (FastAPI, React, SQLAlchemy, Alembic y su base) no se
+modifica. Se aplican a cada tenant por igual, sin reglas especiales por
+Potoquitos.
 
-## 7. Alcance de esta tarea
+| ID | Opción | Decisión | Consecuencias para el diseño | Pendiente / cuándo se aplica |
+|---|---|---|---|---|
+| D-01 | (a) | `catalog_audit_events.actor_user_id` y `catalog_product_price_history.changed_by` son `NOT NULL`, sin `ON DELETE SET NULL`. | Toda mutación de catálogo y todo cambio de precio registran actor autenticado. V2 ya lo expresa. El mapping JPA debe declararlos obligatorios. Un futuro actor de sistema requiere decisión aparte. | Diseño del catálogo Spring. |
+| D-02 | (a) | Producto, categoría, imágenes e historial de precio solo admiten baja lógica; sin cascadas de borrado nuevas. | No exponer borrado físico. Conservar las 5 cascadas existentes del esquema vivo (receta, ítems de receta, detalles de pago, líneas de factura) tal como están. Quitar imagen sigue siendo retiro lógico (fila 9). | Diseño del catálogo Spring. Retención/limpieza de archivos de imagen: no definida. |
+| D-03 | (c) | `internal_code` es inmutable después de crear el producto. Si no se indica al crear, lo genera el backend. | Se mantienen trim, mayúsculas y unicidad normalizada por tenant (`upper(trim())`). La API de actualización no acepta el campo. La generación debe ser tenant-scoped y segura ante concurrencia. | Formato del código generado (el `PRD-…` actual es solo de React) por definir en el diseño del catálogo. |
+| D-04 | (a) | El menú público incluye productos activos de categorías activas, también los no disponibles, y los marca "No disponible". | Se preserva el criterio de inclusión de la API; la presentación refleja `is_available`. No se añade bandera de publicación. | Diseño del menú público y frontend Angular. |
+| D-05 | (a) | La descripción de producto tiene un máximo de 300 caracteres como regla de dominio. | El backend la valida; frontend y backend usan el mismo valor. | Diseño del catálogo Spring. |
+| D-06 | (a) | Se mantienen operaciones separadas (datos, disponibilidad, precio, imagen, receta), cada una atómica y con su permiso; el cliente reporta el resultado real de cada una. | Prohibido silenciar errores. El protocolo de precio con `expected_price_version` se conserva. La UI debe informar éxito parcial cuando ocurra. | Diseño del catálogo Spring y frontend Angular. |
+| D-07 | (a) | `is_active` e `is_available` solo cambian por sus rutas dedicadas: activar/desactivar con su permiso de estado y disponibilidad con su permiso específico. | El endpoint de edición general no acepta esos campos. Equivalencias de permisos en 6.1. | Diseño del catálogo Spring. |
+| D-08 | (c) | La numeración de facturas será por tenant y por serie/establecimiento, con generación concurrente segura. | El diseño debe soportar: (1) unicidad por `tenant_id` + serie/establecimiento + número; (2) generación sin `count(*)+1`, con un mecanismo transaccional que no colisione bajo concurrencia; (3) conservar el número emitido como dato histórico. V2 actual solo tiene `UNIQUE (tenant_id, invoice_number)`: insuficiente para la decisión; se ajustará en el módulo de facturación. | **Definición fiscal detallada pendiente** (series, prefijos, resoluciones, establecimientos) para el módulo de facturación. No bloquea el catálogo. |
+| D-09 | (a) | Las referencias a actores apuntan a `tenant_memberships(tenant_id, user_id)`, como en V2. | Regla obligatoria: las memberships **nunca se borran físicamente**; revocar/suspender es cambio de estado. Un actor histórico con membership revocada sigue siendo válido como referencia. | Aplica a todos los módulos. V2 ya lo expresa. |
+| D-10 | (b) | Nomenclatura Trifood `<dominio>.<recurso>.<acción>` con equivalencia explícita que conserva la granularidad de los 47 permisos legacy. | Ver 6.1 y 6.2. | Los códigos se siembran con cada módulo; V3 ya contiene 8. |
+| D-11 | (a) | Las credenciales de desarrollo de `seed.py` deben salir del repositorio hacia variables de entorno y rotarse si se usaron en algún entorno accesible. | No se reescribe ni limpia historial Git en esta etapa. | **Pendiente de tarea de seguridad separada** con autorización explícita (implica tocar el legacy). |
+| D-12 | (b) | `SaasApiApplicationTests` debe verificar que Flyway aplicó la última migración disponible, no una versión fija. | Evita que la prueba se rompa con cada migración. | **Anotado para el gate de integración** Flyway/Spring Boot/PostgreSQL. No se implementa ahora. |
 
-- Lectura: `pg_dump` y `SELECT` en sesión `read_only`; ningún DDL/DML.
-- Sin cambios en Alembic, SQLAlchemy, FastAPI, React, Spring Boot, Docker,
-  puertos ni contenedores. Catálogo no implementado.
+### 6.1 Equivalencia de permisos legacy → Trifood (D-10)
+
+Fuente legacy: `backend/fastapi_app/infrastructure/seed.py` (`BASE_PERMISSIONS`,
+47 codenames). "Protege" resume los usos observados en FastAPI. Códigos marcados
+**V3** ya están sembrados en `V3__identity_access_and_refresh_sessions.sql`; el
+resto es nomenclatura aprobada que se sembrará con su módulo.
+
+Regla de conservación: cada permiso legacy tiene al menos un código Trifood
+propio y ningún código Trifood agrupa dos permisos legacy distintos.
+
+| # | Legacy | Trifood | Protege en el POS legacy |
+|---|---|---|---|
+| 1 | `user.view` | `users.read` **V3** | Consultar usuarios. |
+| 2 | `user.create` | `users.create` **V3** | Crear usuario. |
+| 3 | `user.update` | `users.update` **V3** + `users.memberships.manage` **V3** | Editar perfil/email; activar/desactivar (con protección del último administrador e incremento de `token_version`). En Trifood el estado vive en la membership (ver 6.2). |
+| 4 | `role.view` | `roles.read` **V3** | Listar roles; consultar rol y permisos. |
+| 5 | `role.assign` | `users.roles.assign` **V3** | Asignar/retirar rol a usuario; asignar roles al crear usuario. |
+| 6 | `role.update` | `roles.manage` **V3** | Editar nombre y permisos de un rol. |
+| 7 | `audit.view` | `audit.events.read` | Auditoría general y auditoría de catálogo. |
+| 8 | `category.view` | `catalog.categories.read` **V3** | Listar/consultar categorías. |
+| 9 | `category.create` | `catalog.categories.create` | Crear categoría. |
+| 10 | `category.update` | `catalog.categories.update` | Editar categoría. |
+| 11 | `category.disable` | `catalog.categories.disable` | Desactivar categoría. |
+| 12 | `product.view` | `catalog.products.read` | Listar/consultar productos e historial de precio. |
+| 13 | `product.create` | `catalog.products.create` | Crear producto (incluye precio inicial, versión 1). |
+| 14 | `product.update` | `catalog.products.update` | Editar datos de producto; cargar/quitar imagen; activar producto. |
+| 15 | `product.disable` | `catalog.products.disable` | Desactivar producto. |
+| 16 | `product.change_price` | `catalog.products.change_price` | Cambiar precio con versión esperada. |
+| 17 | `product.change_availability` | `catalog.products.change_availability` | Cambiar disponibilidad. |
+| 18 | `table.view` | `tables.read` | Ver mesas; solicitar cuenta. |
+| 19 | `table.create` | `tables.create` | Crear mesa. |
+| 20 | `table.update` | `tables.update` | Editar y eliminar mesa. |
+| 21 | `table.open` | `tables.sessions.open` | Abrir sesión de mesa. |
+| 22 | `table.close` | `tables.sessions.close` | Cerrar sesión de mesa. |
+| 23 | `order.view` | `orders.read` | Ver pedidos; resumen de pago de mesa. |
+| 24 | `order.create` | `orders.create` | Crear pedido; consultar ítems de menú para pedir. |
+| 25 | `order.update_draft` | `orders.drafts.update` | Editar pedido en borrador. |
+| 26 | `order.confirm` | `orders.confirm` | Transición de confirmación. |
+| 27 | `order.cancel` | `orders.cancel` | Cancelar pedido. |
+| 28 | `order.deliver` | `orders.deliver` | Marcar entregado. |
+| 29 | `order.prepare` | `orders.prepare` | Transiciones de preparación. |
+| 30 | `kitchen.view` | `kitchen.queue.read` | Cola de cocina. |
+| 31 | `kitchen.advance` | `kitchen.orders.advance` | Iniciar preparación; marcar listo. |
+| 32 | `inventory.view` | `inventory.read` | Ingredientes, movimientos y Kardex. |
+| 33 | `inventory.adjust` | `inventory.adjust` | Crear/editar ingrediente; registrar movimiento. |
+| 34 | `recipe.view` | `inventory.recipes.read` | Consultar recetas y capacidad. |
+| 35 | `recipe.update` | `inventory.recipes.update` | Guardar receta. |
+| 36 | `cash.view` | `cash.read` | Cajas, sesión activa, historial y reporte PDF de sesión. |
+| 37 | `cash.open` | `cash.sessions.open` | Abrir turno de caja. |
+| 38 | `cash.close` | `cash.sessions.close` | Cerrar turno de caja. |
+| 39 | `payment.view` | `payments.read` | Resumen de pagos de mesa. |
+| 40 | `payment.process` | `payments.process` | Registrar pago. |
+| 41 | `invoice.view` | `invoices.read` | Listar/consultar facturas y PDF. |
+| 42 | `expense.view` | `expenses.read` | Listar gastos y categorías de gasto. |
+| 43 | `expense.create` | `expenses.create` | Crear gasto y categoría de gasto. |
+| 44 | `report.view` | `reports.read` | Dashboard, resultados y exportaciones Excel/PDF/XML. |
+| 45 | `prediction.view` | `analytics.predictions.read` | Alertas predictivas. |
+| 46 | `settings.view` | `settings.read` | Consultar configuración. |
+| 47 | `settings.update` | `settings.update` | Actualizar configuración. |
+
+### 6.2 Notas de equivalencia y roles base (D-10)
+
+1. **`user.update` → dos códigos.** En el legacy un mismo permiso edita el
+   perfil y activa/desactiva la cuenta global. En Trifood el estado es de la
+   membership del tenant (`users.memberships.manage`) y el perfil es
+   tenant-local (`users.update`). Quien tenga `user.update` en el legacy recibe
+   ambos. Es una división más fina, no una pérdida de granularidad.
+2. **Roles vía `PATCH /users/{id}`.** El legacy permite cambiar roles dentro de
+   `update_user` con `user.update`; en Trifood la asignación exige
+   `users.roles.assign`. Diferencia registrada; no altera la equivalencia
+   `role.assign` → `users.roles.assign`.
+3. **`roles.manage` incluye crear roles.** El legacy no tiene endpoint de
+   creación de roles (solo `PATCH /roles/{id}`); Trifood sí (`POST /api/roles`).
+   Es una capacidad SaaS nueva cubierta por el equivalente de `role.update`.
+4. **Protección del administrador.** El legacy protege el rol por nombre
+   (`ADMINISTRADOR` no cambia nombre ni permisos) y al último administrador.
+   Trifood protege al último titular de `roles.manage`, sin depender del nombre.
+   Si se requiere además proteger el rol administrador base, debe decidirse
+   aparte.
+5. **Roles base.** `ADMINISTRADOR`, `MESERO`, `COCINA` y `CAJERO`, con su matriz
+   `ROLE_PERMISSIONS_MAP` traducida por esta tabla, se sembrarán **por tenant
+   como datos**, sin lógica especial por nombre de tenant. El bootstrap actual
+   solo crea `TENANT_ADMIN`; su relación con `ADMINISTRADOR` queda para el
+   diseño del seed de roles.
+6. **Códigos solo Trifood.** `users.memberships.manage` no tiene equivalente
+   propio en el legacy (deriva del punto 1).
+
+## 7. Alcance de estas tareas
+
+- 2026-10-08, evidencia: `pg_dump` y `SELECT` en sesión `read_only`; ningún
+  DDL/DML sobre la base de Potoquitos.
+- 2026-10-08, decisiones: actualización documental únicamente.
+- Sin cambios en Alembic, SQLAlchemy, FastAPI, React, Spring Boot, pruebas,
+  Docker, puertos, contenedores ni historial Git. Catálogo no implementado.
