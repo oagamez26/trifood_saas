@@ -20,6 +20,7 @@ Preparar una ruta segura desde el sistema actual (FastAPI + React + PostgreSQL m
 - [tenant-model.md](./tenant-model.md): diseño del modelo de tenants, usuarios y aislamiento.
 - [migration-matrix.md](./migration-matrix.md): fases, dependencias y riesgo de la migración.
 - [risks.md](./risks.md): riesgos técnicos, operativos y de negocio.
+- [schema-discrepancy-matrix-2026-10-08.md](./schema-discrepancy-matrix-2026-10-08.md): verificación del dump vivo 2026-10-08, comparación con V2 y decisiones abiertas.
 
 ## Principios de la migración
 
