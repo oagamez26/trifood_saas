@@ -1,7 +1,8 @@
 # Matriz de discrepancias PostgreSQL / Alembic / SQLAlchemy / FastAPI / React — 2026-10-08
 
-**Estado:** evidencia de solo lectura del 2026-10-08 y **decisiones D-01 a
-D-12 aprobadas por el responsable del proyecto el 2026-10-08** (sección 6).
+**Estado:** evidencia de solo lectura del 2026-10-08, **decisiones D-01 a
+D-12 aprobadas el 2026-10-08** (sección 6) y **D-13 a D-15 aprobadas el
+2026-10-09** (sección 6.3), todas por el responsable del proyecto.
 Las decisiones fijan el contrato objetivo de Trifood; no modifican el POS
 legacy ni autorizan por sí mismas implementar el catálogo, cambiar pruebas o
 reescribir historial Git.
@@ -87,6 +88,9 @@ aprobado el 2026-10-08; el detalle está en la sección 6.
 | 15 | Catálogo de permisos y roles | Tablas `roles`, `permissions`, `user_roles`, `role_permissions` (contenido no inspeccionado: solo esquema). | No siembra permisos. | Modelos RBAC. | `seed.py`: 4 roles y **47** codenames; se siembra vía `cli.py`. | Rutas protegidas por rol. | Matriz rol→permiso del POS. | **D-10 aprobada (b):** nomenclatura Trifood con equivalencia explícita que conserva los 47 permisos (sección 6.1). |
 | 16 | Credenciales de desarrollo en el repositorio | — | — | — | `seed.py` contiene usuarios y contraseñas en claro para desarrollo. | — | CLAUDE.md prohíbe secretos en el repositorio. | **D-11 aprobada (a):** variables de entorno y rotación; pendiente de tarea de seguridad separada. No se reproducen aquí. |
 | 17 | Prueba de integración Flyway | — | — | — | — | — | `SaasApiApplicationTests.java:71` espera versión Flyway `"2"`; V3 existe. | **D-12 aprobada (b):** comprobar la última migración disponible; se aplica dentro del gate de integración. |
+| 18 | Rol administrador inicial | Tabla `roles` (contenido no inspeccionado). | No siembra roles. | Modelo `Role`. | `seed.py`: rol `ADMINISTRADOR` con los 47 permisos (`ROLE_PERMISSIONS_MAP`). | — | El administrador tiene acceso total. | **D-13 aprobada (a + i):** el bootstrap Trifood crea `ADMINISTRADOR` (no `TENANT_ADMIN`); cada migración que agregue permisos los concede al rol administrador de sistema de todos los tenants. `TenantBootstrapService` hoy crea `TENANT_ADMIN` con los permisos existentes en ese momento: cambio pendiente. |
+| 19 | Protección del rol administrador y del último administrador | Sin marca de rol de sistema; `roles.name` único. | — | — | `update_role` rechaza cambiar nombre/permisos del rol llamado `ADMINISTRADOR` (`PROTECTED_ROLE`); `_protect_last_admin` exige un usuario activo con `ADMINISTRADOR` al desactivar o quitar el rol, con `lock_administration()`. | — | El administrador conserva sus permisos y nunca falta un administrador activo. | **D-14 aprobada (c):** rol administrador de sistema con identificador estable (no el nombre visible); permisos e identificador inmutables; nombre visible renombrable por tenant; se mantiene la regla del último titular activo de `roles.manage`. Spring hoy no tiene roles protegidos: cambio pendiente. Requiere migración aditiva futura. |
+| 20 | Cambio de roles y escalada de privilegios | `user_roles` admite varios roles por usuario. | — | — | `PATCH /users/{id}` cambia roles con solo `user.update` y sin incrementar `token_version`; `POST/DELETE /users/{id}/roles` exige `role.assign` e incrementa `token_version`; `create_user` con roles exige `role.assign`. Ninguna ruta impide asignar un rol con más permisos que el asignador. | `UsersPage.tsx` cambia roles por PATCH con `roles: [role]` (un rol por usuario en la UI). | Asignación de roles controlada por permiso. | **D-15 aprobada (c):** separación estricta (`users.update` no cambia roles; asignar/revocar exige `users.roles.assign`) más protección contra escalada; un usuario no puede modificar sus propios roles. Se mantienen varios roles por usuario. Spring hoy no tiene la protección anti-escalada ni el bloqueo de auto-modificación: cambio pendiente. |
 
 ## 5. Documentación inconsistente (registrada, no corregida)
 
@@ -99,8 +103,10 @@ aprobado el 2026-10-08; el detalle está en la sección 6.
 | `docs/architecture/architecture-overview.md` | 45 permisos; 21 tablas en `models.py`. | `seed.py` tiene 47 codenames; dump con 30 tablas de aplicación. |
 | `docs/migration/migration-matrix.md`, `tenant-model.md` | Backfill de datos de Potoquitos; `users.tenant_id/role_id`. | Diseño vigente: reconstrucción sin copia de datos y `tenant_memberships`. |
 
+| `docs/architecture/authentication-and-authorization.md` | El bootstrap crea el rol `TENANT_ADMIN`. | Describe el código actual; superado como diseño por D-13 (a). |
+
 Estos documentos no se modifican en esta tarea; este documento prevalece para
-los temas D-01 a D-12.
+los temas D-01 a D-15.
 
 ## 6. Decisiones aprobadas (2026-10-08)
 
@@ -193,7 +199,7 @@ propio y ningún código Trifood agrupa dos permisos legacy distintos.
    ambos. Es una división más fina, no una pérdida de granularidad.
 2. **Roles vía `PATCH /users/{id}`.** El legacy permite cambiar roles dentro de
    `update_user` con `user.update`; en Trifood la asignación exige
-   `users.roles.assign`. Diferencia registrada; no altera la equivalencia
+   `users.roles.assign` (decidido en D-15). No altera la equivalencia
    `role.assign` → `users.roles.assign`.
 3. **`roles.manage` incluye crear roles.** El legacy no tiene endpoint de
    creación de roles (solo `PATCH /roles/{id}`); Trifood sí (`POST /api/roles`).
@@ -201,20 +207,46 @@ propio y ningún código Trifood agrupa dos permisos legacy distintos.
 4. **Protección del administrador.** El legacy protege el rol por nombre
    (`ADMINISTRADOR` no cambia nombre ni permisos) y al último administrador.
    Trifood protege al último titular de `roles.manage`, sin depender del nombre.
-   Si se requiere además proteger el rol administrador base, debe decidirse
-   aparte.
+   La protección del rol administrador se decide en D-14 (sección 6.3).
 5. **Roles base.** `ADMINISTRADOR`, `MESERO`, `COCINA` y `CAJERO`, con su matriz
    `ROLE_PERMISSIONS_MAP` traducida por esta tabla, se sembrarán **por tenant
-   como datos**, sin lógica especial por nombre de tenant. El bootstrap actual
-   solo crea `TENANT_ADMIN`; su relación con `ADMINISTRADOR` queda para el
-   diseño del seed de roles.
+   como datos**, sin lógica especial por nombre de tenant. La relación con
+   `TENANT_ADMIN` se decide en D-13 (sección 6.3).
 6. **Códigos solo Trifood.** `users.memberships.manage` no tiene equivalente
    propio en el legacy (deriva del punto 1).
+
+### 6.3 Decisiones de administración de acceso (aprobadas 2026-10-09)
+
+Evidencia revisada: `backend/fastapi_app/modules/auth/application/service.py`
+(`create_user`, `update_user`, `_protect_last_admin`, `assign_role`,
+`update_role`), `backend/fastapi_app/presentation/auth_routes.py` y
+`schemas.py`, `backend/fastapi_app/infrastructure/seed.py`,
+`frontend/src/features/users/UsersPage.tsx`,
+`backend/springboot/.../users/TenantBootstrapService.java`,
+`TenantAccessManagementService.java`, `TenantAccessManagementRepository.java`
+y V3.
+
+| ID | Opción | Decisión | Consecuencias para el diseño | Pendiente / cuándo se aplica |
+|---|---|---|---|---|
+| D-13 | (a) + (i) | Existe un único rol administrador por tenant: `ADMINISTRADOR`. El bootstrap lo crea en lugar de `TENANT_ADMIN`, con todos los permisos Trifood equivalentes (6.1). Cada migración que agregue permisos los concede, en la misma migración, al rol administrador de sistema de **todos** los tenants. | El rol se identifica por su identificador de sistema (D-14), nunca por el nombre ni por el tenant: sin lógica especial por Potoquitos. Ningún tenant pierde acceso al desplegar módulos nuevos. `TENANT_ADMIN` desaparece del diseño. | Cambiar `TenantBootstrapService` y las pruebas/documentación asociadas cuando se autorice código. Hoy el bootstrap concede las filas de `permissions` existentes al ejecutarse (8 con V3). |
+| D-14 | (c) | El rol administrador es un **rol de sistema** con identificador estable, distinto de su nombre visible. Sus permisos y su identificador son inmutables; no puede eliminarse. Se mantiene la regla vigente: el tenant debe conservar al menos una membership activa (usuario y tenant activos) con `roles.manage`, verificada con bloqueo del tenant al suspender/revocar membership, revocar rol o reemplazar permisos de un rol. | Requiere migración **aditiva** futura sobre `roles` para el identificador de sistema (V1–V3 no se reescriben). `replaceRolePermissions` debe rechazar cambios sobre el rol de sistema. Habilita D-13 (i). Solo el rol administrador es de sistema; `MESERO`, `COCINA` y `CAJERO` son roles base ordinarios sembrados como datos. | Migración y código cuando se autoricen. **Sub-punto aprobado (2026-10-09):** el nombre visible del rol de sistema **puede** cambiarse por tenant; su identificador de sistema y sus permisos no. Diferencia deliberada con el legacy, que prohíbe renombrar `ADMINISTRADOR`. Spring hoy no tiene endpoint de renombrado. |
+| D-15 | (c) | **Separación estricta:** `users.update` solo modifica el perfil/estado tenant-local y nunca roles; asignar y revocar roles exige `users.roles.assign`. **Protección contra escalada:** asignar un rol que contenga `roles.manage`, o permisos que el asignador no posee, exige además que el asignador tenga `roles.manage`. Se mantienen **varios roles por usuario**; los permisos efectivos son la unión de sus roles. | Regla nueva respecto del legacy, aprobada como mejora de seguridad. Spring ya cumple la separación estricta; la protección anti-escalada no existe aún en `TenantAccessManagementService.assignRole`. La UI Angular debe mostrar los permisos efectivos resultantes de varios roles y usar llamadas separadas para perfil y roles, reportando cada resultado (D-06). | Código y pruebas cuando se autoricen. **Sub-punto aprobado (2026-10-09):** un usuario **no puede** asignarse ni revocarse sus propios roles, aunque tenga `users.roles.assign` o `roles.manage`. Spring hoy no lo impide. |
+
+Diferencias legacy registradas por estas decisiones (no se corrigen en el POS):
+
+- El legacy cambia roles por `PATCH /users/{id}` con solo `user.update` y sin
+  incrementar `token_version`; la ruta dedicada exige `role.assign` y sí lo
+  incrementa. Trifood recalcula authorities por request, por lo que no depende
+  de `token_version` para reflejar cambios de rol.
+- La UI legacy asigna un solo rol por usuario; Trifood conserva varios.
+- El legacy no impide asignar `ADMINISTRADOR` con `role.assign` (ni con
+  `user.update` vía PATCH); D-15 cierra esa escalada en Trifood.
 
 ## 7. Alcance de estas tareas
 
 - 2026-10-08, evidencia: `pg_dump` y `SELECT` en sesión `read_only`; ningún
   DDL/DML sobre la base de Potoquitos.
-- 2026-10-08, decisiones: actualización documental únicamente.
+- 2026-10-08, decisiones D-01 a D-12: actualización documental únicamente.
+- 2026-10-09, decisiones D-13 a D-15: actualización documental únicamente.
 - Sin cambios en Alembic, SQLAlchemy, FastAPI, React, Spring Boot, pruebas,
   Docker, puertos, contenedores ni historial Git. Catálogo no implementado.
